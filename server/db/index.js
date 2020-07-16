@@ -12,7 +12,9 @@ if (process.env.MONGODB_URI) {
     useUnifiedTopology: true,
     useCreateIndex: true,
   });
-  MONGO_URL = process.env.MONGODB_URI;
+  //happening_user:h4663n1n8
+  MONGO_URL =
+    "mongodb://happening_user:h4663n1n8@ds121955.mlab.com:21955/heroku_72d6m5nb";
 } else {
   mongoose.connect(MONGO_LOCAL_URL, {
     useNewUrlParser: true,
