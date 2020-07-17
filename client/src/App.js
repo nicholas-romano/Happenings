@@ -7,6 +7,9 @@ import NoMatch from './pages/NoMatch'
 import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
 
+import './App.css';
+import './App.sass'
+
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
 import { Button } from 'react-bulma-components'
@@ -57,15 +60,39 @@ function App () {
   }
 
   return (
+
+
+    
     <div className='App'>
-      {/* Insert test bulma items here to see whats up */}
-      <button className='button is-warning'>Our Bulma Button</button>
-      <div
-        className='box'
-        img
-        src='https://bulma.io/images/placeholders/128x128.png'
-        alt='Image'
-      ></div>
+      <h1 className="title">Bulma</h1>
+
+<p className="subtitle">
+  Modern CSS framework based on{' '}
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">
+    Flexbox
+  </a>
+</p>
+
+<div className="field">
+  <div className="control">
+    <input className="input" type="text" placeholder="Input" />
+  </div>
+</div>
+
+<div className="field">
+  <p className="control">
+    <span className="select">
+      <select>
+        <option>Select dropdown</option>
+      </select>
+    </span>
+  </p>
+</div>
+
+<div className="buttons">
+  <a className="button is-primary">Primary</a>
+  <a className="button is-link">Link</a>
+</div>
       {/* End of bulma test stuff */}
 
       {loggedIn && (
