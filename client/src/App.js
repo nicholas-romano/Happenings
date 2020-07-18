@@ -60,12 +60,11 @@ function App () {
     <div className='App'>
       {/* Insert test bulma items here to see whats up */}
       <button className='button is-warning'>Our Bulma Button</button>
-      <div
+      <img
         className='box'
-        img
         src='https://bulma.io/images/placeholders/128x128.png'
-        alt='Image'
-      ></div>
+        alt='Placehoder Image'
+      />
       {/* End of bulma test stuff */}
 
       {loggedIn && (
