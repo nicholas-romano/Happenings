@@ -9,7 +9,7 @@ import Feed from './pages/Feed'
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
-import { Button } from 'react-bulma-components'
+// import { Button } from 'react-bulma-components'
 
 function App () {
   const [loggedIn, setLoggedIn] = useState(false)
