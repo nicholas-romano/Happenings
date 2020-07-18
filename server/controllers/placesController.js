@@ -3,7 +3,7 @@
 const ObjectId = require('mongoose').Types.ObjectId
 const db = require('../models')
 
-// Define our methods for the current places
+// Define our methods for the current places, this is currently just a line by line copy of the booksController we did have, so it'll require build out from this point
 
 module.exports = {
   findAll: function (req, res) {
