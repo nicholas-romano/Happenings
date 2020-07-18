@@ -1,20 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import './App.css';
+
 import LoginForm from './pages/Auth/LoginForm'
 import SignupForm from './pages/Auth/SignupForm'
 import Nav from './components/Nav'
 import NoMatch from './pages/NoMatch'
 import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
+import Hero from './components/Hero'
+import MediaContent from './components/MediaContent'
+import Header from './components/Header';
+import Footer from './components/Footer'
 
-import './App.css';
-import './App.sass'
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
-import { Button } from 'react-bulma-components'
+import Button from 'react-bulma-components'
 
-function App () {
+const styles = {
+  twothirds: {
+    paddingBottom: 10,
+    backgroundColor: 'rgba(183, 209, 218, 1)'
+  },
+  onethird: {
+    backgroundColor: 'rgba(163, 124, 64, 1)'
+  },
+  back: {
+    backgroundColor: 'rgba(42, 45, 52, 1)'
+  }
+}
+
+function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
 
@@ -61,62 +78,50 @@ function App () {
 
   return (
 
+    <div className='App' style={styles.back}>
+      <Hero />
+      
 
-    
-    <div className='App'>
-      <h1 className="title">Bulma</h1>
+      <div className='columns is-gapless is-desktop'>
 
-<p className="subtitle">
-  Modern CSS framework based on{' '}
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">
-    Flexbox
-  </a>
-</p>
+        <div className='column is-two-thirds' style={styles.twothirds}>
+          {loggedIn && (
+            <div>
+              <Nav user={user} logout={logout} />
+              <div className='main-view'>
+                <Switch>
+                  <Route exact path='/' component={Feed} />
+                  <Route component={NoMatch} />
+                </Switch>
+              </div>
+            </div>
+          )}
+          {!loggedIn && (
+            <div className='auth-wrapper' style={{ paddingTop: 11 }}>
+              <Route exact path='/' component={() => <LoginForm login={login} />} />
+              <Route
+                exact
+                path='/feed'
+                component={() => <LoginForm user={login} />}
+              />
+              <Route exact path='/signup' component={SignupForm} />
+            </div>
+          )}
 
-<div className="field">
-  <div className="control">
-    <input className="input" type="text" placeholder="Input" />
-  </div>
-</div>
-
-<div className="field">
-  <p className="control">
-    <span className="select">
-      <select>
-        <option>Select dropdown</option>
-      </select>
-    </span>
-  </p>
-</div>
-
-<div className="buttons">
-  <a className="button is-primary">Primary</a>
-  <a className="button is-link">Link</a>
-</div>
-      {/* End of bulma test stuff */}
-
-      {loggedIn && (
-        <div>
-          <Nav user={user} logout={logout} />
-          <div className='main-view'>
-            <Switch>
-              <Route exact path='/' component={Feed} />
-              <Route component={NoMatch} />
-            </Switch>
+        </div>
+        <div className='column is-one-third' style={styles.onethird}>
+          <div className="field">
+            <div className="control">
+              <input className="input" type="text" placeholder="Input" />
+            </div>
           </div>
+
         </div>
-      )}
-      {!loggedIn && (
-        <div className='auth-wrapper' style={{ paddingTop: 40 }}>
-          <Route exact path='/' component={() => <LoginForm login={login} />} />
-          <Route
-            exact
-            path='/feed'
-            component={() => <LoginForm user={login} />}
-          />
-          <Route exact path='/signup' component={SignupForm} />
-        </div>
-      )}
+      </div>
+
+      <MediaContent />
+
+      <Footer />
     </div>
   )
 }

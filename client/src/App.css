@@ -32,3 +32,8 @@
       transform: rotate(360deg);
     }
   }
+
+  .buttons {
+    background-color: crimson;
+    color: darkorange;
+  }
