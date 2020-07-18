@@ -41,5 +41,5 @@ userSchema.pre('save', function (next) {
 })
 
 // Create reference to User & export
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema, 'user')
 module.exports = User

@@ -7,6 +7,6 @@ const quickInfoSchema = new Schema({
   placeImage: { type: String, required: true }
 })
 
-const QuickInfo = mongoose.model('QuickInfo', quickInfoSchema)
+const QuickInfo = mongoose.model('QuickInfo', quickInfoSchema, 'quickInfo')
 
 module.exports = QuickInfo

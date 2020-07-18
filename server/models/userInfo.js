@@ -8,6 +8,6 @@ const userInfoSchema = new Schema({
   userInterest: { type: String, required: true }
 })
 
-const UserInfo = mongoose.model('UserInfo', userInfoSchema)
+const UserInfo = mongoose.model('UserInfo', userInfoSchema, 'userInfo')
 
 module.exports = UserInfo
