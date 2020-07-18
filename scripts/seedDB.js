@@ -1,11 +1,19 @@
 const mongoose = require('mongoose')
 const db = require('../models')
 
-// This file empties the Books collection and inserts the books below
+// This file empties the Places collection and inserts the places below
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/happenings-app'
+  process.env.MONGODB_URI || 'mongodb://localhost/happenings-app', {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  }
 )
+.then(() => console.log('DB Connected!'))
+.catch(err => {
+  console.log(`DB Connection Error: ${err.message}`);
+});
 
 console.log('Inside seedDB.js')
 
@@ -20,7 +28,7 @@ const places = [
   }
 ]
 
-db.Places.remove({})
+db.Places.deleteMany({})
   .then(() => db.Places.collection.insertMany(places))
   .then(data => {
     console.log(data.result.n + ' records inserted!')

@@ -7,7 +7,7 @@ const placesSchema = new mongoose.Schema({
     required: true
   },
   placeAddress: {
-    type: string,
+    type: String,
     required: true
   },
   title: {
