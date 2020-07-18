@@ -16,11 +16,7 @@ import Footer from './components/Footer'
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
-<<<<<<< HEAD
 import Button from 'react-bulma-components'
-=======
-// import { Button } from 'react-bulma-components'
->>>>>>> master
 
 const styles = {
   twothirds: {
