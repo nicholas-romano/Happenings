@@ -1,3 +1,5 @@
+// EXS 18th July - Draft friends list
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 

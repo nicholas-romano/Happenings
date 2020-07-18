@@ -1,9 +1,11 @@
+// EXS 18th July 2020 - reference in our schema files for building seeds
+
 module.exports = {
-  Reviews: require('./reviews'),
-  Places: require('./places'),
   Friends: require('./friends'),
-  UserInfo: require('./userInfo'),
-  QuickInfo: require('./quickInfo'),
   LocationEvents: require('./locationEvents'),
-  User: require('./user')
+  Places: require('./places'),
+  QuickInfo: require('./quickInfo'),
+  Reviews: require('./reviews'),
+  User: require('./user'),
+  UserInfo: require('./userInfo')
 }
