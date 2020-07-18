@@ -4,6 +4,7 @@
 
 const mongoose = require('mongoose')
 const db = require('../models')
+const TODAY = new Date()
 
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost/happenings-app',
@@ -22,17 +23,17 @@ const placesSeed = [
   {
     placeName: 'myTestPlaceName4',
     placeAddress: '2456 Main St',
-    placeEvent: 'None',
-    placeEventStart: 'eventStart',
-    placeEventFinish: 'eventFinish',
+    // placeEvent: 'None',
+    // placeEventStart: Date.now,
+    // placeEventFinish: Date.now,
     placeCreatedBy: 'Eddie'
   },
   {
     placeName: 'myTestPlaceName5',
     placeAddress: '2456 Main St',
-    placeEvent: 'None',
-    placeEventStart: 'eventStart',
-    placeEventFinish: 'eventFinish',
+    // placeEvent: 'None',
+    // placeEventStart: Date.now,
+    // placeEventFinish: Date.now,
     placeCreatedBy: 'Eddie'
   }
 ]
@@ -75,8 +76,8 @@ const quickInfoSeed = [
 const locationEventsSeed = [
   {
     eventLocation: 'ourTestlocation',
-    eventStart: 'starttimedate',
-    eventEnd: 'endtimedate'
+    eventStart: TODAY.getDate(),
+    eventEnd: TODAY.getDate()
   }
 ]
 // EXS When we execture the seedsDB, this removes all entries and then insert the records above
