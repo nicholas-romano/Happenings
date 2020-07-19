@@ -1,4 +1,3 @@
-// EXS 19th July 2020 - Removed line 6 "proxy": "http://localhost:3001/",
 {
   "name": "happenings-app",
   "version": "1.1.0",
