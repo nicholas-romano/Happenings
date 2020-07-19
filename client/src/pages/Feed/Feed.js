@@ -1,5 +1,9 @@
-import React, { useState, useEffect, useRef, Component } from 'react'
-import { Link } from 'react-router-dom'
+// EXS 19th July 2020 commented out these two lines as they're unused
+
+//import React, { useState, useEffect, useRef, Component } from 'react'
+// import { Link } from 'react-router-dom'
+
+import React from 'react'
 
 //  EXS just some starter code for getting current GeoLocation
 
