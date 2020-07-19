@@ -7,9 +7,9 @@ router
   .get(placesController.findAll)
   .post(placesController.create)
 
-// Matches with "/api/books/:id"
+// Matches with "/api/places/:id"
 router
-  .route('/:id')
+  .route('*/:id')
   .get(placesController.findById)
   .put(placesController.update)
   .delete(placesController.remove)

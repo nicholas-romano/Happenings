@@ -10,12 +10,12 @@ import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
-// import Header from './components/Header'; EXS commented out as unused
+import Header from './components/Header'
 import Footer from './components/Footer'
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
-// import Button from 'react-bulma-components' EXS commented out as unused
+import Button from 'react-bulma-components'
 
 const styles = {
   twothirds: {

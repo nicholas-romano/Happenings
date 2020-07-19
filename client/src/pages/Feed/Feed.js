@@ -1,9 +1,5 @@
-// EXS 19th July 2020 commented out these two lines as they're unused
-
-//import React, { useState, useEffect, useRef, Component } from 'react'
-// import { Link } from 'react-router-dom'
-
-import React from 'react'
+import React, { useState, useEffect, useRef, Component } from 'react'
+import { Link } from 'react-router-dom'
 
 //  EXS just some starter code for getting current GeoLocation
 
@@ -16,7 +12,11 @@ navigator.geolocation.getCurrentPosition(function (position) {
 })
 
 function Feed () {
-  return <h1>Check out the neighborhood!</h1>
+  return (
+    <>
+      <h1>Check out the neighborhood!</h1>
+    </>
+  )
 }
 
 export default Feed
