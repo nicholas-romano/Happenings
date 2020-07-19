@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import './App.css';
+import './App.css'
 
 import LoginForm from './pages/Auth/LoginForm'
 import SignupForm from './pages/Auth/SignupForm'
@@ -10,13 +10,12 @@ import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
-import Header from './components/Header';
+// import Header from './components/Header' EXS 19th July 2020 - commented out as unused at this time
 import Footer from './components/Footer'
-
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
-import Button from 'react-bulma-components'
+// import Button from 'react-bulma-components' EXS 19th July 2020 - commented out as unused at this time
 
 const styles = {
   twothirds: {
@@ -31,7 +30,7 @@ const styles = {
   }
 }
 
-function App() {
+function App () {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
 
@@ -77,13 +76,10 @@ function App() {
   }
 
   return (
-
     <div className='App' style={styles.back}>
       <Hero />
-      
 
       <div className='columns is-gapless is-desktop'>
-
         <div className='column is-two-thirds' style={styles.twothirds}>
           {loggedIn && (
             <div>
@@ -98,7 +94,11 @@ function App() {
           )}
           {!loggedIn && (
             <div className='auth-wrapper' style={{ paddingTop: 11 }}>
-              <Route exact path='/' component={() => <LoginForm login={login} />} />
+              <Route
+                exact
+                path='/'
+                component={() => <LoginForm login={login} />}
+              />
               <Route
                 exact
                 path='/feed'
@@ -107,15 +107,13 @@ function App() {
               <Route exact path='/signup' component={SignupForm} />
             </div>
           )}
-
         </div>
         <div className='column is-one-third' style={styles.onethird}>
-          <div className="field">
-            <div className="control">
-              <input className="input" type="text" placeholder="Input" />
+          <div className='field'>
+            <div className='control'>
+              <input className='input' type='text' placeholder='Input' />
             </div>
           </div>
-
         </div>
       </div>
 
