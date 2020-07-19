@@ -27,7 +27,7 @@ const reviewsSchema = new Schema({
     type: String, 
     required: true 
   }
-})
+});
 
 const Reviews = mongoose.model('Reviews', reviewsSchema)
 
