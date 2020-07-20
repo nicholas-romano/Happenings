@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import LoginForm from './pages/Auth/LoginForm'
 import SignupForm from './pages/Auth/SignupForm'
+import AUTH from './utils/AUTH'
+
 import Nav from './components/Nav'
 import NoMatch from './pages/NoMatch'
-import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
-// import Header from './components/Header'
+// import Header from './components/Header'; EXS commented out as unused
 import Footer from './components/Footer'
+
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
 import './App.css'
-
-// import Button from 'react-bulma-components' EXS 19th July 2020 - commented out as unused at this time
+// import Button from 'react-bulma-components' EXS commented out as unused
 
 const styles = {
   twothirds: {
@@ -29,13 +30,13 @@ const styles = {
   }
 }
 
-function App () {
+function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
 
   useEffect(() => {
     AUTH.getUser().then(response => {
-      console.log(response.data)
+      // console.log(response.data);
       if (!!response.data.user) {
         setLoggedIn(true)
         setUser(response.data.user)

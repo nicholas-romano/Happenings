@@ -1,22 +1,22 @@
-import axios from 'axios'
+import axios from "axios";
 
-console.log('Inside AUTH.js')
+console.log("Inside AUTH.js");
 
 export default {
   // Gets user info
   getUser: function () {
-    return axios.get('/auth/user')
+    return axios.get('/auth/user');
   },
   // Logs the user out
   logout: function () {
-    return axios.post('/auth/logout')
+    return axios.post('/auth/logout');
   },
   // Log the user in
   login: function (username, password) {
-    return axios.post('/auth/login', { username, password })
+    return axios.post('/auth/login', { username, password });
   },
   // New user registration
   signup: function (userData) {
-    return axios.post('/auth/signup', userData)
+    return axios.post('/auth/signup', userData);
   }
-}
+};
