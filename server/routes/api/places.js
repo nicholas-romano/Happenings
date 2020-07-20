@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const placesController = require('../../controllers/placesController')
 
-// Matches with "/api/books"
+// Matches with "/api/places"
 router
   .route('/')
   .get(placesController.findAll)
@@ -9,7 +9,7 @@ router
 
 // Matches with "/api/places/:id"
 router
-  .route('*/:id')
+  .route('/:id')
   .get(placesController.findById)
   .put(placesController.update)
   .delete(placesController.remove)

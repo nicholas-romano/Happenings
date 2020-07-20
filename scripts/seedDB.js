@@ -16,16 +16,24 @@ mongoose.connect(
 )
 
 console.log('Inside seedDB.js')
+//console.log('Places: ', db.Places)
+//console.log('Reviews: ', db.Reviews)
 
 const placesSeed = [
   {
     placeName: 'myTestPlaceName4',
     placeAddress: '2456 Main St',
+    // placeEvent: 'None',
+    // placeEventStart: Date.now,
+    // placeEventFinish: Date.now,
     placeCreatedBy: 'Eddie'
   },
   {
     placeName: 'myTestPlaceName5',
     placeAddress: '2456 Main St',
+    // placeEvent: 'None',
+    // placeEventStart: Date.now,
+    // placeEventFinish: Date.now,
     placeCreatedBy: 'Eddie'
   }
 ]
@@ -73,6 +81,8 @@ const locationEventsSeed = [
   }
 ]
 // EXS When we execture the seedsDB, this removes all entries and then insert the records above
+// Optimize this code later
+// console.log(db.Friends, db.UserInfo)
 
 db.Places.deleteMany({})
   .then(console.log('Adding Places'))
