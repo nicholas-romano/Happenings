@@ -13,7 +13,7 @@ class Header extends Component {
 
             <nav className="navbar" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <a className='navbar-item'>
+                    <a className='navbar-item' href='localhost:3000/home'>
                         <img src={Icon} alt='LogoIcon' />
                     </a>
                     <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
