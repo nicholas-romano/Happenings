@@ -6,19 +6,19 @@ mongoose.promise = Promise
 // Define userSchema
 // EXS 18th July 2020 - Create reference from user to userInfo
 
-console.log('We are in server user.js')
+console.log("We are in server user.js");
 
 const userSchema = new Schema({
   firstName: { type: String, unique: false },
   lastName: { type: String, unique: false },
   username: { type: String, unique: false, required: false },
   password: { type: String, unique: false, required: false },
-  books: [
+  userInfo: [
     {
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
       // The ObjectIds will refer to the ids in the places model
-      ref: 'Book'
+      ref: 'UserInfo_id'
     }
   ]
 })
