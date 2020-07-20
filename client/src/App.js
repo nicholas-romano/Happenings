@@ -17,6 +17,8 @@ import 'react-bulma-components/dist/react-bulma-components.min.css'
 import './App.css'
 // import Button from 'react-bulma-components' EXS commented out as unused
 
+console.log(AUTH);
+
 const styles = {
   twothirds: {
     paddingBottom: 10,
