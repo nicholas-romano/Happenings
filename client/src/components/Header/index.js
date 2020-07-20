@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Nav from '../Nav';
-import Icon from '../../assets/HapLogoIcon.png';
+import React, { Component } from 'react'
+// import Nav from '../Nav'; EXS 19th July 2020 - commented out as unused at this time
+import Icon from '../../assets/HapLogoIcon.png'
 import 'react-bulma-components/dist/react-bulma-components.min.css'
 
 // EXS <a href> added to the following lines of code: 12, 17, 31, 34, 36, 38, 40
@@ -52,39 +52,13 @@ class Header extends Component {
                     Logout
                   </a>
                 </div>
-
-                <div className='navbar-menu'>
-                    <div className='navbar-end'>
-                        <a className='navbar-item'>
-                            Home
-                            </a>
-                        <a className='navbar-item'>
-                            Friends
-                            </a>
-                        <div className='navbar-item has-dropdown is-hoverable'>
-                            <a className='navbar-link'>
-                                Account
-                                </a>
-                            <div className='navbar-dropdown'>
-                                <a className='navbar-item'>
-                                    Settings
-                                    </a>
-                                <hr className='navbar-divider'></hr>
-                                <a className='navbar-item'>
-                                    Contact
-                                    </a>
-                                <hr className='navbar-divider'></hr>
-                                <a className='navbar-item'>
-                                    Logout
-                                    </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-        )
-    }
+              </div>
+            </div>
+          </div>
+        </nav>
+      </>
+    )
+  }
 }
 
 export default Header;
