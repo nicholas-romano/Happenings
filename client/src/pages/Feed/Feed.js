@@ -8,8 +8,8 @@ import React from 'react'
 navigator.geolocation.getCurrentPosition(function (position) {
   const myLat = position.coords.longitude
   const myLong = position.coords.longitude
-  console.log('Latitude is :', position.coords.latitude)
-  console.log('Longitude is :', position.coords.longitude)
+  // console.log('Latitude is :', position.coords.latitude)
+  // console.log('Longitude is :', position.coords.longitude)
   console.log(myLat, myLong)
 })
 
