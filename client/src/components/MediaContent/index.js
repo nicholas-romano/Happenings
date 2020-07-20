@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 
 const styles = {
-  title: {
-    color: 'snow'
-  },
-  iconItem: {
-    color: 'rgba(220, 171, 107, 1)'
-  },
-  Prime: {
-    margin: 15
-  }
+    title: {
+        color: 'snow'
+      },
+      iconItem: {
+        color: 'rgba(220, 171, 107, 1)'
+      },
+      Prime: {
+        margin: 15,
+      }
 }
 
 // EXS 19th July changed a references to href -lines 33, 36, 39, 72, 77, 82, 112, 117, 122, 151, 156, 161 - Just to clear warnings and make log easier to read
@@ -48,16 +48,28 @@ function MediaContent () {
                     </span>
                   </a>
                 </div>
-              </nav>
-            </div>
-            <div className='media-right'>
-              <button className='delete'></button>
-            </div>
-          </article>
+                <nav className='level is-mobile'>
+                  <div className='level-left'>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+              <div className='media-right'>
+                <button className='delete'></button>
+              </div>
+            </article>
+          </div>
         </div>
-      </div>
-      <div className='column is-one-fourth'>
-        <div className='tile'>
+        <div className='column is-one-fourth'>
+          <div className='tile'>
           <article className='media'>
             <div className='media-content'>
               <div className='content'>
@@ -87,16 +99,30 @@ function MediaContent () {
                     </span>
                   </a>
                 </div>
-              </nav>
-            </div>
-            <div className='media-right'>
-              <button className='delete'></button>
-            </div>
-          </article>
+                <nav className='level is-mobile'>
+                  <div className='level-left'>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+              <div className='media-right'>
+                <button className='delete'></button>
+              </div>
+            </article>
+
+
+          </div>
         </div>
-      </div>
-      <div className='column is-one-fourth'>
-        <div className='tile'>
+        <div className='column is-one-fourth'>
+          <div className='tile'>
           <article className='media'>
             <div className='media-content'>
               <div className='content'>
@@ -127,16 +153,29 @@ function MediaContent () {
                     </span>
                   </a>
                 </div>
-              </nav>
-            </div>
-            <div className='media-right'>
-              <button className='delete'></button>
-            </div>
-          </article>
+                <nav className='level is-mobile'>
+                  <div className='level-left'>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+              <div className='media-right'>
+                <button className='delete'></button>
+              </div>
+            </article>
+
+          </div>
         </div>
-      </div>
-      <div className='column is-one-fourth'>
-        <div className='tile'>
+        <div className='column is-one-fourth'>
+          <div className='tile'>
           <article className='media'>
             <div className='media-content'>
               <div className='content'>
@@ -165,17 +204,32 @@ function MediaContent () {
                       <i className='fas fa-heart'></i>
                     </span>
                   </a>
+
                 </div>
-              </nav>
-            </div>
-            <div className='media-right'>
-              <button className='delete'></button>
-            </div>
-          </article>
+                <nav className='level is-mobile'>
+                  <div className='level-left'>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
+                    </a>
+                    <a className='level-item'>
+                      <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+              <div className='media-right'>
+                <button className='delete'></button>
+              </div>
+            </article>
+
+          </div>
         </div>
+
       </div>
-    </div>
-  )
+    )
 }
 
-export default MediaContent
+export default MediaContent;

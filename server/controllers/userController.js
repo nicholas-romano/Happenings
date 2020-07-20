@@ -11,6 +11,7 @@ module.exports = {
     }
   },
   register: (req, res) => {
+    console.log('Register user from userController.js', req.user)
     const { firstName, lastName, username, password } = req.body;
     // ADD VALIDATION
     db.User.findOne({ 'username': username }, (err, userMatch) => {
@@ -32,6 +33,7 @@ module.exports = {
     });
   },
   logout: (req, res) => {
+    console.log('Logout user from userController.js', req.user)
     if (req.user) {
       req.session.destroy();
       res.clearCookie('connect.sid'); // clean up!
@@ -40,17 +42,17 @@ module.exports = {
       return res.json({ msg: 'no user to log out!' });
     }
   },
-  auth: function(req, res, next) {
-		// console.log(req.body);
-		next();
+  auth: function (req, res, next) {
+    // console.log(req.body);
+    next();
   },
   authenticate: (req, res) => {
-		const user = JSON.parse(JSON.stringify(req.user)); // hack
-		const cleanUser = Object.assign({}, user);
-		if (cleanUser) {
-			// console.log(`Deleting ${cleanUser.password}`);
-			delete cleanUser.password;
-		}
-		res.json({ user: cleanUser });
-	}
+    const user = JSON.parse(JSON.stringify(req.user)); // hack
+    const cleanUser = Object.assign({}, user);
+    if (cleanUser) {
+      // console.log(`Deleting ${cleanUser.password}`);
+      delete cleanUser.password;
+    }
+    res.json({ user: cleanUser });
+  }
 };
