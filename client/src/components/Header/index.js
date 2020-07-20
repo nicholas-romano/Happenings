@@ -6,14 +6,15 @@ import 'react-bulma-components/dist/react-bulma-components.min.css'
 
 class Header extends Component {
 
+    //  Line 16 <a className='navbar-item' href='localhost:3000/home'>
 
     render() {
         return (
 
             <nav className="navbar" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <a className='navbar-item' href='localhost:3000/home'>
-                        <img src={Icon} alt='LogoIcon'/>
+                    <a className='navbar-item'>
+                        <img src={Icon} alt='LogoIcon' />
                     </a>
                     <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>

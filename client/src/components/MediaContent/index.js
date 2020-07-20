@@ -1,22 +1,22 @@
 import React from 'react';
 
 const styles = {
-    title: {
-        color: 'snow'
-      },
-      iconItem: {
-        color: 'rgba(220, 171, 107, 1)'
-      },
-      Prime: {
-        margin: 15,
-      }
+  title: {
+    color: 'snow'
+  },
+  iconItem: {
+    color: 'rgba(220, 171, 107, 1)'
+  },
+  Prime: {
+    margin: 15,
+  }
 }
 
 function MediaContent() {
 
-    return(
-        <div className='columns' style={styles.Prime}>
-        <div className='column is-one-fourth'>
+  return (
+    <div className='columns' style={styles.Prime}>
+      {/* <div className='column is-one-fourth'>
           <div className='tile'>
             <article className='media'>
               <div className='media-content'>
@@ -143,10 +143,10 @@ function MediaContent() {
             </article>
 
           </div>
-        </div>
+        </div> */}
 
-      </div>
-    )
+    </div>
+  )
 }
 
 export default MediaContent;
