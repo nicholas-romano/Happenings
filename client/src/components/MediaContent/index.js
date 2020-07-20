@@ -13,6 +13,7 @@ const styles = {
 }
 
 // EXS 19th July changed a references to href -lines 33, 36, 39, 72, 77, 82, 112, 117, 122, 151, 156, 161 - Just to clear warnings and make log easier to read
+//RK added ='bulma stuff' to all blank href tags to remove error 
 
 function MediaContent () {
   return (
@@ -31,17 +32,17 @@ function MediaContent () {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-reply'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-retweet'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-heart'></i>
                     </span>
@@ -70,17 +71,17 @@ function MediaContent () {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-reply'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-retweet'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-heart'></i>
                     </span>
@@ -110,17 +111,17 @@ function MediaContent () {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-reply'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-retweet'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-heart'></i>
                     </span>
@@ -149,17 +150,17 @@ function MediaContent () {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-reply'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-retweet'></i>
                     </span>
                   </a>
-                  <a href className='level-item'>
+                  <a href='bulma stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}>
                       <i className='fas fa-heart'></i>
                     </span>
