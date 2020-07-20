@@ -10,7 +10,7 @@ import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
-// import Header from './components/Header' EXS 19th July 2020 - commented out as unused at this time
+// import Header from './components/Header'
 import Footer from './components/Footer'
 
 // EXS 16th July 2020 - Added in bulma calls

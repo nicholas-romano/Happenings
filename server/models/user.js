@@ -5,6 +5,9 @@ mongoose.promise = Promise
 
 // Define userSchema
 // EXS 18th July 2020 - Create reference from user to userInfo
+
+console.log('We are in server user.js')
+
 const userSchema = new Schema({
   firstName: { type: String, unique: false },
   lastName: { type: String, unique: false },
