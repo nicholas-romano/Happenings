@@ -9,6 +9,8 @@ import NoMatch from './pages/NoMatch'
 import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
+import Header from './components/Header';
+import Review from './components/Review';
 // import Header from './components/Header'; EXS commented out as unused
 import Footer from './components/Footer'
 
@@ -89,6 +91,7 @@ function App() {
               <div className='main-view'>
                 <Switch>
                   <Route exact path='/' component={Feed} />
+                  <Route exact path='/review' component={Review} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>
@@ -126,4 +129,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

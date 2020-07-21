@@ -29,13 +29,13 @@ function MediaContent() {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
                   </a>
                 </div>
@@ -60,13 +60,13 @@ function MediaContent() {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
                   </a>
                 </div>
@@ -93,13 +93,13 @@ function MediaContent() {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
                   </a>
                 </div>
@@ -125,13 +125,13 @@ function MediaContent() {
               </div>
               <nav className='level is-mobile'>
                 <div className='level-left'>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-reply'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-retweet'></i></span>
                   </a>
-                  <a className='level-item'>
+                  <a href='bulma-stuff' className='level-item'>
                     <span className='icon is-small' style={styles.iconItem}><i className='fas fa-heart'></i></span>
                   </a>
                 </div>
