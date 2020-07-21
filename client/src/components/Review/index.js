@@ -18,8 +18,8 @@ const Review = props => {
 
     useEffect(() => {
         AUTH.getUser().then(res => {
-            setUser(res.data.user);
-            console.log('user ', user);
+            setUser(res.data.user.username);
+            console.log('username: ', res.data.user.username);
         })
         .catch(err => console.log(err));
     }, []);
