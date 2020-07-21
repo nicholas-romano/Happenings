@@ -5,7 +5,11 @@ import { Card } from "../../components/Card";
 import { Input, FormBtn } from "../../components/Form";
 import AUTH from "../../utils/AUTH";
 
+console.log('Inside our signupForm.js')
+
 function SignupForm() {
+  console.log('Signup Form Loaded')
+
   const [userObject, setUserObject] = useState({
     firstName: "",
     lastName: "",

@@ -16,24 +16,16 @@ mongoose.connect(
 )
 
 console.log('Inside seedDB.js')
-//console.log('Places: ', db.Places)
-//console.log('Reviews: ', db.Reviews)
 
 const placesSeed = [
   {
     placeName: 'myTestPlaceName4',
     placeAddress: '2456 Main St',
-    // placeEvent: 'None',
-    // placeEventStart: Date.now,
-    // placeEventFinish: Date.now,
     placeCreatedBy: 'Eddie'
   },
   {
     placeName: 'myTestPlaceName5',
     placeAddress: '2456 Main St',
-    // placeEvent: 'None',
-    // placeEventStart: Date.now,
-    // placeEventFinish: Date.now,
     placeCreatedBy: 'Eddie'
   }
 ]
