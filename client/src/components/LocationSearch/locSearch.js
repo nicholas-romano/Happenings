@@ -53,6 +53,7 @@ function LocationSearch() {
     setLocationState({
       ...locationState,
       place: selection,
+      showButtons: false,
     });
   };
 
@@ -69,23 +70,29 @@ function LocationSearch() {
         <FormBtn onClick={handleSubmit}>Search</FormBtn>
       </form>
       {/* conditional rendering the buttons to display the places matching the users search */}
-      {locationState.location.length > 0 ? (
-        locationState.location.map((key, i) => {
-          console.log("Key Inside Map: ", key);
-          return (
-            <button
-              key={key.id}
-              value={key.name}
-              className="button"
-              onClick={handleLocClick}
-            >
-              {key.name}
-            </button>
-          );
-        })
-      ) : (
-        <div></div>
-      )}
+      <div>
+        {locationState.location.length > 0 ? (
+          locationState.location.map((key, i) => {
+            console.log("Key Inside Map: ", key);
+            console.log(locationState.showButtons);
+            return (
+              <button
+                style={{
+                  display: locationState.showButtons ? "" : "none",
+                }}
+                key={key.id}
+                value={key.name}
+                className="button"
+                onClick={handleLocClick}
+              >
+                {key.name}
+              </button>
+            );
+          })
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 }
