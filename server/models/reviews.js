@@ -6,6 +6,14 @@ const reviewsSchema = new Schema({
     type: String, 
     required: true 
   },
+  reviewOwnerFirstName: {
+    type: String,
+    required: true
+  },
+  reviewOwnerLastName: {
+    type: String,
+    required: true
+  },
   reviewCreated: {
     type: Date,
     default: Date.now,
