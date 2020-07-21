@@ -2,31 +2,42 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./style.css"
 // import { baseUrl } from "./config";
-
-const emojis = [{
-    name: "photo 1",
-    url: "https://i.pinimg.com/originals/69/01/88/690188487c670d01145817bf9c4666a3.png"
-}]
 
 const Review = () => {
     const settings = {
-        dots: true,
         lazyLoad: true,
         infinite: true,
-        speed: 500,
         arrows: true,
+        speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         initialSlide: 2,
         className: "slides"
     };
     return (
-        <div>
+        <div className="container is-fluid">
+            How’s the vibe?
             <Slider {...settings}>
-                {emojis.map(emoji => {
-                    return (<div><img width="50%" src={emoji.url}></img></div>)
-                })}
+                <div>
+                    <h1>😴</h1>
+                    <br></br>
+                    {/* <img src={emoji.url}></img> */}
+                    <button>Lame</button>
+                </div>
+                <div>
+                    <h1>😎</h1>
+                    <br></br>
+                    {/* <img src={} /> */}
+                    <button>Chill</button>
+                </div>
+                <div>
+                    <h1>🔥</h1>
+                    <br></br>
+                    {/* <img src={baseUrl + "/abstract03.jpg"} /> */}
+                    <button>Fun</button>
+                </div>
             </Slider>
         </div >
     );
