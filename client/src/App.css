@@ -13,6 +13,10 @@
     cursor: pointer;
   }
 
+  .star-rating {
+    font-size: 11px;
+  }
+
   .form {
     padding: 15px;
     text-align: left;

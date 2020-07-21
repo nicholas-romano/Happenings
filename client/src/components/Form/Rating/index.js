@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Star } from './Star';
 
 export const Rating = props => {
 
@@ -7,9 +8,9 @@ export const Rating = props => {
 
     const getStar = star => {
         if (star <= reviewRating) {
-            return (<span onClick={() => handleRatingChange(star)}>★</span>);
+            return (<span>★</span>);
         } else {
-            return (<span onClick={() => handleRatingChange(star)}>☆</span>);
+            return (<span>☆</span>);
         }
     }
 
@@ -18,9 +19,10 @@ export const Rating = props => {
             <label className="label">Rating</label>
                 <div className="control">
                     <div className="star-container">
-                        {stars.map(star => {
-                            return getStar(star);
-                        })}
+                        {stars.map(star => (
+                            <Star star={star} key={star} getStar={getStar} handleRatingChange={handleRatingChange}  />
+                        ))}
+                        <div className="star-rating">{reviewRating} out of 5 stars</div>
                     </div>
                 </div>
         </div>
