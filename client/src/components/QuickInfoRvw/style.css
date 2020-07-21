@@ -1,0 +1,14 @@
+.container {
+    text-align: center;
+    color: black;
+    margin: 75px;
+}
+
+.emojies {
+font-size: 100px;
+margin: 25px;
+}
+
+.btn {
+    margin: 25px
+}
