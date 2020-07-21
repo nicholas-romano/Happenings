@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { Component } from 'react'
 import Nav from '../Nav';
 import Icon from '../../assets/HapLogoIcon.png';
 import 'react-bulma-components/dist/react-bulma-components.min.css'
@@ -50,12 +51,12 @@ const Header = () => {
                     Logout
                   </a>
                 </div>
-
               </div>
             </div>
           </div>
         </nav>
     )
+  }
 }
 
 export default Header;
