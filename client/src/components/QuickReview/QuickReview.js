@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css"
 
-const QuickInfo = () => {
+const QuickReview = () => {
 
     const [mood, setMood] = React.useState();
     console.log(mood)
@@ -104,4 +104,4 @@ const QuickInfo = () => {
     );
 };
 
-export default QuickInfo;
+export default QuickReview;
