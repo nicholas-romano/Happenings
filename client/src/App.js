@@ -6,12 +6,13 @@ import Nav from './components/Nav'
 import NoMatch from './pages/NoMatch'
 import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
+import Review from "./components/ReviewPg/review"
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
 // import { Button } from 'react-bulma-components'
 
-function App () {
+function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
 
@@ -88,6 +89,7 @@ function App () {
             component={() => <LoginForm user={login} />}
           />
           <Route exact path='/signup' component={SignupForm} />
+          <Route exact path='/review' component={Review} />
         </div>
       )}
     </div>
