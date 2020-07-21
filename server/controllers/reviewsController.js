@@ -6,10 +6,11 @@ module.exports = {
 
     findAll: function (req, res) {
         if (req.user) {
-            db.Reviews.findAll({})
+            db.Reviews.find({})
             .then(reviews => {
                 res.json(reviews);
             })
+            .catch(err => res.status(422).json(err))
         }
     },
     create: function (req, res) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Input, Rating, TextArea, FormBtn } from '../Form';
+import ReviewPost from './ReviewPost';
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
 import '../../App.css';
@@ -19,24 +20,45 @@ const Review = props => {
     });
     const [reviewRating, setRatings] = useState(0);
     const formEl = useRef(null);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
+
         AUTH.getUser().then(res => {
             const { username, firstName, lastName } = res.data.user
             setUser({username, firstName, lastName});
+            loadReviews();
         })
         .catch(err => console.log(err));
+
     }, []);
 
     useEffect(() => {
         console.log('formObject rating: ', formObject.rating);
     }, [reviewRating]);
 
+    useEffect(() => {
+        console.log('reviews: ', reviews);
+    }, [reviews]);
+
     // Handles updating component state when the user types into the input field
     const handleInputChange = event => {
         const { name, value } = event.target;
         setFormObject({...formObject, [name]: value})
     };
+
+    const loadReviews = () => {
+
+        API.getReviews()
+            .then(res => {
+                console.log("all reviews: ", res.data);
+                let reviews = res.data;
+                //Reverse the order of the array to display to most recent post first:
+                reviews.reverse();
+                setReviews(reviews);
+            })
+            .catch(err => console.log('err ', err));
+    }
 
     const handleRatingChange = rating => {
         setRatings(rating);
@@ -62,7 +84,7 @@ const Review = props => {
                 setRatings(0);
                 setFormObject({rating: 0});
                 closeReviewForm();
-                //loadReviews();
+                loadReviews();
             })
             .catch(err => console.log(err));
         }
@@ -78,7 +100,7 @@ const Review = props => {
 
     return (
         <>
-        <a className="button is-link" onClick={showReviewForm}>Modal</a>
+        <a className="button is-link" onClick={showReviewForm}>Write a Review</a>
         <div className={showModal ? 'is-active modal' : 'modal'} id="review-modal">
             <div className="modal-background"></div>
                 <div className="modal-content">
@@ -119,6 +141,11 @@ const Review = props => {
                 </div>
             <button className="modal-close is-large" aria-label="close" onClick={closeReviewForm}></button>
         </div>
+        {
+            reviews.map((post, index) => (
+                <ReviewPost key={index} post={post} />
+            ))
+        }
         </>
     ) 
 };
