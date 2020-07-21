@@ -1,49 +1,93 @@
-// import React, { useContext } from "react";
-// import LocationContext from "../../utils/LocationContext";
+import React, { useState } from "react";
 
-// function LocationSearch() {
-//   const context = useContext(LocationContext);
+import mapquestAPI from "../../utils/mapquestAPI";
+import { Input, FormBtn } from "../../components/Form";
 
-//   console.log("CONTEXT IN LOCSEARCH!!!: ", context);
+//getting lat and long of user -- not currerntly used but can be in future development
+navigator.geolocation.getCurrentPosition(function (position) {
+  console.log("Latitude is :", position.coords.latitude);
+  console.log("Longitude is :", position.coords.longitude);
+});
 
-//   {
-//     context.location !== undefined ? (
-//       context.location.map(({ name, displayString }) => {
-//         return <h1>{name}</h1>;
-//       })
-//     ) : (
-//       <h1>We got nothing :(</h1>
-//     );
-//   }
-//   {
-//   /* {context.location.map(({ name, displayString }) => {
-//         return (
-//           <div className="dropdown is-hoverable">
-//             <div className="dropdown-trigger">
-//               <button
-//                 className="button"
-//                 aria-haspopup="true"
-//                 aria-controls="dropdown-menu4"
-//               >
-//                 <span>Locations</span>
-//                 <span className="icon is-small">
-//                   <i className="fas fa-angle-down" aria-hidden="true"></i>
-//                 </span>
-//               </button>
-//             </div>
-//             <div className="dropdown-menu" id="dropdown-menu4" role="menu">
-//               <div className="dropdown-content">
-//                 <div className="dropdown-item">
-//                   <p>
-//                     {name}
-//                     {displayString}
-//                   </p>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         );
-//       })} */}
-// }
+function LocationSearch() {
+  const [locationState, setLocationState] = useState({
+    location: "",
+    place: "",
+    showButtons: true,
+  });
 
-// export default LocationSearch;
+  //handling the location search
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    //fetching locations that match user input from the mapquest API, setting to location in state
+    mapquestAPI.getPlace(locationState.place).then((res) => {
+      console.log(res.data.results);
+      setLocationState({
+        ...locationState,
+        location: res.data.results,
+      });
+    });
+  };
+
+  //storing the form input value for the API search
+  const handleInputChange = (event) => {
+    // Getting the value and name of the input which triggered the change
+    const value = event.target.value;
+
+    // Updating the input's state
+    setLocationState({
+      ...locationState,
+      place: value,
+    });
+  };
+
+  //handling the value of the location selection and filling that name back into the input
+  const handleLocClick = (event) => {
+    event.preventDefault();
+
+    let selection = event.target.value;
+
+    console.log("Selection: ", selection);
+
+    setLocationState({
+      ...locationState,
+      place: selection,
+    });
+  };
+
+  return (
+    <div>
+      <h1>Check out the neighborhood!</h1>
+      <form style={{ marginTop: 10 }}>
+        <label htmlFor="username">Where are you? </label>
+        <Input
+          type="text"
+          value={locationState.place}
+          onChange={handleInputChange}
+        />
+        <FormBtn onClick={handleSubmit}>Search</FormBtn>
+      </form>
+      {/* conditional rendering the buttons to display the places matching the users search */}
+      {locationState.location.length > 0 ? (
+        locationState.location.map((key, i) => {
+          console.log("Key Inside Map: ", key);
+          return (
+            <button
+              key={key.id}
+              value={key.name}
+              className="button"
+              onClick={handleLocClick}
+            >
+              {key.name}
+            </button>
+          );
+        })
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
+}
+
+export default LocationSearch;
