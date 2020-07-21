@@ -14,7 +14,7 @@ const userSchema = new Schema({
     {
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the places model
+      // The ObjectIds will refer to the ids in the user model
       ref: 'UserInfo_id'
     }
   ]

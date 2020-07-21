@@ -11,8 +11,8 @@ import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
 import Header from './components/Header';
+import Review from './components/Review';
 import Footer from './components/Footer'
-
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
@@ -91,6 +91,7 @@ function App() {
               <div className='main-view'>
                 <Switch>
                   <Route exact path='/' component={Feed} />
+                  <Route exact path='/review' component={Review} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>
