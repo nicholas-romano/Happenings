@@ -1,14 +1,13 @@
+
 import React, { Component } from 'react'
-// import Nav from '../Nav'; EXS 19th July 2020 - commented out as unused at this time
-import Icon from '../../assets/HapLogoIcon.png'
+import Nav from '../Nav';
+import Icon from '../../assets/HapLogoIcon.png';
 import 'react-bulma-components/dist/react-bulma-components.min.css'
 
 // EXS <a href> added to the following lines of code: 12, 17, 31, 34, 36, 38, 40
 // RK added ='bulma stuff' after blank href tags to remove errors
-class Header extends Component {
-  render () {
+const Header = () => {
     return (
-      <>
         <nav className='navbar' role='navigation' aria-label='main navigation'>
           <div className='navbar-brand'>
             <a href='bulma stuff' className='navbar-item' href='localhost:3000/home'>
@@ -56,7 +55,6 @@ class Header extends Component {
             </div>
           </div>
         </nav>
-      </>
     )
   }
 }

@@ -11,21 +11,14 @@ module.exports = {
                 res.json(reviews);
             })
         }
+    },
+    create: function (req, res) {
+        db.Reviews.create(req.body)
+        .then(dbReview => {
+            res.json(dbReview);
+        })
+        .catch(err => res.status(422).json(err))
     }
-
-//   findAll: function (req, res) {
-//     if (req.user) {
-//       db.Reviews.find({ _id: req.user._id })
-//         .populate({ path: 'reviews', options: { sort: { reviewCreated: -1 } } })
-//         .then(users => {
-//           res.json({ reviews: users[0].reviews })
-//         })
-//         .catch(err => res.status(422).json(err))
-//     } else {
-//       return res.json({ reviews: null })
-//     }
-//   }
-  //,
 //   findById: function (req, res) {
 //     if (req.user) {
 //       db.Reviews.find({ _id: req.user._id })
@@ -40,21 +33,6 @@ module.exports = {
 //     } else {
 //       return res.json({ review: null })
 //     }
-//   },
-//   create: function (req, res) {
-//     db.Reviews.create(req.body)
-//       .then(dbReview => {
-//         return db.Review.findOneAndUpdate(
-//           { _id: req.user._id },
-//           { $push: { reviews: dbReview.username } },
-//           { new: true }
-//         )
-//       })
-//       .then(review => {
-//         // If the User was updated successfully, send it back to the client
-//         res.json(review)
-//       })
-//       .catch(err => res.status(422).json(err))
 //   },
 //   update: function (req, res) {
 //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)

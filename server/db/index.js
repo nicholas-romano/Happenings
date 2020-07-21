@@ -10,7 +10,7 @@ if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    useCreateIndex: true
   });
   //happening_user:h4663n1n8
   MONGO_URL =
@@ -19,7 +19,7 @@ if (process.env.MONGODB_URI) {
   mongoose.connect(MONGO_LOCAL_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    useCreateIndex: true
   }); // local mongo url
   MONGO_URL = MONGO_LOCAL_URL;
 }
