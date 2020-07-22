@@ -6,10 +6,10 @@ router.route("/")
   .get(reviewsController.findAll)
   .post(reviewsController.create);
 
-// Matches with "/api/reviews/:id"
-// router
-//   .route("/:id")
-//   .get(reviewsController.findById)
+// Matches with "/api/reviews/:userName"
+ router
+   .route("/:userName")
+   .get(reviewsController.findByUserName)
 //   .put(reviewsController.update)
 //   .delete(reviewsController.remove);
 

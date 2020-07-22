@@ -11,6 +11,7 @@ const Review = props => {
         firstName: '',
         lastName: ''
     });
+    const [postOwner, setPostOwner] = useState('');
     const [showModal, setModal] = useState(false);
     const [formObject, setFormObject] = useState({
         title: '',
@@ -34,12 +35,18 @@ const Review = props => {
     }, []);
 
     useEffect(() => {
-        console.log('formObject rating: ', formObject.rating);
-    }, [reviewRating]);
-
-    useEffect(() => {
         console.log('reviews: ', reviews);
     }, [reviews]);
+
+    const getPostOwner = reviewOwner => {
+        API.getReviewOwner(reviewOwner)
+            .then(res => {
+                const firstName = res.data[0].firstName;
+                const lastName = res.data[0].lastName;
+                setPostOwner(`${firstName} ${lastName}`);
+            })
+            .catch(err => console.log(err));
+    }
 
     // Handles updating component state when the user types into the input field
     const handleInputChange = event => {
@@ -51,7 +58,6 @@ const Review = props => {
 
         API.getReviews()
             .then(res => {
-                console.log("all reviews: ", res.data);
                 let reviews = res.data;
                 //Reverse the order of the array to display to most recent post first:
                 reviews.reverse();
@@ -71,8 +77,6 @@ const Review = props => {
         if (formObject.title && formObject.location) {
             API.saveReview({
                 reviewOwner: user.username,
-                reviewOwnerFirstName: user.firstName,
-                reviewOwnerLastName: user.lastName,
                 reviewCreated: Date.now(),
                 reviewTitle: formObject.title,
                 reviewBody: formObject.message,
@@ -109,15 +113,19 @@ const Review = props => {
                             <form ref={formEl}>
                                 <Input
                                     onChange={handleInputChange}
+                                    type="text"
                                     name="title"
                                     title="Title"
                                     placeholder="Title (required)"
+                                    value={formObject.title}
                                 />
                                 <TextArea
                                     onChange={handleInputChange}
                                     name="message"
+                                    value={formObject.message}
                                     title="Message"
                                     placeholder="Message"
+                                    value={formObject.message}
                                 />
                                 <Rating
                                     name="rating"
@@ -129,6 +137,7 @@ const Review = props => {
                                     name="location"
                                     title="Location"
                                     placeholder="Location (required)"
+                                    value={formObject.location}
                                 />
                                 <FormBtn
                                     disabled={!(formObject.title && formObject.location)}
@@ -142,9 +151,12 @@ const Review = props => {
             <button className="modal-close is-large" aria-label="close" onClick={closeReviewForm}></button>
         </div>
         {
-            reviews.map((post, index) => (
-                <ReviewPost key={index} post={post} />
-            ))
+            reviews.map((post, index) => {
+                getPostOwner(post.reviewOwner);
+                return <ReviewPost key={index} post={post} reviewOwnerName={postOwner} />
+            }
+                
+            )
         }
         </>
     ) 

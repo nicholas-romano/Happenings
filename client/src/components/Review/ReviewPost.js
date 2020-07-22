@@ -1,17 +1,17 @@
-import React from 'react';
-import StaticRating from '../Form/Rating/StaticRating';
+import React, { useState } from 'react';
+import StaticRating from './StaticRating';
+import API from '../../utils/API';
 
 const ReviewPost = props => {
-    console.log('props: ', props);
     const { reviewOwner, 
-            reviewOwnerFirstName, 
-            reviewOwnerLastName, 
             reviewTitle, 
             reviewBody,
             reviewRating, 
             reviewLocation,
             reviewCreated 
           } = props.post;
+
+    const reviewOwnerName = props.reviewOwnerName;
 
     return (
         <div className="post">
@@ -24,7 +24,7 @@ const ReviewPost = props => {
                         </figure>
                     </div>
                     <div className="media-content">
-                        <p className="title is-4">{reviewOwnerFirstName} {reviewOwnerLastName}</p>
+                        <p className="title is-4">{reviewOwnerName}</p>
                         <p className="subtitle is-6">@{reviewOwner}</p>
                     </div>
                     </div>

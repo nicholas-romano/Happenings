@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
@@ -13,6 +13,7 @@ function SignupForm() {
   const [userObject, setUserObject] = useState({
     firstName: "",
     lastName: "",
+    email: "",
     username: "",
     password: "",
     confirmPassword: "",
@@ -20,12 +21,10 @@ function SignupForm() {
   });
   const [redirectTo, setRedirectTo] = useState(null);
 
-  const handleChange = (event) => {
-    setUserObject({
-      ...userObject,
-      [event.target.name]: event.target.value,
-    });
-  };
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setUserObject({...userObject, [name]: value})
+};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,10 +32,13 @@ function SignupForm() {
     AUTH.signup({
       firstName: userObject.firstName,
       lastName: userObject.lastName,
-      username: userObject.username,
+      userName: userObject.username,
       password: userObject.password,
-    }).then((response) => {
-      // console.log(response);
+      userEmail: userObject.email,
+      friends: [],
+      userInterest: []
+      }).then((response) => {
+        console.log(response);
       if (!response.data.errmsg) {
         setRedirectTo("/");
       } else {
@@ -55,41 +57,54 @@ function SignupForm() {
         <Col size="md-3"></Col>
         <Col size="md-6">
           <Card title="Create your Happenings Account">
-            <form style={{ marginTop: 10 }}>
-              <label htmlFor="username">First name: </label>
+            <form style={{ marginTop: 10, textAlign: 'left' }}>
               <Input
                 type="text"
                 name="firstName"
+                title="First Name"
+                onChange={handleInputChange}
                 value={userObject.firstName}
-                onChange={handleChange}
+                placeholder="First Name"
               />
-              <label htmlFor="username">Last name: </label>
               <Input
                 type="text"
                 name="lastName"
+                title="Last Name"
+                onChange={handleInputChange}
                 value={userObject.lastName}
-                onChange={handleChange}
+                placeholder="Last Name"
               />
-              <label htmlFor="username">Username: </label>
+               <Input
+                type="email"
+                name="email"
+                title="Email"
+                onChange={handleInputChange}
+                value={userObject.email}
+                placeholder="Email"
+              />
               <Input
                 type="text"
                 name="username"
+                title="Username"
+                onChange={handleInputChange}
                 value={userObject.username}
-                onChange={handleChange}
+                placeholder="Username"
               />
-              <label htmlFor="password">Password: </label>
               <Input
                 type="password"
                 name="password"
+                title="Password"
+                onChange={handleInputChange}
                 value={userObject.password}
-                onChange={handleChange}
+                placeholder="Password"
               />
-              <label htmlFor="confirmPassword">Confirm Password: </label>
               <Input
                 type="password"
                 name="confirmPassword"
+                title="Confirm Password"
+                onChange={handleInputChange}
                 value={userObject.confirmPassword}
-                onChange={handleChange}
+                placeholder="Confirm Password"
               />
               <Link to="/">Login</Link>
               <FormBtn onClick={handleSubmit}>Register</FormBtn>

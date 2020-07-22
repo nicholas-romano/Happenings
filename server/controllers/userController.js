@@ -3,7 +3,6 @@ const db = require("../models");
 // Defining methods for the userController
 module.exports = {
   getUser: (req, res, next) => {
-    console.log("Inside getUser userController: ", req.user);
     if (req.user) {
       return res.json({ user: req.user });
     } else {
@@ -11,20 +10,22 @@ module.exports = {
     }
   },
   register: (req, res) => {
-    console.log('Register user from userController.js', req.user)
-    const { firstName, lastName, username, password } = req.body;
+    const { firstName, lastName, userName, password, userEmail, friends, userInterest } = req.body;
     // ADD VALIDATION
-    db.User.findOne({ 'username': username }, (err, userMatch) => {
+    db.User.findOne({ 'userName': userName }, (err, userMatch) => {
       if (userMatch) {
         return res.json({
-          error: `Sorry, already a user with the username: ${username}`
+          error: `Sorry, already a user with the username: ${userName}`
         });
       }
       const newUser = new db.User({
         'firstName': firstName,
         'lastName': lastName,
-        'username': username,
-        'password': password
+        'userName': userName,
+        'password': password,
+        'userEmail': userEmail,
+        'friends': friends,
+        'userInterest': userInterest
       });
       newUser.save((err, savedUser) => {
         if (err) return res.json(err);
