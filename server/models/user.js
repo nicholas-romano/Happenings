@@ -4,19 +4,26 @@ const bcrypt = require('bcryptjs')
 mongoose.promise = Promise
 
 // Define userSchema
+// EXS 18th July 2020 - Create reference from user to userInfo
+
+console.log("We are in server user.js");
+
 const userSchema = new Schema({
   firstName: { type: String, unique: false },
   lastName: { type: String, unique: false },
-  username: { type: String, unique: false, required: false },
-  password: { type: String, unique: false, required: false },
-  places: [
-    {
-      // Store ObjectIds in the array
-      type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the places model
-      ref: 'Place'
-    }
-  ]
+  username: { type: String, unique: true, required: true },
+  password: { type: String, unique: false, required: true },
+  userEmail: { type: String, unique: true, required: false },
+  friends: { type: Array, unique: false, required: false },
+  userInterest: { type: Array, unique: false, required: false }
+  // userInfo: [
+  //   {
+  //     // Store ObjectIds in the array
+  //     type: Schema.Types.ObjectId,
+  //     // The ObjectIds will refer to the ids in the places model
+  //     ref: 'UserInfo_id'
+  //   }
+  // ]
 })
 
 // Define schema methods

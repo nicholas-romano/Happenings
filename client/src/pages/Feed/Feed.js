@@ -1,13 +1,9 @@
-import React, { useState, useEffect, useRef, Component } from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
 
-navigator.geolocation.getCurrentPosition(function (position) {
-  console.log('Latitude is :', position.coords.latitude)
-  console.log('Longitude is :', position.coords.longitude)
-})
+import LocationSearch from "../../components/LocationSearch/locSearch";
 
-function Feed () {
-  return <h1>Check out the neighborhood!</h1>
+function Feed() {
+  return <LocationSearch />;
 }
 
-export default Feed
+export default Feed;

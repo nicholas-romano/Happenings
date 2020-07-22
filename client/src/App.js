@@ -2,16 +2,40 @@ import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import LoginForm from './pages/Auth/LoginForm'
 import SignupForm from './pages/Auth/SignupForm'
+import AUTH from './utils/AUTH'
+
 import Nav from './components/Nav'
 import NoMatch from './pages/NoMatch'
-import AUTH from './utils/AUTH'
 import Feed from './pages/Feed'
-import QuickReview from "./components/QuickReview/QuickReview"
+import Hero from './components/Hero'
+import MediaContent from './components/MediaContent'
+import Header from './components/Header';
+import Review from './components/Review';
+// import Header from './components/Header'; EXS commented out as unused
+import Footer from './components/Footer'
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
-import QuickInfo from './components/QuickReview/QuickReview'
-// import { Button } from 'react-bulma-components'
+import './App.css'
+// import Button from 'react-bulma-components' EXS commented out as unused
+
+// TW
+import QuickReview from "./components/QuickReview/QuickReview"
+
+console.log(AUTH);
+
+const styles = {
+  twothirds: {
+    paddingBottom: 10,
+    backgroundColor: 'rgba(183, 209, 218, 1)'
+  },
+  onethird: {
+    backgroundColor: 'rgba(163, 124, 64, 1)'
+  },
+  back: {
+    backgroundColor: 'rgba(42, 45, 52, 1)'
+  }
+}
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -59,42 +83,54 @@ function App() {
   }
 
   return (
-    <div className='App'>
-      {/* Insert test bulma items here to see whats up */}
-      <button className='button is-warning'>Our Bulma Button</button>
-      <div
-        className='box'
-        img
-        src='https://bulma.io/images/placeholders/128x128.png'
-        alt='Image'
-      ></div>
-      {/* End of bulma test stuff */}
+    <div className='App' style={styles.back}>
+      <Hero />
 
-      {loggedIn && (
-        <div>
-          <Nav user={user} logout={logout} />
-          <div className='main-view'>
-            <Switch>
-              <Route exact path='/' component={Feed} />
-              <Route component={NoMatch} />
-            </Switch>
+      <div className='columns is-gapless is-desktop'>
+        <div className='column is-two-thirds' style={styles.twothirds}>
+          {loggedIn && (
+            <div>
+              <Nav user={user} logout={logout} />
+              <div className='main-view'>
+                <Switch>
+                  <Route exact path='/' component={Feed} />
+                  <Route exact path='/review' component={Review} />
+                  <Route component={NoMatch} />
+                </Switch>
+              </div>
+            </div>
+          )}
+          {!loggedIn && (
+            <div className='auth-wrapper' style={{ paddingTop: 11 }}>
+              <Route
+                exact
+                path='/'
+                component={() => <LoginForm login={login} />}
+              />
+              <Route
+                exact
+                path='/feed'
+                component={() => <LoginForm user={login} />}
+              />
+              <Route exact path='/signup' component={SignupForm} />
+              <Route exact path='/quickreview' component={QuickReview} />
+            </div>
+          )}
+        </div>
+        <div className='column is-one-third' style={styles.onethird}>
+          <div className='field'>
+            <div className='control'>
+              <input className='input' type='text' placeholder='Input' />
+            </div>
           </div>
         </div>
-      )}
-      {!loggedIn && (
-        <div className='auth-wrapper' style={{ paddingTop: 40 }}>
-          <Route exact path='/' component={() => <LoginForm login={login} />} />
-          <Route
-            exact
-            path='/feed'
-            component={() => <LoginForm user={login} />}
-          />
-          <Route exact path='/signup' component={SignupForm} />
-          <Route exact path='/quickreview' component={QuickReview} />
-        </div>
-      )}
+      </div>
+
+      <MediaContent />
+
+      <Footer />
     </div>
   )
 }
 
-export default App
+export default App;
