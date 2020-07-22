@@ -1,55 +1,125 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Input, Rating, TextArea, FormBtn } from '../Form';
+import API from "../../utils/API";
+import AUTH from "../../utils/AUTH";
+import '../../App.css';
 
 const Review = props => {
-
+    const [user, setUser] = useState({
+        username: '',
+        firstName: '',
+        lastName: ''
+    });
+    const [showModal, setModal] = useState(false);
+    const [formObject, setFormObject] = useState({
+        title: '',
+        message: '',
+        rating: 0,
+        location: ''
+    });
     const [reviewRating, setRatings] = useState(0);
+    const formEl = useRef(null);
 
     useEffect(() => {
-        setRatings(0);
-        console.log('reviewRating: ', reviewRating);
-    }, [ratings]);
+        AUTH.getUser().then(res => {
+            const { username, firstName, lastName } = res.data.user
+            setUser({username, firstName, lastName});
+        })
+        .catch(err => console.log(err));
+    }, []);
+
+    useEffect(() => {
+        console.log('formObject rating: ', formObject.rating);
+    }, [reviewRating]);
+
+    // Handles updating component state when the user types into the input field
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        setFormObject({...formObject, [name]: value})
+    };
+
+    const handleRatingChange = rating => {
+        setRatings(rating);
+        setFormObject({...formObject, rating: rating})
+    }
+
+    const handleFormSubmit = event => {
+        event.preventDefault();
+        
+        if (formObject.title && formObject.location) {
+            API.saveReview({
+                reviewOwner: user.username,
+                reviewOwnerFirstName: user.firstName,
+                reviewOwnerLastName: user.lastName,
+                reviewCreated: Date.now(),
+                reviewTitle: formObject.title,
+                reviewBody: formObject.message,
+                reviewRating: formObject.rating,
+                reviewLocation: formObject.location
+            })
+            .then(res => {
+                formEl.current.reset();
+                setRatings(0);
+                setFormObject({rating: 0});
+                closeReviewForm();
+                //loadReviews();
+            })
+            .catch(err => console.log(err));
+        }
+    };
+
+    const showReviewForm = () => {
+        setModal(true);
+    }
+
+    const closeReviewForm = () => {
+        setModal(false);
+    }
 
     return (
-        <div className="modal">
+        <>
+        <a className="button is-link" onClick={showReviewForm}>Modal</a>
+        <div className={showModal ? 'is-active modal' : 'modal'} id="review-modal">
             <div className="modal-background"></div>
-            <div className="modal-content">
-                <h3>Write a Review</h3>
-                <form>
-                    <div className="field">
-                        <label className="label">Title</label>
-                        <div className="control">
-                            <input id="reviewTitle" className="input" type="text" placeholder="Title" />
-                        </div>
+                <div className="modal-content">
+                    <div className="form">
+                        <h2>Write a Review</h2>
+                            <form ref={formEl}>
+                                <Input
+                                    onChange={handleInputChange}
+                                    name="title"
+                                    title="Title"
+                                    placeholder="Title (required)"
+                                />
+                                <TextArea
+                                    onChange={handleInputChange}
+                                    name="message"
+                                    title="Message"
+                                    placeholder="Message"
+                                />
+                                <Rating
+                                    name="rating"
+                                    reviewRating={reviewRating}
+                                    handleRatingChange={handleRatingChange}
+                                />
+                                <Input
+                                    onChange={handleInputChange}
+                                    name="location"
+                                    title="Location"
+                                    placeholder="Location (required)"
+                                />
+                                <FormBtn
+                                    disabled={!(formObject.title && formObject.location)}
+                                    onClick={handleFormSubmit}
+                                    >
+                                    Submit Review
+                                </FormBtn>
+                            </form>
                     </div>
-                    <div className="field">
-                        <label className="label">Review</label>
-                        <div className="control">
-                            <textarea id="reviewBody" className="textarea" placeholder="Review"></textarea>
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label className="lable">Rating</label>
-                        <div className="control">
-                            <span>
-                                <i className={(reviewRating === 1) ? 'fas fa-star' : 'far fa-star'} onClick={() => setRatings(1)}></i>
-                                <i className={(reviewRating === 2) ? 'fas fa-star' : 'far fa-star'} onClick={() => setRatings(2)}></i>
-                                <i className={(reviewRating === 3) ? 'fas fa-star' : 'far fa-star'} onClick={() => setRatings(3)}></i>
-                                <i className={(reviewRating === 4) ? 'fas fa-star' : 'far fa-star'} onClick={() => setRatings(4)}></i>
-                                <i className={(reviewRating === 5) ? 'fas fa-star' : 'far fa-star'} onClick={() => setRatings(5)}></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div className="field">
-                        <label className="label">Location</label>
-                        <div className="control">
-                            <input className="input" type="text" placeholder="Location" />
-                        </div>
-                    </div>
-                    <input class="button" type="submit" value="Submit input" />
-                </form>
-            </div>
-            <button className="modal-close is-large" aria-label="close"></button>
+                </div>
+            <button className="modal-close is-large" aria-label="close" onClick={closeReviewForm}></button>
         </div>
+        </>
     ) 
 };
   
