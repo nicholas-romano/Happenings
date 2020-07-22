@@ -79,7 +79,8 @@ function App() {
 
   return (
     <div className='App' style={styles.back}>
-      <Hero />
+      {/* <Hero /> */}
+  
 
       <div className='columns is-gapless is-desktop'>
         <div className='column is-two-thirds' style={styles.twothirds}>
@@ -88,8 +89,9 @@ function App() {
               <Nav user={user} logout={logout} />
               <div className='main-view'>
                 <Switch>
-                  <Route exact path='/' component={Feed} />
-                  <Route component={NoMatch} />
+                  <Route exact path='/feed' component={Feed} />
+                  {/* <Route exact path='/' component={Feed} /> */}
+                  {/* <Route component={NoMatch} /> */}
                 </Switch>
               </div>
             </div>
@@ -101,11 +103,11 @@ function App() {
                 path='/'
                 component={() => <LoginForm login={login} />}
               />
-              <Route
+              {/* <Route
                 exact
                 path='/feed'
                 component={() => <LoginForm user={login} />}
-              />
+              /> */}
               <Route exact path='/signup' component={SignupForm} />
             </div>
           )}
@@ -119,9 +121,9 @@ function App() {
         </div>
       </div>
 
-      <MediaContent />
+      {/* <MediaContent />
 
-      <Footer />
+      <Footer /> */}
     </div>
   )
 }

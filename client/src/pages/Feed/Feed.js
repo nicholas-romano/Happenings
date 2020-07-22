@@ -2,6 +2,7 @@
 //import { Link } from 'react-router-dom'
 
 import React from 'react';
+import Dashboard from '../TestPages/Dashboard';
 //  EXS just some starter code for getting current GeoLocation
 
 navigator.geolocation.getCurrentPosition(function (position) {
@@ -15,9 +16,10 @@ navigator.geolocation.getCurrentPosition(function (position) {
 function Feed() {
   return (
     <>
-      <h1>Check out the neighborhood!</h1>
+    <p>Hello</p>
+      <Dashboard />
     </>
   )
 }
 
-export default Feed
+export default Feed;
