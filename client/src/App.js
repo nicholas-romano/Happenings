@@ -10,7 +10,7 @@ import Hero from './components/Hero';
 import MediaContent from './components/MediaContent';
 import Header from './components/Header';
 import Review from './components/Review';
-import Landing from './pages/TestPages/Landing'
+import Landing from './pages/TestPages/Landing';
 // import Header from './components/Header'; EXS commented out as unused
 import Footer from './components/Footer';
 // EXS 16th July 2020 - Added in bulma calls
@@ -43,7 +43,7 @@ function App() {
       if (response.data.user) {
         setLoggedIn(true);
         setUser(response.data.user);
-        history.push('/feed');
+        // history.push('/feed');
       } else {
         setLoggedIn(false);
         setUser(null);
@@ -76,6 +76,7 @@ function App() {
       }
     });
   };
+  console.log('loggedIn!!!:', loggedIn);
   return (
     <div className="App" style={styles.back}>
       {/* <Hero /> */}

@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom'
-import LoginForm from '../Auth/LoginForm'
-import SignupForm from '../Auth/SignupForm'
-import NoMatch from '../NoMatch'
-import AUTH from '../../utils/AUTH'
-import Nav from '../../components/Nav'
-import Feed from '../Feed'
+import { Route, Switch, useHistory } from 'react-router-dom';
+import LoginForm from '../Auth/LoginForm';
+import SignupForm from '../Auth/SignupForm';
+import NoMatch from '../NoMatch';
+import AUTH from '../../utils/AUTH';
+import Nav from '../../components/Nav';
+import Feed from '../Feed';
 
-import Hero from '../../components/Hero'
-import Footer from '../../components/Footer'
-import MediaContent from '../../components/MediaContent'
+import Hero from '../../components/Hero';
+import Footer from '../../components/Footer';
+import MediaContent from '../../components/MediaContent';
 
-import 'react-bulma-components/dist/react-bulma-components.min.css'
-
+import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 const styles = {
   twothirds: {
@@ -25,72 +24,25 @@ const styles = {
   back: {
     backgroundColor: 'rgba(42, 45, 52, 1)'
   }
-}
-
+};
 
 function Landing(props) {
-
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const history = useHistory();
-
-  useEffect(() => {
-    AUTH.getUser().then(response => {
-      // console.log(response.data);
-      if (response.data.user) {
-        setLoggedIn(true)
-        setUser(response.data.user)
-        history.push('/feed');
-      } else {
-        setLoggedIn(false)
-        setUser(null)
-      }
-    })
-
-    return () => {
-      setLoggedIn(false)
-      setUser(null)
-    }
-  }, [])
-
-  const logout = event => {
-    event.preventDefault()
-
-    AUTH.logout().then(response => {
-      // console.log(response.data);
-      if (response.status === 200) {
-        setLoggedIn(false)
-        setUser(null)
-        history.push('/');
-      }
-    })
-  }
-
-  const login = (username, password) => {
-    AUTH.login(username, password).then(response => {
-      console.log('Our user has logged in:', response.data)
-      if (response.status === 200) {
-        // update the state
-        setLoggedIn(true)
-        setUser(response.data.user)
-        history.push('/feed');
-      }
-    })
-  }
 
   return (
     <div style={styles.back}>
       <Hero />
 
-
-      <div className='columns is-gapless is-desktop'>
-        <div className='column is-two-thirds' style={styles.twothirds}>
-        <LoginForm login={login} />
+      <div className="columns is-gapless is-desktop">
+        <div className="column is-two-thirds" style={styles.twothirds}>
+          <LoginForm login={props.login} />
         </div>
-        <div className='column is-one-third' style={styles.onethird}>
-          <div className='field'>
-            <div className='control'>
-              <input className='input' type='text' placeholder='Input' />
+        <div className="column is-one-third" style={styles.onethird}>
+          <div className="field">
+            <div className="control">
+              <input className="input" type="text" placeholder="Input" />
             </div>
           </div>
         </div>
@@ -100,7 +52,7 @@ function Landing(props) {
 
       <Footer />
     </div>
-  )
+  );
 }
 
 export default Landing;
