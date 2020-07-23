@@ -19,7 +19,7 @@ function Dashboard(props) {
     return (
         <>
         <div>
-         <Nav />
+         {/* <Nav /> */}
 
         </div>
             <div>

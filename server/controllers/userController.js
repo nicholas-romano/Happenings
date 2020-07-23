@@ -1,9 +1,9 @@
-const db = require("../models");
+const db = require('../models');
 
 // Defining methods for the userController
 module.exports = {
   getUser: (req, res, next) => {
-    console.log("Inside getUser userController: ", req.user);
+    console.log('req.user:', req.user);
     if (req.user) {
       return res.json({ user: req.user });
     } else {
@@ -11,20 +11,22 @@ module.exports = {
     }
   },
   register: (req, res) => {
-    console.log('Register user from userController.js', req.user)
-    const { firstName, lastName, username, password } = req.body;
+    const { firstName, lastName, userName, password, userEmail, friends, userInterest } = req.body;
     // ADD VALIDATION
-    db.User.findOne({ 'username': username }, (err, userMatch) => {
+    db.User.findOne({ userName: userName }, (err, userMatch) => {
       if (userMatch) {
         return res.json({
-          error: `Sorry, already a user with the username: ${username}`
+          error: `Sorry, already a user with the username: ${userName}`
         });
       }
       const newUser = new db.User({
-        'firstName': firstName,
-        'lastName': lastName,
-        'username': username,
-        'password': password
+        firstName: firstName,
+        lastName: lastName,
+        userName: userName,
+        password: password,
+        userEmail: userEmail,
+        friends: friends,
+        userInterest: userInterest
       });
       newUser.save((err, savedUser) => {
         if (err) return res.json(err);
@@ -33,7 +35,7 @@ module.exports = {
     });
   },
   logout: (req, res) => {
-    console.log('Logout user from userController.js', req.user)
+    console.log('Logout user from userController.js', req.user);
     if (req.user) {
       req.session.destroy();
       res.clearCookie('connect.sid'); // clean up!
@@ -47,6 +49,8 @@ module.exports = {
     next();
   },
   authenticate: (req, res) => {
+    console.log('req:', req);
+    console.log('hit');
     const user = JSON.parse(JSON.stringify(req.user)); // hack
     const cleanUser = Object.assign({}, user);
     if (cleanUser) {
@@ -56,3 +60,5 @@ module.exports = {
     res.json({ user: cleanUser });
   }
 };
+
+console.log('Inside our userController');

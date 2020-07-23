@@ -7,7 +7,6 @@ import { Input, FormBtn } from "../../components/Form";
 console.log('Inside our loginForm.js')
 
 function LoginForm({ login }) {
-  console.log('Login Form Loaded')
   const [userObject, setUserObject] = useState({
     username: "",
     password: "",
@@ -23,33 +22,38 @@ function LoginForm({ login }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(userObject.username, userObject.password);
-    setRedirectTo("/feed");
+    login({
+      userName: userObject.username,
+      password: userObject.password
+    });
+    // setRedirectTo("/");
   };
 
-  if (redirectTo) {
-    return <Redirect to={{ pathname: redirectTo }} />;
-  } else {
+  // if (redirectTo) {
+  //   return <Redirect to={{ pathname: redirectTo }} />;
+  // } else {
     return (
       <Container>
         <Row>
           <Col size="md-3"></Col>
           <Col size="md-6">
             <Card title="Login to the Happenings App!">
-              <form style={{ marginTop: 10 }}>
-                <label htmlFor="username">Username: </label>
+              <form style={{ marginTop: 10, textAlign: 'left' }}>
                 <Input
                   type="text"
+                  title="Username"
                   name="username"
                   value={userObject.username}
                   onChange={handleChange}
+                  placeholder="Username"
                 />
-                <label htmlFor="password">Password: </label>
                 <Input
                   type="password"
+                  title="Password"
                   name="password"
                   value={userObject.password}
                   onChange={handleChange}
+                  placeholder="Password"
                 />
                 <Link to="/signup">Create Account</Link>
                 <FormBtn onClick={handleSubmit}>Login</FormBtn>
@@ -61,6 +65,6 @@ function LoginForm({ login }) {
       </Container>
     );
   }
-}
+// }
 
 export default LoginForm;

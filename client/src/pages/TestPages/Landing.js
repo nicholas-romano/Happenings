@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import LoginForm from '../Auth/LoginForm'
 import SignupForm from '../Auth/SignupForm'
 import NoMatch from '../NoMatch'
@@ -32,13 +32,15 @@ function Landing(props) {
 
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
+  const history = useHistory();
 
   useEffect(() => {
     AUTH.getUser().then(response => {
       // console.log(response.data);
-      if (!!response.data.user) {
+      if (response.data.user) {
         setLoggedIn(true)
         setUser(response.data.user)
+        history.push('/feed');
       } else {
         setLoggedIn(false)
         setUser(null)
@@ -59,6 +61,7 @@ function Landing(props) {
       if (response.status === 200) {
         setLoggedIn(false)
         setUser(null)
+        history.push('/');
       }
     })
   }
@@ -70,6 +73,7 @@ function Landing(props) {
         // update the state
         setLoggedIn(true)
         setUser(response.data.user)
+        history.push('/feed');
       }
     })
   }
@@ -81,19 +85,7 @@ function Landing(props) {
 
       <div className='columns is-gapless is-desktop'>
         <div className='column is-two-thirds' style={styles.twothirds}>
-          {!loggedIn && (
-            <div className='auth-wrapper' style={{ paddingTop: 11 }}>
-              <Route
-                exact
-                path='/'
-                component={() => <LoginForm login={login} />} />
-              <Route
-                exact
-                path='/feed'
-                component={() => <LoginForm user={login} />} />
-              <Route exact path='/signup' component={SignupForm} />
-            </div>
-          )}
+        <LoginForm login={login} />
         </div>
         <div className='column is-one-third' style={styles.onethird}>
           <div className='field'>
