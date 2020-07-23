@@ -61,11 +61,11 @@ const QuickReview = () => {
                     <h1>How safe do you feel?</h1>
                     <br></br>
                     <div>
-                        <button className="icon" onClick={() => setSafety(1)}>1</button> under threat
+                        <button className="icon" onClick={() => setSafety(1)}>1</button> threatened
                         <button className="icon" onClick={() => setSafety(2)}>2</button> sketchy
                         <button className="icon" onClick={() => setSafety(4)}>3</button> neutral
                         <button className="icon" onClick={() => setSafety(4)}>4</button> safe
-                        <button className="icon" onClick={() => setSafety(5)}>5</button> exteremely safe
+                        <button className="icon" onClick={() => setSafety(5)}>5</button> comfy
                     </div>
                 </>
             )
