@@ -18,7 +18,7 @@ export const Rating = props => {
         <div className="field">
             <label className="label">Rating</label>
                 <div className="control">
-                    <div className="star-container">
+                    <div className="star-container-clickable">
                         {stars.map(star => (
                             <Star star={star} key={star} getStar={getStar} handleRatingChange={handleRatingChange}  />
                         ))}

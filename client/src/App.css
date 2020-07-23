@@ -8,16 +8,30 @@
     pointer-events: none;
   }
 
-  .star-container {
-    width: 75px;
+  .star-container-clickable {
     cursor: pointer;
+    color: gold;
+  }
+
+  .card-content .content .location {
+    margin-bottom: -35px;
+  }
+
+  .star-container-static {
+    color: gold;
   }
 
   .star-rating {
     font-size: 11px;
+    margin-top: 5px;
+    color: black;
   }
 
-  .form {
+  .card-content .content .title {
+    margin-bottom: -3px;
+  }
+
+  .form, .post {
     padding: 15px;
     text-align: left;
   }

@@ -41,6 +41,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
 
+  console.log('loggedIn: ', loggedIn)
+
   useEffect(() => {
     AUTH.getUser().then(response => {
       // console.log(response.data);
