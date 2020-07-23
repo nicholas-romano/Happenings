@@ -9,12 +9,15 @@ import NoMatch from './pages/NoMatch'
 import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
+import Header from './components/Header';
+import Review from './components/Review';
 // import Header from './components/Header'; EXS commented out as unused
 import Footer from './components/Footer'
 
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css'
 import './App.css'
+import Landing from './pages/TestPages/Landing'
 // import Button from 'react-bulma-components' EXS commented out as unused
 
 console.log(AUTH);
@@ -33,99 +36,108 @@ const styles = {
 }
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState(null)
+  // const [loggedIn, setLoggedIn] = useState(false)
+  // const [user, setUser] = useState(null)
 
-  useEffect(() => {
-    AUTH.getUser().then(response => {
-      // console.log(response.data);
-      if (!!response.data.user) {
-        setLoggedIn(true)
-        setUser(response.data.user)
-      } else {
-        setLoggedIn(false)
-        setUser(null)
-      }
-    })
+  // useEffect(() => {
+  //   AUTH.getUser().then(response => {
+  //     // console.log(response.data);
+  //     if (!!response.data.user) {
+  //       setLoggedIn(true)
+  //       setUser(response.data.user)
+  //     } else {
+  //       setLoggedIn(false)
+  //       setUser(null)
+  //     }
+  //   })
 
-    return () => {
-      setLoggedIn(false)
-      setUser(null)
-    }
-  }, [])
+  //   return () => {
+  //     setLoggedIn(false)
+  //     setUser(null)
+  //   }
+  // }, [])
 
-  const logout = event => {
-    event.preventDefault()
+  // const logout = event => {
+  //   event.preventDefault()
 
-    AUTH.logout().then(response => {
-      // console.log(response.data);
-      if (response.status === 200) {
-        setLoggedIn(false)
-        setUser(null)
-      }
-    })
-  }
+  //   AUTH.logout().then(response => {
+  //     // console.log(response.data);
+  //     if (response.status === 200) {
+  //       setLoggedIn(false)
+  //       setUser(null)
+  //     }
+  //   })
+  // }
 
-  const login = (username, password) => {
-    AUTH.login(username, password).then(response => {
-      console.log('Our user has logged in:', response.data)
-      if (response.status === 200) {
-        // update the state
-        setLoggedIn(true)
-        setUser(response.data.user)
-      }
-    })
-  }
+  // const login = (username, password) => {
+  //   AUTH.login(username, password).then(response => {
+  //     console.log('Our user has logged in:', response.data)
+  //     if (response.status === 200) {
+  //       // update the state
+  //       setLoggedIn(true)
+  //       setUser(response.data.user)
+  //     }
+  //   })
+  // }
 
   return (
     <div className='App' style={styles.back}>
       {/* <Hero /> */}
+      <Switch>
+        <Route exact path='/' component={Landing} />
+        <Route exact path='/feed' component={Feed} />
+        <Route exact path='/review' component={Review} />
+        <Route component={NoMatch} />
+      </Switch>
   
 
-      <div className='columns is-gapless is-desktop'>
-        <div className='column is-two-thirds' style={styles.twothirds}>
+      {/* <div className='columns is-gapless is-desktop'>
+        <div className='column isfull' style={styles.twothirds}>
           {loggedIn && (
             <div>
               <Nav user={user} logout={logout} />
               <div className='main-view'>
                 <Switch>
+                  
                   <Route exact path='/feed' component={Feed} />
-                  {/* <Route exact path='/' component={Feed} /> */}
-                  {/* <Route component={NoMatch} /> */}
+                  <Route exact path='/review' component={Review} />
+                  <Route component={NoMatch} />
                 </Switch>
               </div>
             </div>
           )}
           {!loggedIn && (
-            <div className='auth-wrapper' style={{ paddingTop: 11 }}>
-              <Route
+            <div className='auth-wrapper' style={{ paddingTop: 11 }}> */}
+              {/* <Route
                 exact
                 path='/'
                 component={() => <LoginForm login={login} />}
-              />
+              /> */}
+              {/* <Route exact path='/' component={Landing} /> */}
               {/* <Route
                 exact
                 path='/feed'
                 component={() => <LoginForm user={login} />}
               /> */}
-              <Route exact path='/signup' component={SignupForm} />
-            </div>
-          )}
-        </div>
-        <div className='column is-one-third' style={styles.onethird}>
+              {/* <Route exact path='/signup' component={SignupForm} /> */}
+            {/* </div> */}
+          {/* )} */}
+        {/* </div> */}
+        {/* <div className='column is-one-third' style={styles.onethird}>
           <div className='field'>
             <div className='control'>
               <input className='input' type='text' placeholder='Input' />
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <MediaContent />
 
       <Footer /> */}
+      {/* </div> */}
     </div>
   )
 }
 
-export default App
+export default App;

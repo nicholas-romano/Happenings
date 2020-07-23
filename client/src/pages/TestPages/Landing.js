@@ -15,22 +15,22 @@ import 'react-bulma-components/dist/react-bulma-components.min.css'
 
 
 const styles = {
-    twothirds: {
-        paddingBottom: 10,
-        backgroundColor: 'rgba(183, 209, 218, 1)'
-    },
-    onethird: {
-        backgroundColor: 'rgba(163, 124, 64, 1)'
-    },
-    back: {
-        backgroundColor: 'rgba(42, 45, 52, 1)'
-    }
+  twothirds: {
+    paddingBottom: 10,
+    backgroundColor: 'rgba(183, 209, 218, 1)'
+  },
+  onethird: {
+    backgroundColor: 'rgba(163, 124, 64, 1)'
+  },
+  back: {
+    backgroundColor: 'rgba(42, 45, 52, 1)'
+  }
 }
 
 
 function Landing(props) {
 
-    const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -74,55 +74,41 @@ function Landing(props) {
     })
   }
 
-    return (
-        <div style={styles.back}>
-            <Hero />
+  return (
+    <div style={styles.back}>
+      <Hero />
 
 
-            <div className='columns is-gapless is-desktop'>
-                <div className='column is-two-thirds' style={styles.twothirds}>
-                    {loggedIn && (
-                        <div>
-                            <Nav user={user} logout={logout} />
-                            <div className='main-view'>
-                                <Switch>
-                                    <Route exact path='/' render={Landing} />
-                                    <Route exact path='/feed' render={Feed} />
-                                    <Route component={NoMatch} />
-                                </Switch>
-                            </div>
-                        </div>
-                    )}
-                    {!loggedIn && (
-                        <div className='auth-wrapper' style={{ paddingTop: 11 }}>
-                            <Route
-                                exact
-                                path='/'
-                                component={() => <LoginForm login={login} />}
-                            />
-                            <Route
-                                exact
-                                path='/feed'
-                                component={() => <LoginForm user={login} />}
-                            />
-                            <Route exact path='/signup' component={SignupForm} />
-                        </div>
-                    )}
-                </div>
-                <div className='column is-one-third' style={styles.onethird}>
-                    <div className='field'>
-                        <div className='control'>
-                            <input className='input' type='text' placeholder='Input' />
-                        </div>
-                    </div>
-                </div>
+      <div className='columns is-gapless is-desktop'>
+        <div className='column is-two-thirds' style={styles.twothirds}>
+          {!loggedIn && (
+            <div className='auth-wrapper' style={{ paddingTop: 11 }}>
+              <Route
+                exact
+                path='/'
+                component={() => <LoginForm login={login} />} />
+              <Route
+                exact
+                path='/feed'
+                component={() => <LoginForm user={login} />} />
+              <Route exact path='/signup' component={SignupForm} />
             </div>
-
-            <MediaContent />
-
-            <Footer />
+          )}
         </div>
-    )
+        <div className='column is-one-third' style={styles.onethird}>
+          <div className='field'>
+            <div className='control'>
+              <input className='input' type='text' placeholder='Input' />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <MediaContent />
+
+      <Footer />
+    </div>
+  )
 }
 
 export default Landing;

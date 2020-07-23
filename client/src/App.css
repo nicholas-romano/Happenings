@@ -7,6 +7,25 @@
     height: 40vmin;
     pointer-events: none;
   }
+
+  .star-container {
+    width: 75px;
+    cursor: pointer;
+  }
+
+  .star-rating {
+    font-size: 11px;
+  }
+
+  .form {
+    padding: 15px;
+    text-align: left;
+  }
+
+  .form h2 {
+    text-align: center;
+    font-size: 24px;
+  }
   
   .App-header {
     background-color: #282c34;

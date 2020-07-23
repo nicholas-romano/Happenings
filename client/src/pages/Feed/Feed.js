@@ -1,7 +1,6 @@
-//import React, { useState, useEffect, useRef, Component } from 'react'
-//import { Link } from 'react-router-dom'
+import React from "react";
+import LocationSearch from "../../components/LocationSearch/locSearch";
 
-import React from 'react';
 import Dashboard from '../TestPages/Dashboard';
 //  EXS just some starter code for getting current GeoLocation
 
@@ -16,10 +15,12 @@ navigator.geolocation.getCurrentPosition(function (position) {
 function Feed() {
   return (
     <>
-    <p>Hello</p>
       <Dashboard />
+      {/* <LocationSearch />; */}
     </>
   )
+
+
 }
 
 export default Feed;
