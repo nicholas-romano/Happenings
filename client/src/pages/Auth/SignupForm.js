@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
@@ -24,19 +24,19 @@ function SignupForm() {
   const handleInputChange = event => {
     const { name, value } = event.target;
     setUserObject({...userObject, [name]: value})
-};
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO - validate!
     AUTH.signup({
-      firstName: userObject.firstName,
-      lastName: userObject.lastName,
-      userName: userObject.username,
-      password: userObject.password,
-      userEmail: userObject.email,
-      friends: [],
-      userInterest: []
+        firstName: userObject.firstName,
+        lastName: userObject.lastName,
+        userName: userObject.username,
+        password: userObject.password,
+        userEmail: userObject.email,
+        friends: [],
+        userInterest: []
       }).then((response) => {
         console.log(response);
       if (!response.data.errmsg) {
