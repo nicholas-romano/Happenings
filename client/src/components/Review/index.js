@@ -7,11 +7,10 @@ import '../../App.css';
 
 const Review = props => {
     const [user, setUser] = useState({
-        username: '',
+        userName: '',
         firstName: '',
         lastName: ''
     });
-    const [postOwner, setPostOwner] = useState('');
     const [showModal, setModal] = useState(false);
     const [formObject, setFormObject] = useState({
         title: '',
@@ -26,27 +25,13 @@ const Review = props => {
     useEffect(() => {
 
         AUTH.getUser().then(res => {
-            const { username, firstName, lastName } = res.data.user
-            setUser({username, firstName, lastName});
+            const { userName, firstName, lastName } = res.data.user
+            setUser({userName, firstName, lastName});
             loadReviews();
         })
         .catch(err => console.log(err));
 
     }, []);
-
-    useEffect(() => {
-        console.log('reviews: ', reviews);
-    }, [reviews]);
-
-    const getPostOwner = reviewOwner => {
-        API.getReviewOwner(reviewOwner)
-            .then(res => {
-                const firstName = res.data[0].firstName;
-                const lastName = res.data[0].lastName;
-                setPostOwner(`${firstName} ${lastName}`);
-            })
-            .catch(err => console.log(err));
-    }
 
     // Handles updating component state when the user types into the input field
     const handleInputChange = event => {
@@ -55,13 +40,9 @@ const Review = props => {
     };
 
     const loadReviews = () => {
-
         API.getReviews()
             .then(res => {
-                let reviews = res.data;
-                //Reverse the order of the array to display to most recent post first:
-                reviews.reverse();
-                setReviews(reviews);
+                setReviews(res.data);
             })
             .catch(err => console.log('err ', err));
     }
@@ -76,7 +57,7 @@ const Review = props => {
         
         if (formObject.title && formObject.location) {
             API.saveReview({
-                reviewOwner: user.username,
+                reviewOwner: user.userName,
                 reviewCreated: Date.now(),
                 reviewTitle: formObject.title,
                 reviewBody: formObject.message,
@@ -104,7 +85,6 @@ const Review = props => {
 
     return (
         <>
-        <a className="button is-link" onClick={showReviewForm}>Write a Review</a>
         <div className={showModal ? 'is-active modal' : 'modal'} id="review-modal">
             <div className="modal-background"></div>
                 <div className="modal-content">
@@ -125,7 +105,6 @@ const Review = props => {
                                     value={formObject.message}
                                     title="Message"
                                     placeholder="Message"
-                                    value={formObject.message}
                                 />
                                 <Rating
                                     name="rating"
@@ -134,6 +113,7 @@ const Review = props => {
                                 />
                                 <Input
                                     onChange={handleInputChange}
+                                    type="text"
                                     name="location"
                                     title="Location"
                                     placeholder="Location (required)"
@@ -150,14 +130,17 @@ const Review = props => {
                 </div>
             <button className="modal-close is-large" aria-label="close" onClick={closeReviewForm}></button>
         </div>
+        <div className="review-posts">
         {
             reviews.map((post, index) => {
-                getPostOwner(post.reviewOwner);
-                return <ReviewPost key={index} post={post} reviewOwnerName={postOwner} />
-            }
-                
+                return <ReviewPost key={index} post={post} />
+            }   
             )
         }
+        </div>
+        <div className="review-button">
+            <a className="button is-link" onClick={showReviewForm}>Write a Review</a>
+        </div>
         </>
     ) 
 };
