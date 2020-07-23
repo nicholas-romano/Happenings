@@ -20,6 +20,9 @@ import 'react-bulma-components/dist/react-bulma-components.min.css'
 import './App.css'
 // import Button from 'react-bulma-components' EXS commented out as unused
 
+// TW Quick review component
+import QuickReview from "./components/QuickReview/QuickReview"
+
 console.log(AUTH);
 
 const styles = {
@@ -118,6 +121,9 @@ function App() {
                 component={() => <LoginForm user={login} />}
               />
               <Route exact path='/signup' component={SignupForm} />
+              {// TW oute for testing quick review
+              }
+              <Route exact path='/quickreview' component={QuickReview} />
             </div>
           )}
         </div>
