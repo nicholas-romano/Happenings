@@ -57,3 +57,5 @@ module.exports = {
     res.json({ user: cleanUser });
   }
 };
+
+console.log("Inside our userController");
