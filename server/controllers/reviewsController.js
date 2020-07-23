@@ -24,7 +24,7 @@ module.exports = {
     },
     findByUserName: function (req, res) {
     if (req.user) {
-      db.User.find({ username: req.user.username })
+      db.User.find({ userName: req.params.userName })
         .then(user => {
           res.json(user);
         })

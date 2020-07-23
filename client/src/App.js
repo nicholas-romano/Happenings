@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import LoginForm from './pages/Auth/LoginForm';
@@ -8,6 +9,20 @@ import NoMatch from './pages/NoMatch';
 import Feed from './pages/Feed';
 import Hero from './components/Hero';
 import MediaContent from './components/MediaContent';
+=======
+import React, { useState, useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { Redirect, Link } from "react-router-dom";
+import LoginForm from './pages/Auth/LoginForm'
+import SignupForm from './pages/Auth/SignupForm'
+import AUTH from './utils/AUTH'
+
+import Nav from './components/Nav'
+import NoMatch from './pages/NoMatch'
+import Feed from './pages/Feed'
+import Hero from './components/Hero'
+import MediaContent from './components/MediaContent'
+>>>>>>> master
 import Header from './components/Header';
 import Review from './components/Review';
 import Landing from './pages/TestPages/Landing';
@@ -31,11 +46,20 @@ const styles = {
   }
 };
 function App() {
+<<<<<<< HEAD
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const history = useHistory();
   console.log('history:', history);
   console.log('loggedIn: ', loggedIn);
+=======
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
+  const [redirectTo, setRedirectTo] = useState(null);
+
+  console.log('loggedIn: ', loggedIn)
+
+>>>>>>> master
   useEffect(() => {
     AUTH.getUser().then(response => {
       console.log('response:', response);
@@ -59,12 +83,26 @@ function App() {
     AUTH.logout().then(response => {
       // console.log(response.data);
       if (response.status === 200) {
+<<<<<<< HEAD
         setLoggedIn(false);
         setUser(null);
         history.push('/');
       }
     });
   };
+=======
+        setLoggedIn(false)
+        setUser(null)
+        setRedirectTo("/");
+      }
+    })
+  }
+
+  if (redirectTo) {
+    return <Redirect to={{ pathname: redirectTo }} />;
+  }
+
+>>>>>>> master
   const login = (username, password) => {
     AUTH.login(username, password).then(response => {
       console.log('Our user has logged in:', response.data);
@@ -78,17 +116,29 @@ function App() {
   };
   console.log('loggedIn!!!:', loggedIn);
   return (
+<<<<<<< HEAD
     <div className="App" style={styles.back}>
       {/* <Hero /> */}
       <div className="columns is-gapless is-desktop">
         <div className="column is-full" style={styles.twothirds}>
+=======
+    <div className='App' style={styles.back}>
+      <Hero />
+
+      <div className='columns is-gapless is-desktop'>
+        <div className='column is-one-thirds' style={styles.twothirds}>
+>>>>>>> master
           {loggedIn && (
             <div>
               <Nav user={user} logout={logout} />
               <div className="main-view">
                 <Switch>
+<<<<<<< HEAD
                   <Route exact path="/feed" component={Feed} />
                   <Route exact path="/review" component={Review} />
+=======
+                  <Route exact path='/' component={Feed} />
+>>>>>>> master
                   <Route component={NoMatch} />
                 </Switch>
               </div>
@@ -102,6 +152,23 @@ function App() {
             </div>
           )}
         </div>
+<<<<<<< HEAD
+=======
+        <div className='column is-one-third' style={styles.onethird}>
+          <div className='field'>
+            <div className='control'>
+              <input className='input' type='text' placeholder='Input' />
+            </div>
+          </div>
+        </div>
+        <div className='column is-one-third' style={styles.onethird}>
+          <div className='field'>
+            <div className='control'>
+              <Review />
+            </div>
+          </div>
+        </div>
+>>>>>>> master
       </div>
     </div>
   );
