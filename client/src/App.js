@@ -81,7 +81,7 @@ function App() {
     <div className="App" style={styles.back}>
       {/* <Hero /> */}
       <div className="columns is-gapless is-desktop">
-        <div className="column is-two-thirds" style={styles.twothirds}>
+        <div className="column is-full" style={styles.twothirds}>
           {loggedIn && (
             <div>
               <Nav user={user} logout={logout} />
@@ -102,16 +102,7 @@ function App() {
             </div>
           )}
         </div>
-        {/* <div className="column is-one-third" style={styles.onethird}>
-          <div className="field">
-            <div className="control">
-              <input className="input" type="text" placeholder="Input" />
-            </div>
-          </div>
-        </div> */}
       </div>
-      {/* <MediaContent /> */}
-      {/* <Footer /> */}
     </div>
   );
 }

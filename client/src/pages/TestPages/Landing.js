@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import LoginForm from '../Auth/LoginForm';
-import SignupForm from '../Auth/SignupForm';
-import NoMatch from '../NoMatch';
-import AUTH from '../../utils/AUTH';
-import Nav from '../../components/Nav';
-import Feed from '../Feed';
+// import SignupForm from '../Auth/SignupForm';
+// import NoMatch from '../NoMatch';
+// import AUTH from '../../utils/AUTH';
+// import Nav from '../../components/Nav';
+// import Feed from '../Feed';
 
 import Hero from '../../components/Hero';
 import Footer from '../../components/Footer';
@@ -23,6 +23,11 @@ const styles = {
   },
   back: {
     backgroundColor: 'rgba(42, 45, 52, 1)'
+  },
+  breaking: {
+    backgroundColor: 'rgba(183, 209, 218, 1)',
+    marginTop: -12,
+    padding: 90
   }
 };
 
@@ -46,6 +51,9 @@ function Landing(props) {
             </div>
           </div>
         </div>
+      </div>
+      <div className='columns'>
+        <div className='column is-full is-centered' style={styles.breaking}></div>
       </div>
 
       <MediaContent />

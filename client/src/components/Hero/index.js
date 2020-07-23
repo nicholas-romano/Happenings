@@ -3,7 +3,8 @@ import Logo from '../../assets/HappeningsLogo.png'
 
 const styles = {
     topHead: {
-        backgroundColor: 'rgba(36, 123, 160, 1)'
+        backgroundColor: 'rgba(36, 123, 160, 1)',
+        marginTop: -12
       },
       logo: {
         height: 160,

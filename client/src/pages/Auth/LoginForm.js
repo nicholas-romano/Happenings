@@ -11,7 +11,7 @@ function LoginForm({ login }) {
     username: "",
     password: "",
   });
-  const [redirectTo, setRedirectTo] = useState(null);
+  // const [redirectTo, setRedirectTo] = useState(null);
 
   const handleChange = (event) => {
     setUserObject({

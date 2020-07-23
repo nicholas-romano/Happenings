@@ -50,10 +50,7 @@ const Header = () => {
               <a href='bulma stuff' className='navbar-item'>
                 Contact
                   </a>
-              <hr className='navbar-divider'></hr>
-              <a href='bulma stuff' className='navbar-item'>
-                Logout
-                  </a>
+              
             </div>
           </div>
         </div>
