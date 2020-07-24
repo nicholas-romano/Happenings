@@ -7,6 +7,76 @@
     height: 40vmin;
     pointer-events: none;
   }
+
+  .media-content p.title {
+    font-size: 18px;
+  }
+
+  .media-content p.subtitle {
+    font-size: 14px;
+  }
+
+  .star-container-clickable {
+    cursor: pointer;
+    color: gold;
+  }
+
+  .card-content .content .location {
+    margin-bottom: -35px;
+    font-size: 12px;
+  }
+
+  .star-container-static {
+    color: gold;
+    font-size: 16px;
+  }
+
+  .star-rating {
+    font-size: 11px;
+    margin-top: 5px;
+    color: black;
+  }
+
+  .card-content .content .title {
+    margin-top: -10px;
+    font-size: 16pt;
+    margin-bottom: -2px;
+  }
+
+  .form, .post {
+    padding: 15px;
+    text-align: left;
+  }
+
+  .review-post {
+    padding: 5px;
+  }
+
+  .review-posts {
+    max-height: 500px;
+    overflow-y: scroll;
+    padding: 5px;
+    background-color: #4a4a4a;
+  }
+
+  .review-button {
+    color: white;
+    padding: 10px;
+    background-color: #4a4a4a;
+  }
+
+  .form h2 {
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .messageBody {
+    font-size: 12px;
+  }
+
+  .content p time {
+    font-size: 10px;
+  }
   
   .App-header {
     background-color: #282c34;

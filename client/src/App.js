@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { Redirect, Link } from "react-router-dom";
 import LoginForm from './pages/Auth/LoginForm'
 import SignupForm from './pages/Auth/SignupForm'
 import AUTH from './utils/AUTH'
@@ -9,6 +10,8 @@ import NoMatch from './pages/NoMatch'
 import Feed from './pages/Feed'
 import Hero from './components/Hero'
 import MediaContent from './components/MediaContent'
+import Header from './components/Header';
+import Review from './components/Review';
 // import Header from './components/Header'; EXS commented out as unused
 import Footer from './components/Footer'
 
@@ -16,6 +19,9 @@ import Footer from './components/Footer'
 import 'react-bulma-components/dist/react-bulma-components.min.css'
 import './App.css'
 // import Button from 'react-bulma-components' EXS commented out as unused
+
+// TW Quick review component
+import QuickReview from "./components/QuickReview/QuickReview"
 
 console.log(AUTH);
 
@@ -35,6 +41,9 @@ const styles = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
+  const [redirectTo, setRedirectTo] = useState(null);
+
+  console.log('loggedIn: ', loggedIn)
 
   useEffect(() => {
     AUTH.getUser().then(response => {
@@ -62,8 +71,13 @@ function App() {
       if (response.status === 200) {
         setLoggedIn(false)
         setUser(null)
+        setRedirectTo("/");
       }
     })
+  }
+
+  if (redirectTo) {
+    return <Redirect to={{ pathname: redirectTo }} />;
   }
 
   const login = (username, password) => {
@@ -82,7 +96,7 @@ function App() {
       <Hero />
 
       <div className='columns is-gapless is-desktop'>
-        <div className='column is-two-thirds' style={styles.twothirds}>
+        <div className='column is-one-thirds' style={styles.twothirds}>
           {loggedIn && (
             <div>
               <Nav user={user} logout={logout} />
@@ -107,6 +121,9 @@ function App() {
                 component={() => <LoginForm user={login} />}
               />
               <Route exact path='/signup' component={SignupForm} />
+              {// TW oute for testing quick review
+              }
+              <Route exact path='/quickreview' component={QuickReview} />
             </div>
           )}
         </div>
@@ -114,6 +131,13 @@ function App() {
           <div className='field'>
             <div className='control'>
               <input className='input' type='text' placeholder='Input' />
+            </div>
+          </div>
+        </div>
+        <div className='column is-one-third' style={styles.onethird}>
+          <div className='field'>
+            <div className='control'>
+              <Review />
             </div>
           </div>
         </div>
@@ -126,4 +150,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
