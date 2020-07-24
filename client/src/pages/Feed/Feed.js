@@ -1,7 +1,8 @@
 import React from 'react';
-import LocationSearch from '../../components/LocationSearch/locSearch';
-
+// import LocationSearch from '../../components/LocationSearch/locSearch';
 import Dashboard from '../TestPages/Dashboard';
+import DisplayMap from "../../components/Map/map";
+
 //  EXS just some starter code for getting current GeoLocation
 
 navigator.geolocation.getCurrentPosition(function (position) {
@@ -17,8 +18,10 @@ function Feed() {
     <>
       <Dashboard />
       {/* <LocationSearch />; */}
+      <DisplayMap />
     </>
+    // import LocationSearch from "../../components/LocationSearch/locSearch";
+
   );
 }
-
 export default Feed;
