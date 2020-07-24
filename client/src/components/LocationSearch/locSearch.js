@@ -1,33 +1,45 @@
 import React, { useState } from "react";
 
-import mapquestAPI from "../../utils/mapquestAPI";
+import placesAPI from "../../utils/placesAPI";
 import { Input, FormBtn } from "../../components/Form";
-
-//getting lat and long of user -- not currerntly used but can be in future development
-navigator.geolocation.getCurrentPosition(function (position) {
-  console.log("Latitude is :", position.coords.latitude);
-  console.log("Longitude is :", position.coords.longitude);
-});
 
 function LocationSearch() {
   const [locationState, setLocationState] = useState({
     location: "",
     place: "",
     showButtons: true,
+    coords: {
+      lat: 0,
+      long: 0,
+    },
+  });
+
+  //getting users coords and setting them to state
+  navigator.geolocation.getCurrentPosition(function (position) {
+    setLocationState({
+      ...locationState,
+      coords: {
+        lat: position.coords.latitude,
+        long: position.coords.longitude,
+      },
+    });
   });
 
   //handling the location search
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    //fetching locations that match user input from the mapquest API, setting to location in state
-    mapquestAPI.getPlace(locationState.place).then((res) => {
-      console.log(res.data.results);
-      setLocationState({
-        ...locationState,
-        location: res.data.results,
+    //fetching locations that match user input from the places API, setting to location in state
+    placesAPI
+      .getPlace(locationState.place, locationState.coords)
+      .then((res) => {
+        console.log(res.data.items);
+        setLocationState({
+          ...locationState,
+          location: res.data.items,
+          showButtons: true,
+        });
       });
-    });
   };
 
   //storing the form input value for the API search
@@ -81,11 +93,11 @@ function LocationSearch() {
                   display: locationState.showButtons ? "" : "none",
                 }}
                 key={key.id}
-                value={key.name}
+                value={key.title}
                 className="button"
                 onClick={handleLocClick}
               >
-                {key.name}
+                {key.title}
               </button>
             );
           })
