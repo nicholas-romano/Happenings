@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import Nav from '../../components/Nav'
+import Review from '../../components/Review/index'
 import LocationSearch from '../../components/LocationSearch/locSearch';
 
 const styles = {
@@ -11,6 +11,9 @@ const styles = {
     },
     onethird: {
       backgroundColor: 'rgba(163, 124, 64, 1)'
+    },
+    full: {
+        backgroundColor: 'rgba(42, 45, 52, 1)'
     }
 }
 
@@ -37,10 +40,10 @@ function Dashboard(props) {
 
                 </div>
                 <div className='column is-one-third' style={styles.onethird}>
-                    <p>Your user review modal goes here!!</p>
+                    <Review />
                 </div>
             </div>
-            <div className='columns is-desktop' style={styles.onethird}>
+            <div className='columns is-desktop' style={styles.full}>
 
                 <div className='column '>
                     <p>Review feed goes here!!</p>
