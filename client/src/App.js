@@ -104,7 +104,7 @@ function App() {
         </div>
 
 
-        <div className='column is-one-third' style={styles.onethird}>
+        {/* <div className='column is-one-third' style={styles.onethird}>
           <div className='field'>
             <div className='control'>
               <input className='input' type='text' placeholder='Input' />
@@ -117,7 +117,7 @@ function App() {
               <Review />
             </div>
           </div>
-        </div>
+        </div> */}
 
         
       </div>
