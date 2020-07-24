@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { Redirect, Link } from "react-router-dom";
-import LoginForm from './pages/Auth/LoginForm'
-import SignupForm from './pages/Auth/SignupForm'
-import AUTH from './utils/AUTH'
-
-import Nav from './components/Nav'
-import NoMatch from './pages/NoMatch'
-import Feed from './pages/Feed'
-import Hero from './components/Hero'
-import MediaContent from './components/MediaContent'
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import LoginForm from './pages/Auth/LoginForm';
+import SignupForm from './pages/Auth/SignupForm';
+import AUTH from './utils/AUTH';
+import Nav from './components/Nav';
+import NoMatch from './pages/NoMatch';
+import Feed from './pages/Feed';
+import Hero from './components/Hero';
+import MediaContent from './components/MediaContent';
 import Header from './components/Header';
 import Review from './components/Review';
+import Landing from './pages/TestPages/Landing';
 // import Header from './components/Header'; EXS commented out as unused
-import Footer from './components/Footer'
-
+import Footer from './components/Footer';
 // EXS 16th July 2020 - Added in bulma calls
-import 'react-bulma-components/dist/react-bulma-components.min.css'
-import './App.css'
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import './App.css';
 // import Button from 'react-bulma-components' EXS commented out as unused
-
-// TW Quick review component
-import QuickReview from "./components/QuickReview/QuickReview"
-
 console.log(AUTH);
-
 const styles = {
   twothirds: {
     paddingBottom: 10,
@@ -36,98 +29,82 @@ const styles = {
   back: {
     backgroundColor: 'rgba(42, 45, 52, 1)'
   }
-}
-
+};
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState(null)
-  const [redirectTo, setRedirectTo] = useState(null);
-
-  console.log('loggedIn: ', loggedIn)
-
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const history = useHistory();
+  console.log('history:', history);
+  console.log('loggedIn: ', loggedIn);
   useEffect(() => {
     AUTH.getUser().then(response => {
+      console.log('response:', response);
       // console.log(response.data);
-      if (!!response.data.user) {
-        setLoggedIn(true)
-        setUser(response.data.user)
+      if (response.data.user) {
+        setLoggedIn(true);
+        setUser(response.data.user);
+        // history.push('/feed');
       } else {
-        setLoggedIn(false)
-        setUser(null)
+        setLoggedIn(false);
+        setUser(null);
       }
-    })
-
+    });
     return () => {
-      setLoggedIn(false)
-      setUser(null)
-    }
-  }, [])
-
+      setLoggedIn(false);
+      setUser(null);
+    };
+  }, []);
   const logout = event => {
-    event.preventDefault()
-
+    event.preventDefault();
     AUTH.logout().then(response => {
       // console.log(response.data);
       if (response.status === 200) {
-        setLoggedIn(false)
-        setUser(null)
-        setRedirectTo("/");
+        setLoggedIn(false);
+        setUser(null);
+        history.push('/');
       }
-    })
-  }
-
-  if (redirectTo) {
-    return <Redirect to={{ pathname: redirectTo }} />;
-  }
-
+    });
+  };
   const login = (username, password) => {
     AUTH.login(username, password).then(response => {
-      console.log('Our user has logged in:', response.data)
+      console.log('Our user has logged in:', response.data);
       if (response.status === 200) {
         // update the state
-        setLoggedIn(true)
-        setUser(response.data.user)
+        setLoggedIn(true);
+        setUser(response.data.user);
+        history.push('/feed');
       }
-    })
-  }
-
+    });
+  };
+  console.log('loggedIn!!!:', loggedIn);
   return (
-    <div className='App' style={styles.back}>
-      <Hero />
-
-      <div className='columns is-gapless is-desktop'>
-        <div className='column is-one-thirds' style={styles.twothirds}>
+    <div className="App" style={styles.back}>
+      {/* <Hero /> */}
+      <div className="columns is-gapless is-desktop">
+        <div className="column is-full" style={styles.twothirds}>
           {loggedIn && (
             <div>
               <Nav user={user} logout={logout} />
-              <div className='main-view'>
+              <div className="main-view">
                 <Switch>
-                  <Route exact path='/' component={Feed} />
+                  <Route exact path="/feed" component={Feed} />
+                  <Route exact path="/review" component={Review} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>
             </div>
           )}
           {!loggedIn && (
-            <div className='auth-wrapper' style={{ paddingTop: 11 }}>
-              <Route
-                exact
-                path='/'
-                component={() => <LoginForm login={login} />}
-              />
-              <Route
-                exact
-                path='/feed'
-                component={() => <LoginForm user={login} />}
-              />
-              <Route exact path='/signup' component={SignupForm} />
-              {// TW oute for testing quick review
-              }
-              <Route exact path='/quickreview' component={QuickReview} />
+            <div className="auth-wrapper" style={{ paddingTop: 11 }}>
+              <Route exact path="/" component={() => <Landing login={login} />} />
+              {/* <Route exact path="/feed" component={() => <LoginForm user={login} />} /> */}
+              <Route exact path="/signup" component={SignupForm} />
             </div>
           )}
         </div>
-        <div className='column is-one-third' style={styles.onethird}>
+
+
+        {/* <div className='column is-one-third' style={styles.onethird}>
           <div className='field'>
             <div className='control'>
               <input className='input' type='text' placeholder='Input' />
@@ -140,14 +117,11 @@ function App() {
               <Review />
             </div>
           </div>
-        </div>
+        </div> */}
+
+        
       </div>
-
-      <MediaContent />
-
-      <Footer />
     </div>
-  )
+  );
 }
-
 export default App;
