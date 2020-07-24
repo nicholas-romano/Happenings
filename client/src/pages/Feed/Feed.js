@@ -1,13 +1,12 @@
 import React from "react";
 
-import LocationSearch from "../../components/LocationSearch/locSearch";
-import Map from "../../components/Map/map";
+// import LocationSearch from "../../components/LocationSearch/locSearch";
+import DisplayMap from "../../components/Map/map";
 
 function Feed() {
   return (
     <div>
-      <LocationSearch />
-      <Map />
+      <DisplayMap />
     </div>
   );
 }
