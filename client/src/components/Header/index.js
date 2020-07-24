@@ -1,8 +1,12 @@
 
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
+// import Nav from '../Nav'; EXS 19th July 2020 - commented out as unused at this time
+
 import Nav from '../Nav';
 import Icon from '../../assets/HapLogoIcon.png';
 import 'react-bulma-components/dist/react-bulma-components.min.css'
+import LocationSearch from '../LocationSearch/locSearch';
 
 // EXS <a href> added to the following lines of code: 12, 17, 31, 34, 36, 38, 40
 // RK added ='bulma stuff' after blank href tags to remove errors
@@ -46,10 +50,7 @@ const Header = () => {
               <a href='bulma stuff' className='navbar-item'>
                 Contact
                   </a>
-              <hr className='navbar-divider'></hr>
-              <a href='bulma stuff' className='navbar-item'>
-                Logout
-                  </a>
+              
             </div>
           </div>
         </div>
