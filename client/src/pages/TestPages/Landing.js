@@ -36,6 +36,8 @@ function Landing(props) {
   const [user, setUser] = useState(null);
   const history = useHistory();
 
+  console.log('props landing: ', props);
+
   return (
     <div style={styles.back}>
       <Hero />

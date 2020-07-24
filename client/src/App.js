@@ -66,8 +66,9 @@ function App() {
       }
     });
   };
-  const login = (username, password) => {
-    AUTH.login({username, password}).then(response => {
+  const login = userData => {
+    console.log('userData ', userData);
+    AUTH.login(userData).then(response => {
       console.log('Our user has logged in:', response.data);
       if (response.status === 200) {
         // update the state
