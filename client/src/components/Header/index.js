@@ -43,13 +43,13 @@ const Header = () => {
               Account
                 </a>
             <div className='navbar-dropdown'>
-              <a href='bulma stuff' className='navbar-item'>
+              <Link to="/settings" className='navbar-item'>
                 Settings
-                  </a>
+              </Link>
               <hr className='navbar-divider'></hr>
               <a href='bulma stuff' className='navbar-item'>
                 Contact
-                  </a>
+              </a>
               
             </div>
           </div>
