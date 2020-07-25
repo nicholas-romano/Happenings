@@ -6,8 +6,7 @@ const SettingsInput = props => {
         label,
         value,
         enableFields,
-        enableEdit,
-        getIcon
+        enableEdit
     } = props;
 
 
