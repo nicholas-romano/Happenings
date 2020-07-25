@@ -50,6 +50,7 @@
 
   .review-post {
     padding: 5px;
+    text-align: left;
   }
 
   .review-posts {
@@ -63,6 +64,15 @@
     color: white;
     padding: 10px;
     background-color: rgba(163, 124, 64, 1);
+    float: left;
+  }
+
+  .settings {
+    text-align: left;
+  }
+
+  .settings label {
+    text-align: right;
   }
 
   .form h2 {
