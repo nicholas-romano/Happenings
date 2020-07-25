@@ -8,7 +8,11 @@ function LocationSearch() {
     location: "",
     place: "",
     showButtons: true,
-    coords: {
+    myCoords: {
+      lat: 0,
+      long: 0,
+    },
+    locationCoords: {
       lat: 0,
       long: 0,
     },
@@ -18,7 +22,7 @@ function LocationSearch() {
   navigator.geolocation.getCurrentPosition(function (position) {
     setLocationState({
       ...locationState,
-      coords: {
+      myCoords: {
         lat: position.coords.latitude,
         long: position.coords.longitude,
       },
@@ -31,7 +35,7 @@ function LocationSearch() {
 
     //fetching locations that match user input from the places API, setting to location in state
     placesAPI
-      .getPlace(locationState.place, locationState.coords)
+      .getPlace(locationState.place, locationState.myCoords)
       .then((res) => {
         console.log(res.data.items);
         setLocationState({
@@ -60,12 +64,22 @@ function LocationSearch() {
 
     let selection = event.target.value;
 
+    let latitude = event.target.dataset.latitude;
+    let longitude = event.target.dataset.longitude;
+    console.log("longitude:", longitude);
+
+    console.log("latitude:", latitude);
+
     console.log("Selection: ", selection);
 
     setLocationState({
       ...locationState,
       place: selection,
       showButtons: false,
+      locationCoords: {
+        lat: latitude,
+        long: longitude,
+      },
     });
   };
 
@@ -94,10 +108,14 @@ function LocationSearch() {
                 }}
                 key={key.id}
                 value={key.title}
+                data-latitude={key.position.lat}
+                data-longitude={key.position.lng}
                 className="button"
                 onClick={handleLocClick}
               >
                 {key.title}
+                <br></br>
+                {key.address.houseNumber}
               </button>
             );
           })
