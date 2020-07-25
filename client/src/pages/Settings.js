@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import SettingsInput from '../components/Form/Settings/SettingsInput';
 import AUTH from '../utils/AUTH';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Settings = () => {
 
@@ -49,6 +51,7 @@ const Settings = () => {
 
     return (
         <>
+        <Header />
         <section className="section settings">
             <div className="container">
                 <h1 className="title">Settings</h1>
@@ -70,6 +73,7 @@ const Settings = () => {
                 }
             </div>
         </section>
+        <Footer />
         </>
     );
 }

@@ -6,18 +6,13 @@ import AUTH from './utils/AUTH';
 import Nav from './components/Nav';
 import NoMatch from './pages/NoMatch';
 import Feed from './pages/Feed';
-import Settings from './pages/Settings';
-import Hero from './components/Hero';
-import MediaContent from './components/MediaContent';
-import Header from './components/Header';
 import Review from './components/Review';
-import Landing from './pages/TestPages/Landing';
-// import Header from './components/Header'; EXS commented out as unused
-import Footer from './components/Footer';
+import Landing from './pages/MainPages/Landing';
+import Settings from './pages/Settings'
 // EXS 16th July 2020 - Added in bulma calls
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import './App.css';
-// import Button from 'react-bulma-components' EXS commented out as unused
+
 console.log(AUTH);
 const styles = {
   twothirds: {
@@ -66,9 +61,8 @@ function App() {
       }
     });
   };
-  const login = userData => {
-    console.log('userData ', userData);
-    AUTH.login(userData).then(response => {
+  const login = (username, password) => {
+    AUTH.login(username, password).then(response => {
       console.log('Our user has logged in:', response.data);
       if (response.status === 200) {
         // update the state
@@ -91,7 +85,7 @@ function App() {
                 <Switch>
                   <Route exact path="/feed" component={Feed} />
                   <Route exact path="/review" component={Review} />
-                  <Route exact path="/settings" component={Settings} />
+                  <Route exact path='/settings' component={Settings} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>

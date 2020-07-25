@@ -1,6 +1,6 @@
 
 import React from 'react'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import Nav from '../Nav'; EXS 19th July 2020 - commented out as unused at this time
 
 // import Nav from '../Nav';
@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <nav className='navbar' role='navigation' aria-label='main navigation'>
       <div className='navbar-brand'>
-        <a className='navbar-item' href='localhost:3000/home'>
+        <a className='navbar-item' href='/feed'>
           <img src={Icon} alt='LogoIcon' />
         </a>
         <a
