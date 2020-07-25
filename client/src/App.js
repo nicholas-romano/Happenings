@@ -6,6 +6,7 @@ import AUTH from './utils/AUTH';
 import Nav from './components/Nav';
 import NoMatch from './pages/NoMatch';
 import Feed from './pages/Feed';
+import Settings from './pages/Settings';
 import Hero from './components/Hero';
 import MediaContent from './components/MediaContent';
 import Header from './components/Header';
@@ -65,8 +66,9 @@ function App() {
       }
     });
   };
-  const login = (username, password) => {
-    AUTH.login(username, password).then(response => {
+  const login = userData => {
+    console.log('userData ', userData);
+    AUTH.login(userData).then(response => {
       console.log('Our user has logged in:', response.data);
       if (response.status === 200) {
         // update the state
@@ -89,6 +91,7 @@ function App() {
                 <Switch>
                   <Route exact path="/feed" component={Feed} />
                   <Route exact path="/review" component={Review} />
+                  <Route exact path="/settings" component={Settings} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>
