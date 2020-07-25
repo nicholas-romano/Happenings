@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Review from '../../components/Review';
 import LocationSearch from '../../components/LocationSearch/locSearch';
+import DisplayMap from '../../components/Map/map';
 
 const styles = {
     twothirds: {
@@ -36,7 +37,7 @@ function Dashboard(props) {
 
             <div className='columns is-dekstop'>
                 <div className='column is-two-thirds' style={styles.twothirds}>
-                    <p>Map goes here!!!!!!!!</p>
+                    <DisplayMap />
 
                 </div>
                 <div className='column is-one-third' style={styles.onethird}>
@@ -46,10 +47,7 @@ function Dashboard(props) {
             <div className='columns is-desktop' style={styles.full}>
 
                 <div className='column '>
-                    <p>Review feed goes here!!</p>
-                    <p>Review feed goes here!!</p>
-                    <p>Review feed goes here!!</p>
-                    <p>Review feed goes here!!</p>
+                   <Review />
                 </div>
             </div>
 

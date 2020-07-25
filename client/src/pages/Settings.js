@@ -3,6 +3,8 @@ import SettingsInput from '../components/Form/Settings/SettingsInput';
 import ProfileImg from '../components/Form/Settings/ProfileImg';
 import AUTH from '../utils/AUTH';
 import ProfileImage from '../components/Form/Settings/ProfileImg';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Settings = () => {
 
@@ -80,6 +82,7 @@ const Settings = () => {
 
     return (
         <>
+        <Header />
         <section className="section settings">
             <div className="container">
                 <h1 className="title">Settings</h1>
@@ -144,6 +147,7 @@ const Settings = () => {
                 </div>
             </div>
         </section>
+        <Footer />
         </>
     );
 }
