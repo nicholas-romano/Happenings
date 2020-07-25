@@ -72,15 +72,20 @@ function LocationSearch() {
   return (
     <div>
       <h1>Check out the neighborhood!</h1>
-      <form style={{ marginTop: 10 }}>
-        <label htmlFor="username">Where are you? </label>
-        <Input
-          type="text"
-          value={locationState.place}
-          onChange={handleInputChange}
-        />
+      <div className='columns'>
+        <div className='column is-11'>
+          <form style={{ marginTop: 10 }}>
+            <label htmlFor="username">Where are you? </label>
+            <Input
+              type="text"
+              value={locationState.place}
+              onChange={handleInputChange}
+            />
+          </form>
+        </div>
+    
         <FormBtn onClick={handleSubmit}>Search</FormBtn>
-      </form>
+      </div>
       {/* conditional rendering the buttons to display the places matching the users search */}
       <div>
         {locationState.location.length > 0 ? (
@@ -102,8 +107,8 @@ function LocationSearch() {
             );
           })
         ) : (
-          <div></div>
-        )}
+            <div></div>
+          )}
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ function Dashboard(props) {
                     <DisplayMap />
 
                 </div>
-                <div className='column is-one-third' style={styles.onethird}>
+                <div className='column is-one-third' style={styles.twothirds}>
                     <Review />
                 </div>
             </div>

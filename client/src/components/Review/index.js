@@ -5,6 +5,13 @@ import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
 import '../../App.css';
 
+
+const styles = {
+    revBtn: {
+        backgroundColor: 'rgba(42, 45, 52, 1)'
+    }
+}
+
 const Review = props => {
     const [user, setUser] = useState({
         userName: '',
@@ -138,8 +145,8 @@ const Review = props => {
             )
         }
         </div>
-        <div className="review-button">
-            <a href='review' className="button is-link" onClick={showReviewForm}>Write a Review</a>
+        <div className="review-button" style={styles.revBtn}>
+            <a  className="button is-link" onClick={showReviewForm}>Write a Review</a>
         </div>
         </>
     ) 
