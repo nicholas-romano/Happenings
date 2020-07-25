@@ -139,7 +139,7 @@ const Review = props => {
         }
         </div>
         <div className="review-button">
-            <a href='review' className="button is-link" onClick={showReviewForm}>Write a Review</a>
+            <button className="button is-link" onClick={showReviewForm}>Write a Review</button>
         </div>
         </>
     ) 
