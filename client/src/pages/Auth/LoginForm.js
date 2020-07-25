@@ -8,7 +8,7 @@ console.log('Inside our loginForm.js')
 
 function LoginForm({ login }) {
   const [userObject, setUserObject] = useState({
-    username: "",
+    userName: "",
     password: "",
   });
   // const [redirectTo, setRedirectTo] = useState(null);
@@ -23,7 +23,7 @@ function LoginForm({ login }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     login({
-      userName: userObject.username,
+      userName: userObject.userName,
       password: userObject.password
     });
     // setRedirectTo("/");
@@ -42,7 +42,7 @@ function LoginForm({ login }) {
                 <Input
                   type="text"
                   title="Username"
-                  name="username"
+                  name="userName"
                   value={userObject.username}
                   onChange={handleChange}
                   placeholder="Username"

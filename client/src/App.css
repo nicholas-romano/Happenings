@@ -67,6 +67,14 @@
     float: left;
   }
 
+  .settings {
+    text-align: left;
+  }
+
+  .settings label {
+    text-align: right;
+  }
+
   .form h2 {
     text-align: center;
     font-size: 24px;
