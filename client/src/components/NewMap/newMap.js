@@ -4,7 +4,7 @@ import BreweryData from "../../data/breweries.json";
 
 function NewMap() {
   const [viewport, setViewport] = useState({
-    width: 400,
+    width: "100%",
     height: 400,
     latitude: 35.7796,
     longitude: -78.6382,
