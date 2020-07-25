@@ -14,7 +14,6 @@ export default {
   },
   // Log the user in
   login: function (userData) {
-    console.log(userData);
     return axios.post('/auth/login', userData);
   },
   // New user registration

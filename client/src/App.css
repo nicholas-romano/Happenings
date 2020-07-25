@@ -8,19 +8,84 @@
     pointer-events: none;
   }
 
-  .star-container {
-    width: 75px;
-    cursor: pointer;
+  .media-content p.title {
+    font-size: 18px;
   }
 
-  .form {
+  .media-content p.subtitle {
+    font-size: 14px;
+  }
+
+  .star-container-clickable {
+    cursor: pointer;
+    color: gold;
+  }
+
+  .card-content .content .location {
+    margin-bottom: -35px;
+    font-size: 12px;
+  }
+
+  .star-container-static {
+    color: gold;
+    font-size: 16px;
+  }
+
+  .star-rating {
+    font-size: 11px;
+    margin-top: 5px;
+    color: black;
+  }
+
+  .card-content .content .title {
+    margin-top: -10px;
+    font-size: 16pt;
+    margin-bottom: -2px;
+  }
+
+  .form, .post {
     padding: 15px;
     text-align: left;
+  }
+
+  .review-post {
+    padding: 5px;
+    text-align: left;
+  }
+
+  .review-posts {
+    max-height: 500px;
+    overflow-y: scroll;
+    padding: 5px;
+    background-color: rgba(42, 45, 52, 1);
+  }
+
+  .review-button {
+    color: white;
+    padding: 10px;
+    background-color: rgba(163, 124, 64, 1);
+    float: left;
+  }
+
+  .settings {
+    text-align: left;
+  }
+
+  .settings label {
+    text-align: right;
   }
 
   .form h2 {
     text-align: center;
     font-size: 24px;
+  }
+
+  .messageBody {
+    font-size: 12px;
+  }
+
+  .content p time {
+    font-size: 10px;
   }
   
   .App-header {
@@ -38,16 +103,6 @@
     color: #61dafb;
   }
   
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 
-  .buttons {
-    background-color: crimson;
-    color: darkorange;
-  }
+
+ 
