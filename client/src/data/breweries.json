@@ -1,0 +1,282 @@
+{
+  "items": [
+    {
+      "title": "Union Square Brewery",
+      "id": "here:pds:place:8403fv6k-632014a90d620e617d9b86837e904feb",
+      "resultType": "place",
+      "address": {
+        "label": "Union Square Brewery, 506 Pershing Rd, Raleigh, NC 27608-2624, United States",
+        "countryCode": "USA",
+        "countryName": "United States",
+        "state": "North Carolina",
+        "county": "Wake",
+        "city": "Raleigh",
+        "district": "University",
+        "street": "Pershing Rd",
+        "postalCode": "27608-2624",
+        "houseNumber": "506"
+      },
+      "position": { "lat": 35.8044, "lng": -78.63365 },
+      "access": [{ "lat": 35.80464, "lng": -78.63354 }],
+      "distance": 10960,
+      "categories": [
+        { "id": "100-1000-0001", "name": "Casual Dining", "primary": true },
+        { "id": "200-2000-0011", "name": "Bar or Pub" },
+        { "id": "300-3000-0350", "name": "Brewery" }
+      ],
+      "foodTypes": [{ "id": "800-078", "name": "Grill", "primary": true }],
+      "contacts": [
+        {
+          "phone": [{ "value": "+19199165961" }],
+          "www": [{ "value": "http://www.nickelpointbrewing.com" }]
+        }
+      ]
+    },
+    {
+      "title": "Big Boss Brewing",
+      "id": "here:pds:place:840dq25e-c5c98767cf1b4878b92573729ca349a2",
+      "resultType": "place",
+      "address": {
+        "label": "Big Boss Brewing, 1249 Wicker Dr, Raleigh, NC 27604-1427, United States",
+        "countryCode": "USA",
+        "countryName": "United States",
+        "state": "North Carolina",
+        "county": "Wake",
+        "city": "Raleigh",
+        "district": "East Raleigh",
+        "street": "Wicker Dr",
+        "postalCode": "27604-1427",
+        "houseNumber": "1249"
+      },
+      "position": { "lat": 35.81042, "lng": -78.61792 },
+      "access": [{ "lat": 35.8097, "lng": -78.6182 }],
+      "distance": 11660,
+      "categories": [
+        { "id": "200-2000-0011", "name": "Bar or Pub", "primary": true },
+        { "id": "100-1000-0000", "name": "Restaurant" },
+        { "id": "300-3000-0350", "name": "Brewery" },
+        { "id": "600-6300-0068", "name": "Wine & Liquor" },
+        { "id": "700-7400-0000", "name": "Consumer Services" }
+      ],
+      "references": [
+        { "supplier": { "id": "tripadvisor" }, "id": "3619090" },
+        { "supplier": { "id": "yelp" }, "id": "4YNNl75WFqxOb2t5SxggXw" },
+        { "supplier": { "id": "yelp" }, "id": "NiYbguM2E9J8Uxy_zNw9Aw" },
+        { "supplier": { "id": "yelp" }, "id": "S152GVX8CWLqRY3qPBEMSQ" }
+      ],
+      "foodTypes": [{ "id": "800-074", "name": "Brewpub", "primary": true }],
+      "contacts": [
+        {
+          "phone": [
+            { "value": "+19198340045" },
+            { "value": "+19198340046" },
+            { "value": "+19198349200" }
+          ],
+          "fax": [{ "value": "+17242652223" }, { "value": "+19198340046" }],
+          "www": [
+            { "value": "http://www.bigbossbrewing.com" },
+            { "value": "http://www.bigbossbrewing.com/" }
+          ],
+          "email": [{ "value": "info@bigbossbrewing.com" }]
+        }
+      ],
+      "openingHours": [
+        {
+          "text": [
+            "Mon: 15:00 - 24:00, 15:00 - 24:00",
+            "Tue-Thu: 15:00 - 24:00, 15:00 - 02:00",
+            "Fri: 14:00 - 02:00, 14:00 - 02:00",
+            "Sat: 00:00 - 02:00, 12:00 - 02:00, 12:00 - 02:00",
+            "Sun: 00:00 - 02:00, 09:00 - 19:00"
+          ],
+          "isOpen": true,
+          "structured": [
+            {
+              "start": "T150000",
+              "duration": "PT09H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:MO,TU,WE,TH"
+            },
+            {
+              "start": "T150000",
+              "duration": "PT08H59M",
+              "recurrence": "FREQ:DAILY;BYDAY:MO"
+            },
+            {
+              "start": "T150000",
+              "duration": "PT11H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:TU,WE,TH"
+            },
+            {
+              "start": "T140000",
+              "duration": "PT12H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:FR"
+            },
+            {
+              "start": "T140000",
+              "duration": "PT09H59M",
+              "recurrence": "FREQ:DAILY;BYDAY:FR"
+            },
+            {
+              "start": "T000000",
+              "duration": "PT02H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:SA,SU"
+            },
+            {
+              "start": "T120000",
+              "duration": "PT14H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:SA"
+            },
+            {
+              "start": "T120000",
+              "duration": "PT11H59M",
+              "recurrence": "FREQ:DAILY;BYDAY:SA"
+            },
+            {
+              "start": "T090000",
+              "duration": "PT13H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:SU"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Compass Rose Brewery",
+      "id": "here:pds:place:840aabd1-84f1bfc18971027828b92fd3516e3750",
+      "resultType": "place",
+      "address": {
+        "label": "Compass Rose Brewery, 3201 Northside Dr, Raleigh, NC 27615-4126, United States",
+        "countryCode": "USA",
+        "countryName": "United States",
+        "state": "North Carolina",
+        "county": "Wake",
+        "city": "Raleigh",
+        "district": "North Raleigh",
+        "street": "Northside Dr",
+        "postalCode": "27615-4126",
+        "houseNumber": "3201"
+      },
+      "position": { "lat": 35.88394, "lng": -78.58271 },
+      "access": [{ "lat": 35.88334, "lng": -78.5822 }],
+      "distance": 12848,
+      "categories": [
+        { "id": "200-2000-0011", "name": "Bar or Pub", "primary": true },
+        { "id": "100-1000-0000", "name": "Restaurant" },
+        { "id": "200-2000-0019", "name": "Beer Garden" },
+        { "id": "300-3000-0350", "name": "Brewery" }
+      ],
+      "references": [
+        { "supplier": { "id": "yelp" }, "id": "gFMiNwPSwwK0go-IKaT56Q" }
+      ],
+      "foodTypes": [{ "id": "800-074", "name": "Brewpub", "primary": true }],
+      "contacts": [
+        {
+          "phone": [{ "value": "+19198755683" }],
+          "www": [{ "value": "http://www.compassrosebrewery.com" }],
+          "email": [{ "value": "compassrosebrewery@gmail.com" }]
+        }
+      ],
+      "openingHours": [
+        {
+          "text": [
+            "Mon-Wed: 15:00 - 20:00",
+            "Thu: 12:00 - 20:00",
+            "Fri, Sat: 12:00 - 21:00",
+            "Sun: 12:00 - 23:59"
+          ],
+          "isOpen": true,
+          "structured": [
+            {
+              "start": "T150000",
+              "duration": "PT08H59M",
+              "recurrence": "FREQ:DAILY;BYDAY:MO,TU,WE"
+            },
+            {
+              "start": "T120000",
+              "duration": "PT11H59M",
+              "recurrence": "FREQ:DAILY;BYDAY:TH,FR,SA,SU"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Clouds Brewing",
+      "id": "here:pds:place:840dq25g-2a064cc6ff9845f58adcda2fd0a88bc9",
+      "resultType": "place",
+      "address": {
+        "label": "Clouds Brewing, 1233 Front St, Raleigh, NC 27609-7526, United States",
+        "countryCode": "USA",
+        "countryName": "United States",
+        "state": "North Carolina",
+        "county": "Wake",
+        "city": "Raleigh",
+        "district": "North Hills",
+        "street": "Front St",
+        "postalCode": "27609-7526",
+        "houseNumber": "1233"
+      },
+      "position": { "lat": 35.82153, "lng": -78.61408 },
+      "access": [{ "lat": 35.82114, "lng": -78.61453 }],
+      "distance": 11306,
+      "categories": [
+        { "id": "300-3000-0350", "name": "Brewery", "primary": true },
+        { "id": "200-2000-0011", "name": "Bar or Pub" }
+      ],
+      "references": [
+        { "supplier": { "id": "yelp" }, "id": "AgHIs44KLfVobsaM4A5GGA" }
+      ],
+      "contacts": [
+        {
+          "phone": [{ "value": "+19197474863" }],
+          "www": [
+            { "value": "http://www.cloudsbrewing.com" },
+            { "value": "http://www.cloudsbrewing.com/" }
+          ]
+        }
+      ],
+      "openingHours": [
+        {
+          "text": ["Thu, Fri: 15:00 - 22:00", "Sat, Sun: 13:00 - 21:00"],
+          "isOpen": false,
+          "structured": [
+            {
+              "start": "T150000",
+              "duration": "PT07H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:TH,FR"
+            },
+            {
+              "start": "T130000",
+              "duration": "PT08H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:SA,SU"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Brewer St, Raleigh, NC 27608, United States",
+      "id": "here:af:street:xG.1mkoi9Cn72Sjb1Uv7.C",
+      "resultType": "street",
+      "address": {
+        "label": "Brewer St, Raleigh, NC 27608, United States",
+        "countryCode": "USA",
+        "countryName": "United States",
+        "state": "North Carolina",
+        "county": "Wake",
+        "city": "Raleigh",
+        "district": "University",
+        "street": "Brewer St",
+        "postalCode": "27608"
+      },
+      "position": { "lat": 35.81139, "lng": -78.62866 },
+      "distance": 10812,
+      "mapView": {
+        "west": -78.62957,
+        "south": 35.80997,
+        "east": -78.62864,
+        "north": 35.8128
+      }
+    }
+  ]
+}
