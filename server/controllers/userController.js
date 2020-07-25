@@ -57,4 +57,5 @@ module.exports = {
   }
 };
 
-console.log("Inside our userController");
+//console.log("Find our places: ", db.Places.find({ placesCreatedBy: 'Eddie' }));
+

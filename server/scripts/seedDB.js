@@ -71,8 +71,9 @@ const userSeed = [
 // Optimize this code later
 
 db.Places.deleteMany({})
-  .then(console.log('Adding Places'))
+  // .then(console.log('Adding Places'))
   .then(() => db.Places.collection.insertMany(placesSeed))
+  //.then(db.Places.find({}, function (err, result) { console.log(err, result); }))
   .then(data => {
     process.exit(0)
   })
@@ -82,7 +83,7 @@ db.Places.deleteMany({})
   })
 
 db.Reviews.deleteMany({})
-  .then(console.log('Adding Reviews'))
+  // .then(console.log('Adding Reviews'))
   .then(() => db.Reviews.collection.insertMany(reviewsSeed))
   .then(data => {
     process.exit(0)
@@ -93,7 +94,7 @@ db.Reviews.deleteMany({})
   })
 
 db.LocationEvents.deleteMany({})
-  .then(console.log('Adding Location Events'))
+  // .then(console.log('Adding Location Events'))
   .then(() => db.LocationEvents.collection.insertMany(locationEventsSeed))
   .then(data => {
     process.exit(0)
@@ -104,12 +105,17 @@ db.LocationEvents.deleteMany({})
   })
 
 db.User.deleteMany({})
-  .then(console.log('Adding A User'))
+  //.then(console.log('Adding A User'))
   .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
+
     process.exit(0)
   })
   .catch(err => {
     console.error(err)
     process.exit(1)
   })
+
+const myTest = db.Places.aggregate([{ '$match': { 'placesCreatedBy': 'Eddie' } }]);
+const myFind = db.Places.find({});
+console.log(myTest, myFind);
