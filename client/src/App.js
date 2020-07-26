@@ -1,40 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import LoginForm from './pages/Auth/LoginForm';
-import SignupForm from './pages/Auth/SignupForm';
-import AUTH from './utils/AUTH';
-import Nav from './components/Nav';
-import NoMatch from './pages/NoMatch';
-import Feed from './pages/Feed';
-import Review from './components/Review';
-import Landing from './pages/MainPages/Landing';
-import Settings from './pages/Settings'
+import React, { useState, useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
+import LoginForm from "./pages/Auth/LoginForm";
+import SignupForm from "./pages/Auth/SignupForm";
+import AUTH from "./utils/AUTH";
+import Nav from "./components/Nav";
+import NoMatch from "./pages/NoMatch";
+import Feed from "./pages/Feed";
+import Review from "./components/Review";
+import Landing from "./pages/MainPages/Landing";
+import Settings from "./pages/Settings";
 // EXS 16th July 2020 - Added in bulma calls
-import 'react-bulma-components/dist/react-bulma-components.min.css';
-import './App.css';
+import "react-bulma-components/dist/react-bulma-components.min.css";
+import "./App.css";
 
 console.log(AUTH);
 const styles = {
   twothirds: {
     paddingBottom: 10,
-    backgroundColor: 'rgba(183, 209, 218, 1)'
+    backgroundColor: "rgba(183, 209, 218, 1)",
   },
   onethird: {
-    backgroundColor: 'rgba(163, 124, 64, 1)'
+    backgroundColor: "rgba(163, 124, 64, 1)",
   },
   back: {
-    backgroundColor: 'rgba(42, 45, 52, 1)'
-  }
+    backgroundColor: "rgba(42, 45, 52, 1)",
+  },
 };
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const history = useHistory();
-  console.log('history:', history);
-  console.log('loggedIn: ', loggedIn);
+  console.log("history:", history);
+  console.log("loggedIn: ", loggedIn);
   useEffect(() => {
-    AUTH.getUser().then(response => {
-      console.log('response:', response);
+    AUTH.getUser().then((response) => {
+      console.log("response:", response);
       // console.log(response.data);
       if (response.data.user) {
         setLoggedIn(true);
@@ -50,29 +50,29 @@ function App() {
       setUser(null);
     };
   }, []);
-  const logout = event => {
+  const logout = (event) => {
     event.preventDefault();
-    AUTH.logout().then(response => {
+    AUTH.logout().then((response) => {
       // console.log(response.data);
       if (response.status === 200) {
         setLoggedIn(false);
         setUser(null);
-        history.push('/');
+        history.push("/");
       }
     });
   };
   const login = (userData) => {
-    AUTH.login(userData).then(response => {
-      console.log('Our user has logged in:', response.data);
+    AUTH.login(userData).then((response) => {
+      console.log("Our user has logged in:", response.data);
       if (response.status === 200) {
         // update the state
         setLoggedIn(true);
         setUser(response.data.user);
-        history.push('/feed');
+        history.push("/feed");
       }
     });
   };
-  console.log('loggedIn!!!:', loggedIn);
+  console.log("loggedIn!!!:", loggedIn);
   return (
     <div className="App" style={styles.back}>
       {/* <Hero /> */}
@@ -85,7 +85,7 @@ function App() {
                 <Switch>
                   <Route exact path="/feed" component={Feed} />
                   <Route exact path="/review" component={Review} />
-                  <Route exact path='/settings' component={Settings} />
+                  <Route exact path="/settings" component={Settings} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>
@@ -93,13 +93,16 @@ function App() {
           )}
           {!loggedIn && (
             <div className="auth-wrapper" style={{ paddingTop: 11 }}>
-              <Route exact path="/" component={() => <Landing login={login} />} />
+              <Route
+                exact
+                path="/"
+                component={() => <Landing login={login} />}
+              />
               {/* <Route exact path="/feed" component={() => <LoginForm user={login} />} /> */}
               <Route exact path="/signup" component={SignupForm} />
             </div>
           )}
         </div>
-
 
         {/* <div className='column is-one-third' style={styles.onethird}>
           <div className='field'>
@@ -115,8 +118,6 @@ function App() {
             </div>
           </div>
         </div> */}
-
-        
       </div>
     </div>
   );
