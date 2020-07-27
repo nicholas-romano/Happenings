@@ -1,0 +1,6 @@
+/* EXS 26th July 2020 - Creation of stylesheet for the contact page */
+/* Test background color change to make sure the CSS file is being attached correctly */
+
+body {
+  background-color: orange;
+}
