@@ -71,11 +71,15 @@
     text-align: left;
   }
 
+  .img-link {
+    margin-bottom: 15px;
+  }
+
   .settings label {
     text-align: right;
   }
 
-  .interestList {
+  .list {
     background-color: white;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -83,14 +87,29 @@
     padding: 2px 2px 2px 10px;
   }
 
+  .list .empty {
+    color: #ccc;
+  }
+
   .delete-icon {
     float: right;
     color: red;
     cursor: pointer;
+    border: none;
+    background-color: none;
+    font-size: 14px;
+    border-radius: 0 5px 5px 0;
   }
 
-  .interestList .empty {
-    color: #ccc;
+
+  .button.is-light {
+    font-size: 15px;
+    margin-right: 10px;
+  }
+
+  .error {
+    color: red;
+    font-size: 10px;
   }
 
   .form h2 {

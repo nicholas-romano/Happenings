@@ -5,7 +5,6 @@ console.log("Inside AUTH.js");
 export default {
   // Gets user info
   getUser: function () {
-    console.log("Inside AUTH getUser");
     return axios.get('/auth/user');
   },
   // Logs the user out

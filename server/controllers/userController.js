@@ -3,12 +3,76 @@ const db = require('../models');
 // Defining methods for the userController
 module.exports = {
   getUser: (req, res, next) => {
-    console.log('req.user:', req.user);
     if (req.user) {
       return res.json({ user: req.user });
     } else {
       return res.json({ user: null });
     }
+  },
+  getUserInfo: (req, res) => {
+    if (req.user) {
+      db.User.find({
+        userName: req.params.userName
+      })
+      .then((user) => {
+          return res.json(user);
+      })
+      .catch(err => {
+          res.json(err);
+      });
+    } else {
+      return res.json({ user: null });
+    }
+  },
+  updateUser: (req, res) => {
+    console.log('req.body.password: ', req.body.password);
+    const { userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends} = req.body;
+    if (req.user) {
+
+      if (password !== undefined) {
+        //Password Change:
+          db.User.update(
+          {
+            userName: req.user.userName
+          },
+          {
+            $set: {
+              userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends
+            }
+          },
+          (error, data) => {
+            if (error) {
+              res.send(error);
+            } else {
+              res.send(data);
+            }
+          }
+        );
+      } else {
+        //Password Unchanged:
+        db.User.update(
+          {
+            userName: req.user.userName
+          },
+          {
+            $set: {
+              userName, firstName, lastName, userEmail, profileImg, userInterest, friends
+            }
+          },
+          (error, data) => {
+            if (error) {
+              res.send(error);
+            } else {
+              res.send(data);
+            }
+          }
+        );
+      }
+
+    } else {
+      return res.json({ user: null });
+    }
+    
   },
   register: (req, res) => {
     const { firstName, lastName, userName, password, userEmail, friends, userInterest } = req.body;
@@ -35,7 +99,6 @@ module.exports = {
     });
   },
   logout: (req, res) => {
-    console.log('Logout user from userController.js', req.user);
     if (req.user) {
       req.session.destroy();
       res.clearCookie('connect.sid'); // clean up!
