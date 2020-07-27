@@ -43,6 +43,11 @@ const userSchema = new Schema({
     type: Array, 
     unique: false, 
     required: false 
+  },
+  profileImg: {
+    type: String,
+    unique: false,
+    required: false
   }
 })
 

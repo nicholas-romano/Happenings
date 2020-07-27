@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Input, Rating, TextArea, FormBtn } from '../Form';
-import ReviewPost from './ReviewPost';
+import React, { useState, useEffect, useRef } from "react";
+import Input from "../../components/Form/Input";
+import { Rating, TextArea, FormBtn } from "../Form";
+import ReviewPost from "./ReviewPost";
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
-import '../../App.css';
+import "../../App.css";
 
 
 const styles = {
@@ -13,6 +14,7 @@ const styles = {
 }
 
 const Review = props => {
+
     const [user, setUser] = useState({
         userName: '',
         firstName: '',
@@ -29,37 +31,36 @@ const Review = props => {
     const formEl = useRef(null);
     const [reviews, setReviews] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
+    AUTH.getUser()
+      .then((res) => {
+        const { userName, firstName, lastName } = res.data.user;
+        setUser({ userName, firstName, lastName });
+        return loadReviews();
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-        AUTH.getUser().then(res => {
-            const { userName, firstName, lastName } = res.data.user
-            setUser({userName, firstName, lastName});
-            loadReviews();
-        })
-        .catch(err => console.log(err));
+  // Handles updating component state when the user types into the input field
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value });
+  };
 
-    }, []);
+const loadReviews = () => {
+    API.getReviews()
+      .then(res => {  
+        return setReviews(res.data);
+      })
+      .catch((err) => console.log("err ", err));
+  };
 
-    // Handles updating component state when the user types into the input field
-    const handleInputChange = event => {
-        const { name, value } = event.target;
-        setFormObject({...formObject, [name]: value})
-    };
+  const handleRatingChange = (rating) => {
+    setRatings(rating);
+    setFormObject({ ...formObject, rating: rating });
+  };
 
-    const loadReviews = () => {
-        API.getReviews()
-            .then(res => {
-                setReviews(res.data);
-            })
-            .catch(err => console.log('err ', err));
-    }
-
-    const handleRatingChange = rating => {
-        setRatings(rating);
-        setFormObject({...formObject, rating: rating})
-    }
-
-    const handleFormSubmit = event => {
+    const handleSubmit = event => {
         event.preventDefault();
         
         if (formObject.title && formObject.location) {
@@ -84,7 +85,7 @@ const Review = props => {
 
     const showReviewForm = () => {
         setModal(true);
-    }
+    };
 
     const closeReviewForm = () => {
         setModal(false);
@@ -128,7 +129,7 @@ const Review = props => {
                                 />
                                 <FormBtn
                                     disabled={!(formObject.title && formObject.location)}
-                                    onClick={handleFormSubmit}
+                                    onClick={handleSubmit}
                                     >
                                     Submit Review
                                 </FormBtn>
@@ -145,11 +146,17 @@ const Review = props => {
             )
         }
         </div>
-        <div className="review-button" style={styles.revBtn}>
-            <button  className="button is-link" onClick={showReviewForm}>Write a Review</button>
-        </div>
-        </>
-    ) 
+      <div className="review-button">
+        <button
+          href="review"
+          className="button is-link"
+          onClick={showReviewForm}
+        >
+          Write a Review
+        </button>
+      </div>
+    </>
+  );
 };
-  
+
 export default Review;

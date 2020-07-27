@@ -1,7 +1,7 @@
 import React from "react";
 import '../../App.css';
 
-const Input = props => {
+ const Password = props => {
 
   const {
     title,
@@ -16,7 +16,7 @@ const Input = props => {
       <label className="label">{title}</label>
       <div className="control">
           <input 
-            type="text"
+            type="password"
             className="input" 
             name={name} 
             value={value} 
@@ -29,4 +29,4 @@ const Input = props => {
   )
 };
 
-export default Input;
+export default Password;

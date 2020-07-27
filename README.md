@@ -1,3 +1,45 @@
+# Whats Happening
+
+A small web based app allowing a user to review and create quickinfo about locations they have visited.
+
+# Table of Contents
+
+- [User Story](#User%20Story)
+- [Build Status](#Build%20Status)
+- [Technology](#Code%20Style%20and%20Technology)
+- [Use](#Usage)
+- [Credits](#Credits)
+- [Notes](#Notes)
+- [Code Repository](#Code%20Repository)
+
+# User Story
+
+# Build Status
+
+Still in pre-production
+
+# Technology
+
+HTML, CSS, React, Bulma CSS, MapQuest
+
+# Use
+
+Visit the following URL to open the application.
+
+https://what-happenings.herokuapp.com/
+
+# Credits
+
+Richard Kessler
+Nicholas Romano
+Eddie Saunders
+Jason Vernot
+Tevin Ward
+
+# Notes
+
+# Code Repository
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
