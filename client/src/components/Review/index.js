@@ -76,9 +76,9 @@ const loadReviews = () => {
         }
     };
 
-  const showReviewForm = () => {
-    setModal(true);
-  };
+    const showReviewForm = () => {
+        setModal(true);
+    };
 
     const closeReviewForm = () => {
         setModal(false);
