@@ -12,6 +12,9 @@ const Contact = () => {
       <hr></hr>
       <h1 className="contactTitle">About and Contacts</h1>
       <hr></hr>
+      This app was created as part of the UNC Full Stack Developer Boot Camp
+      program. The following individuals contributed to this project:
+      <br></br>
       <ul>
         <li>
           <a href="https://github.com/RichardKessler" target="_blank">
@@ -39,6 +42,10 @@ const Contact = () => {
           </a>
         </li>
       </ul>
+      <hr></hr>
+      <a href="https://github.com/SaundersEddie/Happenings" target="_blank">
+        Link to github repository
+      </a>
       <hr></hr>
       <Footer />
     </>
