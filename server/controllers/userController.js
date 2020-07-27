@@ -1,4 +1,5 @@
 const db = require('../models');
+const bcrypt = require('bcryptjs')
 
 // Defining methods for the userController
 module.exports = {
@@ -25,48 +26,112 @@ module.exports = {
     }
   },
   updateUser: (req, res) => {
-    console.log('req.body.password: ', req.body.password);
     const { userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends} = req.body;
     if (req.user) {
 
-      if (password !== undefined) {
-        //Password Change:
+      if (userName === req.user.userName) {
+        //username was not changed:
+        //check to see if the user's password was changed:
+        if (password !== undefined) {
+          //Password Change:
+          const newPassword = bcrypt.hashSync(password, 10);
           db.User.update(
-          {
-            userName: req.user.userName
-          },
-          {
-            $set: {
-              userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends
+            //update user data:
+            {
+              userName: req.user.userName
+            },
+            {
+              $set: {
+                userName, firstName, lastName, userEmail, 
+                password: newPassword, 
+                profileImg, userInterest, friends
+              }
+            },
+            (error, data) => {
+              if (error) {
+                res.send(error);
+              } else {
+                res.send(data);
+              }
             }
-          },
-          (error, data) => {
-            if (error) {
-              res.send(error);
-            } else {
-              res.send(data);
+          );
+        } else {
+          //Password Unchanged:
+          db.User.update(
+            {
+              userName: req.user.userName
+            },
+            {
+              $set: {
+                userName, firstName, lastName, userEmail, profileImg, userInterest, friends
+              }
+            },
+            (error, data) => {
+              if (error) {
+                res.send(error);
+              } else {
+                res.send(data);
+              }
             }
-          }
-        );
+          );
+        }
       } else {
-        //Password Unchanged:
-        db.User.update(
-          {
-            userName: req.user.userName
-          },
-          {
-            $set: {
-              userName, firstName, lastName, userEmail, profileImg, userInterest, friends
-            }
-          },
-          (error, data) => {
-            if (error) {
-              res.send(error);
+        //username was changed, check if it already exists:
+        db.User.findOne({ userName: userName }, (err, userMatch) => {
+
+          //If a match was found, someone else has the same username, return an error:
+          if (userMatch) {
+            return res.json({
+              error: `Sorry, already a user with the username: ${userName}`
+            });
+          } else {
+            //If a match was not found, change ther user's username:
+            //check to see if the user's password was changed:
+            if (password !== undefined) {
+              //Password Change:
+              const newPassword = bcrypt.hashSync(password, 10);
+              db.User.update(
+                //update user data:
+                {
+                  userName: req.user.userName
+                },
+                {
+                  $set: {
+                    userName, firstName, lastName, userEmail, 
+                    password: newPassword, 
+                    profileImg, userInterest, friends
+                  }
+                },
+                (error, data) => {
+                  if (error) {
+                    res.send(error);
+                  } else {
+                    res.send(data);
+                  }
+                }
+              );
             } else {
-              res.send(data);
+              //Password Unchanged:
+              db.User.update(
+                {
+                  userName: req.user.userName
+                },
+                {
+                  $set: {
+                    userName, firstName, lastName, userEmail, profileImg, userInterest, friends
+                  }
+                },
+                (error, data) => {
+                  if (error) {
+                    res.send(error);
+                  } else {
+                    res.send(data);
+                  }
+                }
+              );
             }
           }
-        );
+        });
       }
 
     } else {
@@ -112,8 +177,8 @@ module.exports = {
     next();
   },
   authenticate: (req, res) => {
-    console.log('req:', req);
-    console.log('hit');
+    //console.log('req:', req);
+    //console.log('hit');
     const user = JSON.parse(JSON.stringify(req.user)); // hack
     const cleanUser = Object.assign({}, user);
     if (cleanUser) {

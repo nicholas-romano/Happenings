@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import LoginForm from './pages/Auth/LoginForm';
 import SignupForm from './pages/Auth/SignupForm';
 import AUTH from './utils/AUTH';
 import Nav from './components/Nav';
@@ -27,8 +27,17 @@ const styles = {
   }
 };
 function App() {
+
+  const { register, handleSubmit, errors } = useForm();
+
+  const [userObject, setUserObject] = useState({
+    userName: "",
+    password: "",
+  });
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+
   const history = useHistory();
   console.log('history:', history);
   console.log('loggedIn: ', loggedIn);
@@ -70,6 +79,8 @@ function App() {
         setUser(response.data.user);
         history.push('/feed');
       }
+    }).catch(err => {
+      console.log("err: ", err);
     });
   };
   console.log('loggedIn!!!:', loggedIn);
@@ -93,7 +104,16 @@ function App() {
           )}
           {!loggedIn && (
             <div className="auth-wrapper" style={{ paddingTop: 11 }}>
-              <Route exact path="/" component={() => <Landing login={login} />} />
+              <Route exact path="/" component={() => 
+                <Landing 
+                  login={login} 
+                  userObject={userObject} 
+                  setUserObject={setUserObject} 
+                  register={register}  
+                  handleSubmit={handleSubmit}
+                  errors={errors}
+                />
+              } />
               {/* <Route exact path="/feed" component={() => <LoginForm user={login} />} /> */}
               <Route exact path="/signup" component={SignupForm} />
             </div>

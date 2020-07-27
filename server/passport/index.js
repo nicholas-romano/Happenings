@@ -3,8 +3,8 @@ const LocalStrategy = require('./localStrategy');
 const db = require('../models');
 
 passport.serializeUser((user, done) => {
-  // console.log('Serialize called');
-  // console.log(user); // the whole raw user object!
+   //console.log('Serialize called');
+   //console.log(user); // the whole raw user object!
   done(null, { _id: user._id });
 });
 

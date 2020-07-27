@@ -37,6 +37,15 @@ function Landing(props) {
   const [user, setUser] = useState(null);
   const history = useHistory();
 
+  const {
+    login,
+    userObject,
+    setUserObject,
+    register,
+    handleSubmit,
+    errors
+  } = props;
+
   console.log('props landing: ', props);
 
   return (
@@ -45,7 +54,14 @@ function Landing(props) {
 
       <div className="columns is-gapless is-desktop">
         <div className="column is-two-thirds" style={styles.twothirds}>
-          <LoginForm login={props.login} />
+          <LoginForm 
+            login={login} 
+            userObject={userObject} 
+            setUserObject={setUserObject} 
+            register={register}  
+            handleSubmit={handleSubmit}
+            errors={errors}
+          />
         </div>
         <div className="column is-one-third" style={styles.onethird}>
           <DisplayMap />

@@ -13,10 +13,23 @@ const SettingsInput = props => {
         errors
     } = props;
 
+    let pattern;
+    let errMessage;
 
-    let isRequired = true;
-    if (label === 'Change Password:') {
-        isRequired = false;
+    switch(label) {
+        case "Username:":
+            pattern = /^[-\w]+$/;
+            errMessage = 'cannot contain special characters or spaces.';
+        break;
+        case "First Name:":
+        case "Last Name:":
+            pattern = /^[A-Za-z]+$/;
+            errMessage = 'cannot contain special characters, numbers, or spaces.';
+        break;
+        case "Email:":
+            pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})$/;
+            errMessage = 'invalid format';
+        break;
     }
 
     return (
@@ -32,9 +45,17 @@ const SettingsInput = props => {
                                 defaultValue={value}
                                 disabled={enableFields[label] ? false : true}
                                 onChange={e => setUserData({...userData, [label]: e.target.value})}
-                                ref={register({required: isRequired})}
+                                ref={register({required: true, minLength: 2, pattern: pattern})}
                             />
-                            {errors[label] && <p className="error">{label} field is required.</p>}
+                            {errors[label] && errors[label].type === "required" && 
+                                (<p className="error">{label} field is required.</p>)
+                            }
+                            {errors[label] && errors[label].type === "minLength" && 
+                                (<p className="error">{label} field must be at least 2 characters.</p>)
+                            }
+                            {errors[label] && errors[label].type === "pattern" && 
+                                (<p className="error">{label} {errMessage}</p>)
+                            }
                         </div>
                         <div className="column is-one-fifth">
                             <button onClick={() => enableEdit([label])} className="button is-link">

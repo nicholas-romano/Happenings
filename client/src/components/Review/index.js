@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { Input, Rating, TextArea, FormBtn } from '../Form';
 import ReviewPost from './ReviewPost';
 import API from "../../utils/API";
@@ -6,6 +7,9 @@ import AUTH from "../../utils/AUTH";
 import '../../App.css';
 
 const Review = props => {
+
+    const { register, handleSubmit, errors } = useForm();
+
     const [user, setUser] = useState({
         userName: '',
         firstName: '',
@@ -52,7 +56,7 @@ const Review = props => {
         setFormObject({...formObject, rating: rating})
     }
 
-    const handleFormSubmit = event => {
+    const onSubmit = event => {
         event.preventDefault();
         
         if (formObject.title && formObject.location) {
@@ -98,6 +102,8 @@ const Review = props => {
                                     title="Title"
                                     placeholder="Title (required)"
                                     value={formObject.title}
+                                    register={register}
+                                    errors={errors}
                                 />
                                 <TextArea
                                     onChange={handleInputChange}
@@ -105,6 +111,8 @@ const Review = props => {
                                     value={formObject.message}
                                     title="Message"
                                     placeholder="Message"
+                                    register={register}
+                                    errors={errors}
                                 />
                                 <Rating
                                     name="rating"
@@ -118,10 +126,12 @@ const Review = props => {
                                     title="Location"
                                     placeholder="Location (required)"
                                     value={formObject.location}
+                                    register={register}
+                                    errors={errors}
                                 />
                                 <FormBtn
                                     disabled={!(formObject.title && formObject.location)}
-                                    onClick={handleFormSubmit}
+                                    onClick={handleSubmit(onSubmit)}
                                     >
                                     Submit Review
                                 </FormBtn>

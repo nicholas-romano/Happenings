@@ -6,26 +6,21 @@ import { Input, FormBtn } from "../../components/Form";
 
 console.log('Inside our loginForm.js')
 
-function LoginForm({ login }) {
-  const [userObject, setUserObject] = useState({
-    userName: "",
-    password: "",
-  });
+function LoginForm({ login, userObject, setUserObject, register, handleSubmit, errors }) {
 
-  const handleChange = (event) => {
+  const handleInputChange = (event) => {
     setUserObject({
       ...userObject,
       [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = () => {
     login({
       userName: userObject.userName,
       password: userObject.password
     });
-  };
+  }
 
     return (
       <Container>
@@ -36,22 +31,26 @@ function LoginForm({ login }) {
               <form style={{ marginTop: 10, textAlign: 'left' }}>
                 <Input
                   type="text"
-                  title="Username"
                   name="userName"
+                  title="Username"
+                  onChange={handleInputChange}
                   value={userObject.userName}
-                  onChange={handleChange}
                   placeholder="Username"
+                  register={register}
+                  errors={errors}
                 />
                 <Input
                   type="password"
                   title="Password"
                   name="password"
                   value={userObject.password}
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                   placeholder="Password"
+                  register={register}
+                  errors={errors}
                 />
                 <Link to="/signup">Create Account</Link>
-                <FormBtn onClick={handleSubmit}>Login</FormBtn>
+                <FormBtn onClick={handleSubmit(onSubmit)}>Login</FormBtn>
               </form>
             </Card>
           </Col>
