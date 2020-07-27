@@ -7,6 +7,7 @@ const ProfileImage = props => {
         imageRef,
         enableFields,
         enableEdit,
+        setUserProfileImg,
         selectImgLink
     } = props;
 
@@ -31,11 +32,12 @@ const ProfileImage = props => {
                             <div>
                                 <label>Image link:</label>
                             </div>
-                            <div>
+                            <div className="img-link">
                                 <input className="input" type="text"
                                     placeholder="Image Link Input"
                                     defaultValue={profileImg} 
                                     disabled={enableFields.profileImg ? false : true}
+                                    onChange={() => setUserProfileImg(imageRef.current.value)}
                                     onFocus={() => selectImgLink()}
                                     ref={imageRef}
                                 />

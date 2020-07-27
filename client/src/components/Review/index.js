@@ -1,33 +1,35 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Input, Rating, TextArea, FormBtn } from "../Form";
+import Input from "../../components/Form/Input";
+import { Rating, TextArea, FormBtn } from "../Form";
 import ReviewPost from "./ReviewPost";
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
 import "../../App.css";
 
-const Review = (props) => {
-  const [user, setUser] = useState({
-    userName: "",
-    firstName: "",
-    lastName: "",
-  });
-  const [showModal, setModal] = useState(false);
-  const [formObject, setFormObject] = useState({
-    title: "",
-    message: "",
-    rating: 0,
-    location: "",
-  });
-  const [reviewRating, setRatings] = useState(0);
-  const formEl = useRef(null);
-  const [reviews, setReviews] = useState([]);
+const Review = props => {
+
+    const [user, setUser] = useState({
+        userName: '',
+        firstName: '',
+        lastName: ''
+    });
+    const [showModal, setModal] = useState(false);
+    const [formObject, setFormObject] = useState({
+        title: '',
+        message: '',
+        rating: 0,
+        location: ''
+    });
+    const [reviewRating, setRatings] = useState(0);
+    const formEl = useRef(null);
+    const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     AUTH.getUser()
       .then((res) => {
         const { userName, firstName, lastName } = res.data.user;
         setUser({ userName, firstName, lastName });
-        loadReviews();
+        return loadReviews();
       })
       .catch((err) => console.log(err));
   }, []);
@@ -38,10 +40,10 @@ const Review = (props) => {
     setFormObject({ ...formObject, [name]: value });
   };
 
-  const loadReviews = () => {
+const loadReviews = () => {
     API.getReviews()
-      .then((res) => {
-        setReviews(res.data);
+      .then(res => {  
+        return setReviews(res.data);
       })
       .catch((err) => console.log("err ", err));
   };
@@ -51,96 +53,92 @@ const Review = (props) => {
     setFormObject({ ...formObject, rating: rating });
   };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+    const handleSubmit = event => {
+        event.preventDefault();
+        
+        if (formObject.title && formObject.location) {
+            API.saveReview({
+                reviewOwner: user.userName,
+                reviewCreated: Date.now(),
+                reviewTitle: formObject.title,
+                reviewBody: formObject.message,
+                reviewRating: formObject.rating,
+                reviewLocation: formObject.location
+            })
+            .then(res => {
+                formEl.current.reset();
+                setRatings(0);
+                setFormObject({rating: 0});
+                closeReviewForm();
+                loadReviews();
+            })
+            .catch(err => console.log(err));
+        }
+    };
 
-    if (formObject.title && formObject.location) {
-      API.saveReview({
-        reviewOwner: user.userName,
-        reviewCreated: Date.now(),
-        reviewTitle: formObject.title,
-        reviewBody: formObject.message,
-        reviewRating: formObject.rating,
-        reviewLocation: formObject.location,
-      })
-        .then((res) => {
-          formEl.current.reset();
-          setRatings(0);
-          setFormObject({ rating: 0 });
-          closeReviewForm();
-          loadReviews();
-        })
-        .catch((err) => console.log(err));
+    const showReviewForm = () => {
+        setModal(true);
+    };
+
+    const closeReviewForm = () => {
+        setModal(false);
     }
-  };
 
-  const showReviewForm = () => {
-    setModal(true);
-  };
-
-  const closeReviewForm = () => {
-    setModal(false);
-  };
-
-  return (
-    <>
-      <div
-        className={showModal ? "is-active modal" : "modal"}
-        id="review-modal"
-      >
-        <div className="modal-background"></div>
-        <div className="modal-content">
-          <div className="form">
-            <h2>Write a Review</h2>
-            <form ref={formEl}>
-              <Input
-                onChange={handleInputChange}
-                type="text"
-                name="title"
-                title="Title"
-                placeholder="Title (required)"
-                value={formObject.title}
-              />
-              <TextArea
-                onChange={handleInputChange}
-                name="message"
-                value={formObject.message}
-                title="Message"
-                placeholder="Message"
-              />
-              <Rating
-                name="rating"
-                reviewRating={reviewRating}
-                handleRatingChange={handleRatingChange}
-              />
-              <Input
-                onChange={handleInputChange}
-                type="text"
-                name="location"
-                title="Location"
-                placeholder="Location (required)"
-                value={formObject.location}
-              />
-              <FormBtn
-                disabled={!(formObject.title && formObject.location)}
-                onClick={handleFormSubmit}
-              >
-                Submit Review
-              </FormBtn>
-            </form>
-          </div>
+    return (
+        <>
+        <div className={showModal ? 'is-active modal' : 'modal'} id="review-modal">
+            <div className="modal-background"></div>
+                <div className="modal-content">
+                    <div className="form">
+                        <h2>Write a Review</h2>
+                            <form ref={formEl}>
+                                <Input
+                                    onChange={handleInputChange}
+                                    type="text"
+                                    name="title"
+                                    title="Title"
+                                    placeholder="Title (required)"
+                                    value={formObject.title}
+                                />
+                                <TextArea
+                                    onChange={handleInputChange}
+                                    name="message"
+                                    value={formObject.message}
+                                    title="Message"
+                                    placeholder="Message"
+                                />
+                                <Rating
+                                    name="rating"
+                                    reviewRating={reviewRating}
+                                    handleRatingChange={handleRatingChange}
+                                />
+                                <Input
+                                    onChange={handleInputChange}
+                                    type="text"
+                                    name="location"
+                                    title="Location"
+                                    placeholder="Location (required)"
+                                    value={formObject.location}
+                                />
+                                <FormBtn
+                                    disabled={!(formObject.title && formObject.location)}
+                                    onClick={handleSubmit}
+                                    >
+                                    Submit Review
+                                </FormBtn>
+                            </form>
+                    </div>
+                </div>
+            <button className="modal-close is-large" aria-label="close" onClick={closeReviewForm}></button>
         </div>
-        <button
-          className="modal-close is-large"
-          aria-label="close"
-          onClick={closeReviewForm}
-        ></button>
-      </div>
-      <div className="review-posts">
-        {reviews.map((post, index) => {
-          return <ReviewPost key={index} post={post} />;
-        })}
-      </div>
+        <div className="review-posts">
+        {
+            reviews.map((post, index) => {
+                return <ReviewPost key={index} post={post} />
+            }   
+            )
+        }
+        </div>
       <div className="review-button">
         <button
           href="review"

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import LoginForm from "./pages/Auth/LoginForm";
 import SignupForm from "./pages/Auth/SignupForm";
 import AUTH from "./utils/AUTH";
 import Nav from "./components/Nav";
@@ -16,22 +15,25 @@ import Friends from "./pages/Friends/Friends";
 import "react-bulma-components/dist/react-bulma-components.min.css";
 import "./App.css";
 
-console.log(AUTH);
-const styles = {
-  twothirds: {
-    paddingBottom: 10,
-    backgroundColor: "rgba(183, 209, 218, 1)",
-  },
-  onethird: {
-    backgroundColor: "rgba(163, 124, 64, 1)",
-  },
-  back: {
-    backgroundColor: "rgba(42, 45, 52, 1)",
-  },
-};
 function App() {
+
+  const styles = {
+    twothirds: {
+      paddingBottom: 10,
+      backgroundColor: "rgba(183, 209, 218, 1)",
+    },
+    onethird: {
+      backgroundColor: "rgba(163, 124, 64, 1)",
+    },
+    back: {
+      backgroundColor: "rgba(42, 45, 52, 1)",
+    },
+  };
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
+  const [loginErr, setLoginErr] = useState('');
+
   const history = useHistory();
   console.log("history:", history);
   console.log("loggedIn: ", loggedIn);
@@ -76,12 +78,14 @@ function App() {
         setUser(response.data.user);
         history.push("/feed");
       }
+    }).catch(err => {
+      console.log("err: ", err);
+      setLoginErr('Invalid username and password combination.')
     });
   };
   console.log("loggedIn!!!:", loggedIn);
   return (
     <div className="App" style={styles.back}>
-      {/* <Hero /> */}
       <div className="columns is-gapless is-desktop">
         <div className="column is-full" style={styles.twothirds}>
           {loggedIn && (
@@ -101,33 +105,16 @@ function App() {
           )}
           {!loggedIn && (
             <div className="auth-wrapper" style={{ paddingTop: 11 }}>
-              <Route
-                exact
-                path="/"
-                component={() => <Landing login={login} />}
-              />
+              <Route exact path="/" component={() => <Landing login={login} loginErr={loginErr} />
+              } />
               {/* <Route exact path="/feed" component={() => <LoginForm user={login} />} /> */}
               <Route exact path="/signup" component={SignupForm} />
             </div>
           )}
         </div>
-
-        {/* <div className='column is-one-third' style={styles.onethird}>
-          <div className='field'>
-            <div className='control'>
-              <input className='input' type='text' placeholder='Input' />
-            </div>
-          </div>
-        </div>
-        <div className='column is-one-third' style={styles.onethird}>
-          <div className='field'>
-            <div className='control'>
-              <Review />
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
-  );
+  )
 }
+
 export default App;

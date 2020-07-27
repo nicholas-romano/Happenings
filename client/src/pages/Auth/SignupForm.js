@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
-import { Input, FormBtn } from "../../components/Form";
+import Input from "../../components/Form/Input";
+import Email from "../../components/Form/Email";
+import Password from "../../components/Form/Password";
+import { FormBtn } from "../../components/Form";
 import AUTH from "../../utils/AUTH";
 
-console.log('Inside our signupForm.js')
-
 function SignupForm() {
-  console.log('Signup Form Loaded')
 
   const [userObject, setUserObject] = useState({
     firstName: "",
@@ -44,7 +44,7 @@ function SignupForm() {
       } else {
         console.log("duplicate");
       }
-    });
+      });
   };
 
   if (redirectTo) {
@@ -57,9 +57,8 @@ function SignupForm() {
         <Col size="md-3"></Col>
         <Col size="md-6">
           <Card title="Create your Happenings Account">
-            <form style={{ marginTop: 10, textAlign: 'left' }}>
+            <form  style={{ marginTop: 10, textAlign: 'left' }}>
               <Input
-                type="text"
                 name="firstName"
                 title="First Name"
                 onChange={handleInputChange}
@@ -67,15 +66,13 @@ function SignupForm() {
                 placeholder="First Name"
               />
               <Input
-                type="text"
                 name="lastName"
                 title="Last Name"
                 onChange={handleInputChange}
                 value={userObject.lastName}
                 placeholder="Last Name"
               />
-               <Input
-                type="email"
+               <Email
                 name="email"
                 title="Email"
                 onChange={handleInputChange}
@@ -90,15 +87,14 @@ function SignupForm() {
                 value={userObject.username}
                 placeholder="Username"
               />
-              <Input
-                type="password"
+              <Password
                 name="password"
                 title="Password"
                 onChange={handleInputChange}
                 value={userObject.password}
                 placeholder="Password"
               />
-              <Input
+              <Password
                 type="password"
                 name="confirmPassword"
                 title="Confirm Password"

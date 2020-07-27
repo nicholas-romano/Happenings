@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import placesAPI from "../../utils/placesAPI";
-import { Input, FormBtn } from "../../components/Form";
+import Input from '../../components/Form/Input';
+import { FormBtn } from "../../components/Form";
 
 function LocationSearch() {
   const [locationState, setLocationState] = useState({
