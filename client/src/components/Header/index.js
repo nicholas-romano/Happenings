@@ -34,9 +34,9 @@ const Header = () => {
           <a href="feed" className="navbar-item">
             Home
           </a>
-          <a href="friends" className="navbar-item">
+          <Link to="/friends" className="navbar-item">
             Friends
-          </a>
+          </Link>
           <div className="navbar-item has-dropdown is-hoverable">
             <a href="feed" className="navbar-link">
               Account
