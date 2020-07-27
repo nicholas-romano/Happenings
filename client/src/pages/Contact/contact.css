@@ -7,5 +7,6 @@ body {
 .contactTitle {
   font-weight: bold;
   font-size: larger;
-  color: violet;
+  /* color: violet; */
+  vertical-align: middle;
 }
