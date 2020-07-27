@@ -44,10 +44,6 @@ const reviewsSchema = new Schema({
     type: Array,
     required: false,
   },
-  reviewTestField: {
-    type: String,
-    required: true,
-  },
 });
 
 const Reviews = mongoose.model("Reviews", reviewsSchema);
