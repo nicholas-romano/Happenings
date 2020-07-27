@@ -64,8 +64,11 @@ function App() {
       }
     });
   };
-  const login = (username, password) => {
-    AUTH.login(username, password).then((response) => {
+// EXS 27th July possible conflict, commented out next two lines
+//  const login = (username, password) => {
+//    AUTH.login(username, password).then((response) => {
+  const login = (userData) => {
+    AUTH.login(userData).then((response) => {
       console.log("Our user has logged in:", response.data);
       if (response.status === 200) {
         // update the state

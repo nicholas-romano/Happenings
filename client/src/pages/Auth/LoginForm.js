@@ -11,7 +11,6 @@ function LoginForm({ login }) {
     userName: "",
     password: "",
   });
-  // const [redirectTo, setRedirectTo] = useState(null);
 
   const handleChange = (event) => {
     setUserObject({
@@ -26,12 +25,8 @@ function LoginForm({ login }) {
       userName: userObject.userName,
       password: userObject.password
     });
-    // setRedirectTo("/");
   };
 
-  // if (redirectTo) {
-  //   return <Redirect to={{ pathname: redirectTo }} />;
-  // } else {
     return (
       <Container>
         <Row>
@@ -43,7 +38,7 @@ function LoginForm({ login }) {
                   type="text"
                   title="Username"
                   name="userName"
-                  value={userObject.username}
+                  value={userObject.userName}
                   onChange={handleChange}
                   placeholder="Username"
                 />
@@ -65,6 +60,5 @@ function LoginForm({ login }) {
       </Container>
     );
   }
-// }
 
 export default LoginForm;
