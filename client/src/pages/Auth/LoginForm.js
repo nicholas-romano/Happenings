@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
-import { Input, FormBtn } from "../../components/Form";
+import Input from "../../components/Form/Input";
+import Password from "../../components/Form/Password";
+import { FormBtn } from "../../components/Form";
 
 console.log('Inside our loginForm.js')
 
-function LoginForm({ login, userObject, setUserObject, register, handleSubmit, errors }) {
+function LoginForm({ login, loginErr }) {
+
+  console.log('loginErr: ', loginErr);
+
+  const [userObject, setUserObject] = useState({
+    userName: "",
+    password: "",
+  });
 
   const handleInputChange = (event) => {
     setUserObject({
@@ -15,11 +24,20 @@ function LoginForm({ login, userObject, setUserObject, register, handleSubmit, e
     });
   };
 
-  const onSubmit = () => {
+  const handleSubmit = event => {
+    event.preventDefault();
     login({
       userName: userObject.userName,
       password: userObject.password
     });
+  }
+
+  const checkForError = () => {
+    if (loginErr !== '') {
+      return <p className="error">{loginErr}</p>
+    } else {
+      return;
+    }
   }
 
     return (
@@ -29,28 +47,25 @@ function LoginForm({ login, userObject, setUserObject, register, handleSubmit, e
           <Col size="md-6">
             <Card title="Login to the Happenings App!">
               <form style={{ marginTop: 10, textAlign: 'left' }}>
+                {
+                  checkForError()
+                }
                 <Input
-                  type="text"
                   name="userName"
                   title="Username"
                   onChange={handleInputChange}
                   value={userObject.userName}
                   placeholder="Username"
-                  register={register}
-                  errors={errors}
                 />
-                <Input
-                  type="password"
+                <Password
                   title="Password"
                   name="password"
                   value={userObject.password}
                   onChange={handleInputChange}
                   placeholder="Password"
-                  register={register}
-                  errors={errors}
                 />
                 <Link to="/signup">Create Account</Link>
-                <FormBtn onClick={handleSubmit(onSubmit)}>Login</FormBtn>
+                <FormBtn onClick={handleSubmit}>Login</FormBtn>
               </form>
             </Card>
           </Col>

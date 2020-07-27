@@ -4,7 +4,8 @@ import API from "../../utils/API";
 
 const ReviewPost = props => {
 
-    const { reviewOwner,
+        const { 
+            reviewOwner,
             reviewTitle, 
             reviewBody,
             reviewRating, 
@@ -13,23 +14,34 @@ const ReviewPost = props => {
             reviewComments
           } = props.post;
 
-    const [postOwner, setPostOwner] = useState('');
+          const [profileImg, setProfileImg] = useState('');
+          const [postOwner, setPostOwner] = useState('');
 
-    useEffect(() => {
-        getOwnerName(reviewOwner);
-    }, []);
+          useEffect(() => {
+            getReviewPhoto(reviewOwner);
+          }, [])
 
-    const getOwnerName = ownerUserName => {
-        //get Review Owner name:
-        API.getReviewOwner(ownerUserName)
-        .then(res => {
-            const firstName = res.data[0].firstName;
-            const lastName = res.data[0].lastName;
-            const ownerName = `${firstName} ${lastName}`;
-            setPostOwner(ownerName);
-        })
-        .catch(err => console.log(err));
-    }
+        const getReviewPhoto = reviewOwner => {
+            API.getUserInfo(reviewOwner)
+            .then(res => {
+                const profilePhoto = res.data[0].profileImg;
+                setProfileImg(profilePhoto);
+                return getOwnerName(reviewOwner)
+            })
+            .catch(err => console.log(err));
+        }  
+        
+        const getOwnerName = reviewOwner => {
+            //get Review Owner name:
+            API.getReviewOwner(reviewOwner)
+            .then(res => {
+                const firstName = res.data[0].firstName;
+                const lastName = res.data[0].lastName;
+                const ownerName = `${firstName} ${lastName}`;
+                setPostOwner(ownerName);
+            })
+            .catch(err => console.log(err));
+        }
 
     return (
         <div className="review-post">
@@ -38,7 +50,7 @@ const ReviewPost = props => {
                     <div className="media">
                     <div className="media-left">
                         <figure className="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/96x96.png" alt={reviewOwner} />
+                            <img src={(profileImg !== "") ? profileImg : "https://bulma.io/images/placeholders/96x96.png"} alt={postOwner} />
                         </figure>
                     </div>
                     <div className="media-content">

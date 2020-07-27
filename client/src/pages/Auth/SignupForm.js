@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useForm } from 'react-hook-form';
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
-import { Input, FormBtn } from "../../components/Form";
+import Input from "../../components/Form/Input";
+import Email from "../../components/Form/Email";
+import Password from "../../components/Form/Password";
+import { FormBtn } from "../../components/Form";
 import AUTH from "../../utils/AUTH";
 
 function SignupForm() {
-
-  const { register, handleSubmit, errors } = useForm();
 
   const [userObject, setUserObject] = useState({
     firstName: "",
@@ -26,7 +26,7 @@ function SignupForm() {
     setUserObject({...userObject, [name]: value})
   };
 
-  const onSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     // TODO - validate!
     AUTH.signup({
@@ -59,34 +59,25 @@ function SignupForm() {
           <Card title="Create your Happenings Account">
             <form  style={{ marginTop: 10, textAlign: 'left' }}>
               <Input
-                type="text"
                 name="firstName"
                 title="First Name"
                 onChange={handleInputChange}
                 value={userObject.firstName}
                 placeholder="First Name"
-                register={register}
-                errors={errors}
               />
               <Input
-                type="text"
                 name="lastName"
                 title="Last Name"
                 onChange={handleInputChange}
                 value={userObject.lastName}
                 placeholder="Last Name"
-                register={register}
-                errors={errors}
               />
-               <Input
-                type="email"
+               <Email
                 name="email"
                 title="Email"
                 onChange={handleInputChange}
                 value={userObject.email}
                 placeholder="Email"
-                register={register}
-                errors={errors}
               />
               <Input
                 type="text"
@@ -95,31 +86,24 @@ function SignupForm() {
                 onChange={handleInputChange}
                 value={userObject.username}
                 placeholder="Username"
-                register={register}
-                errors={errors}
               />
-              <Input
-                type="password"
+              <Password
                 name="password"
                 title="Password"
                 onChange={handleInputChange}
                 value={userObject.password}
                 placeholder="Password"
-                register={register}
-                errors={errors}
               />
-              <Input
+              <Password
                 type="password"
                 name="confirmPassword"
                 title="Confirm Password"
                 onChange={handleInputChange}
                 value={userObject.confirmPassword}
                 placeholder="Confirm Password"
-                register={register}
-                errors={errors}
               />
               <Link to="/">Login</Link>
-              <FormBtn onClick={handleSubmit(onSubmit)}>Register</FormBtn>
+              <FormBtn onClick={handleSubmit}>Register</FormBtn>
             </form>
           </Card>
         </Col>

@@ -6,8 +6,6 @@ export const TextArea = props => {
     title,
     name,
     value,
-    register,
-    errors,
     placeholder,
     onChange
   } = props;
@@ -22,16 +20,9 @@ export const TextArea = props => {
           value={value} 
           onChange={onChange} 
           placeholder={placeholder}
-          ref={register({minLength: 2, pattern: /^[-'"_\w\s!@#$%^&*]+$/})}
         >
         </textarea>
-      </div>
-      {errors[name] && errors[name].type === "minLength" && 
-          (<p className="error">{title} field must be at least 2 characters.</p>)
-      }
-      {errors[name] && errors[name].type === "pattern" && 
-          (<p className="error">{title} contains invalid characters.</p>)
-      }                        
+      </div>        
     </div>
   );
 };

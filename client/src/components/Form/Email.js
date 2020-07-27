@@ -1,7 +1,7 @@
 import React from "react";
 import '../../App.css';
 
-const Input = props => {
+const Email = props => {
 
   const {
     title,
@@ -16,17 +16,16 @@ const Input = props => {
       <label className="label">{title}</label>
       <div className="control">
           <input 
-            type="text"
+            type="email"
             className="input" 
             name={name} 
             value={value} 
             onChange={onChange} 
             placeholder={placeholder}
           />
-      </div>
-                          
+      </div>                    
     </div>
   )
 };
 
-export default Input;
+export default Email;

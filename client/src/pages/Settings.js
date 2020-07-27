@@ -15,6 +15,7 @@ const Settings = () => {
 
     const imageRef = useRef();
     const newInterest = useRef();
+    const [showModal, setModal] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const [userData, setUserData] = useState({
         "Username:": '',
@@ -147,7 +148,8 @@ const Settings = () => {
             console.log('updatedUser: ', updatedUser);
 
             API.updateUser(updatedUser).then(res => {
-                console.log('res: ', res)
+                console.log('res: ', res);
+                showSaveConfirmation();
             }).catch(err => {
                 console.log('err: ', err)
             });
@@ -168,19 +170,43 @@ const Settings = () => {
             console.log('updatedUser: ', updatedUser);
 
             API.updateUser(updatedUser).then(res => {
-                console.log('res: ', res)
+                console.log('res: ', res);
+                showSaveConfirmation();
             }).catch(err => {
                 console.log('err: ', err)
             });
         }
-
         
+    }
+
+    const showSaveConfirmation = () => {
+        setModal(true);
+    };
+
+    const closeSaveConfirmation = () => {
+        setModal(false);
     }
 
     const userDataEntries = Object.entries(userData);
 
     return (
         <>
+        <div className={showModal ? 'is-active modal' : 'modal'}>
+            <div className="modal-background"></div>
+                <div className="modal-card">
+                    <header className="modal-card-head">
+                        <p className="modal-card-title">Save Successful</p>
+                        <button className="delete" aria-label="close" onClick={closeSaveConfirmation}></button>
+                    </header>
+                    <section className="modal-card-body">
+                        <p>Your account changes have been saved successfully.</p>
+                    </section>
+                    <footer className="modal-card-foot">
+                        <button className="button is-success" onClick={closeSaveConfirmation}>OK</button>
+                    </footer>
+                </div>
+            <button className="modal-close is-large" aria-label="close" onClick={closeSaveConfirmation}></button>
+        </div>
         <Header />
         <section className="section settings">
             <div className="container">
