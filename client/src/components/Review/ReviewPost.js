@@ -1,47 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import StaticRating from './StaticRating';
+import React, { useEffect, useState } from "react";
+import StaticRating from "./StaticRating";
 import API from "../../utils/API";
 
-const ReviewPost = props => {
+const ReviewPost = (props) => {
+  const {
+    reviewOwner,
+    reviewTitle,
+    reviewBody,
+    reviewRating,
+    reviewLocation,
+    reviewCreated,
+    reviewComments,
+  } = props.post;
 
-        const { 
-            reviewOwner,
-            reviewTitle, 
-            reviewBody,
-            reviewRating, 
-            reviewLocation,
-            reviewCreated,
-            reviewComments
-          } = props.post;
+    const [profileImg, setProfileImg] = useState('');
+    const [postOwner, setPostOwner] = useState('');
 
-          const [profileImg, setProfileImg] = useState('');
-          const [postOwner, setPostOwner] = useState('');
+    useEffect(() => {
+        getReviewPhoto(reviewOwner);
+    }, [])
 
-          useEffect(() => {
-            getReviewPhoto(reviewOwner);
-          }, [])
-
-        const getReviewPhoto = reviewOwner => {
-            API.getUserInfo(reviewOwner)
-            .then(res => {
-                const profilePhoto = res.data[0].profileImg;
-                setProfileImg(profilePhoto);
-                return getOwnerName(reviewOwner)
-            })
-            .catch(err => console.log(err));
-        }  
+    const getReviewPhoto = reviewOwner => {
+        API.getUserInfo(reviewOwner)
+        .then(res => {
+            const profilePhoto = res.data[0].profileImg;
+            setProfileImg(profilePhoto);
+            return getOwnerName(reviewOwner)
+        })
+        .catch(err => console.log(err));
+    }  
         
-        const getOwnerName = reviewOwner => {
-            //get Review Owner name:
-            API.getReviewOwner(reviewOwner)
-            .then(res => {
-                const firstName = res.data[0].firstName;
-                const lastName = res.data[0].lastName;
-                const ownerName = `${firstName} ${lastName}`;
-                setPostOwner(ownerName);
-            })
-            .catch(err => console.log(err));
-        }
+    const getOwnerName = reviewOwner => {
+        //get Review Owner name:
+        API.getReviewOwner(reviewOwner)
+        .then(res => {
+            const firstName = res.data[0].firstName;
+            const lastName = res.data[0].lastName;
+            const ownerName = `${firstName} ${lastName}`;
+            setPostOwner(ownerName);
+        })
+        .catch(err => console.log(err));
+    }
 
     return (
         <div className="review-post">
@@ -68,7 +67,7 @@ const ReviewPost = props => {
                 </div>
             </div>
         </div>
-    );
+  );
 };
 
 export default ReviewPost;

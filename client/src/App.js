@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import SignupForm from './pages/Auth/SignupForm';
-import AUTH from './utils/AUTH';
-import Nav from './components/Nav';
-import NoMatch from './pages/NoMatch';
-import Feed from './pages/Feed';
-import Review from './components/Review';
-import Landing from './pages/MainPages/Landing';
-import Settings from './pages/Settings'
+import React, { useState, useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
+import SignupForm from "./pages/Auth/SignupForm";
+import AUTH from "./utils/AUTH";
+import Nav from "./components/Nav";
+import NoMatch from "./pages/NoMatch";
+import Feed from "./pages/Feed";
+import Review from "./components/Review";
+import Landing from "./pages/MainPages/Landing";
+import Settings from "./pages/Settings";
+import Contact from "./pages/Contact/Contact";
+import Friends from "./pages/Friends/Friends";
+
 // EXS 16th July 2020 - Added in bulma calls
 import "react-bulma-components/dist/react-bulma-components.min.css";
 import "./App.css";
@@ -63,6 +66,9 @@ function App() {
       }
     });
   };
+// EXS 27th July possible conflict, commented out next two lines
+//  const login = (username, password) => {
+//    AUTH.login(username, password).then((response) => {
   const login = (userData) => {
     AUTH.login(userData).then((response) => {
       console.log("Our user has logged in:", response.data);
@@ -90,6 +96,8 @@ function App() {
                   <Route exact path="/feed" component={Feed} />
                   <Route exact path="/review" component={Review} />
                   <Route exact path="/settings" component={Settings} />
+                  <Route exact path="/contact" component={Contact} />
+                  <Route exact path="/friends" component={Friends} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>
