@@ -16,7 +16,6 @@ import "react-bulma-components/dist/react-bulma-components.min.css";
 import "./App.css";
 
 function App() {
-
   const styles = {
     twothirds: {
       paddingBottom: 10,
@@ -32,7 +31,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [loginErr, setLoginErr] = useState('');
+  const [loginErr, setLoginErr] = useState("");
 
   const history = useHistory();
   console.log("history:", history);
@@ -66,22 +65,24 @@ function App() {
       }
     });
   };
-// EXS 27th July possible conflict, commented out next two lines
-//  const login = (username, password) => {
-//    AUTH.login(username, password).then((response) => {
+  // EXS 27th July possible conflict, commented out next two lines
+  //  const login = (username, password) => {
+  //    AUTH.login(username, password).then((response) => {
   const login = (userData) => {
-    AUTH.login(userData).then((response) => {
-      console.log("Our user has logged in:", response.data);
-      if (response.status === 200) {
-        // update the state
-        setLoggedIn(true);
-        setUser(response.data.user);
-        history.push("/feed");
-      }
-    }).catch(err => {
-      console.log("err: ", err);
-      setLoginErr('Invalid username and password combination.')
-    });
+    AUTH.login(userData)
+      .then((response) => {
+        console.log("Our user has logged in:", response.data);
+        if (response.status === 200) {
+          // update the state
+          setLoggedIn(true);
+          setUser(response.data.user);
+          history.push("/feed");
+        }
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+        setLoginErr("Invalid username and password combination.");
+      });
   };
   console.log("loggedIn!!!:", loggedIn);
   return (
@@ -105,8 +106,11 @@ function App() {
           )}
           {!loggedIn && (
             <div className="auth-wrapper" style={{ paddingTop: 11 }}>
-              <Route exact path="/" component={() => <Landing login={login} loginErr={loginErr} />
-              } />
+              <Route
+                exact
+                path="/"
+                component={() => <Landing login={login} loginErr={loginErr} />}
+              />
               {/* <Route exact path="/feed" component={() => <LoginForm user={login} />} /> */}
               <Route exact path="/signup" component={SignupForm} />
             </div>
@@ -114,7 +118,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default App;
