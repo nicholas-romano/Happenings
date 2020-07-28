@@ -40,10 +40,6 @@ const reviewsSchema = new Schema({
     type: Array,
     required: false,
   },
-  reviewComments: {
-    type: Array,
-    required: false,
-  },
 });
 
 const Reviews = mongoose.model("Reviews", reviewsSchema);
