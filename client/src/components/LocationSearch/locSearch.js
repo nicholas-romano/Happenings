@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 
-import placesAPI from "../../utils/placesAPI";
 import Input from "../../components/Form/Input";
 import { FormBtn } from "../../components/Form";
 

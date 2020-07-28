@@ -49,6 +49,10 @@ const Review = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    console.log("reviews: ", reviews);
+  }, [reviews]);
+
   // Handles updating component state when the user types into the input field
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -134,9 +138,8 @@ const Review = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("location state in review", locationState);
-
     if (formObject.title && formObject.location) {
+      console.log("formObject: ", formObject);
       API.saveReview({
         reviewOwner: user.userName,
         reviewCreated: Date.now(),
@@ -146,6 +149,11 @@ const Review = (props) => {
         reviewLocation: formObject.location,
         reviewLat: locationState.locationCoords.lat,
         reviewLong: locationState.locationCoords.long,
+        reviewGeoLocation: [
+          locationState.locationCoords.lat,
+          locationState.locationCoords.long,
+        ],
+        reviewComments: ["Comment1", "Comment2"],
       })
         .then((res) => {
           formEl.current.reset();
@@ -165,6 +173,14 @@ const Review = (props) => {
   const closeReviewForm = () => {
     setModal(false);
   };
+
+  //   const showReviewForm = () => {
+  //     setModal(true);
+  //   };
+
+  //   const closeReviewForm = () => {
+  //     setModal(false);
+  //   };
 
   return (
     <>

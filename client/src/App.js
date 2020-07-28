@@ -111,7 +111,6 @@ function App() {
                 path="/"
                 component={() => <Landing login={login} loginErr={loginErr} />}
               />
-              {/* <Route exact path="/feed" component={() => <LoginForm user={login} />} /> */}
               <Route exact path="/signup" component={SignupForm} />
             </div>
           )}
