@@ -82,7 +82,7 @@ function LocationSearch(props) {
   //     },
   //   });
   // };
-  console.log("Props", props);
+  // console.log("Props", props);
   if (!props.locationState) return null;
   return (
     <div>

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import BreweryData from "../../data/breweries.json";
+import "./newMap.css";
+import API from "../../utils/API";
 
 function NewMap() {
   const [viewport, setViewport] = useState({
@@ -8,15 +10,22 @@ function NewMap() {
     height: 400,
     latitude: 35.7796,
     longitude: -78.6382,
-    zoom: 8,
+    zoom: 10,
   });
 
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  useEffect(() => {
+    API.getReviews().then((res) => {
+      console.log("Review Response!!!", res);
+    });
+  });
 
   return (
     <ReactMapGL
       {...viewport}
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      mapStyle="mapbox://styles/jvernot/ckd5e6xwf0ixv1iqp99qprvr4"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
     >
       {BreweryData.items.map((brewery) => (
@@ -26,12 +35,14 @@ function NewMap() {
           longitude={brewery.position.lng}
         >
           <button
+            className="marker-btn"
             onClick={(event) => {
               event.preventDefault();
               setSelectedEvent(brewery);
             }}
           >
-            <img src="/beer.svg" alt="Brewery Icon" />
+            <img src="/HapLogoIcon.png" alt="Location Icon" />
+            {/* <i class="fas fa-map-marker-alt"></i> */}
           </button>
         </Marker>
       ))}
