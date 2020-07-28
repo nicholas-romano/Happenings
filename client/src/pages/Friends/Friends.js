@@ -12,7 +12,6 @@ const Friends = () => {
   return (
     <>
       <Header />
-      <h1>Our friends stuff</h1>
       <FriendsList />
       <Footer />
     </>
