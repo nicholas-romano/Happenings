@@ -17,30 +17,23 @@ const ReviewPost = (props) => {
     const [postOwner, setPostOwner] = useState('');
 
     useEffect(() => {
-        getReviewPhoto(reviewOwner);
+        getReviewOwnerDetails(reviewOwner);
     }, [])
 
-    const getReviewPhoto = reviewOwner => {
+    const getReviewOwnerDetails = reviewOwner => {
         API.getUserInfo(reviewOwner)
         .then(res => {
+            console.log('res: ', res);
             const profilePhoto = res.data[0].profileImg;
             setProfileImg(profilePhoto);
-            return getOwnerName(reviewOwner)
-        })
-        .catch(err => console.log(err));
-    }  
-        
-    const getOwnerName = reviewOwner => {
-        //get Review Owner name:
-        API.getReviewOwner(reviewOwner)
-        .then(res => {
+
             const firstName = res.data[0].firstName;
             const lastName = res.data[0].lastName;
             const ownerName = `${firstName} ${lastName}`;
             setPostOwner(ownerName);
         })
         .catch(err => console.log(err));
-    }
+    }  
 
     return (
         <div className="review-post">
