@@ -14,8 +14,23 @@ module.exports = {
         }
     },
     create: function (req, res) {
+      console.log('review submitted: ', req.body);
+      const { reviewOwner, reviewCreated, reviewTitle, reviewBody, reviewRating, 
+              reviewLocation, reviewLat, reviewLong, reviewGeoLocation, 
+              reviewComments } = req.body;
         if (req.user) {
-            db.Reviews.create(req.body)
+            db.Reviews.create({
+                reviewOwner, 
+                reviewCreated,
+                reviewTitle,
+                reviewBody,
+                reviewRating,
+                reviewLocation,
+                reviewLat,
+                reviewLong,
+                reviewGeoLocation,
+                reviewComments
+            })
             .then(dbReview => {
                 res.json(dbReview);
             })

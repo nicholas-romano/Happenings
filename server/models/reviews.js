@@ -28,10 +28,6 @@ const reviewsSchema = new Schema({
     type: String,
     required: true,
   },
-  reviewComments: {
-    type: Array,
-    required: false,
-  },
   reviewLat: {
     type: Number,
     required: false,
@@ -44,9 +40,9 @@ const reviewsSchema = new Schema({
     type: Array,
     required: false,
   },
-  reviewTestField: {
-    type: String,
-    required: true,
+  reviewComments: {
+    type: Array,
+    required: false,
   },
 });
 
