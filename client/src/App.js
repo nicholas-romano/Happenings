@@ -105,9 +105,7 @@ function App() {
           )}
           {!loggedIn && (
             <div className="auth-wrapper" style={{ paddingTop: 11 }}>
-              <Route exact path="/" component={() => <Landing login={login} loginErr={loginErr} />
-              } />
-              {/* <Route exact path="/feed" component={() => <LoginForm user={login} />} /> */}
+              <Route exact path="/" component={() => <Landing login={login} loginErr={loginErr} /> } />
               <Route exact path="/signup" component={SignupForm} />
             </div>
           )}
