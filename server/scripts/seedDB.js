@@ -64,6 +64,7 @@ const userSeed = [
   {
     firstName: "Eddie",
     lastName: "Saunders",
+    profileImg: "",
     userName: "Admin",
     password: "",
     userEmail: "saunders.eddie@outlook.com",

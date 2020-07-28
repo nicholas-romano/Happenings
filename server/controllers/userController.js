@@ -85,7 +85,7 @@ module.exports = {
               error: `Sorry, already a user with the username: ${userName}`
             });
           } else {
-            //If a match was not found, change ther user's username:
+            //If a match was not found, change the user's username:
             //check to see if the user's password was changed:
             if (password !== undefined) {
               //Password Change:

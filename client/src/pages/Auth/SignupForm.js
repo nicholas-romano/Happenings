@@ -29,6 +29,7 @@ function SignupForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO - validate!
+    console.log(userObject);
     AUTH.signup({
         firstName: userObject.firstName,
         lastName: userObject.lastName,
