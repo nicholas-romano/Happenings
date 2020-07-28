@@ -146,7 +146,7 @@ const loadReviews = () => {
             )
         }
         </div>
-      <div className="review-button">
+      <div className="review-button" style={styles.revBtn}>
         <button
           href="review"
           className="button is-link"

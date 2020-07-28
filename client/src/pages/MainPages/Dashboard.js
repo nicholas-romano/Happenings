@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Review from "../../components/Review";
 import LocationSearch from "../../components/LocationSearch/locSearch";
-import DisplayMap from "../../components/Map/map";
+// import DisplayMap from "../../components/Map/map";
 import NewMap from "../../components/NewMap/newMap";
 
 const styles = {
@@ -12,7 +12,7 @@ const styles = {
     backgroundColor: "rgba(183, 209, 218, 1)",
   },
   onethird: {
-    backgroundColor: "rgba(163, 124, 64, 1)",
+    backgroundColor: "rgba(183, 209, 218, 1)",
   },
   full: {
     backgroundColor: "rgba(42, 45, 52, 1)",
