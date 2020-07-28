@@ -5,7 +5,6 @@ import AUTH from "../../utils/AUTH"
 const FriendsList = () => {
 
     const [friends, setFriends] = useState();
-    console.log(friends)
 
     useEffect(() => {
         AUTH.getUser()
@@ -38,7 +37,7 @@ const FriendsList = () => {
 
         }
         else {
-            return <div>No friends yet</div>
+            return <div>You haven't added any friends yet :(</div>
         }
 
     }
