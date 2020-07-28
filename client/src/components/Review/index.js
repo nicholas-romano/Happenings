@@ -34,6 +34,10 @@ const Review = props => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    console.log('reviews: ', reviews);
+  }, [reviews])
+
   // Handles updating component state when the user types into the input field
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -57,13 +61,18 @@ const loadReviews = () => {
         event.preventDefault();
         
         if (formObject.title && formObject.location) {
+            console.log('formObject: ', formObject)
             API.saveReview({
                 reviewOwner: user.userName,
                 reviewCreated: Date.now(),
                 reviewTitle: formObject.title,
                 reviewBody: formObject.message,
                 reviewRating: formObject.rating,
-                reviewLocation: formObject.location
+                reviewLocation: formObject.location,
+                reviewLat: 35.711264,
+                reviewLong: -78.614171,
+                reviewGeoLocation: [35.711264, -78.614171],
+                reviewComments: ["Comment1", "Comment2"]
             })
             .then(res => {
                 formEl.current.reset();
