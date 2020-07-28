@@ -13,6 +13,14 @@ function NewMap() {
     zoom: 10,
   });
 
+  const [event, setEventState] = useState({
+    name: "",
+    coords: {
+      lat: 0,
+      long: 0,
+    },
+  });
+
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
