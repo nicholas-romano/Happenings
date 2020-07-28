@@ -46,6 +46,7 @@
     "react-bulma-components": "^3.4.0",
     "react-hook-form": "^6.0.8",
     "react-map-gl": "^5.2.7",
+    "react-scripts": "^3.4.1",
     "start": "^5.1.0"
   }
 }
