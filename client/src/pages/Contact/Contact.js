@@ -4,6 +4,10 @@ import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "./contact.css";
+import gitHubIcon from "../../assets/gitHubLogo.png";
+import emailIcon from "../../assets/emailIcon.png";
+import linkedinIcon from "../../assets/linkedInIcon.png";
+import facebookIcon from "../../assets/facebookIcon.png";
 
 const Contact = () => {
   return (
@@ -17,48 +21,182 @@ const Contact = () => {
       <br></br>
       <ul>
         <li>
+          Richard Kessler
           <a
             href="https://github.com/RichardKessler"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Richard Kessler
+            {" "}
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
+          </a>
+          <a href="mailto:noemail@noemail.com">
+            {" "}
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
+
         <li>
+          Nicholas Romano
           <a
             href="https://github.com/nicholas-romano"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Nicholas Romano
+            {" "}
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
+          </a>
+          <a href="mailto:noemail@noemail.com">
+            {" "}
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
+
         <li>
+          Eddie Saunders
           <a
             href="https://github.com/SaundersEddie"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Eddie Saunders
+            {" "}
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
+          </a>
+          <a href="mailto:noemail@noemail.com">
+            {" "}
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
+
         <li>
+          Jason Vernot
           <a
             href="https://github.com/jvernot"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Jason Vernot
+            {" "}
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
+          </a>
+          <a href="mailto:noemail@noemail.com">
+            {" "}
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
+
         <li>
+          Tevin Ward
           <a
             href="https://github.com/TevinWard7"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Tevin Ward
+            {" "}
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
+          </a>
+          <a href="mailto:noemail@noemail.com">
+            {" "}
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
       </ul>
