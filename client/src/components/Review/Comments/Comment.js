@@ -1,14 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import API from "../../../utils/API";
+
 
 const Comment = props => {
 
     const {
-        name,
         user,
-        photo,
         message,
         time
     } = props.comment;
+
+    const [photo, setPhoto] = useState('');
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        getCommentOwnerDetails();
+    }, []);
+
+    const getCommentOwnerDetails = () => {
+        API.getUserInfo(user)
+        .then(res => {
+            const photo = res.data[0].profileImg;
+            setPhoto(photo);
+            const firstName = res.data[0].firstName;
+            const lastName = res.data[0].lastName;
+            const name = `${firstName} ${lastName}`;
+            setName(name);
+        })
+        .catch(err => console.log(err));
+    }
 
     return (
         <div className="comment-post">
