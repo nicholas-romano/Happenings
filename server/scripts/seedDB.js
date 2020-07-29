@@ -44,11 +44,10 @@ const reviewsSeed = [
     reviewBody: "TestRewviewBody",
     reviewRating: 5,
     reviewLocation: "Testing Location",
-    reviewTestField: "It's A Trap!",
     reviewLat: 35.711264,
     reviewLong: -78.614171,
     reviewGeoLocation: [35.711264, -78.614171],
-    reviewComments: ["Comment1", "Comment2"],
+    reviewComments: []
   },
 ];
 

@@ -1,5 +1,4 @@
 const ObjectId = require('mongoose').Types.ObjectId;
-const mongojs = require("mongojs");
 const db = require('../models');
 
 // Defining methods for the reviewsController
@@ -50,15 +49,15 @@ module.exports = {
     },
     addComment: (req, res) => {
       const { id } = req.params;
-      const {name, user, photo, message, time} = req.body;
+      const {user, message, time} = req.body;
 
       db.Reviews.updateOne(
           {
-            _id: mongojs.ObjectId(id)
+            _id: ObjectId(id)
           }, {
               $push: {
                   reviewComments: [{
-                    name, user, photo, message, time
+                    user, message, time
                   }]
               }
           }
