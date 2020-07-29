@@ -28,7 +28,7 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={gitHubIcon} alt="git hub logo" />
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
           </a>
           <a
             href="https://linkedin.com"
@@ -36,7 +36,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={linkedinIcon} alt="linked in logo" />
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
           </a>
           <a
             href="https://facebook.com"
@@ -44,11 +48,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={facebookIcon} alt="facebook logo" />
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
           </a>
           <a href="mailto:noemail@noemail.com">
             {" "}
-            <img src={emailIcon} alt="email logo" />
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
 
@@ -60,7 +64,7 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={gitHubIcon} alt="git hub logo" />
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
           </a>
           <a
             href="https://linkedin.com"
@@ -68,7 +72,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={linkedinIcon} alt="linked in logo" />
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
           </a>
           <a
             href="https://facebook.com"
@@ -76,11 +84,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={facebookIcon} alt="facebook logo" />
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
           </a>
           <a href="mailto:noemail@noemail.com">
             {" "}
-            <img src={emailIcon} alt="email logo" />
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
 
@@ -92,7 +100,7 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={gitHubIcon} alt="git hub logo" />
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
           </a>
           <a
             href="https://linkedin.com"
@@ -100,7 +108,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={linkedinIcon} alt="linked in logo" />
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
           </a>
           <a
             href="https://facebook.com"
@@ -108,11 +120,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={facebookIcon} alt="facebook logo" />
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
           </a>
           <a href="mailto:noemail@noemail.com">
             {" "}
-            <img src={emailIcon} alt="email logo" />
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
 
@@ -124,7 +136,7 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={gitHubIcon} alt="git hub logo" />
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
           </a>
           <a
             href="https://linkedin.com"
@@ -132,7 +144,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={linkedinIcon} alt="linked in logo" />
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
           </a>
           <a
             href="https://facebook.com"
@@ -140,11 +156,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={facebookIcon} alt="facebook logo" />
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
           </a>
           <a href="mailto:noemail@noemail.com">
             {" "}
-            <img src={emailIcon} alt="email logo" />
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
 
@@ -156,7 +172,7 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={gitHubIcon} alt="git hub logo" />
+            <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
           </a>
           <a
             href="https://linkedin.com"
@@ -164,7 +180,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={linkedinIcon} alt="linked in logo" />
+            <img
+              className="imageSize"
+              src={linkedinIcon}
+              alt="linked in logo"
+            />
           </a>
           <a
             href="https://facebook.com"
@@ -172,11 +192,11 @@ const Contact = () => {
             rel="noopener noreferrer"
           >
             {" "}
-            <img src={facebookIcon} alt="facebook logo" />
+            <img className="imageSize" src={facebookIcon} alt="facebook logo" />
           </a>
           <a href="mailto:noemail@noemail.com">
             {" "}
-            <img src={emailIcon} alt="email logo" />
+            <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
         </li>
       </ul>
