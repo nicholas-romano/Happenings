@@ -29,11 +29,7 @@ const ReviewPost = (props) => {
         API.getUserInfo(reviewOwner)
         .then(res => {
             const profilePhoto = res.data[0].profileImg;
-            if (profilePhoto === undefined) {
-                setProfileImg('')
-            } else {
-                setProfileImg(profilePhoto);
-            }
+            setProfileImg(profilePhoto);
 
             const firstName = res.data[0].firstName;
             const lastName = res.data[0].lastName;

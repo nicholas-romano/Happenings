@@ -46,6 +46,23 @@ const Comments = props => {
         reviewComments
     } = review;
 
+    // const commentList = [
+    //     {
+    //         name: 'Dave Campbell',
+    //         user: 'dcampbell',
+    //         photo: '',
+    //         message: 'Great day today',
+    //         time: '7/29/2020 8:13AM'
+    //     },
+    //     {
+    //         name: 'Mike Sanchez',
+    //         user: 'msanchez',
+    //         photo: 'https://i.guim.co.uk/img/media/7a633730f5f90db3c12f6efc954a2d5b475c3d4a/0_138_5544_3327/master/5544.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=27c09d27ccbd139fd0f7d1cef8f7d41d',
+    //         message: 'Love the weather',
+    //         time: '7/29/2020 9:29AM'
+    //     }
+    // ]
+
     useEffect(() => {
         AUTH.getUser()
           .then((res) => {
@@ -77,12 +94,7 @@ const Comments = props => {
         API.getUserInfo(userName)
         .then(res => {
             const profilePhoto = res.data[0].profileImg;
-            if (profilePhoto === undefined) {
-                setUserProfileImg('')
-            } else {
-                setUserProfileImg(profilePhoto);
-            }
-            return;
+            setUserProfileImg(profilePhoto);
         });
     }
 
@@ -91,7 +103,8 @@ const Comments = props => {
         .then(res => {
             console.log('res: ', res.data[0]);
             setReview(res.data[0]);
-            setComments(res.data[0].reviewComments);
+            const comments = res.data[0].reviewComments;
+            setComments(comments);
             return getReviewOwnerDetails(res.data[0].reviewOwner);
         });
     }
@@ -99,6 +112,7 @@ const Comments = props => {
     const getReviewOwnerDetails = reviewOwner => {
         API.getUserInfo(reviewOwner)
         .then(res => {
+            console.log('comment owner details: ', res);
             const profilePhoto = res.data[0].profileImg;
             setProfileImg(profilePhoto);
 
@@ -106,6 +120,7 @@ const Comments = props => {
             const lastName = res.data[0].lastName;
             const ownerName = `${firstName} ${lastName}`;
             setPostOwner(ownerName);
+            return;
         })
         .catch(err => console.log(err));
     }
@@ -125,9 +140,7 @@ const Comments = props => {
         const time = new Date();
 
         const newComment =  {
-                name: `${user.firstName} ${user.lastName}`,
                 user: user.userName,
-                photo: userProfileImg,
                 message: formObject.message,
                 time: time.toLocaleString()
         }
