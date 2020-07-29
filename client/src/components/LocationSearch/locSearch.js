@@ -86,17 +86,57 @@ function LocationSearch(props) {
   if (!props.locationState) return null;
   return (
     <div>
-      <h1>Check out the neighborhood!</h1>
-      <form style={{ marginTop: 10 }}>
-        <label htmlFor="username">Where are you? </label>
-        <Input
-          type="text"
-          value={props.value}
-          onChange={props.handleInputChange}
-          name="location"
-        />
-        <FormBtn onClick={props.handlePlaceSubmit}>Search</FormBtn>
-      </form>
+      <div class="field">
+        <label class="label">Location</label>
+        <div class="control">
+          <input
+            className="input"
+            type="text"
+            placeholder="Search here"
+            value={props.value}
+            onChange={props.handleInputChange}
+            name="location"
+          />
+        </div>
+        <p className="help">
+          Search for a park, restaurant, or location by name. Confirm your
+          selection below.
+        </p>
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button is-success" onClick={props.handlePlaceSubmit}>
+            Find Locations
+          </button>
+        </p>
+      </div>
+      {/* <div className="field is-grouped">
+        <label className="label">Where are you? </label>
+        <p className="control is expanded">
+          <input
+            className="input"
+            type="text"
+            placeholder="Location"
+            value={props.value}
+            onChange={props.handleInputChange}
+            name="location"
+          />
+        </p>
+        <div className="control" onClick={props.handlePlaceSubmit}>
+          <a className="button is-info">Search</a>
+        </div> */}
+      {/* <p class="help">Search for where you are.</p> */}
+      {/* <form style={{ marginTop: 10 }}>
+          <label htmlFor="username">Where are you? </label>
+          <Input
+            type="text"
+            value={props.value}
+            onChange={props.handleInputChange}
+            name="location"
+          />
+          <FormBtn onClick={props.handlePlaceSubmit}>Search</FormBtn>
+        </form> */}
+      {/* </div> */}
       {/* conditional rendering the buttons to display the places matching the users search */}
       <div>
         {props.locationState.location.length > 0 ? (
@@ -115,9 +155,7 @@ function LocationSearch(props) {
                 className="button"
                 onClick={props.handleLocClick}
               >
-                {key.title}
-                <br></br>
-                {key.address.houseNumber}
+                {`${key.title} - ${key.address.houseNumber} ${key.address.street}, ${key.address.city}`}
               </button>
             );
           })
