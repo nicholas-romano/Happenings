@@ -1,10 +1,11 @@
-const ObjectId = require('mongoose').Types.ObjectId
-const db = require('../models')
+const ObjectId = require('mongoose').Types.ObjectId;
+const mongojs = require("mongojs");
+const db = require('../models');
 
 // Defining methods for the reviewsController
 module.exports = {
 
-    findAll: function (req, res) {
+    findAll: (req, res) => {
         if (req.user) {
             db.Reviews.find({})
             .then(reviews => {
@@ -13,7 +14,17 @@ module.exports = {
             .catch(err => res.status(422).json(err))
         }
     },
-    create: function (req, res) {
+    findById: (req, res) => {
+      console.log('req.params.id: ', req.params.id);
+      if (req.user) {
+        db.Reviews.find({
+          _id: req.params.id
+        }).then(review => {
+          res.json(review);
+        }).catch(err => res.status(422).json(err))
+      }
+    },
+    create: (req, res) => {
       console.log('review submitted: ', req.body);
       const { reviewOwner, reviewCreated, reviewTitle, reviewBody, reviewRating, 
               reviewLocation, reviewLat, reviewLong, reviewGeoLocation, 
@@ -37,17 +48,31 @@ module.exports = {
             .catch(err => res.status(422).json(err))
         }
     },
-    findByUserName: function (req, res) {
-    if (req.user) {
-      db.User.find({ userName: req.params.userName })
-        .then(user => {
-          res.json(user);
-        })
-        .catch(err => res.status(422).json(err))
-    } else {
-      return res.json({ user: null })
+    addComment: (req, res) => {
+      const { userName } = req.params;
+      const {name, user, photo, message, time} = req.body;
+
+      db.Reviews.updateOne(
+          {
+            reviewOwner: userName
+          }, {
+              $push: {
+                  reviewComments: [{
+                    name, user, photo, message, time
+                  }]
+              }
+          }
+      ).then(comment => {
+          res.json(comment);
+      })
+      .catch(err => {
+          res.json(err);
+      });
+
+    },
+    getComments: (req, res) => {
+      console.log('getComments req.params.id: ', req.params.id);
     }
-  }
 //   update: function (req, res) {
 //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)
 //       .then(dbModel => {

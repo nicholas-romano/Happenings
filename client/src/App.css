@@ -67,16 +67,49 @@
     float: left;
   }
 
+  .review-comment-button {
+    float: right;
+    width: 100px;
+  }
+
   .settings {
     text-align: left;
   }
 
-  .img-link {
-    margin-bottom: 15px;
-  }
-
   .settings label {
     text-align: right;
+  }
+
+  .add-comment {
+    width: 150px;
+    margin-left: auto;
+  }
+
+  .add-comment button.is-link {
+    background-color: rgb(36, 123, 160);
+  }
+
+  .add-comment button.is-link:hover {
+    background-color: rgb(36, 123, 160);
+  }
+
+  .comments {
+    text-align: left;
+  }
+
+  .comments label {
+    text-align: right;
+  }
+
+  .comment-post {
+    padding: 5px;
+    text-align: left;
+    width: 90%;
+    margin-left: auto;
+  }
+
+  .img-link {
+    margin-bottom: 15px;
   }
 
   .list {
@@ -100,7 +133,6 @@
     font-size: 14px;
     border-radius: 0 5px 5px 0;
   }
-
 
   .button.is-light {
     font-size: 15px;

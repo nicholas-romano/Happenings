@@ -16,8 +16,7 @@ function SignupForm() {
     email: "",
     username: "",
     password: "",
-    confirmPassword: "",
-    redirectTo: null,
+    confirmPassword: ""
   });
   const [redirectTo, setRedirectTo] = useState(null);
 

@@ -153,7 +153,7 @@ const Review = (props) => {
           locationState.locationCoords.lat,
           locationState.locationCoords.long,
         ],
-        reviewComments: ["Comment1", "Comment2"],
+        reviewComments: []
       })
         .then((res) => {
           formEl.current.reset();
@@ -174,21 +174,13 @@ const Review = (props) => {
     setModal(false);
   };
 
-  //   const showReviewForm = () => {
-  //     setModal(true);
-  //   };
-
-  //   const closeReviewForm = () => {
-  //     setModal(false);
-  //   };
-
   return (
     <>
       <div
         className={showModal ? "is-active modal" : "modal"}
         id="review-modal"
       >
-        <div className="modal-background"></div>
+      <div className="modal-background"></div>
         <div className="modal-content">
           <div className="form">
             <h2>Write a Review</h2>

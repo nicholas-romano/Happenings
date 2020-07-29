@@ -29,11 +29,14 @@ const FriendsList = () => {
 
     }, []);
 
-
     const displayFriends = () => {
 
         if (friends) {
-            return friends.map(friend => <li>{friend}</li>)
+            return (
+                <ul>
+                    {friends.map((friend, index = 1) => <li key={index}>{friend}</li>)}
+                </ul>
+                )
 
         }
         else {

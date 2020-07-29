@@ -8,9 +8,8 @@ export default {
   getReviews: function() {
     return axios.get("/api/reviews");
   },
-  // Gets the review owner with the given username
-  getReviewOwner: function(userName) {
-    return axios.get("/api/reviews/" + userName);
+  getReviewById: function(id) {
+    return axios.get("/api/reviews/" + id);
   },
   updateUser: function(userData) {
     return axios.put("/api/user", userData);
@@ -22,5 +21,11 @@ export default {
   // Saves a review to the database:
   saveReview: function(reviewData) {
     return axios.post("/api/reviews", reviewData);
+  },
+  addComment: function(userName, commentData) {
+    return axios.put("/api/reviews/" + userName, commentData)
+  },
+  getComments: function(id) {
+    return axios.get("/api/reviews/comments/" + id);
   }
 };
