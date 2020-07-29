@@ -13,21 +13,23 @@ function NewMap() {
     zoom: 10,
   });
 
-  const [event, setEventState] = useState({
-    name: "",
-    coords: {
-      lat: 0,
-      long: 0,
-    },
+  const [eventState, setEventState] = useState({
+    reviews: [],
   });
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     API.getReviews().then((res) => {
-      console.log("Review Response!!!", res);
+      console.log("Review Response!!!", res.data);
+      setEventState({
+        reviews: res.data,
+      });
     });
-  });
+  }, []);
+
+  console.log("REVIEWS IN STATE!!!!: ", eventState.reviews);
+  // console.log("latitude in state", eventState.reviews[0].reviewGeoLocation[0]);
 
   return (
     <ReactMapGL
@@ -36,17 +38,17 @@ function NewMap() {
       mapStyle="mapbox://styles/jvernot/ckd5e6xwf0ixv1iqp99qprvr4"
       onViewportChange={(nextViewport) => setViewport(nextViewport)}
     >
-      {BreweryData.items.map((brewery) => (
+      {eventState.reviews.map((post) => (
         <Marker
-          key={brewery.id}
-          latitude={brewery.position.lat}
-          longitude={brewery.position.lng}
+          key={post._id}
+          latitude={post.reviewLat}
+          longitude={post.reviewLong}
         >
           <button
             className="marker-btn"
             onClick={(event) => {
               event.preventDefault();
-              setSelectedEvent(brewery);
+              setSelectedEvent(post);
             }}
           >
             <img src="/HapLogoIcon.png" alt="Location Icon" />
@@ -56,15 +58,15 @@ function NewMap() {
       ))}
       {selectedEvent ? (
         <Popup
-          latitude={selectedEvent.position.lat}
-          longitude={selectedEvent.position.lng}
+          latitude={selectedEvent.reviewLat}
+          longitude={selectedEvent.reviewLong}
           onClose={() => {
             setSelectedEvent(null);
           }}
         >
           <div>
-            <h2>{selectedEvent.title}</h2>
-            <p>{`${selectedEvent.address.houseNumber} ${selectedEvent.address.street}, ${selectedEvent.address.city}`}</p>
+            <h2>{selectedEvent.reviewTitle}</h2>
+            <p>{`${selectedEvent.reviewBody}`}</p>
           </div>
         </Popup>
       ) : null}
