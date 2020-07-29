@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
 import Input from "../../components/Form/Input";
-import Password from "../../components/Form/Password";
 import { FormBtn } from "../../components/Form";
 
 console.log('Inside our loginForm.js')
@@ -12,23 +11,28 @@ function LoginForm({ login, loginErr }) {
 
   console.log('loginErr: ', loginErr);
 
-  const [userObject, setUserObject] = useState({
+  const [formObject, setFormObject] = useState({
     userName: "",
     password: "",
   });
 
-  const handleInputChange = (event) => {
-    setUserObject({
-      ...userObject,
-      [event.target.name]: event.target.value,
-    });
-  };
+  // const handleInputChange = (event) => {
+  //   console.log('event: ', event);
+    // setUserObject({
+    //   ...userObject,
+    //   [event.target.name]: event.target.value,
+    // });
+  // };
+
+  useEffect(() => {
+    console.log('formObject: ', formObject);
+  }, [formObject])
 
   const handleSubmit = event => {
     event.preventDefault();
     login({
-      userName: userObject.userName,
-      password: userObject.password
+      userName: formObject.userName,
+      password: formObject.password
     });
   }
 
@@ -52,16 +56,20 @@ function LoginForm({ login, loginErr }) {
                 }
                 <Input
                   name="userName"
+                  type="input"
                   title="Username"
-                  onChange={handleInputChange}
-                  value={userObject.userName}
+                  setFormObject={setFormObject}
+                  formObject={formObject}
+                  value={formObject.userName}
                   placeholder="Username"
                 />
-                <Password
+                <Input
                   title="Password"
+                  type="password"
                   name="password"
-                  value={userObject.password}
-                  onChange={handleInputChange}
+                  value={formObject.password}
+                  setFormObject={setFormObject}
+                  formObject={formObject}
                   placeholder="Password"
                 />
                 <Link to="/signup">Create Account</Link>

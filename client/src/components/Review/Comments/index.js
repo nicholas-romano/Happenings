@@ -46,23 +46,6 @@ const Comments = props => {
         reviewComments
     } = review;
 
-    // const commentList = [
-    //     {
-    //         name: 'Dave Campbell',
-    //         user: 'dcampbell',
-    //         photo: '',
-    //         message: 'Great day today',
-    //         time: '7/29/2020 8:13AM'
-    //     },
-    //     {
-    //         name: 'Mike Sanchez',
-    //         user: 'msanchez',
-    //         photo: 'https://i.guim.co.uk/img/media/7a633730f5f90db3c12f6efc954a2d5b475c3d4a/0_138_5544_3327/master/5544.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=27c09d27ccbd139fd0f7d1cef8f7d41d',
-    //         message: 'Love the weather',
-    //         time: '7/29/2020 9:29AM'
-    //     }
-    // ]
-
     useEffect(() => {
         AUTH.getUser()
           .then((res) => {
@@ -72,10 +55,6 @@ const Comments = props => {
           })
           .catch((err) => console.log(err));
     }, []);
-
-    useEffect(() => {
-        console.log('userProfileImg: ', userProfileImg);
-    }, [userProfileImg]);
         
     useEffect(() => {
         const review = new URLSearchParams(location.search).get('id');
@@ -85,10 +64,6 @@ const Comments = props => {
             getReview();
         }
     }, [reviewId]);
-
-    useEffect(() => {
-        console.log('comments: ', comments);
-    }, [comments]);
 
     const getUserPhoto = userName => {
         API.getUserInfo(userName)
@@ -101,7 +76,6 @@ const Comments = props => {
     const getReview = () => {
         API.getReviewById(reviewId)
         .then(res => {
-            console.log('res: ', res.data[0]);
             setReview(res.data[0]);
             const comments = res.data[0].reviewComments;
             setComments(comments);
@@ -112,7 +86,6 @@ const Comments = props => {
     const getReviewOwnerDetails = reviewOwner => {
         API.getUserInfo(reviewOwner)
         .then(res => {
-            console.log('comment owner details: ', res);
             const profilePhoto = res.data[0].profileImg;
             setProfileImg(profilePhoto);
 
@@ -124,12 +97,6 @@ const Comments = props => {
         })
         .catch(err => console.log(err));
     }
-
-    // Handles updating component state when the user types into the input field
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormObject({ ...formObject, [name]: value });
-    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -225,10 +192,11 @@ const Comments = props => {
                                 <div className="form">                               
                                     <form ref={formEl}>
                                         <TextArea
-                                            onChange={handleInputChange}
                                             name="message"
-                                            value={formObject.message}
                                             title="Message"
+                                            setFormObject={setFormObject}
+                                            formObject={formObject}
+                                            value={formObject.message}
                                             placeholder="Message"
                                         />
                                         <FormBtn

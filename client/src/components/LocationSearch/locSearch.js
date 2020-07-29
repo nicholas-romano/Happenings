@@ -84,28 +84,29 @@ function LocationSearch(props) {
   // };
   // console.log("Props", props);
   if (!props.locationState) return null;
+
+  const { setFormObject, formObject, type, name, title, placeholder } = props;
+
   return (
     <div>
-      <div class="field">
-        <label class="label">Location</label>
-        <div class="control">
-          <input
-            className="input"
-            type="text"
-            placeholder="Search here"
-            value={props.value}
-            onChange={props.handleInputChange}
-            name="location"
-          />
-        </div>
+        <Input
+            name={name}
+            title={title}
+            type={type}
+            setFormObject={setFormObject}
+            formObject={formObject}
+            value={formObject.location}
+            placeholder={placeholder}
+        />
+      <div className="field">
         <p className="help">
           Search for a park, restaurant, or location by name. Confirm your
           selection below.
         </p>
       </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-success" onClick={props.handlePlaceSubmit}>
+      <div className="field">
+        <p className="control">
+          <button className="button is-success" onClick={props.handlePlaceSubmit}>
             Find Locations
           </button>
         </p>
@@ -125,7 +126,7 @@ function LocationSearch(props) {
         <div className="control" onClick={props.handlePlaceSubmit}>
           <a className="button is-info">Search</a>
         </div> */}
-      {/* <p class="help">Search for where you are.</p> */}
+      {/* <p className="help">Search for where you are.</p> */}
       {/* <form style={{ marginTop: 10 }}>
           <label htmlFor="username">Where are you? </label>
           <Input

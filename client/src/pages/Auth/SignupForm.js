@@ -1,42 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import Hero from "../../components/Hero";
 import Footer from '../../components/Footer';
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
 import Input from "../../components/Form/Input";
-import Email from "../../components/Form/Email";
-import Password from "../../components/Form/Password";
 import { FormBtn } from "../../components/Form";
 import AUTH from "../../utils/AUTH";
 
 function SignupForm() {
 
-  const [userObject, setUserObject] = useState({
+  const [formObject, setFormObject] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    username: "",
+    userName: "",
     password: "",
     confirmPassword: ""
   });
+
   const [redirectTo, setRedirectTo] = useState(null);
 
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-    setUserObject({...userObject, [name]: value})
-  };
+  useEffect(() => {
+    console.log('formObject: ', formObject);
+  }, [formObject]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO - validate!
-    console.log(userObject);
+    console.log(formObject);
     AUTH.signup({
-        firstName: userObject.firstName,
-        lastName: userObject.lastName,
-        userName: userObject.username,
-        password: userObject.password,
-        userEmail: userObject.email,
+        firstName: formObject.firstName,
+        lastName: formObject.lastName,
+        userName: formObject.userName,
+        password: formObject.password,
+        userEmail: formObject.email,
         friends: [],
         userInterest: [],
         profileImg: ''
@@ -64,47 +62,57 @@ function SignupForm() {
           <Card title="Create your Happenings Account">
             <form  style={{ marginTop: 10, textAlign: 'left' }}>
               <Input
-                name="firstName"
-                title="First Name"
-                onChange={handleInputChange}
-                value={userObject.firstName}
-                placeholder="First Name"
+                  name="firstName"
+                  title="First Name"
+                  type="input"
+                  setFormObject={setFormObject}
+                  formObject={formObject}
+                  value={formObject.firstName}
+                  placeholder="First Name"
               />
               <Input
-                name="lastName"
-                title="Last Name"
-                onChange={handleInputChange}
-                value={userObject.lastName}
-                placeholder="Last Name"
+                  name="lastName"
+                  title="Last Name"
+                  type="input"
+                  setFormObject={setFormObject}
+                  formObject={formObject}
+                  value={formObject.lastName}
+                  placeholder="Last Name"
               />
-               <Email
+               <Input
                 name="email"
                 title="Email"
-                onChange={handleInputChange}
-                value={userObject.email}
+                type="email"
+                setFormObject={setFormObject}
+                formObject={formObject}
+                value={formObject.email}
                 placeholder="Email"
               />
               <Input
-                type="text"
-                name="username"
+                name="userName"
                 title="Username"
-                onChange={handleInputChange}
-                value={userObject.username}
+                type="input"
+                setFormObject={setFormObject}
+                formObject={formObject}
+                value={formObject.userName}
                 placeholder="Username"
               />
-              <Password
+              <Input
                 name="password"
                 title="Password"
-                onChange={handleInputChange}
-                value={userObject.password}
+                type="password"
+                setFormObject={setFormObject}
+                formObject={formObject}
+                value={formObject.password}
                 placeholder="Password"
               />
-              <Password
-                type="password"
+              <Input
                 name="confirmPassword"
                 title="Confirm Password"
-                onChange={handleInputChange}
-                value={userObject.confirmPassword}
+                type="password"
+                setFormObject={setFormObject}
+                formObject={formObject}
+                value={formObject.confirmPassword}
                 placeholder="Confirm Password"
               />
               <Link to="/">Login</Link>
