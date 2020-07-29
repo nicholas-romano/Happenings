@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import BreweryData from "../../data/breweries.json";
 import "./newMap.css";
 import API from "../../utils/API";
 
 function NewMap() {
   const [viewport, setViewport] = useState({
     width: "100%",
-    height: 400,
+    height: 550,
     latitude: 35.7796,
     longitude: -78.6382,
     zoom: 10,
@@ -51,8 +50,7 @@ function NewMap() {
               setSelectedEvent(post);
             }}
           >
-            <img src="/HapLogoIcon.png" alt="Location Icon" />
-            {/* <i class="fas fa-map-marker-alt"></i> */}
+            <img src="/marker.png" alt="Location Icon" />
           </button>
         </Marker>
       ))}
