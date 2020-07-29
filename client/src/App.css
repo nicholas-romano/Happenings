@@ -80,6 +80,14 @@
     text-align: right;
   }
 
+  .total-comments {
+    font-size: 11px;
+    float: right;
+    width: 110px;
+    margin-top: 12px;
+    
+  }
+
   .add-comment {
     width: 150px;
     margin-left: auto;

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 const Comment = props => {
 
-    console.log('props: ', props);
-
     const {
         name,
         user,

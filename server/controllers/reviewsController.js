@@ -49,12 +49,12 @@ module.exports = {
         }
     },
     addComment: (req, res) => {
-      const { userName } = req.params;
+      const { id } = req.params;
       const {name, user, photo, message, time} = req.body;
 
       db.Reviews.updateOne(
           {
-            reviewOwner: userName
+            _id: mongojs.ObjectId(id)
           }, {
               $push: {
                   reviewComments: [{
@@ -69,9 +69,6 @@ module.exports = {
           res.json(err);
       });
 
-    },
-    getComments: (req, res) => {
-      console.log('getComments req.params.id: ', req.params.id);
     }
 //   update: function (req, res) {
 //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)

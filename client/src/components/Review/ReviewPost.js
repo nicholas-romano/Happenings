@@ -16,6 +16,8 @@ const ReviewPost = (props) => {
         reviewComments,
     } = props.post;
 
+    console.log('review comments: ', reviewComments);
+
     const [profileImg, setProfileImg] = useState('');
     const [postOwner, setPostOwner] = useState('');
 
@@ -27,7 +29,11 @@ const ReviewPost = (props) => {
         API.getUserInfo(reviewOwner)
         .then(res => {
             const profilePhoto = res.data[0].profileImg;
-            setProfileImg(profilePhoto);
+            if (profilePhoto === undefined) {
+                setProfileImg('')
+            } else {
+                setProfileImg(profilePhoto);
+            }
 
             const firstName = res.data[0].firstName;
             const lastName = res.data[0].lastName;
@@ -61,6 +67,11 @@ const ReviewPost = (props) => {
                         <Link to={{pathname:"/comments",search: "?id=" + _id}}>
                             <button className="review-comment-button button is-dark">Comment</button>
                         </Link>
+                        <div className="total-comments">
+                            <label>
+                                {(reviewComments.length > 0 ? reviewComments.length + ' total comment(s)' : '')}
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

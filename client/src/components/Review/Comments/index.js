@@ -46,23 +46,6 @@ const Comments = props => {
         reviewComments
     } = review;
 
-    const commentsList = [
-        {
-            name: 'John Smith',
-            user: 'jsmith',
-            photo: 'https://pbs.twimg.com/profile_images/670332049522298880/N5uJZueS_400x400.jpg',
-            message: 'I love Krispy Kreme too!',
-            time: '3:00PM'
-        },
-        {
-            name: 'Jane Doe',
-            user: 'jdoe',
-            photo: 'https://images-na.ssl-images-amazon.com/images/I/71XMfi2WROL._CR0,80,1163,1163_UX256.jpg',
-            message: 'It is the best!',
-            time: '3:10PM'
-        }
-    ];
-
     useEffect(() => {
         AUTH.getUser()
           .then((res) => {
@@ -93,7 +76,12 @@ const Comments = props => {
     const getUserPhoto = userName => {
         API.getUserInfo(userName)
         .then(res => {
-            setUserProfileImg(res.data[0].profileImg);
+            const profilePhoto = res.data[0].profileImg;
+            if (profilePhoto === undefined) {
+                setUserProfileImg('')
+            } else {
+                setUserProfileImg(profilePhoto);
+            }
             return;
         });
     }
@@ -134,19 +122,21 @@ const Comments = props => {
         console.log('Message: ', formObject.message);
         console.log('user info: ', user);
 
+        const time = new Date();
+
         const newComment =  {
                 name: `${user.firstName} ${user.lastName}`,
                 user: user.userName,
                 photo: userProfileImg,
                 message: formObject.message,
-                time: Date.now()
+                time: time.toLocaleString()
         }
 
-        API.addComment(user.userName, newComment)
+        API.addComment(reviewId, newComment)
         .then(res => {
             console.log('comment res: ', res);
             hideForm();
-            getReview();
+            return getReview();
         });
     }
 

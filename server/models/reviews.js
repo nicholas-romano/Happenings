@@ -5,40 +5,39 @@ const Schema = mongoose.Schema;
 const reviewsSchema = new Schema({
   reviewOwner: {
     type: String,
-    required: true,
+    required: true
   },
   reviewCreated: {
-    type: Date,
-    default: Date.now,
-    required: true,
+    type: String,
+    required: true
   },
   reviewTitle: {
     type: String,
-    required: true,
+    required: true
   },
   reviewBody: {
     type: String,
-    required: false,
+    required: false
   },
   reviewRating: {
     type: Number,
-    required: true,
+    required: true
   },
   reviewLocation: {
     type: String,
-    required: true,
+    required: true
   },
   reviewLat: {
     type: Number,
-    required: false,
+    required: false
   },
   reviewLong: {
     type: Number,
-    required: false,
+    required: false
   },
   reviewGeoLocation: {
     type: Array,
-    required: false,
+    required: false
   },
   reviewComments: {
     type: Array,

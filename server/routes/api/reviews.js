@@ -10,11 +10,8 @@ router.route("/")
  router.route("/:id")
   .get(reviewsController.findById);
 
-  router.route("/:userName")
+  router.route("/:id")
   .put(reviewsController.addComment);
-
-  router.route("/comments/:id")
-  .get(reviewsController.getComments);
 
 //   .put(reviewsController.update)
 //   .delete(reviewsController.remove);

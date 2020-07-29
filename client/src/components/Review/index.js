@@ -135,6 +135,8 @@ const Review = (props) => {
     setFormObject({ ...formObject, rating: rating });
   };
 
+  const time = new Date();
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -142,7 +144,7 @@ const Review = (props) => {
       console.log("formObject: ", formObject);
       API.saveReview({
         reviewOwner: user.userName,
-        reviewCreated: Date.now(),
+        reviewCreated: time.toLocaleString(),
         reviewTitle: formObject.title,
         reviewBody: formObject.message,
         reviewRating: formObject.rating,

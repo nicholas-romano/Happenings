@@ -22,10 +22,7 @@ export default {
   saveReview: function(reviewData) {
     return axios.post("/api/reviews", reviewData);
   },
-  addComment: function(userName, commentData) {
-    return axios.put("/api/reviews/" + userName, commentData)
-  },
-  getComments: function(id) {
-    return axios.get("/api/reviews/comments/" + id);
+  addComment: function(id, commentData) {
+    return axios.put("/api/reviews/" + id, commentData)
   }
 };
