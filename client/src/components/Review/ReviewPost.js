@@ -1,46 +1,47 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import StaticRating from "./StaticRating";
 import API from "../../utils/API";
 
 const ReviewPost = (props) => {
-  const {
-    reviewOwner,
-    reviewTitle,
-    reviewBody,
-    reviewRating,
-    reviewLocation,
-    reviewCreated,
-    reviewComments,
-  } = props.post;
+
+    const {
+        _id,
+        reviewOwner,
+        reviewTitle,
+        reviewBody,
+        reviewRating,
+        reviewLocation,
+        reviewCreated,
+        reviewComments,
+    } = props.post;
+
+    console.log('review comments: ', reviewComments);
 
     const [profileImg, setProfileImg] = useState('');
     const [postOwner, setPostOwner] = useState('');
 
     useEffect(() => {
-        getReviewPhoto(reviewOwner);
+        getReviewOwnerDetails(reviewOwner);
     }, [])
 
-    const getReviewPhoto = reviewOwner => {
+    const getReviewOwnerDetails = reviewOwner => {
         API.getUserInfo(reviewOwner)
         .then(res => {
             const profilePhoto = res.data[0].profileImg;
-            setProfileImg(profilePhoto);
-            return getOwnerName(reviewOwner)
-        })
-        .catch(err => console.log(err));
-    }  
-        
-    const getOwnerName = reviewOwner => {
-        //get Review Owner name:
-        API.getReviewOwner(reviewOwner)
-        .then(res => {
+            if (profilePhoto === undefined) {
+                setProfileImg('')
+            } else {
+                setProfileImg(profilePhoto);
+            }
+
             const firstName = res.data[0].firstName;
             const lastName = res.data[0].lastName;
             const ownerName = `${firstName} ${lastName}`;
             setPostOwner(ownerName);
         })
         .catch(err => console.log(err));
-    }
+    }  
 
     return (
         <div className="review-post">
@@ -63,6 +64,14 @@ const ReviewPost = (props) => {
                         <h3><StaticRating reviewRating={reviewRating} /></h3>
                         <p className="messageBody">{reviewBody}</p>
                         <p><time dateTime="2016-1-1">{reviewCreated}</time></p>
+                        <Link to={{pathname:"/comments",search: "?id=" + _id}}>
+                            <button className="review-comment-button button is-dark">Comment</button>
+                        </Link>
+                        <div className="total-comments">
+                            <label>
+                                {(reviewComments.length > 0 ? reviewComments.length + ' total comment(s)' : '')}
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
