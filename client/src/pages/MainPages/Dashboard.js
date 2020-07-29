@@ -3,7 +3,6 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Review from "../../components/Review";
 import LocationSearch from "../../components/LocationSearch/locSearch";
-import DisplayMap from "../../components/Map/map";
 import NewMap from "../../components/NewMap/newMap";
 
 const styles = {
