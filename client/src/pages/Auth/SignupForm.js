@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
+import Hero from "../../components/Hero";
+import Footer from '../../components/Footer';
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
 import Input from "../../components/Form/Input";
@@ -16,8 +18,7 @@ function SignupForm() {
     email: "",
     username: "",
     password: "",
-    confirmPassword: "",
-    redirectTo: null,
+    confirmPassword: ""
   });
   const [redirectTo, setRedirectTo] = useState(null);
 
@@ -37,7 +38,8 @@ function SignupForm() {
         password: userObject.password,
         userEmail: userObject.email,
         friends: [],
-        userInterest: []
+        userInterest: [],
+        profileImg: ''
       }).then((response) => {
         console.log(response);
       if (!response.data.errmsg) {
@@ -53,6 +55,8 @@ function SignupForm() {
   }
 
   return (
+    <>
+    <Hero />
     <Container>
       <Row>
         <Col size="md-3"></Col>
@@ -111,6 +115,8 @@ function SignupForm() {
         <Col size="md-3"></Col>
       </Row>
     </Container>
+    <Footer />
+  </>
   );
 }
 

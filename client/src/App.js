@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import NoMatch from "./pages/NoMatch";
 import Feed from "./pages/Feed";
 import Review from "./components/Review";
+import Comments from "./components/Review/Comments";
 import Landing from "./pages/MainPages/Landing";
 import Settings from "./pages/Settings";
 import Contact from "./pages/Contact/Contact";
@@ -16,7 +17,6 @@ import "react-bulma-components/dist/react-bulma-components.min.css";
 import "./App.css";
 
 function App() {
-
   const styles = {
     twothirds: {
       paddingBottom: 10,
@@ -32,7 +32,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [loginErr, setLoginErr] = useState('');
+  const [loginErr, setLoginErr] = useState("");
 
   const history = useHistory();
   console.log("history:", history);
@@ -66,22 +66,24 @@ function App() {
       }
     });
   };
-// EXS 27th July possible conflict, commented out next two lines
-//  const login = (username, password) => {
-//    AUTH.login(username, password).then((response) => {
+  // EXS 27th July possible conflict, commented out next two lines
+  //  const login = (username, password) => {
+  //    AUTH.login(username, password).then((response) => {
   const login = (userData) => {
-    AUTH.login(userData).then((response) => {
-      console.log("Our user has logged in:", response.data);
-      if (response.status === 200) {
-        // update the state
-        setLoggedIn(true);
-        setUser(response.data.user);
-        history.push("/feed");
-      }
-    }).catch(err => {
-      console.log("err: ", err);
-      setLoginErr('Invalid username and password combination.')
-    });
+    AUTH.login(userData)
+      .then((response) => {
+        console.log("Our user has logged in:", response.data);
+        if (response.status === 200) {
+          // update the state
+          setLoggedIn(true);
+          setUser(response.data.user);
+          history.push("/feed");
+        }
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+        setLoginErr("Invalid username and password combination.");
+      });
   };
   console.log("loggedIn!!!:", loggedIn);
   return (
@@ -95,6 +97,7 @@ function App() {
                 <Switch>
                   <Route exact path="/feed" component={Feed} />
                   <Route exact path="/review" component={Review} />
+                  <Route exact path="/comments" component={Comments} />
                   <Route exact path="/settings" component={Settings} />
                   <Route exact path="/contact" component={Contact} />
                   <Route exact path="/friends" component={Friends} />
@@ -105,14 +108,18 @@ function App() {
           )}
           {!loggedIn && (
             <div className="auth-wrapper" style={{ paddingTop: 11 }}>
-              <Route exact path="/" component={() => <Landing login={login} loginErr={loginErr} /> } />
+              <Route
+                exact
+                path="/"
+                component={() => <Landing login={login} loginErr={loginErr} />}
+              />
               <Route exact path="/signup" component={SignupForm} />
             </div>
           )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default App;
