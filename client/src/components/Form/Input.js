@@ -5,10 +5,12 @@ const Input = props => {
 
   const {
     title,
+    type,
     name,
-    value,
     placeholder,
-    onChange
+    value,
+    setFormObject,
+    formObject
   } = props;
 
   return (
@@ -16,11 +18,11 @@ const Input = props => {
       <label className="label">{title}</label>
       <div className="control">
           <input 
-            type="text"
+            type={type}
             className="input" 
-            name={name} 
-            value={value} 
-            onChange={onChange} 
+            name={name}
+            defaultValue={value}
+            onChange={e => setFormObject({...formObject, [name]: e.target.value})}
             placeholder={placeholder}
           />
       </div>
