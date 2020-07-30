@@ -18,14 +18,14 @@ const Review = (props) => {
   const [user, setUser] = useState({
     userName: "",
     firstName: "",
-    lastName: "",
+    lastName: ""
   });
   const [showModal, setModal] = useState(false);
   const [formObject, setFormObject] = useState({
     title: "",
     message: "",
     rating: 0,
-    location: "",
+    location: ""
   });
   const [reviewRating, setRatings] = useState(0);
   const formEl = useRef(null);
@@ -42,7 +42,7 @@ const Review = (props) => {
     locationCoords: {
       lat: 0,
       long: 0,
-    },
+    }
   });
 
   useEffect(() => {
@@ -54,16 +54,6 @@ const Review = (props) => {
       })
       .catch((err) => console.log(err));
   }, []);
-
-  useEffect(() => {
-    console.log("reviews: ", reviews);
-  }, [reviews]);
-
-  // Handles updating component state when the user types into the input field
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormObject({ ...formObject, [name]: value });
-  };
 
   //getting users coords and setting them to state
   navigator.geolocation.getCurrentPosition(function (position) {
@@ -194,18 +184,20 @@ const Review = (props) => {
             <h2>Write a Review</h2>
             <form ref={formEl}>
               <Input
-                onChange={handleInputChange}
-                type="text"
                 name="title"
                 title="Title"
-                placeholder="Title (required)"
+                type="input"
+                setFormObject={setFormObject}
+                formObject={formObject}
                 value={formObject.title}
+                placeholder="Title (required)"
               />
               <TextArea
-                onChange={handleInputChange}
                 name="message"
-                value={formObject.message}
                 title="Message"
+                setFormObject={setFormObject}
+                formObject={formObject}
+                value={formObject.message}
                 placeholder="Message"
               />
               <Rating
@@ -214,14 +206,14 @@ const Review = (props) => {
                 handleRatingChange={handleRatingChange}
               />
               <LocationSearch
-                onChange={handleInputChange}
                 type="text"
                 name="location"
                 title="Location"
                 placeholder="Location (required)"
                 value={formObject.location}
                 locationState={locationState}
-                handleInputChange={handleInputChange}
+                setFormObject={setFormObject}
+                formObject={formObject}
                 handlePlaceSubmit={handlePlaceSubmit}
                 handleLocClick={handleLocClick}
               />

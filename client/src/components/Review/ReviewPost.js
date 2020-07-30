@@ -16,8 +16,6 @@ const ReviewPost = (props) => {
         reviewComments,
     } = props.post;
 
-    console.log('review comments: ', reviewComments);
-
     const [profileImg, setProfileImg] = useState('');
     const [postOwner, setPostOwner] = useState('');
 
