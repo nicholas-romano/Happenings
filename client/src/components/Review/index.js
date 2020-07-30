@@ -169,18 +169,20 @@ const Review = (props) => {
             <h2>Write a Review</h2>
             <form ref={formEl}>
               <Input
-                onChange={handleInputChange}
-                type="text"
                 name="title"
                 title="Title"
-                placeholder="Title (required)"
+                type="input"
+                setFormObject={setFormObject}
+                formObject={formObject}
                 value={formObject.title}
+                placeholder="Title (required)"
               />
               <TextArea
-                onChange={handleInputChange}
                 name="message"
-                value={formObject.message}
                 title="Message"
+                setFormObject={setFormObject}
+                formObject={formObject}
+                value={formObject.message}
                 placeholder="Message"
               />
               <Rating
@@ -189,11 +191,11 @@ const Review = (props) => {
                 handleRatingChange={handleRatingChange}
               />
               <LocationSearch
-                onChange={handleInputChange}
                 type="text"
                 name="location"
                 title="Location"
                 placeholder="Location (required)"
+                onChange={handleInputChange}
                 value={formObject.location}
                 locationState={locationState}
                 handleInputChange={handleInputChange}
