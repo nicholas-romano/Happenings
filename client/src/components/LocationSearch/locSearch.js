@@ -86,9 +86,9 @@ function LocationSearch(props) {
   if (!props.locationState) return null;
   return (
     <div>
-      <div class="field">
-        <label class="label">Location</label>
-        <div class="control">
+      <div className="field">
+        <label className="label">Location</label>
+        <div className="control">
           <input
             className="input"
             type="text"
@@ -103,9 +103,12 @@ function LocationSearch(props) {
           selection below.
         </p>
       </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-success" onClick={props.handlePlaceSubmit}>
+      <div className="field">
+        <p className="control">
+          <button
+            className="button is-success"
+            onClick={props.handlePlaceSubmit}
+          >
             Find Locations
           </button>
         </p>
