@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import LoginForm from "../Auth/LoginForm";
-// import SignupForm from '../Auth/SignupForm';
-// import NoMatch from '../NoMatch';
-// import AUTH from '../../utils/AUTH';
-// import Nav from '../../components/Nav';
-// import Feed from '../Feed';
+
 
 import Hero from "../../components/Hero";
 import Footer from "../../components/Footer";

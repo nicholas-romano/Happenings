@@ -8,6 +8,12 @@ import "../../App.css";
 import LocationSearch from "../LocationSearch/locSearch";
 import placesAPI from "../../utils/placesAPI";
 
+const styles = {
+  revBtn: {
+    backgroundColor: 'rgba(42, 45, 52, 1)'
+  }
+}
+
 const Review = (props) => {
   const [user, setUser] = useState({
     userName: "",
@@ -239,7 +245,7 @@ const Review = (props) => {
           return <ReviewPost key={index} post={post} />;
         })}
       </div>
-      <div className="review-button">
+      <div className="review-button" style={styles.revBtn}>
         <button
           href="review"
           className="button is-link"

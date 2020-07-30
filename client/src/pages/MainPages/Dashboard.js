@@ -33,7 +33,7 @@ function Dashboard(props) {
 
       <div className="columns is-dekstop">
         <div className="column is-two-thirds" style={styles.twothirds}>
-          <NewMap />
+          {/* <NewMap /> */}
         </div>
         <div className="column is-one-third" style={styles.onethird}>
           <Review />
@@ -41,7 +41,7 @@ function Dashboard(props) {
       </div>
       <div className="columns is-desktop" style={styles.full}>
         <div className="column ">
-          <Review />
+          {/* <Review /> */}
         </div>
       </div>
 
