@@ -11,6 +11,7 @@ import Landing from "./pages/MainPages/Landing";
 import Settings from "./pages/Settings";
 import Contact from "./pages/Contact/Contact";
 import Friends from "./pages/Friends/Friends";
+import QuickReview from "./components/QuickReview/QuickReview"
 
 // EXS 16th July 2020 - Added in bulma calls
 import "react-bulma-components/dist/react-bulma-components.min.css";
@@ -101,7 +102,9 @@ function App() {
                   <Route exact path="/settings" component={Settings} />
                   <Route exact path="/contact" component={Contact} />
                   <Route exact path="/friends" component={Friends} />
+                  <Route exact path="/quickreview" component={QuickReview} />
                   <Route component={NoMatch} />
+
                 </Switch>
               </div>
             </div>
