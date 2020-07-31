@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import UsersList from "./UsersList";
@@ -6,14 +6,12 @@ import FriendsList from "./FriendsList";
 import "./friends.css";
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
-import FriendsContext from "../../utils/FriendsContext";
 
 const Friends = () => {
 
      const [friendsUsernames, setFriendsUsernames] = useState([]);
      const [users, setUsers] = useState([]);
      const [thisUser, setThisUser] = useState('');
-     const [addButtonDisabled, setAddButtonDisabled] = useState(false)
 
     useEffect(() => {
         getCurrentUser();
@@ -49,44 +47,20 @@ const Friends = () => {
         .catch(err => console.log('err: ', err))
     }
 
-
-    const addFriend = userName => {
-        console.log('add friend to db ');
-        API.addFriend(userName)
-        .then(res => {
-            console.log('Friend added: ', res);
-        })
-        .catch(err => console.log('err: ', err));
-    }
-
-    const removeFriend = userName => {
-        console.log('remove friend from db ');
-    }
-
-    const handleActionButton = (actionType, userName) => {
-        console.log('userName added: ', userName);
-        if (actionType === "add-friend") {
-            setAddButtonDisabled(true);
-            addFriend(userName);
-        } else if (actionType === "remove-friend") {
-            removeFriend(userName);
-        }
-    }
-
-    return (<>
-        <Header />
-            <FriendsContext.Provider value={{ friendsUsernames, users, thisUser, handleActionButton, addButtonDisabled }}>
-                <div className="columns">
-                    <div className="column">
-                        <UsersList />
+    return (
+        <>
+            <Header />
+                    <div className="columns">
+                        <div className="column">
+                            <UsersList users={users} thisUser={thisUser} />
+                        </div>
+                        <div className="column">
+                            <FriendsList friends={friendsUsernames} />
+                        </div>
                     </div>
-                    <div className="column">
-                        <FriendsList />
-                    </div>
-                </div>
-            </FriendsContext.Provider>
-        <Footer />
-    </>)
+            <Footer />
+        </>
+    )
 };
 
 export default Friends;

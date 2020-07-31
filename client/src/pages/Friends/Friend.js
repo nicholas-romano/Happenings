@@ -1,10 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
-import FriendsContext from "../../utils/FriendsContext";
+import React, { useState, useEffect } from 'react';
 import API from "../../utils/API";
 
 const Friend = props => {
-
-    const { handleActionButton } = useContext(FriendsContext);
 
     const [friendInfo, setFriendInfo] = useState({});
 
@@ -36,6 +33,23 @@ const Friend = props => {
                 })
     }
 
+    const removeFriend = userName => {
+        console.log('removed friend from db ');
+        API.removeFriend(userName)
+        .then(res => {
+            console.log('Friend removed: ', res);
+            window.location.reload();
+        })
+        .catch(err => console.log('err: ', err));
+    }
+
+    const handleButtonClick = event => {
+        console.log('event ', event);
+        event.target.disabled = true;
+        event.target.innerHTML = "Removed";
+        removeFriend(userName);
+    }
+
     return (
         <a className="panel-block">
             <label>
@@ -46,7 +60,7 @@ const Friend = props => {
             {friendInfo.firstName} {friendInfo.lastName} ({friendInfo.userName})
             </label>
             <div className="action-button">
-                <button onClick={() => handleActionButton(actionType, userName)} className={`button is-link ${actionType}`}>{actionButton}</button>
+                <button onClick={handleButtonClick} className={`button is-link ${actionType}`}>{actionButton}</button>
             </div>
         </a>
     )

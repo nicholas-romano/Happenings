@@ -12,3 +12,8 @@
     text-align: left;
     margin-left: 25px;
 }
+
+.panel {
+    background-color: white;
+    margin: 25px 10px;
+}

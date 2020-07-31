@@ -16,6 +16,8 @@ router.route("/:userName")
 router.route("/addFriend/:userName")
   .put(userController.addFriend);
   
+router.route("/removeFriend/:userName")
+  .delete(userController.removeFriend);
 //   .put(reviewsController.update)
 //   .delete(reviewsController.remove);
 

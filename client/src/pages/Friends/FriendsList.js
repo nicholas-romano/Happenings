@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import ListItem from "./Friend";
-import FriendsContext from "../../utils/FriendsContext";
+import React from "react";
 import Friend from './Friend';
 
-const FriendsList = () => {
+const FriendsList = props => {
 
-    const { friendsUsernames } = useContext(FriendsContext);
+    const {
+        friends
+    } = props;
 
     return (<>
                 <nav className="panel">
@@ -20,19 +20,13 @@ const FriendsList = () => {
                         </span>
                         </p>
                     </div>
-                    <p className="panel-tabs">
-                        <a className="is-active">All</a>
-                        <a>Public</a>
-                        <a>Private</a>
-                        <a>Sources</a>
-                        <a>Forks</a>
-                    </p>
+                    
                     {
-                        friendsUsernames.length === 0 ?
+                        friends.length === 0 ?
                         <a className="panel-block">
                             You have not added any friends yet.
                         </a> :
-                        friendsUsernames.map((friend, index) => {
+                        friends.map((friend, index) => {
                             return <Friend friend={friend} key={index} actionType="remove-friend" actionButton="Remove Friend" />
                         })
                     }

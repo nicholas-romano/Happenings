@@ -154,37 +154,51 @@ module.exports = {
     
   },
   addFriend: (req, res) => {
-    console.log('add Friend controller!!!!!');
     const user = req.user.userName;
     const userName = req.params.userName;
-    console.log('your username: ', user);
-    console.log('userName added: ', userName);
+
+    console.log('addFriend controller');
     
     if (req.user) {
 
-      db.User.updateOne(
-        {
-          userName: user
-        },
-        {
-          $push: {
-            friends: [
-              {
-                userName
-              }
-            ],
-          },
-        }
-      )
-        .then((comment) => {
-          res.json(comment);
-        })
-        .catch((err) => {
-          res.json(err);
-        });
+          db.User.updateOne(
+            {
+              userName: user
+            },
+            {
+              $push: {
+                friends: [
+                  {
+                    userName
+                  }
+                ],
+              },
+            }
+          )
+            .then((comment) => {
+              res.json(comment);
+            })
+            .catch((err) => {
+              res.json(err);
+            });
 
     }
     
+  },
+  removeFriend: (req, res) => {
+    if (req.user) {
+
+      db.User.findOneAndUpdate(
+        { userName: req.user.userName },
+        { $pull: { friends: { userName: req.params.userName}}}
+      ).then((friendsList) => {
+        res.json(friendsList);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+
+    }
   },
   register: (req, res) => {
     const { firstName, lastName, userName, password, userEmail, friends, userInterest, profileImg } = req.body;

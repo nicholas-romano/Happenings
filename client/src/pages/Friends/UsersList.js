@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import ListItem from "./Friend";
-import FriendsContext from "../../utils/FriendsContext";
+import React, { useEffect, useState } from 'react';
 import User from './User';
 
 
-const UsersList = () => {
+const UsersList = props => {
 
-    const { users } = useContext(FriendsContext);
-    const { thisUser } = useContext(FriendsContext);
+    const {
+        users,
+        thisUser
+    } = props;
 
     return (
         <nav className="panel">
@@ -22,18 +22,14 @@ const UsersList = () => {
                         </span>
                         </p>
                     </div>
-                    <p className="panel-tabs">
-                        <a className="is-active">All</a>
-                        <a>Public</a>
-                        <a>Private</a>
-                        <a>Sources</a>
-                        <a>Forks</a>
-                    </p>
+                    
                     {
                         users.map((user, index = 1) => {
+                            
                             if (user.userName !== thisUser) {
                                 return <User user={user} key={index} actionType="add-friend" actionButton="Add Friend" />
                             }
+                            
                         })
                     }
                     <div className="panel-block">
