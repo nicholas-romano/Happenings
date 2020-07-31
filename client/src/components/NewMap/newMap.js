@@ -12,9 +12,9 @@ function NewMap() {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: 550,
-    latitude: userLocation.coords.lat,
-    longitude: userLocation.coords.long,
-    zoom: 10,
+    latitude: 0,
+    longitude: 0,
+    zoom: 11,
   });
 
   const [eventState, setEventState] = useState({
@@ -24,6 +24,16 @@ function NewMap() {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setViewport({
+        ...viewport,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
     API.getReviews().then((res) => {
       console.log("Review Response!!!", res.data);
       setEventState({
@@ -31,9 +41,6 @@ function NewMap() {
       });
     });
   }, []);
-
-  console.log("REVIEWS IN STATE!!!!: ", eventState.reviews);
-  // console.log("latitude in state", eventState.reviews[0].reviewGeoLocation[0]);
 
   return (
     <ReactMapGL
@@ -55,7 +62,7 @@ function NewMap() {
               setSelectedEvent(post);
             }}
           >
-            <img src="/marker.png" alt="Location Icon" />
+            <img src="/mapMarkerWhite.png" alt="Location Icon" />
           </button>
         </Marker>
       ))}
