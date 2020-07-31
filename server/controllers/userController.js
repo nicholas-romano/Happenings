@@ -10,6 +10,20 @@ module.exports = {
       return res.json({ user: null });
     }
   },
+  getUsers: (req, res) => {
+    if (req.user) {
+      console.log('getUsers controller function!!!')
+      db.User.find({})
+      .then((users) => {
+          return res.json(users);
+      })
+      .catch(err => {
+          res.json(err);
+      });
+    } else {
+      return res.json({ user: null });
+    }
+  },
   getUserInfo: (req, res) => {
     if (req.user) {
       db.User.find({
@@ -136,6 +150,39 @@ module.exports = {
 
     } else {
       return res.json({ user: null });
+    }
+    
+  },
+  addFriend: (req, res) => {
+    console.log('add Friend controller!!!!!');
+    const user = req.user.userName;
+    const userName = req.params.userName;
+    console.log('your username: ', user);
+    console.log('userName added: ', userName);
+    
+    if (req.user) {
+
+      db.User.updateOne(
+        {
+          userName: user
+        },
+        {
+          $push: {
+            friends: [
+              {
+                userName
+              }
+            ],
+          },
+        }
+      )
+        .then((comment) => {
+          res.json(comment);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+
     }
     
   },

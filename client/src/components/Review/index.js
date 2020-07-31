@@ -15,18 +15,12 @@ const Review = (props) => {
     lastName: ""
   });
   const [showModal, setModal] = useState(false);
+
   const [formObject, setFormObject] = useState({
     title: "",
     message: "",
     rating: 0,
-    location: ""
-  });
-  const [reviewRating, setRatings] = useState(0);
-  const formEl = useRef(null);
-  const [reviews, setReviews] = useState([]);
-
-  const [locationState, setLocationState] = useState({
-    location: "",
+    location: [],
     place: "",
     showButtons: true,
     myCoords: {
@@ -39,6 +33,24 @@ const Review = (props) => {
     }
   });
 
+  const [reviewRating, setRatings] = useState(0);
+  const formEl = useRef(null);
+  const [reviews, setReviews] = useState([]);
+
+  // const [locationState, setLocationState] = useState({
+  //   location: [],
+  //   place: "",
+  //   showButtons: true,
+  //   myCoords: {
+  //     lat: 0,
+  //     long: 0,
+  //   },
+  //   locationCoords: {
+  //     lat: 0,
+  //     long: 0,
+  //   }
+  // });
+
   useEffect(() => {
     AUTH.getUser()
       .then((res) => {
@@ -49,10 +61,22 @@ const Review = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    console.log('locationState location: ', formObject.location);
+  }, [formObject.location]);
+
+  useEffect(() => {
+    console.log('locationState place: ', formObject.place);
+  }, [formObject.place]);
+
+  useEffect(() => {
+    console.log('my coords: ', formObject.myCoords);
+  }, [formObject.myCoords]);
+
   //getting users coords and setting them to state
   navigator.geolocation.getCurrentPosition(function (position) {
-    setLocationState({
-      ...locationState,
+    setFormObject({
+      ...formObject,
       myCoords: {
         lat: position.coords.latitude,
         long: position.coords.longitude,
@@ -60,19 +84,20 @@ const Review = (props) => {
     });
   });
 
+
   //handling the location search
   const handlePlaceSubmit = (event) => {
     event.preventDefault();
 
     //fetching locations that match user input from the places API, setting to location in state
     placesAPI
-      .getPlace(formObject.location, locationState.myCoords)
+      .getPlace(formObject.place, formObject.myCoords)
       .then((res) => {
         console.log(res.data.items);
-        setLocationState({
-          ...locationState,
+        setFormObject({
+          ...formObject,
           location: res.data.items,
-          showButtons: true,
+          showButtons: true
         });
       });
   };
@@ -101,8 +126,8 @@ const Review = (props) => {
 
     console.log("Selection: ", selection);
 
-    setLocationState({
-      ...locationState,
+    setFormObject({
+      ...formObject,
       place: selection,
       showButtons: false,
       locationCoords: {
@@ -138,12 +163,12 @@ const Review = (props) => {
         reviewTitle: formObject.title,
         reviewBody: formObject.message,
         reviewRating: formObject.rating,
-        reviewLocation: formObject.location,
-        reviewLat: locationState.locationCoords.lat,
-        reviewLong: locationState.locationCoords.long,
+        reviewLocation: formObject.place,
+        reviewLat: formObject.locationCoords.lat,
+        reviewLong: formObject.locationCoords.long,
         reviewGeoLocation: [
-          locationState.locationCoords.lat,
-          locationState.locationCoords.long,
+          formObject.locationCoords.lat,
+          formObject.locationCoords.long
         ],
         reviewComments: []
       })
@@ -151,8 +176,8 @@ const Review = (props) => {
           formEl.current.reset();
           setRatings(0);
           setFormObject({ rating: 0 });
-          closeReviewForm();
           loadReviews();
+          closeReviewForm();
         })
         .catch((err) => console.log(err));
     }
@@ -201,18 +226,17 @@ const Review = (props) => {
               />
               <LocationSearch
                 type="text"
-                name="location"
-                title="Location"
-                placeholder="Location (required)"
-                value={formObject.location}
-                locationState={locationState}
+                name="place"
+                title="Place"
+                placeholder="Place (required)"
+                value={formObject.place}
                 setFormObject={setFormObject}
                 formObject={formObject}
                 handlePlaceSubmit={handlePlaceSubmit}
                 handleLocClick={handleLocClick}
               />
               <FormBtn
-                disabled={!(formObject.title && formObject.location)}
+                disabled={!(formObject.title && formObject.place)}
                 onClick={handleSubmit}
               >
                 Submit Review

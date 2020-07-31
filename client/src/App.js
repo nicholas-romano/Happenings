@@ -10,7 +10,7 @@ import Comments from "./components/Review/Comments";
 import Landing from "./pages/MainPages/Landing";
 import Settings from "./pages/Settings";
 import Contact from "./pages/Contact/Contact";
-import Friends from "./pages/Friends/Friends";
+import Friends from "./pages/Friends/";
 
 // EXS 16th July 2020 - Added in bulma calls
 import "react-bulma-components/dist/react-bulma-components.min.css";
