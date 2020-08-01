@@ -3,7 +3,7 @@
 [![GitHub Repo](https://img.shields.io/github/repo-size/SaundersEddie/Happenings?color=Green&style=plastic)](https://github.com/SaundersEddie/Happenings)
 [![Main Repo Language](https://img.shields.io/github/languages/top/SaundersEddie/Happenings?color=blueviolet&style=plastic)](https://github.com/SaundersEddie/Happenings)
 [![Repo Languages](https://img.shields.io/github/languages/count/SaundersEddie/Happenings?color=red&style=plastic)](https://github.com/SaundersEddie/Happenings)
-[![License](https://img.shields.io/github/license/SaundersEddie/Happenings?color=yellow&style=plastic)](https://github.com/SaundersEddie/Happenings)
+[![NPM Package Size](https://badgen.net/badge/bundlephobia/min/react/cyan)](https://github.com/SaundersEddie/Happenings)
 
 A small web based app allowing a user to review and create quickinfo about locations they have visited.
 
