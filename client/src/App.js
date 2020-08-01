@@ -10,8 +10,8 @@ import Comments from "./components/Review/Comments";
 import Landing from "./pages/MainPages/Landing";
 import Settings from "./pages/Settings";
 import Contact from "./pages/Contact/Contact";
-import Friends from "./pages/Friends/Friends";
-import QuickReview from "./components/QuickReview/QuickReview"
+import Friends from "./pages/Friends/";
+import UserLocationContext from "./utils/UserLocationContext";
 
 // EXS 16th July 2020 - Added in bulma calls
 import "react-bulma-components/dist/react-bulma-components.min.css";
@@ -34,6 +34,12 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [loginErr, setLoginErr] = useState("");
+  const [userLocation, setUserLocation] = useState({
+    coords: {
+      lat: 0,
+      long: 0,
+    },
+  });
 
   const history = useHistory();
   console.log("history:", history);
@@ -86,42 +92,60 @@ function App() {
         setLoginErr("Invalid username and password combination.");
       });
   };
+
+  //getting user coordinated to render map and use throughout other components
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setUserLocation({
+        ...userLocation,
+        coords: {
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        },
+      });
+    });
+  }, []);
+
+  console.log("USER LOCATION: ", userLocation);
+
   console.log("loggedIn!!!:", loggedIn);
   return (
-    <div className="App" style={styles.back}>
-      <div className="columns is-gapless is-desktop">
-        <div className="column is-full" style={styles.twothirds}>
-          {loggedIn && (
-            <div>
-              <Nav user={user} logout={logout} />
-              <div className="main-view">
-                <Switch>
-                  <Route exact path="/feed" component={Feed} />
-                  <Route exact path="/review" component={Review} />
-                  <Route exact path="/comments" component={Comments} />
-                  <Route exact path="/settings" component={Settings} />
-                  <Route exact path="/contact" component={Contact} />
-                  <Route exact path="/friends" component={Friends} />
-                  <Route exact path="/quickreview" component={QuickReview} />
-                  <Route component={NoMatch} />
-
-                </Switch>
+    <UserLocationContext.Provider value={userLocation}>
+      <div className="App" style={styles.back}>
+        <div className="columns is-gapless is-desktop">
+          <div className="column is-full" style={styles.twothirds}>
+            {loggedIn && (
+              <div>
+                <Nav user={user} logout={logout} />
+                <div className="main-view">
+                  <Switch>
+                    <Route exact path="/feed" component={Feed} />
+                    <Route exact path="/review" component={Review} />
+                    <Route exact path="/comments" component={Comments} />
+                    <Route exact path="/settings" component={Settings} />
+                    <Route exact path="/contact" component={Contact} />
+                    <Route exact path="/friends" component={Friends} />
+                    <Route component={NoMatch} />
+                  </Switch>
+                </div>
               </div>
-            </div>
-          )}
-          {!loggedIn && (
-            <div className="auth-wrapper" style={{ paddingTop: 11 }}>
-              <Route
-                exact
-                path="/"
-                component={() => <Landing login={login} loginErr={loginErr} />}
-              />
-              <Route exact path="/signup" component={SignupForm} />
-            </div>
-          )}
+            )}
+            {!loggedIn && (
+              <div className="auth-wrapper" style={{ paddingTop: 11 }}>
+                <Route
+                  exact
+                  path="/"
+                  component={() => (
+                    <Landing login={login} loginErr={loginErr} />
+                  )}
+                />
+                <Route exact path="/signup" component={SignupForm} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </UserLocationContext.Provider>
   );
 }
 

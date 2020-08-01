@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Review from "../../components/Review";
 import LocationSearch from "../../components/LocationSearch/locSearch";
 import NewMap from "../../components/NewMap/newMap";
+import QuickReview from "../../components/QuickReview/QuickReview";
 
 const styles = {
   twothirds: {
@@ -37,6 +38,7 @@ function Dashboard(props) {
         </div>
         <div className="column is-one-third" style={styles.onethird}>
           <Review />
+          <QuickReview />
         </div>
       </div>
       <div className="columns is-desktop" style={styles.full}>

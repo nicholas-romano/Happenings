@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Input from "../../components/Form/Input";
 import { Rating, TextArea, FormBtn } from "../Form";
 import ReviewPost from "./ReviewPost";
@@ -7,19 +7,21 @@ import AUTH from "../../utils/AUTH";
 import "../../App.css";
 import LocationSearch from "../LocationSearch/locSearch";
 import placesAPI from "../../utils/placesAPI";
+import UserLocationContext from "../../utils/UserLocationContext";
 
 const Review = (props) => {
+  const userLocation = useContext(UserLocationContext);
+
   const [user, setUser] = useState({
     userName: "",
     firstName: "",
-    lastName: ""
+    lastName: "",
   });
   const [showModal, setModal] = useState(false);
   const [formObject, setFormObject] = useState({
     title: "",
     message: "",
-    rating: 0,
-    location: ""
+    rating: 0
   });
   const [reviewRating, setRatings] = useState(0);
   const formEl = useRef(null);
@@ -30,13 +32,13 @@ const Review = (props) => {
     place: "",
     showButtons: true,
     myCoords: {
-      lat: 0,
-      long: 0,
+      lat: userLocation.coords.lat,
+      long: userLocation.coords.long,
     },
     locationCoords: {
       lat: 0,
       long: 0,
-    }
+    },
   });
 
   useEffect(() => {
@@ -49,16 +51,9 @@ const Review = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-  //getting users coords and setting them to state
-  navigator.geolocation.getCurrentPosition(function (position) {
-    setLocationState({
-      ...locationState,
-      myCoords: {
-        lat: position.coords.latitude,
-        long: position.coords.longitude,
-      },
-    });
-  });
+  // useEffect(() => {
+  //   console.log("reviews: ", reviews);
+  // }, [reviews]);
 
   //handling the location search
   const handlePlaceSubmit = (event) => {
@@ -66,9 +61,9 @@ const Review = (props) => {
 
     //fetching locations that match user input from the places API, setting to location in state
     placesAPI
-      .getPlace(formObject.location, locationState.myCoords)
+      .getPlace(locationState.place, locationState.myCoords)
       .then((res) => {
-        console.log(res.data.items);
+        //console.log(res.data.items);
         setLocationState({
           ...locationState,
           location: res.data.items,
@@ -77,17 +72,6 @@ const Review = (props) => {
       });
   };
 
-  //   const handlePlaceInputChange = (event) => {
-  //     // Getting the value and name of the input which triggered the change
-  //     const value = event.target.value;
-
-  //     // Updating the input's state
-  //     setLocationState({
-  //       ...locationState,
-  //       place: value,
-  //     });
-  //   };
-
   const handleLocClick = (event) => {
     event.preventDefault();
 
@@ -95,11 +79,11 @@ const Review = (props) => {
 
     let latitude = event.target.dataset.latitude;
     let longitude = event.target.dataset.longitude;
-    console.log("longitude:", longitude);
+    //console.log("longitude:", longitude);
 
-    console.log("latitude:", latitude);
+    //console.log("latitude:", latitude);
 
-    console.log("Selection: ", selection);
+    //console.log("Selection: ", selection);
 
     setLocationState({
       ...locationState,
@@ -130,22 +114,22 @@ const Review = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formObject.title && formObject.location) {
-      console.log("formObject: ", formObject);
+    if (formObject.title && locationState.place) {
+      //console.log("formObject: ", formObject);
       API.saveReview({
         reviewOwner: user.userName,
         reviewCreated: time.toLocaleString(),
         reviewTitle: formObject.title,
         reviewBody: formObject.message,
         reviewRating: formObject.rating,
-        reviewLocation: formObject.location,
+        reviewLocation: locationState.place,
         reviewLat: locationState.locationCoords.lat,
         reviewLong: locationState.locationCoords.long,
         reviewGeoLocation: [
           locationState.locationCoords.lat,
           locationState.locationCoords.long,
         ],
-        reviewComments: []
+        reviewComments: [],
       })
         .then((res) => {
           formEl.current.reset();
@@ -172,7 +156,7 @@ const Review = (props) => {
         className={showModal ? "is-active modal" : "modal"}
         id="review-modal"
       >
-      <div className="modal-background"></div>
+        <div className="modal-background"></div>
         <div className="modal-content">
           <div className="form">
             <h2>Write a Review</h2>
@@ -200,19 +184,14 @@ const Review = (props) => {
                 handleRatingChange={handleRatingChange}
               />
               <LocationSearch
-                type="text"
-                name="location"
-                title="Location"
-                placeholder="Location (required)"
-                value={formObject.location}
+                value={locationState.place}
                 locationState={locationState}
-                setFormObject={setFormObject}
-                formObject={formObject}
+                setLocationState={setLocationState}
                 handlePlaceSubmit={handlePlaceSubmit}
                 handleLocClick={handleLocClick}
               />
               <FormBtn
-                disabled={!(formObject.title && formObject.location)}
+                disabled={!(formObject.title && locationState.place)}
                 onClick={handleSubmit}
               >
                 Submit Review

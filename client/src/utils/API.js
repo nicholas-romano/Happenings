@@ -11,8 +11,17 @@ export default {
   getReviewById: function(id) {
     return axios.get("/api/reviews/" + id);
   },
+  getUsers: function() {
+    return axios.get("/api/user/users");
+  },
   updateUser: function(userData) {
     return axios.put("/api/user", userData);
+  },
+  addFriend: function(friendUserName) {
+    return axios.put("/api/user/addFriend/" + friendUserName)
+  },
+  removeFriend: function(friendUserName) {
+    return axios.delete("/api/user/removeFriend/" + friendUserName)
   },
   // Deletes the book with the given id
   // deleteBook: function(id) {

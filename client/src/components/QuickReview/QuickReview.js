@@ -102,7 +102,10 @@ const QuickReview = () => {
 
     return (
         <>
-            <button class="button" onClick={() => setShowModal("is-active")}>Rate Mood</button>
+            <div class="review-button">
+                <button class="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
+            </div>
+
 
             <div id="modal-3dFlipHorizontal-fs" class={newClass}>
                 <div class="modal-content modal-card">
