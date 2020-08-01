@@ -4,7 +4,7 @@ import "./newMap.css";
 import API from "../../utils/API";
 import UserLocationContext from "../../utils/UserLocationContext";
 
-function NewMap() {
+function NewMap({ reviewData }) {
   const userLocation = useContext(UserLocationContext);
 
   console.log("COORDS IN NEWMAP: ", userLocation);
@@ -34,15 +34,20 @@ function NewMap() {
   }, []);
 
   useEffect(() => {
-    API.getReviews().then((res) => {
-      console.log("Review Response!!!", res.data);
-      setEventState({
-        reviews: res.data,
-      });
+    // API.getReviews().then((res) => {
+    //   console.log("Review Response!!!", res.data);
+    //   setEventState({
+    //     reviews: res.data,
+    //   });
+    // });
+    setEventState({
+      reviews: reviewData,
     });
-  }, []);
+  }, [reviewData]);
 
-  return (
+  return viewport.latitude === 0 ? (
+    <h1>loading</h1>
+  ) : (
     <div className="container">
       <ReactMapGL
         {...viewport}

@@ -11,9 +11,9 @@ import UserLocationContext from "../../utils/UserLocationContext";
 
 const styles = {
   revBtn: {
-    backgroundColor: 'rgba(42, 45, 52, 1)'
-  }
-}
+    backgroundColor: "rgba(42, 45, 52, 1)",
+  },
+};
 
 const Review = (props) => {
   const userLocation = useContext(UserLocationContext);
@@ -27,7 +27,7 @@ const Review = (props) => {
   const [formObject, setFormObject] = useState({
     title: "",
     message: "",
-    rating: 0
+    rating: 0,
   });
   const [reviewRating, setRatings] = useState(0);
   const formEl = useRef(null);
@@ -105,6 +105,7 @@ const Review = (props) => {
   const loadReviews = () => {
     API.getReviews()
       .then((res) => {
+        props.setReviewState(res.data);
         return setReviews(res.data);
       })
       .catch((err) => console.log("err ", err));
