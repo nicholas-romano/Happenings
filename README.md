@@ -13,13 +13,13 @@ A small web based app allowing a user to review and create quickinfo about locat
 
 # Table of Contents
 
-- [User Story](#User%20Story)
-- [Build Status](#Build%20Status)
-- [Technology](#Code%20Style%20and%20Technology)
+- [User Story](#User-Story)
+- [Build Status](#Build-Status)
+- [Technology](#Code-Style-and-Technology)
 - [Use](#Usage)
 - [Credits](#Credits)
 - [Notes](#Notes)
-- [Code Repository](#Code%20Repository)
+- [Code Repository](#Code-Repository)
 
 # User Story
 
@@ -29,7 +29,11 @@ Still in pre-production
 
 # Technology
 
-HTML, CSS, React, Bulma CSS, MapQuest
+* HTML5
+* CSS3
+* [Bulma CSS Framework](https://bulma.io/)
+* [Mapbox with React-map-gl](https://github.com/visgl/react-map-gl)
+* React
 
 # Use
 
