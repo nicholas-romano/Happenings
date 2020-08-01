@@ -4,7 +4,7 @@ import "./newMap.css";
 import API from "../../utils/API";
 import UserLocationContext from "../../utils/UserLocationContext";
 
-function NewMap() {
+function NewMap({ reviewData }) {
   const userLocation = useContext(UserLocationContext);
 
   console.log("COORDS IN NEWMAP: ", userLocation);
@@ -34,75 +34,82 @@ function NewMap() {
   }, []);
 
   useEffect(() => {
-    API.getReviews().then((res) => {
-      console.log("Review Response!!!", res.data);
-      setEventState({
-        reviews: res.data,
-      });
+    // API.getReviews().then((res) => {
+    //   console.log("Review Response!!!", res.data);
+    //   setEventState({
+    //     reviews: res.data,
+    //   });
+    // });
+    setEventState({
+      reviews: reviewData,
     });
-  }, []);
+  }, [reviewData]);
 
-  return (
-    <ReactMapGL
-      {...viewport}
-      mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      mapStyle="mapbox://styles/jvernot/ckd80ii7w09rn1imr6fomm1zd"
-      onViewportChange={(nextViewport) => setViewport(nextViewport)}
-    >
-      {eventState.reviews.map((post) => (
-        <Marker
-          key={post._id}
-          latitude={post.reviewLat}
-          longitude={post.reviewLong}
-        >
-          <button
-            className="marker-btn"
-            onClick={(event) => {
-              event.preventDefault();
-              setSelectedEvent(post);
+  return viewport.latitude === 0 ? (
+    <h1>loading</h1>
+  ) : (
+    <div className="container">
+      <ReactMapGL
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapStyle="mapbox://styles/jvernot/ckd80ii7w09rn1imr6fomm1zd"
+        onViewportChange={(nextViewport) => setViewport(nextViewport)}
+      >
+        {eventState.reviews.map((post) => (
+          <Marker
+            key={post._id}
+            latitude={post.reviewLat}
+            longitude={post.reviewLong}
+          >
+            <button
+              className="marker-btn"
+              onClick={(event) => {
+                event.preventDefault();
+                setSelectedEvent(post);
+              }}
+            >
+              <img src="/mapMarkerWhite.png" alt="Location Icon" />
+            </button>
+          </Marker>
+        ))}
+        {selectedEvent ? (
+          <Popup
+            latitude={selectedEvent.reviewLat}
+            longitude={selectedEvent.reviewLong}
+            onClose={() => {
+              setSelectedEvent(null);
             }}
           >
-            <img src="/mapMarkerWhite.png" alt="Location Icon" />
-          </button>
-        </Marker>
-      ))}
-      {selectedEvent ? (
-        <Popup
-          latitude={selectedEvent.reviewLat}
-          longitude={selectedEvent.reviewLong}
-          onClose={() => {
-            setSelectedEvent(null);
-          }}
-        >
-          <div>
-            <div className="card">
-              <div className="card-content">
-                <div className="media">
-                  <div className="media-left">
-                    <figure className="image is-48x48">
-                      <img
-                        src="https://bulma.io/images/placeholders/96x96.png"
-                        alt="Placeholder image"
-                      />
-                    </figure>
+            <div>
+              <div className="card popup-card">
+                <div className="card-content">
+                  <div className="media">
+                    <div className="media-left">
+                      <figure className="image is-48x48">
+                        <img
+                          src="https://bulma.io/images/placeholders/96x96.png"
+                          alt="Placeholder image"
+                        />
+                      </figure>
+                    </div>
+                    <div className="media-content">
+                      <p className="title is-4">{selectedEvent.reviewTitle}</p>
+                      <p class="subtitle is-6">{selectedEvent.reviewOwner}</p>
+                    </div>
                   </div>
-                  <div className="media-content">
-                    <p className="title is-4">{selectedEvent.reviewTitle}</p>
-                    <p class="subtitle is-6">{selectedEvent.reviewOwner}</p>
-                  </div>
-                </div>
 
-                <div className="content">
-                  <p>{selectedEvent.reviewBody}</p>
-                  <br />
-                  <time>{selectedEvent.reviewCreated}</time>
+                  <div className="content">
+                    <p>{selectedEvent.reviewBody}</p>
+                    <br />
+                    <time>{selectedEvent.reviewCreated}</time>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Popup>
-      ) : null}
-    </ReactMapGL>
+          </Popup>
+        ) : null}
+      </ReactMapGL>
+    </div>
   );
 }
 

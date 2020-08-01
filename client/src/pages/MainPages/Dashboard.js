@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Review from "../../components/Review";
@@ -20,6 +20,7 @@ const styles = {
 };
 
 function Dashboard(props) {
+  const [reviewState, setReviewState] = useState([]);
   return (
     <>
       <div>{/* <Nav /> */}</div>
@@ -34,17 +35,15 @@ function Dashboard(props) {
 
       <div className="columns is-dekstop">
         <div className="column is-two-thirds" style={styles.twothirds}>
-          <NewMap />
+          <NewMap reviewData={reviewState} />
         </div>
         <div className="column is-one-third" style={styles.onethird}>
-          <Review />
+          <Review setReviewState={setReviewState} />
           <QuickReview />
         </div>
       </div>
       <div className="columns is-desktop" style={styles.full}>
-        <div className="column ">
-          {/* <Review /> */}
-        </div>
+        <div className="column ">{/* <Review /> */}</div>
       </div>
 
       <div>

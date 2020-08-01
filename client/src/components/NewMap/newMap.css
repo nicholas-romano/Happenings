@@ -8,3 +8,12 @@
   width: 30px;
   height: 30px;
 }
+
+.mapboxgl-popup-close-button {
+  color: red;
+}
+
+.popup-card {
+  margin: 11px;
+  width: 18em;
+}
