@@ -9,6 +9,12 @@ import LocationSearch from "../LocationSearch/locSearch";
 import placesAPI from "../../utils/placesAPI";
 import UserLocationContext from "../../utils/UserLocationContext";
 
+const styles = {
+  revBtn: {
+    backgroundColor: 'rgba(42, 45, 52, 1)'
+  }
+}
+
 const Review = (props) => {
   const userLocation = useContext(UserLocationContext);
 
@@ -210,7 +216,7 @@ const Review = (props) => {
           return <ReviewPost key={index} post={post} />;
         })}
       </div>
-      <div className="review-button">
+      <div className="review-button" style={styles.revBtn}>
         <button
           href="review"
           className="button is-link"

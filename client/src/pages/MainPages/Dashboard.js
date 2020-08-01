@@ -12,7 +12,7 @@ const styles = {
     backgroundColor: "rgba(183, 209, 218, 1)",
   },
   onethird: {
-    backgroundColor: "rgba(163, 124, 64, 1)",
+    backgroundColor: "rgba(183, 209, 218, 1)",
   },
   full: {
     backgroundColor: "rgba(42, 45, 52, 1)",
@@ -43,7 +43,7 @@ function Dashboard(props) {
       </div>
       <div className="columns is-desktop" style={styles.full}>
         <div className="column ">
-          <Review />
+          {/* <Review /> */}
         </div>
       </div>
 
