@@ -11,9 +11,9 @@ const Header = () => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/feed">
+        <Link className="navbar-item" to="/feed">
           <img src={Icon} alt="LogoIcon" />
-        </a>
+        </Link>
         <a
           href="feed"
           className="navbar-burger burger"
@@ -29,9 +29,9 @@ const Header = () => {
       </div>
       <div className="navbar-menu">
         <div className="navbar-end">
-          <a href="feed" className="navbar-item">
+          <Link to="feed" className="navbar-item">
             Home
-          </a>
+          </Link>
           <Link to="/friends" className="navbar-item">
             Friends
           </Link>
