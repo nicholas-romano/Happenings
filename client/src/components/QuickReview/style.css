@@ -7,10 +7,20 @@ font-size: 100px;
 margin: 25px;
 }
 
+.safety-container {
+    margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+
 .icon {
     margin: 10px;
 }
 
 .btn {
     margin: 25px
+}
+
+ul {
+    text-align: left;
 }
