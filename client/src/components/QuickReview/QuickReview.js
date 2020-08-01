@@ -71,10 +71,10 @@ const QuickReview = () => {
                     <br></br>
                     <div>
                         <button className="icon" onClick={() => setSafety(1)}>1</button> Threatened
-                        <button className="icon" onClick={() => setSafety(2)}>2</button> Concverned
+                        <button className="icon" onClick={() => setSafety(2)}>2</button> Concerned
                         <button className="icon" onClick={() => setSafety(4)}>3</button> Neutral
                         <button className="icon" onClick={() => setSafety(4)}>4</button> Safe
-                        <button className="icon" onClick={() => setSafety(5)}>5</button> Comfy
+                        <button className="icon" onClick={() => setSafety(5)}>5</button> Comfortable
                     </div>
                 </>
             )
