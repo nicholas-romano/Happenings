@@ -48,6 +48,8 @@
     "react-hook-form": "^6.0.8",
     "react-map-gl": "^5.2.7",
     "react-scripts": "^3.4.1",
+    "react-slick": "^0.27.1",
+    "slick-carousel": "^1.8.1",
     "start": "^5.1.0"
   }
 }
