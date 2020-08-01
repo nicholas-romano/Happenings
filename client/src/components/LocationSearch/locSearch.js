@@ -73,15 +73,15 @@ function LocationSearch(props) {
   return (
     <div>
       <div className="field">
-        <label className="label">Location</label>
+      <label className="label">Place</label>
         <div className="control">
           <input
-            className="input"
             type="text"
-            placeholder="Search here"
-            value={props.value}
-            onChange={props.handleInputChange}
-            name="location"
+            className="input" 
+            placeholder="Search here (required)"
+            name="place"
+            defaultValue={props.value}
+            onChange={e => props.setLocationState({...props.locationState, place: e.target.value})}
           />
         </div>
         <p className="help">
@@ -104,8 +104,8 @@ function LocationSearch(props) {
       <div>
         {props.locationState.location.length > 0 ? (
           props.locationState.location.map((key, i) => {
-            console.log("Key Inside Map: ", key);
-            console.log(props.locationState.showButtons);
+            //console.log("Key Inside Map: ", key);
+            //console.log(props.locationState.showButtons);
             return (
               <button
                 style={{

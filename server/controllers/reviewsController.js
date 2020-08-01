@@ -13,7 +13,7 @@ module.exports = {
     }
   },
   findById: (req, res) => {
-    console.log("req.params.id: ", req.params.id);
+    //console.log("req.params.id: ", req.params.id);
     if (req.user) {
       db.Reviews.find({
         _id: req.params.id,
@@ -25,7 +25,7 @@ module.exports = {
     }
   },
   create: (req, res) => {
-    console.log("review submitted: ", req.body);
+    //console.log("review submitted: ", req.body);
     const {
       reviewOwner,
       reviewCreated,
@@ -36,7 +36,7 @@ module.exports = {
       reviewLat,
       reviewLong,
       reviewGeoLocation,
-      reviewComments,
+      reviewComments
     } = req.body;
     if (req.user) {
       db.Reviews.create({
@@ -49,7 +49,7 @@ module.exports = {
         reviewLat,
         reviewLong,
         reviewGeoLocation,
-        reviewComments,
+        reviewComments
       })
         .then((dbReview) => {
           res.json(dbReview);
@@ -71,7 +71,7 @@ module.exports = {
             {
               user,
               message,
-              time,
+              time
             },
           ],
         },
