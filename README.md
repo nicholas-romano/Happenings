@@ -15,8 +15,8 @@ A small web based app allowing a user to review and create quickinfo about locat
 
 - [User Story](#User-Story)
 - [Build Status](#Build-Status)
-- [Technology](#Code-Style-and-Technology)
-- [Use](#Usage)
+- [Technology](#Technology)
+- [Use](#Use)
 - [Credits](#Credits)
 - [Notes](#Notes)
 - [Code Repository](#Code-Repository)
