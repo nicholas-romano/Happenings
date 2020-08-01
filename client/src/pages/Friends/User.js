@@ -10,8 +10,6 @@ const User = props => {
     } = props.user;
 
     const {
-        actionButton,
-        actionType,
         addFriend
     } = props;
 
@@ -32,7 +30,7 @@ const User = props => {
             {firstName} {lastName} ({userName})
             </label>
             <div className="action-button">
-                <button onClick={handleButtonClick} className={`button is-link ${actionType}`}>{actionButton}</button>
+                <button onClick={handleButtonClick} className="button is-link add-friend">Add Friend</button>
             </div>
         </a>
     )

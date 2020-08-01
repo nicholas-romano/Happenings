@@ -51,7 +51,7 @@ const Friend = props => {
             {friendInfo.firstName} {friendInfo.lastName} ({friendInfo.userName})
             </label>
             <div className="action-button">
-                <button onClick={handleButtonClick} className={`button is-link ${actionType}`}>{actionButton}</button>
+                <button onClick={handleButtonClick} className="button is-link remove-friend">Remove Friend</button>
             </div>
         </a>
     )
