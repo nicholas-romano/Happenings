@@ -123,8 +123,8 @@ function LocationSearch(props) {
             );
           })
         ) : (
-          <div></div>
-        )}
+            <div></div>
+          )}
       </div>
     </div>
   );

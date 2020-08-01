@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Nav from '../Nav'; EXS 19th July 2020 - commented out as unused at this time
 
-// import Nav from '../Nav';
 import Icon from "../../assets/HapLogoIcon.png";
 import "react-bulma-components/dist/react-bulma-components.min.css";
 // import LocationSearch from '../LocationSearch/locSearch';

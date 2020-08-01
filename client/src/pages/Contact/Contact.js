@@ -31,7 +31,7 @@ const Contact = () => {
             <img className="imageSize" src={gitHubIcon} alt="git hub logo" />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/richardjkessler/"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -43,14 +43,14 @@ const Contact = () => {
             />
           </a>
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/richard.kessler.180/"
             target="_blank"
             rel="noopener noreferrer"
           >
             {" "}
             <img className="imageSize" src={facebookIcon} alt="facebook logo" />
           </a>
-          <a href="mailto:noemail@noemail.com">
+          <a href="mailto:KesslerRichardJ@gmail.com">
             {" "}
             <img className="imageSize" src={emailIcon} alt="email logo" />
           </a>
