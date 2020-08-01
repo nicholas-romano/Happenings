@@ -75,7 +75,7 @@ function NewMap() {
           }}
         >
           <div>
-            <div className="card">
+            <div className="card popup-card">
               <div className="card-content">
                 <div className="media">
                   <div className="media-left">
