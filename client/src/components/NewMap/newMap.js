@@ -12,9 +12,9 @@ function NewMap() {
   const [viewport, setViewport] = useState({
     width: "100%",
     height: 550,
-    latitude: userLocation.coords.lat,
-    longitude: userLocation.coords.long,
-    zoom: 10,
+    latitude: 0,
+    longitude: 0,
+    zoom: 11,
   });
 
   const [eventState, setEventState] = useState({
@@ -24,6 +24,16 @@ function NewMap() {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setViewport({
+        ...viewport,
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
     API.getReviews().then((res) => {
       console.log("Review Response!!!", res.data);
       setEventState({
@@ -31,9 +41,6 @@ function NewMap() {
       });
     });
   }, []);
-
-  console.log("REVIEWS IN STATE!!!!: ", eventState.reviews);
-  // console.log("latitude in state", eventState.reviews[0].reviewGeoLocation[0]);
 
   return (
     <ReactMapGL
@@ -55,7 +62,7 @@ function NewMap() {
               setSelectedEvent(post);
             }}
           >
-            <img src="/marker.png" alt="Location Icon" />
+            <img src="/mapMarkerWhite.png" alt="Location Icon" />
           </button>
         </Marker>
       ))}
@@ -68,8 +75,30 @@ function NewMap() {
           }}
         >
           <div>
-            <h2>{selectedEvent.reviewTitle}</h2>
-            <p>{`${selectedEvent.reviewBody}`}</p>
+            <div className="card">
+              <div className="card-content">
+                <div className="media">
+                  <div className="media-left">
+                    <figure className="image is-48x48">
+                      <img
+                        src="https://bulma.io/images/placeholders/96x96.png"
+                        alt="Placeholder image"
+                      />
+                    </figure>
+                  </div>
+                  <div className="media-content">
+                    <p className="title is-4">{selectedEvent.reviewTitle}</p>
+                    <p class="subtitle is-6">{selectedEvent.reviewOwner}</p>
+                  </div>
+                </div>
+
+                <div className="content">
+                  <p>{selectedEvent.reviewBody}</p>
+                  <br />
+                  <time>{selectedEvent.reviewCreated}</time>
+                </div>
+              </div>
+            </div>
           </div>
         </Popup>
       ) : null}
