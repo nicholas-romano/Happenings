@@ -10,7 +10,7 @@ import Comments from "./components/Review/Comments";
 import Landing from "./pages/MainPages/Landing";
 import Settings from "./pages/Settings";
 import Contact from "./pages/Contact/Contact";
-import Friends from "./pages/Friends/Friends";
+import Friends from "./pages/Friends/";
 import UserLocationContext from "./utils/UserLocationContext";
 
 // EXS 16th July 2020 - Added in bulma calls
