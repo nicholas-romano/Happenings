@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import Input from "../../components/Form/Input";
 import { Rating, TextArea, FormBtn } from "../Form";
 import ReviewPost from "./ReviewPost";
+import FriendsFeed from "./FriendsFeed";
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
 import "../../App.css";
@@ -11,9 +12,9 @@ import UserLocationContext from "../../utils/UserLocationContext";
 
 const styles = {
   revBtn: {
-    backgroundColor: 'rgba(42, 45, 52, 1)'
-  }
-}
+    backgroundColor: "rgba(42, 45, 52, 1)",
+  },
+};
 
 const Review = (props) => {
   const userLocation = useContext(UserLocationContext);
@@ -23,11 +24,13 @@ const Review = (props) => {
     firstName: "",
     lastName: "",
   });
+  const [friendsUsernames, setFriendsUsernames] = useState([]);
+
   const [showModal, setModal] = useState(false);
   const [formObject, setFormObject] = useState({
     title: "",
     message: "",
-    rating: 0
+    rating: 0,
   });
   const [reviewRating, setRatings] = useState(0);
   const formEl = useRef(null);
@@ -57,9 +60,27 @@ const Review = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-  // useEffect(() => {
-  //   console.log("reviews: ", reviews);
-  // }, [reviews]);
+  useEffect(() => {
+    console.log("get friends for user: ", user);
+    getUserFriends(user.userName);
+  }, [user]);
+
+  useEffect(() => {
+    console.log("friendsUsernames: ", friendsUsernames);
+    if (friendsUsernames.length > 0) {
+      console.log('user has friends');
+      //API.getUserReviews()
+    }
+  }, [friendsUsernames]);
+
+  const getUserFriends = userName => {
+    API.getUserInfo(userName).then(res => {
+        if (res.data[0].friends.length > 0) {
+            setFriendsUsernames(res.data[0].friends);
+            return;
+        }
+    })
+}
 
   //handling the location search
   const handlePlaceSubmit = (event) => {
@@ -105,6 +126,7 @@ const Review = (props) => {
   const loadReviews = () => {
     API.getReviews()
       .then((res) => {
+        props.setReviewState(res.data);
         return setReviews(res.data);
       })
       .catch((err) => console.log("err ", err));
@@ -212,6 +234,8 @@ const Review = (props) => {
         ></button>
       </div>
       <div className="review-posts">
+        <FriendsFeed />
+        {/* All Reviews */}
         {reviews.map((post, index) => {
           return <ReviewPost key={index} post={post} />;
         })}
