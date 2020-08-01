@@ -47,7 +47,7 @@ const reviewsSeed = [
     reviewLat: 35.711264,
     reviewLong: -78.614171,
     reviewGeoLocation: [35.711264, -78.614171],
-    reviewComments: []
+    reviewComments: [],
   },
 ];
 
@@ -71,6 +71,104 @@ const userSeed = [
     userInterest: ["Beer", "Scotch", "Food"],
   },
 ];
+
+const emojiTagSeed = [
+  {
+    emojiType: [
+      "😀",
+      "😃",
+      "😄",
+      "😁",
+      "😆",
+      "😅",
+      "😂",
+      "🤣",
+      "☺️",
+      "😊",
+      "😇",
+      "🙂",
+      "🙃",
+      "😉",
+      "😌",
+      "😍",
+      "🥰",
+      "😘",
+      "😗",
+      "😙",
+      "😚",
+      "😋",
+      "😛",
+      "😝",
+      "😜",
+      "🤪",
+      "🤨",
+      "🧐",
+      "🤓",
+      "😎",
+      "🤩",
+      "🥳",
+      "😏",
+      "😒",
+      "😞",
+      "😔",
+      "😟",
+      "😕",
+      "🙁",
+      "☹️",
+      "😣",
+      "😖",
+      "😫",
+      "😩",
+      "🥺",
+      "😢",
+      "😭",
+      "😤",
+      "😠",
+      "😡",
+      "🤬",
+      "🤯",
+      "😳",
+      "🥵",
+      "🥶",
+      "😱",
+      "😨",
+      "😰",
+      "😥",
+      "😓",
+      "🤗",
+      "🤔",
+      "🤭",
+      "🤫",
+      "🤥",
+      "😶",
+      "😐",
+      "😑",
+      "😬",
+      "🙄",
+      "😯",
+      "😦",
+      "😧",
+      "😮",
+      "😲",
+      "🥱",
+      "😴",
+      "🤤",
+      "😪",
+      "😵",
+      "🤐",
+      "🥴",
+      "🤢",
+      "🤮",
+      "🤧",
+      "😷",
+      "🤒",
+      "🤕",
+      "🤑",
+    ],
+    tagType: ["Dickbag", "Good", "Bad", "Great", "Beer", "Food", "Party"],
+  },
+];
+
 // EXS When we execture the seedsDB, this removes all entries and then insert the records above
 // Optimize this code later
 
@@ -113,6 +211,18 @@ db.LocationEvents.deleteMany({})
 db.User.deleteMany({})
   .then(console.log("Adding A User"))
   .then(() => db.User.collection.insertMany(userSeed))
+  .then((data) => {
+    console.log(data.result.n + " user records inserted!");
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+
+db.EmojiTag.deleteMany({})
+  .then(console.log("Adding A User"))
+  .then(() => db.EmojiTag.collection.insertMany(emojiTagSeed))
   .then((data) => {
     console.log(data.result.n + " user records inserted!");
     process.exit(0);

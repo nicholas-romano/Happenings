@@ -1,35 +1,89 @@
+// import React from "react";
+
+// function LocationSearch(props) {
+//   if (!props.locationState) return null;
+
+//   // const { setFormObject, formObject, type, name, title, placeholder } = props;
+
+//   return (
+//     <div>
+//       <div className="field">
+//         <label className="label">Location</label>
+//         <div className="control">
+//           <input
+//             className="input"
+//             type="text"
+//             placeholder="Search here"
+//             value={props.value}
+//             onChange={props.handleInputChange}
+//             name="location"
+//           />
+//         </div>
+//         <p className="help">
+//           Search for a park, restaurant, or location by name. Confirm your
+//           selection below.
+//         </p>
+//       </div>
+//       <div className="field">
+//         <p className="control">
+//           <button
+//             className="button is-success"
+//             onClick={props.handlePlaceSubmit}
+//           >
+//             Find Locations
+//           </button>
+//         </p>
+//       </div>
+//       {/* conditional rendering the buttons to display the places matching the users search */}
+//       <div>
+//         {props.locationState.location.length > 0 ? (
+//           props.locationState.location.map((key, i) => {
+//             console.log("Key Inside Map: ", key);
+//             console.log(props.locationState.showButtons);
+//             return (
+//               <button
+//                 style={{
+//                   display: props.locationState.showButtons ? "" : "none",
+//                 }}
+//                 key={key.id}
+//                 value={key.title}
+//                 data-latitude={key.position.lat}
+//                 data-longitude={key.position.lng}
+//                 className="button"
+//                 onClick={props.handleLocClick}
+//               >
+//                 {`${key.title} - ${key.address.houseNumber} ${key.address.street}, ${key.address.city}`}
+//               </button>
+//             );
+//           })
+//         ) : (
+//           <div></div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default LocationSearch;
+
 import React from "react";
 
-import Input from "../../components/Form/Input";
-
 function LocationSearch(props) {
- 
-  if (!props.formObject) return null;
-
-  const { 
-    setFormObject, 
-    formObject,
-    type, 
-    name, 
-    title, 
-    placeholder, 
-    value, 
-    handlePlaceSubmit, 
-    handleLocClick 
-  } = props;
-
+  if (!props.locationState) return null;
   return (
     <div>
-        <Input
-            name={name}
-            title={title}
-            type={type}
-            setFormObject={setFormObject}
-            formObject={formObject}
-            value={value}
-            placeholder={placeholder}
-        />
       <div className="field">
+      <label className="label">Place</label>
+        <div className="control">
+          <input
+            type="text"
+            className="input" 
+            placeholder="Search here (required)"
+            name="place"
+            defaultValue={props.value}
+            onChange={e => props.setLocationState({...props.locationState, place: e.target.value})}
+          />
+        </div>
         <p className="help">
           Search for a park, restaurant, or location by name. Confirm your
           selection below.
@@ -37,30 +91,34 @@ function LocationSearch(props) {
       </div>
       <div className="field">
         <p className="control">
-          <button className="button is-success" onClick={handlePlaceSubmit}>
+          <button
+            className="button is-success"
+            onClick={props.handlePlaceSubmit}
+          >
             Find Locations
           </button>
         </p>
       </div>
 
+      {/* conditional rendering the buttons to display the places matching the users search */}
       <div>
-        {formObject.location !== undefined ? (
-          formObject.location.map((key, i) => {
-            console.log("Key Inside Map: ", key);
-            console.log('show button: ', formObject.showButtons);
+        {props.locationState.location.length > 0 ? (
+          props.locationState.location.map((key, i) => {
+            //console.log("Key Inside Map: ", key);
+            //console.log(props.locationState.showButtons);
             return (
               <button
                 style={{
-                  display: formObject.showButtons ? "" : "none",
+                  display: props.locationState.showButtons ? "" : "none",
                 }}
                 key={key.id}
                 value={key.title}
                 data-latitude={key.position.lat}
                 data-longitude={key.position.lng}
                 className="button"
-                onClick={handleLocClick}
+                onClick={props.handleLocClick}
               >
-                 {`${key.title} - ${key.address.houseNumber} ${key.address.street}, ${key.address.city}`}
+                {`${key.title} - ${key.address.houseNumber} ${key.address.street}, ${key.address.city}`}
               </button>
             );
           })
