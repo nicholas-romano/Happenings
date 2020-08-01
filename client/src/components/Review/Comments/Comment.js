@@ -36,8 +36,8 @@ const Comment = props => {
                         <div className="card-content">
                             <div className="media">
                             <div className="media-left">
-                                <figure className="image is-48x48">
-                                    <img src={(photo !== "") ? photo : "https://bulma.io/images/placeholders/96x96.png"} alt="Comment Owner" />
+                                <figure className="image is-96x96">
+                                    <img src={(photo !== "") ? photo : "https://bulma.io/images/placeholders/96x96.png"} width="96" height="96" alt="Comment Owner" />
                                 </figure>
                             </div>
                             <div className="media-content">
