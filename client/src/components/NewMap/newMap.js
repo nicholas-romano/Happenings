@@ -75,8 +75,30 @@ function NewMap() {
           }}
         >
           <div>
-            <h2>{selectedEvent.reviewTitle}</h2>
-            <p>{`${selectedEvent.reviewBody}`}</p>
+            <div className="card">
+              <div className="card-content">
+                <div className="media">
+                  <div className="media-left">
+                    <figure className="image is-48x48">
+                      <img
+                        src="https://bulma.io/images/placeholders/96x96.png"
+                        alt="Placeholder image"
+                      />
+                    </figure>
+                  </div>
+                  <div className="media-content">
+                    <p className="title is-4">{selectedEvent.reviewTitle}</p>
+                    <p class="subtitle is-6">{selectedEvent.reviewOwner}</p>
+                  </div>
+                </div>
+
+                <div className="content">
+                  <p>{selectedEvent.reviewBody}</p>
+                  <br />
+                  <time>{selectedEvent.reviewCreated}</time>
+                </div>
+              </div>
+            </div>
           </div>
         </Popup>
       ) : null}
