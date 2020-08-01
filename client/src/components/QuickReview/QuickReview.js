@@ -2,7 +2,13 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./style.css"
+import "./style.css";
+
+const styles = {
+    revBtn: {
+        backgroundColor: 'rgba(42, 45, 52, 1)'
+    }
+}
 
 const QuickReview = () => {
 
@@ -102,7 +108,7 @@ const QuickReview = () => {
 
     return (
         <>
-            <div class="review-button">
+            <div class="review-button" style={styles.revBtn}>
                 <button class="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
             </div>
 
