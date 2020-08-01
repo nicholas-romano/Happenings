@@ -10,6 +10,20 @@ module.exports = {
       return res.json({ user: null });
     }
   },
+  getUsers: (req, res) => {
+    if (req.user) {
+      console.log('getUsers controller function!!!')
+      db.User.find({})
+      .then((users) => {
+          return res.json(users);
+      })
+      .catch(err => {
+          res.json(err);
+      });
+    } else {
+      return res.json({ user: null });
+    }
+  },
   getUserInfo: (req, res) => {
     if (req.user) {
       db.User.find({
@@ -138,6 +152,53 @@ module.exports = {
       return res.json({ user: null });
     }
     
+  },
+  addFriend: (req, res) => {
+    const user = req.user.userName;
+    const userName = req.params.userName;
+
+    console.log('addFriend controller');
+    
+    if (req.user) {
+
+          db.User.updateOne(
+            {
+              userName: user
+            },
+            {
+              $push: {
+                friends: [
+                  {
+                    userName
+                  }
+                ],
+              },
+            }
+          )
+            .then((comment) => {
+              res.json(comment);
+            })
+            .catch((err) => {
+              res.json(err);
+            });
+
+    }
+    
+  },
+  removeFriend: (req, res) => {
+    if (req.user) {
+
+      db.User.findOneAndUpdate(
+        { userName: req.user.userName },
+        { $pull: { friends: { userName: req.params.userName}}}
+      ).then((friendsList) => {
+        res.json(friendsList);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+
+    }
   },
   register: (req, res) => {
     const { firstName, lastName, userName, password, userEmail, friends, userInterest, profileImg } = req.body;

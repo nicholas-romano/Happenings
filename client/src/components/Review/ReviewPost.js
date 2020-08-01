@@ -44,7 +44,7 @@ const ReviewPost = (props) => {
                     <div className="media">
                     <div className="media-left">
                         <figure className="image is-48x48">
-                            <img src={(profileImg !== "") ? profileImg : "https://bulma.io/images/placeholders/96x96.png"} alt={postOwner} />
+                            <img src={(profileImg !== "") ? profileImg : "https://bulma.io/images/placeholders/96x96.png"} width="96" height="96" alt={postOwner} />
                         </figure>
                     </div>
                     <div className="media-content">

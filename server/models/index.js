@@ -5,4 +5,5 @@ module.exports = {
   Places: require("./places"),
   Reviews: require("./reviews"),
   User: require("./user"),
+  EmojiTag: require("./emojis"),
 };
