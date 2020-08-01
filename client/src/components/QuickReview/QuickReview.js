@@ -108,23 +108,23 @@ const QuickReview = () => {
 
     return (
         <>
-            <div class="review-button" style={styles.revBtn}>
-                <button class="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
+            <div className="review-button" style={styles.revBtn}>
+                <button className="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
             </div>
 
 
-            <div id="modal-3dFlipHorizontal-fs" class={newClass}>
-                <div class="modal-content modal-card">
-                    <section class="modal-card-body my-container">
+            <div id="modal-3dFlipHorizontal-fs" className={newClass}>
+                <div className="modal-content modal-card">
+                    <section className="modal-card-body my-container">
 
                         <div >
                             {questions()}
                         </div >
 
                     </section>
-                    <footer class="modal-card-foot">
+                    <footer className="modal-card-foot">
 
-                        <button onClick={() => setShowModal("")} class="modal-button-close button">Exit</button>
+                        <button onClick={() => setShowModal("")} className="modal-button-close button">Exit</button>
 
                     </footer>
                 </div>

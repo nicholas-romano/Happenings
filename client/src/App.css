@@ -53,6 +53,13 @@
     text-align: left;
   }
 
+  .review-post h2 {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+  }
+
   .review-posts {
     max-height: 500px;
     overflow-y: scroll;

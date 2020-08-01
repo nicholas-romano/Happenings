@@ -13,7 +13,7 @@ const ReviewPost = (props) => {
         reviewRating,
         reviewLocation,
         reviewCreated,
-        reviewComments,
+        reviewComments
     } = props.post;
 
     const [profileImg, setProfileImg] = useState('');
