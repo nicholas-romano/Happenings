@@ -20,8 +20,8 @@ const Friends = props => {
                                         {
                                             friendsList.map((friend, index) => {
                                                 index += 1;
-                                                return (<li key={index}>{index}. {friend} 
-                                                            <button className="delete-icon" onClick={() => deleteFriend(index, friendsList)}>
+                                                return (<li key={index}>{index}. {friend.userName} 
+                                                            <button className="delete-icon" onClick={() => deleteFriend(index)}>
                                                                 <span className="fas fa-minus-circle"></span>
                                                             </button>
                                                         </li>)

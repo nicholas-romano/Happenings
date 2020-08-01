@@ -56,7 +56,8 @@ const Settings = () => {
         API.getUserInfo(userName)
             .then(res => {
             console.log('getUserInfo: ', res);
-            const { firstName, lastName, profileImg, userEmail, userInterest, friends} = res.data[0];
+            const { firstName, lastName, profileImg, userEmail, userInterest } = res.data[0];
+            const friends = res.data[0].friends;
             setUserData({ 
                 "Username:": userName,
                 "First Name:": firstName,
