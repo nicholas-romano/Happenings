@@ -18,6 +18,22 @@ const Friends = () => {
         getAllUsersInfo();
     }, []);
 
+    useEffect(() => {
+
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i].userName;
+            for (let j = 0; j < friendsUsernames.length; j++) {
+                const friend = friendsUsernames[j].userName;
+                if (user === friend) {
+                    const deleteItem = users[i];
+                    const newUserList = users.filter(user => user !== deleteItem);
+                    setUsers(newUserList);
+                }
+            }
+        }
+
+    }, [users, friendsUsernames]);
+
     const getCurrentUser = () => {
         AUTH.getUser()
         .then(res => {
@@ -47,15 +63,35 @@ const Friends = () => {
         .catch(err => console.log('err: ', err))
     }
 
+    const addFriend = userName => {
+        console.log('add friend to db ');
+        API.addFriend(userName)
+        .then(res => {
+            console.log('Friend added: ', res);
+            window.location.reload();
+        })
+        .catch(err => console.log('err: ', err));
+    }
+
+    const removeFriend = userName => {
+        console.log('removed friend from db ');
+        API.removeFriend(userName)
+        .then(res => {
+            console.log('Friend removed: ', res);
+            window.location.reload();
+        })
+        .catch(err => console.log('err: ', err));
+    }
+
     return (
         <>
             <Header />
                     <div className="columns">
                         <div className="column">
-                            <UsersList users={users} thisUser={thisUser} />
+                            <UsersList users={users} thisUser={thisUser} addFriend={addFriend} />
                         </div>
                         <div className="column">
-                            <FriendsList friends={friendsUsernames} />
+                            <FriendsList friends={friendsUsernames} removeFriend={removeFriend} />
                         </div>
                     </div>
             <Footer />

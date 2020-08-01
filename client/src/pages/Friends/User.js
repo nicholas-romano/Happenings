@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import API from "../../utils/API";
 
 const User = props => {
 
@@ -7,23 +6,14 @@ const User = props => {
         userName,
         firstName,
         lastName,
-        profileImg
+        profileImg,
     } = props.user;
 
     const {
         actionButton,
-        actionType
+        actionType,
+        addFriend
     } = props;
-
-    const addFriend = userName => {
-        console.log('add friend to db ');
-        API.addFriend(userName)
-        .then(res => {
-            console.log('Friend added: ', res);
-            window.location.reload();
-        })
-        .catch(err => console.log('err: ', err));
-    }
 
     const handleButtonClick = event => {
         console.log('event ', event);

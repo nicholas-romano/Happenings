@@ -11,7 +11,8 @@ const Friend = props => {
 
     const {
         actionButton,
-        actionType
+        actionType,
+        removeFriend
     } = props;
 
     useEffect(() => {
@@ -31,16 +32,6 @@ const Friend = props => {
                         } 
                     )
                 })
-    }
-
-    const removeFriend = userName => {
-        console.log('removed friend from db ');
-        API.removeFriend(userName)
-        .then(res => {
-            console.log('Friend removed: ', res);
-            window.location.reload();
-        })
-        .catch(err => console.log('err: ', err));
     }
 
     const handleButtonClick = event => {

@@ -106,13 +106,13 @@ const Settings = () => {
 
     const deleteInterest = index => {
         const deleteItem = interestList[index - 1];
-        const newList = interestList.filter(interest => interest != deleteItem);
+        const newList = interestList.filter(interest => interest !== deleteItem);
         setInterestList(newList);
     }
 
     const deleteFriend = index => {
         const deleteItem = friendsList[index - 1];
-        const newList = friendsList.filter(friend => friend != deleteItem);
+        const newList = friendsList.filter(friend => friend !== deleteItem);
         setFriendsList(newList);
     }
 

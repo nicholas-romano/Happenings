@@ -6,7 +6,8 @@ const UsersList = props => {
 
     const {
         users,
-        thisUser
+        thisUser,
+        addFriend
     } = props;
 
     return (
@@ -27,16 +28,11 @@ const UsersList = props => {
                         users.map((user, index = 1) => {
                             
                             if (user.userName !== thisUser) {
-                                return <User user={user} key={index} actionType="add-friend" actionButton="Add Friend" />
+                                return <User user={user} key={index} addFriend={addFriend} actionType="add-friend" actionButton="Add Friend" />
                             }
                             
                         })
                     }
-                    <div className="panel-block">
-                        <button className="button is-link is-outlined is-fullwidth">
-                        Reset all filters
-                        </button>
-                    </div>
                 </nav>
     )  
 }

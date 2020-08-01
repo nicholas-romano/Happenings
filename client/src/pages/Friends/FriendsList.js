@@ -4,7 +4,8 @@ import Friend from './Friend';
 const FriendsList = props => {
 
     const {
-        friends
+        friends,
+        removeFriend
     } = props;
 
     return (<>
@@ -27,7 +28,7 @@ const FriendsList = props => {
                             You have not added any friends yet.
                         </a> :
                         friends.map((friend, index) => {
-                            return <Friend friend={friend} key={index} actionType="remove-friend" actionButton="Remove Friend" />
+                            return <Friend friend={friend} key={index} removeFriend={removeFriend} actionType="remove-friend" actionButton="Remove Friend" />
                         })
                     }
                 </nav>
