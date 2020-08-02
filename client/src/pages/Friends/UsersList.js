@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import User from './User';
 
 
@@ -40,13 +40,12 @@ const UsersList = props => {
                     </p>
                     <div className="panel-block">
                         <p className="control has-icons-left">
-                        <input className="input" type="text" onChange={filterByUser} placeholder="Search Users (by last name)" />
+                        <input className="input" type="text" onChange={filterByUser} placeholder="Search" />
                         <span className="icon is-left">
                             <i className="fas fa-search" aria-hidden="true"></i>
                         </span>
                         </p>
                     </div>
-                    
                     {
                         users.map((user, index = 1) => {
                             

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import StaticRating from "./StaticRating";
 import API from "../../utils/API";
@@ -18,10 +18,20 @@ const ReviewPost = (props) => {
 
     const [profileImg, setProfileImg] = useState('');
     const [postOwner, setPostOwner] = useState('');
+    const didMountRef = useRef(false);
 
     useEffect(() => {
         getReviewOwnerDetails(reviewOwner);
     }, [])
+
+    //Updates component when a new post is added:
+    useEffect(() => {
+        if (didMountRef.current) {
+            getReviewOwnerDetails(reviewOwner);
+        } else {
+            didMountRef.current = true;
+        }
+    })
 
     const getReviewOwnerDetails = reviewOwner => {
         API.getUserInfo(reviewOwner)
@@ -38,7 +48,7 @@ const ReviewPost = (props) => {
     }  
 
     return (
-        <div className="review-post">
+        <div className="review-post feed">
             <div className="card">
                 <div className="card-content">
                     <div className="media">
@@ -55,7 +65,7 @@ const ReviewPost = (props) => {
                     <div className="content">
                         <p className="title">{reviewTitle}</p>
                         <p className="location">{reviewLocation}</p>
-                        <h3><StaticRating reviewRating={reviewRating} /></h3>
+                        <h3 className="rating"><StaticRating reviewRating={reviewRating} /></h3>
                         <p className="messageBody">{reviewBody}</p>
                         <p><time dateTime="2016-1-1">{reviewCreated}</time></p>
                         <Link to={{pathname:"/comments",search: "?id=" + _id}}>
