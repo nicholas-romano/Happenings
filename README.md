@@ -43,11 +43,11 @@ https://what-happenings.herokuapp.com/
 
 # Credits
 
-Richard Kessler
-Nicholas Romano
-Eddie Saunders
-Jason Vernot
-Tevin Ward
+Richard Kessler <br/>
+Nicholas Romano <br/>
+Eddie Saunders <br/>
+Jason Vernot <br/>
+Tevin Ward <br/>
 
 # Notes
 
