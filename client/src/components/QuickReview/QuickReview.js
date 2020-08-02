@@ -68,13 +68,13 @@ const QuickReview = () => {
                 <>
                     <h1>How safe do you feel?</h1>
                     <br></br>
-                    <div class="safety-container">
+                    <div className="safety-container">
                         <ul>
-                            <li class="safety-item"><button className="icon" onClick={() => setSafety(1)}>1</button> Threatened</li>
-                            <li class="safety-item"><button className="icon" onClick={() => setSafety(2)}>2</button> Concerned</li>
-                            <li class="safety-item"><button className="icon" onClick={() => setSafety(4)}>3</button> Neutral</li>
-                            <li class="safety-item"><button className="icon" onClick={() => setSafety(4)}>4</button> Safe</li>
-                            <li class="safety-item"><button className="icon" onClick={() => setSafety(5)}>5</button> Comfortable</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(1)}>1</button> Threatened</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(2)}>2</button> Concerned</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(4)}>3</button> Neutral</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(4)}>4</button> Safe</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(5)}>5</button> Comfortable</li>
                         </ul>
                     </div>
                 </>
@@ -111,19 +111,19 @@ const QuickReview = () => {
         <>
             {// Button for showing modal
             }
-            <div class="review-button" style={styles.revBtn}>
-                <button class="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
+            <div className="review-button" style={styles.revBtn}>
+                <button className="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
             </div>
 
-            <div id="modal-3dFlipHorizontal-fs" class={newClass}>
+            <div id="modal-3dFlipHorizontal-fs" className={newClass}>
 
                 <div className="modal-background"></div>
 
-                <button class="modal-close is-large" aria-label="close" onClick={() => setShowModal("")}></button>
+                <button className="modal-close is-large" aria-label="close" onClick={() => setShowModal("")}></button>
 
-                <div class="modal-content modal-card">
+                <div className="modal-content modal-card">
 
-                    <section class="modal-card-body my-container">
+                    <section className="modal-card-body my-container">
 
                         <div >
                             {questions()}

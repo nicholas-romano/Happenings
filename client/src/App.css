@@ -21,10 +21,6 @@
     color: gold;
   }
 
-  .card-content .content .location {
-    margin-bottom: -35px;
-    font-size: 12px;
-  }
 
   .star-container-static {
     color: gold;
@@ -38,7 +34,7 @@
   }
 
   .card-content .content .title {
-    margin-top: -10px;
+    margin-top: -5px;
     font-size: 16pt;
     margin-bottom: -2px;
   }
@@ -48,9 +44,18 @@
     text-align: left;
   }
 
-  .review-post {
+  .review-post.feed {
     padding: 5px;
     text-align: left;
+  }
+
+
+  .review-post.feed .content .location {
+    margin-top: 5px;
+  }
+
+  .review-post.feed .rating {
+    margin-top: -15px;
   }
 
   .review-posts {
@@ -58,6 +63,13 @@
     overflow-y: scroll;
     padding: 5px;
     background-color: rgba(42, 45, 52, 1);
+  }
+
+  .review-posts h2 {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
   }
 
   .review-button {
@@ -89,8 +101,9 @@
   }
 
   .add-comment {
-    width: 150px;
+    width: 142px;
     margin-left: auto;
+    margin-top: 5px;
   }
 
   .add-comment button.is-link {
@@ -105,6 +118,22 @@
     text-align: left;
   }
 
+  .comments .review-post .content .title {
+    margin-top: 15px;
+    font-size: 24px;
+  }
+
+  .comments .review-post .content .messageBody {
+    padding-top: 5px;
+    font-size: 14px;
+  }
+
+  .comments .review-post .content .location {
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: -30px;
+  }
+
   .comments label {
     text-align: right;
   }
@@ -114,6 +143,10 @@
     text-align: left;
     width: 90%;
     margin-left: auto;
+  }
+
+  .comment-post .messageBody {
+    font-size: 14px;
   }
 
   .img-link {

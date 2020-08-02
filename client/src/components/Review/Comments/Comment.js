@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import API from "../../../utils/API";
 
 
@@ -12,10 +12,20 @@ const Comment = props => {
 
     const [photo, setPhoto] = useState('');
     const [name, setName] = useState('');
+    const didMountRef = useRef(false);
 
     useEffect(() => {
         getCommentOwnerDetails();
     }, []);
+
+    //Updates component when a new post is added:
+    useEffect(() => {
+        if (didMountRef.current) {
+            getCommentOwnerDetails();
+        } else {
+            didMountRef.current = true;
+        }
+    })
 
     const getCommentOwnerDetails = () => {
         API.getUserInfo(user)
@@ -37,7 +47,7 @@ const Comment = props => {
                             <div className="media">
                             <div className="media-left">
                                 <figure className="image is-96x96">
-                                    <img src={(photo !== "") ? photo : "https://bulma.io/images/placeholders/96x96.png"} width="96" height="96" alt="Comment Owner" />
+                                    <img src={(photo !== "") ? photo : "https://bulma.io/images/placeholders/96x96.png"} alt="Comment Owner" />
                                 </figure>
                             </div>
                             <div className="media-content">
