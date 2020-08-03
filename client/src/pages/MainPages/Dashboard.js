@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Review from "../../components/Review";
@@ -20,10 +20,17 @@ const styles = {
 };
 
 function Dashboard(props) {
-  const [reviewState, setReviewState] = useState([]);
+  
+  const [reviewsData, setReviewsData] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [user, setUser] = useState({
+    userName: "",
+    firstName: "",
+    lastName: "",
+  });
+
   return (
     <>
-      <div>{/* <Nav /> */}</div>
       <div>
         <Header />
       </div>
@@ -34,11 +41,11 @@ function Dashboard(props) {
       </div>
 
       <div className="columns is-dekstop">
-        <div className="column is-two-thirds" style={styles.twothirds}>
-          <NewMap reviewData={reviewState} />
+        <div className="column is-two-thirds" style={styles.twothirds} friends={friends}>
+          <NewMap reviewsData={reviewsData}  user={user} setUser={setUser} setReviewsData={setReviewsData} friends={friends} />
         </div>
         <div className="column is-one-third" style={styles.onethird}>
-          <Review setReviewState={setReviewState} />
+          <Review reviewsData={reviewsData} setReviewsData={setReviewsData} user={user} setUser={setUser} friends={friends} setFriends={setFriends}  />
           <QuickReview />
         </div>
       </div>
