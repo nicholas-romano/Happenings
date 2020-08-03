@@ -45,7 +45,7 @@ function Landing(props) {
           <LoginForm login={login} loginErr={loginErr} />
         </div>
         <div className="column is-one-third" style={styles.onethird}>
-          <h1>Image</h1>
+          <img src="/MapScreenshot2.png"></img>
         </div>
       </div>
       <div className="columns">
