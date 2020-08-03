@@ -17,7 +17,6 @@ const AllUsersFeed = props => {
     return (
         <>
             <div className="review-post">
-                <h2>All Users Feed</h2>
                 {
                     reviewsDisplayed.length > 0 ?
                     reviewsDisplayed.map((post, index) => {
