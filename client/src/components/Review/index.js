@@ -68,19 +68,19 @@ const Review = (props) => {
   useEffect(() => {
     console.log("friendsUsernames: ", friendsUsernames);
     if (friendsUsernames.length > 0) {
-      console.log('user has friends');
+      console.log("user has friends");
       //API.getUserReviews()
     }
   }, [friendsUsernames]);
 
-  const getUserFriends = userName => {
-    API.getUserInfo(userName).then(res => {
-        if (res.data[0].friends.length > 0) {
-            setFriendsUsernames(res.data[0].friends);
-            return;
-        }
-    })
-}
+  const getUserFriends = (userName) => {
+    API.getUserInfo(userName).then((res) => {
+      if (res.data[0].friends.length > 0) {
+        setFriendsUsernames(res.data[0].friends);
+        return;
+      }
+    });
+  };
 
   //handling the location search
   const handlePlaceSubmit = (event) => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "./newMap.css";
-import API from "../../utils/API";
 import UserLocationContext from "../../utils/UserLocationContext";
+import PulseLoader from "react-spinners/PulseLoader";
 
 function NewMap({ reviewData }) {
   const userLocation = useContext(UserLocationContext);
@@ -34,19 +34,15 @@ function NewMap({ reviewData }) {
   }, []);
 
   useEffect(() => {
-    // API.getReviews().then((res) => {
-    //   console.log("Review Response!!!", res.data);
-    //   setEventState({
-    //     reviews: res.data,
-    //   });
-    // });
     setEventState({
       reviews: reviewData,
     });
   }, [reviewData]);
 
   return viewport.latitude === 0 ? (
-    <h1>loading</h1>
+    <div className="container">
+      <PulseLoader size={40} margin={50} />
+    </div>
   ) : (
     <div className="container">
       <ReactMapGL
