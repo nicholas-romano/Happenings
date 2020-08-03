@@ -5,7 +5,7 @@ const db = require("../models");
 module.exports = {
   findAll: (req, res) => {
     if (req.user) {
-      db.Reviews.find({})
+      db.Reviews.find({}).sort({ _id: -1 })
         .then((reviews) => {
           res.json(reviews);
         })
@@ -63,18 +63,15 @@ module.exports = {
 
     db.Reviews.updateOne(
       {
-        _id: ObjectId(id),
+        _id: ObjectId(id)
       },
       {
         $push: {
-          reviewComments: [
-            {
-              user,
-              message,
-              time
-            },
-          ],
-        },
+          reviewComments: {
+            $each: [{ user, message, time}],
+            $sort: { time: -1 }
+          }
+        }
       }
     )
       .then((comment) => {
@@ -83,6 +80,29 @@ module.exports = {
       .catch((err) => {
         res.json(err);
       });
+
+    // db.Reviews.updateOne(
+    //   {
+    //     _id: ObjectId(id)
+    //   },
+    //   {
+    //     $push: {
+    //       reviewComments: [
+    //         {
+    //           user,
+    //           message,
+    //           time
+    //         },
+    //       ],
+    //     },
+    //   }
+    // )
+    //   .then((comment) => {
+    //     res.json(comment);
+    //   })
+    //   .catch((err) => {
+    //     res.json(err);
+    //   });
   },
   //   update: function (req, res) {
   //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)

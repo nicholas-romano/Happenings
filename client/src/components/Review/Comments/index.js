@@ -131,7 +131,7 @@ const Comments = props => {
     return (
         <>
         <Header />
-        <section className="section settings">
+        <section className="section settings comments">
             <div className="container">
                 <h1 className="title">Comments</h1>
                 <div className="review-post">
@@ -139,7 +139,7 @@ const Comments = props => {
                         <div className="card-content">
                             <div className="media">
                                 <div className="media-left">
-                                    <figure className="image is-48x48">
+                                    <figure className="image is-96x96">
                                         <img src={(profileImg !== "") ? profileImg : "https://bulma.io/images/placeholders/96x96.png"} alt={reviewOwner} />
                                     </figure>
                                 </div>
