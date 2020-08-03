@@ -227,15 +227,25 @@ const Review = (props) => {
           onClick={closeReviewForm}
         ></button>
       </div>
-      <div className="review-posts">
+      <div className="review-section">
         {friendsUsernames.length > 0 ? (
-          <FriendsFeed
-            reviews={reviews}
-            friends={friendsUsernames}
-            user={user}
-          />
+          <>
+            <h2>Friends Feed</h2>
+            <div className="review-posts">
+            <FriendsFeed
+              reviews={reviews}
+              friends={friendsUsernames}
+              user={user}
+            />
+          </div>
+          </>
         ) : (
-          <AllUsersFeed reviews={reviews} />
+          <>
+            <h2>All Users Feed</h2>
+            <div className="review-posts">
+              <AllUsersFeed reviews={reviews} />
+            </div>
+          </>
         )}
       </div>
       <div className="review-button" style={styles.revBtn}>

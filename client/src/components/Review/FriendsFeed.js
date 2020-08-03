@@ -9,7 +9,7 @@ const FriendsFeed = props => {
         user
     } = props;
 
-    console.log('friends feed props: ', props);
+    //console.log('friends feed props: ', props);
 
     const [reviewsDisplayed, setReviewsDisplayed] = useState([]);
 
@@ -44,7 +44,6 @@ const FriendsFeed = props => {
     return (
         <>
         <div className="review-post">
-            <h2>Friends Feed</h2>
             {
                 reviewsDisplayed.length > 0 ?
                 reviewsDisplayed.map((post, index) => {
