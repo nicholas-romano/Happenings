@@ -144,7 +144,7 @@ useEffect(() => {
                   <div className="content">
                     <p className="title">{selectedEvent.reviewTitle}</p>
                     <p className="messageBody">{selectedEvent.reviewBody}</p>
-                    <p className="rating"><StaticRating reviewRating={selectedEvent.reviewRating} /></p>
+                    <StaticRating reviewRating={selectedEvent.reviewRating} />
                     <br />
                     <time>{selectedEvent.reviewCreated}</time>
                   </div>
