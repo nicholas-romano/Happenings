@@ -13,9 +13,32 @@
   color: red;
 }
 
-.popup-card {
+.card.popup-card {
   margin: 11px;
   width: 18em;
+  text-align: left;
+}
+
+.card.popup-card .card-content {
+  margin: -15px;
+}
+
+.card.popup-card .card-content time {
+  font-size: 10px;
+}
+
+.card.popup-card .card-content .title {
+  font-size: 18px;
+}
+
+.card.popup-card .card-content .messageBody {
+  margin-top: 5px;
+}
+
+.card.popup-card .card-content .content .rating {
+  margin-bottom: -20px;
+  margin-top: -10px;
+  font-size: 8px;
 }
 
 .map {

@@ -3,12 +3,12 @@ import Input from "../../components/Form/Input";
 import { Rating, TextArea, FormBtn } from "../Form";
 import FriendsFeed from "./FriendsFeed";
 import AllUsersFeed from "./AllUsersFeed";
-import API from "../../utils/API";
-import AUTH from "../../utils/AUTH";
 import "../../App.css";
 import LocationSearch from "../LocationSearch/locSearch";
 import placesAPI from "../../utils/placesAPI";
 import UserLocationContext from "../../utils/UserLocationContext";
+import API from "../../utils/API";
+import AUTH from "../../utils/AUTH";
 
 const styles = {
   revBtn: {
@@ -17,16 +17,19 @@ const styles = {
 };
 
 const Review = (props) => {
+
+  const {
+    reviewsData,
+    setReviewsData,
+    friends,
+    setFriends,
+    user,
+    setUser
+  } = props;
+
   const userLocation = useContext(UserLocationContext);
 
-  console.log("props review: ", props);
-
-  const [user, setUser] = useState({
-    userName: "",
-    firstName: "",
-    lastName: "",
-  });
-  const [friendsUsernames, setFriendsUsernames] = useState([]);
+  //console.log("props review: ", props);
 
   const [showModal, setModal] = useState(false);
   const [formObject, setFormObject] = useState({
@@ -36,7 +39,6 @@ const Review = (props) => {
   });
   const [reviewRating, setRatings] = useState(0);
   const formEl = useRef(null);
-  const [reviews, setReviews] = useState([]);
 
   const [locationState, setLocationState] = useState({
     location: "",
@@ -62,17 +64,10 @@ const Review = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    //console.log("friendsUsernames: ", friendsUsernames);
-    if (friendsUsernames.length > 0) {
-      console.log("user has friends ", friendsUsernames);
-    }
-  }, [friendsUsernames]);
-
   const getUserFriends = (userName) => {
     API.getUserInfo(userName).then((res) => {
       if (res.data[0].friends.length > 0) {
-        setFriendsUsernames(res.data[0].friends);
+        setFriends(res.data[0].friends);
       }
       return loadReviews();
     });
@@ -81,8 +76,8 @@ const Review = (props) => {
   const loadReviews = () => {
     API.getReviews()
       .then((res) => {
-        props.setReviewState(res.data);
-        return setReviews(res.data);
+        console.log('friends length: ', friends.length)
+        setReviewsData(res.data);
       })
       .catch((err) => console.log("err ", err));
   };
@@ -110,9 +105,7 @@ const Review = (props) => {
     let latitude = event.target.dataset.latitude;
     let longitude = event.target.dataset.longitude;
     //console.log("longitude:", longitude);
-
     //console.log("latitude:", latitude);
-
     //console.log("Selection: ", selection);
 
     setLocationState({
@@ -227,15 +220,25 @@ const Review = (props) => {
           onClick={closeReviewForm}
         ></button>
       </div>
-      <div className="review-posts">
-        {friendsUsernames.length > 0 ? (
-          <FriendsFeed
-            reviews={reviews}
-            friends={friendsUsernames}
-            user={user}
-          />
+      <div className="review-section">
+        {friends.length > 0 ? (
+          <>
+            <h2>Friends Feed</h2>
+            <div className="review-posts">
+            <FriendsFeed
+              user={user}
+              friends={friends}
+              reviewsData={reviewsData}
+            />
+          </div>
+          </>
         ) : (
-          <AllUsersFeed reviews={reviews} />
+          <>
+            <h2>All Users Feed</h2>
+            <div className="review-posts">
+              <AllUsersFeed reviewsData={reviewsData} />
+            </div>
+          </>
         )}
       </div>
       <div className="review-button" style={styles.revBtn}>
