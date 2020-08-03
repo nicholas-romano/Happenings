@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import LoginForm from "../Auth/LoginForm";
 
-
 import Hero from "../../components/Hero";
 import Footer from "../../components/Footer";
 import MediaContent from "../../components/MediaContent";
@@ -46,7 +45,7 @@ function Landing(props) {
           <LoginForm login={login} loginErr={loginErr} />
         </div>
         <div className="column is-one-third" style={styles.onethird}>
-          <NewMap />
+          <h1>Image</h1>
         </div>
       </div>
       <div className="columns">

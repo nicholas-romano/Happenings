@@ -10,7 +10,6 @@ import LocationSearch from "../LocationSearch/locSearch";
 import placesAPI from "../../utils/placesAPI";
 import UserLocationContext from "../../utils/UserLocationContext";
 
-
 const styles = {
   revBtn: {
     backgroundColor: "rgba(42, 45, 52, 1)",
@@ -20,7 +19,7 @@ const styles = {
 const Review = (props) => {
   const userLocation = useContext(UserLocationContext);
 
-  console.log('props review: ', props);
+  console.log("props review: ", props);
 
   const [user, setUser] = useState({
     userName: "",
@@ -66,19 +65,18 @@ const Review = (props) => {
   useEffect(() => {
     //console.log("friendsUsernames: ", friendsUsernames);
     if (friendsUsernames.length > 0) {
-      console.log('user has friends ', friendsUsernames);
+      console.log("user has friends ", friendsUsernames);
     }
   }, [friendsUsernames]);
 
-  const getUserFriends = userName => {
-    API.getUserInfo(userName)
-    .then(res => {
-        if (res.data[0].friends.length > 0) {
-            setFriendsUsernames(res.data[0].friends);
-        }
-        return loadReviews();
-    })
-  }
+  const getUserFriends = (userName) => {
+    API.getUserInfo(userName).then((res) => {
+      if (res.data[0].friends.length > 0) {
+        setFriendsUsernames(res.data[0].friends);
+      }
+      return loadReviews();
+    });
+  };
 
   const loadReviews = () => {
     API.getReviews()
@@ -232,11 +230,15 @@ const Review = (props) => {
         ></button>
       </div>
       <div className="review-posts">
-        {
-            (friendsUsernames.length > 0) ? 
-               (<FriendsFeed reviews={reviews} friends={friendsUsernames} user={user} />)
-            :  (<AllUsersFeed reviews={reviews} />)
-        }
+        {friendsUsernames.length > 0 ? (
+          <FriendsFeed
+            reviews={reviews}
+            friends={friendsUsernames}
+            user={user}
+          />
+        ) : (
+          <AllUsersFeed reviews={reviews} />
+        )}
       </div>
       <div className="review-button" style={styles.revBtn}>
         <button
