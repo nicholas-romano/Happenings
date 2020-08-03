@@ -15,7 +15,7 @@ const QuickReview = () => {
     const [mood, setMood] = React.useState();
     const [safety, setSafety] = React.useState();
     const [showModal, setShowModal] = React.useState("myclass");
-    let newClass = `modal modal-full-screen modal-fx-3dFlipHorizontal ${showModal}`;
+    let newClass = `modal modal-fx-3dFlipHorizontal ${showModal}`;
     console.log(mood)
     console.log(safety)
 
@@ -53,11 +53,10 @@ const QuickReview = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1,
+        slidesToScroll: 3,
         initialSlide: 2,
-        // adaptiveHeight: true,
-        prevArrow: <PrevArrow />,
-        nextArrow: <NextArrow />
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     };
 
     const questions = () => {
@@ -69,12 +68,14 @@ const QuickReview = () => {
                 <>
                     <h1>How safe do you feel?</h1>
                     <br></br>
-                    <div>
-                        <button className="icon" onClick={() => setSafety(1)}>1</button> Threatened
-                        <button className="icon" onClick={() => setSafety(2)}>2</button> Concverned
-                        <button className="icon" onClick={() => setSafety(4)}>3</button> Neutral
-                        <button className="icon" onClick={() => setSafety(4)}>4</button> Safe
-                        <button className="icon" onClick={() => setSafety(5)}>5</button> Comfy
+                    <div className="safety-container">
+                        <ul>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(1)}>1</button> Threatened</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(2)}>2</button> Concerned</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(4)}>3</button> Neutral</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(4)}>4</button> Safe</li>
+                            <li className="safety-item"><button className="icon" onClick={() => setSafety(5)}>5</button> Comfortable</li>
+                        </ul>
                     </div>
                 </>
             )
@@ -108,27 +109,31 @@ const QuickReview = () => {
 
     return (
         <>
-            <div class="review-button" style={styles.revBtn}>
-                <button class="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
+            {// Button for showing modal
+            }
+            <div className="review-button" style={styles.revBtn}>
+                <button className="button is-link" onClick={() => setShowModal("is-active")}>Rate Mood</button>
             </div>
 
+            <div id="modal-3dFlipHorizontal-fs" className={newClass}>
 
-            <div id="modal-3dFlipHorizontal-fs" class={newClass}>
-                <div class="modal-content modal-card">
-                    <section class="modal-card-body my-container">
+                <div className="modal-background"></div>
+
+                <button className="modal-close is-large" aria-label="close" onClick={() => setShowModal("")}></button>
+
+                <div className="modal-content modal-card">
+
+                    <section className="modal-card-body my-container">
 
                         <div >
                             {questions()}
                         </div >
 
                     </section>
-                    <footer class="modal-card-foot">
 
-                        <button onClick={() => setShowModal("")} class="modal-button-close button">Exit</button>
-
-                    </footer>
                 </div>
             </div>
+
         </>
     );
 };

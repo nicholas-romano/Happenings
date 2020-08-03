@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "./newMap.css";
-import API from "../../utils/API";
 import UserLocationContext from "../../utils/UserLocationContext";
+import PulseLoader from "react-spinners/PulseLoader";
+import StaticRating from "../Review/StaticRating";
+import API from "../../utils/API";
+
 
 function NewMap({ reviewData }) {
   const userLocation = useContext(UserLocationContext);
 
   console.log("COORDS IN NEWMAP: ", userLocation);
 
+  console.log('props new map: ', reviewData);
+
   const [viewport, setViewport] = useState({
     width: "100%",
     height: 550,
     latitude: 0,
     longitude: 0,
-    zoom: 11,
+    zoom: 12,
   });
 
   const [eventState, setEventState] = useState({
@@ -22,6 +27,9 @@ function NewMap({ reviewData }) {
   });
 
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const [profileImg, setProfileImg] = useState('');
+  const [postOwner, setPostOwner] = useState('');
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -34,25 +42,42 @@ function NewMap({ reviewData }) {
   }, []);
 
   useEffect(() => {
-    // API.getReviews().then((res) => {
-    //   console.log("Review Response!!!", res.data);
-    //   setEventState({
-    //     reviews: res.data,
-    //   });
-    // });
     setEventState({
       reviews: reviewData,
     });
   }, [reviewData]);
 
+  useEffect(() => {
+    if (selectedEvent !== null) {
+      getReviewOwnerDetails(selectedEvent.reviewOwner)
+    }
+  }, [selectedEvent]);
+
+  const getReviewOwnerDetails = reviewOwner => {
+    API.getUserInfo(reviewOwner)
+    .then(res => {
+        const profilePhoto = res.data[0].profileImg;
+        setProfileImg(profilePhoto);
+
+        const firstName = res.data[0].firstName;
+        const lastName = res.data[0].lastName;
+        const ownerName = `${firstName} ${lastName}`;
+        setPostOwner(ownerName);
+    })
+    .catch(err => console.log(err));
+}  
+
   return viewport.latitude === 0 ? (
-    <h1>loading</h1>
+    <div className="container">
+      <PulseLoader size={40} margin={50} />
+    </div>
   ) : (
     <div className="container">
       <ReactMapGL
+        className="map"
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/jvernot/ckd80ii7w09rn1imr6fomm1zd"
+        mapStyle="mapbox://styles/jvernot/ckddwhsez2x561hpbwyf2snmg"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
         {eventState.reviews.map((post) => (
@@ -86,20 +111,18 @@ function NewMap({ reviewData }) {
                   <div className="media">
                     <div className="media-left">
                       <figure className="image is-48x48">
-                        <img
-                          src="https://bulma.io/images/placeholders/96x96.png"
-                          alt="Placeholder image"
-                        />
+                        <img src={(profileImg !== "") ? profileImg : "https://bulma.io/images/placeholders/96x96.png"} width="96" height="96" alt={postOwner} />
                       </figure>
                     </div>
                     <div className="media-content">
-                      <p className="title is-4">{selectedEvent.reviewTitle}</p>
-                      <p class="subtitle is-6">{selectedEvent.reviewOwner}</p>
+                      <p className="title is-4">{postOwner}</p>
+                      <p className="subtitle is-6">@{selectedEvent.reviewOwner}</p>
                     </div>
                   </div>
-
                   <div className="content">
-                    <p>{selectedEvent.reviewBody}</p>
+                    <p className="title">{selectedEvent.reviewTitle}</p>
+                    <p className="messageBody">{selectedEvent.reviewBody}</p>
+                    <p className="rating"><StaticRating reviewRating={selectedEvent.reviewRating} /></p>
                     <br />
                     <time>{selectedEvent.reviewCreated}</time>
                   </div>

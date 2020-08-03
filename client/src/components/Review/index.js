@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Input from "../../components/Form/Input";
 import { Rating, TextArea, FormBtn } from "../Form";
-import ReviewPost from "./ReviewPost";
 import FriendsFeed from "./FriendsFeed";
+import AllUsersFeed from "./AllUsersFeed";
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
 import "../../App.css";
@@ -18,6 +18,8 @@ const styles = {
 
 const Review = (props) => {
   const userLocation = useContext(UserLocationContext);
+
+  console.log("props review: ", props);
 
   const [user, setUser] = useState({
     userName: "",
@@ -55,48 +57,49 @@ const Review = (props) => {
       .then((res) => {
         const { userName, firstName, lastName } = res.data.user;
         setUser({ userName, firstName, lastName });
-        return loadReviews();
+        return getUserFriends(userName);
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    console.log("get friends for user: ", user);
-    getUserFriends(user.userName);
-  }, [user]);
-
-  useEffect(() => {
-    console.log("friendsUsernames: ", friendsUsernames);
+    //console.log("friendsUsernames: ", friendsUsernames);
     if (friendsUsernames.length > 0) {
-      console.log('user has friends');
-      //API.getUserReviews()
+      console.log("user has friends ", friendsUsernames);
     }
   }, [friendsUsernames]);
 
-  const getUserFriends = userName => {
-    API.getUserInfo(userName).then(res => {
-        if (res.data[0].friends.length > 0) {
-            setFriendsUsernames(res.data[0].friends);
-            return;
-        }
-    })
-}
+  const getUserFriends = (userName) => {
+    API.getUserInfo(userName).then((res) => {
+      if (res.data[0].friends.length > 0) {
+        setFriendsUsernames(res.data[0].friends);
+      }
+      return loadReviews();
+    });
+  };
+
+  const loadReviews = () => {
+    API.getReviews()
+      .then((res) => {
+        props.setReviewState(res.data);
+        return setReviews(res.data);
+      })
+      .catch((err) => console.log("err ", err));
+  };
 
   //handling the location search
   const handlePlaceSubmit = (event) => {
     event.preventDefault();
 
     //fetching locations that match user input from the places API, setting to location in state
-    placesAPI
-      .getPlace(locationState.place, locationState.myCoords)
-      .then((res) => {
-        //console.log(res.data.items);
-        setLocationState({
-          ...locationState,
-          location: res.data.items,
-          showButtons: true,
-        });
+    placesAPI.getPlace(locationState.place, userLocation.coords).then((res) => {
+      //console.log(res.data.items);
+      setLocationState({
+        ...locationState,
+        location: res.data.items,
+        showButtons: true,
       });
+    });
   };
 
   const handleLocClick = (event) => {
@@ -121,15 +124,6 @@ const Review = (props) => {
         long: longitude,
       },
     });
-  };
-
-  const loadReviews = () => {
-    API.getReviews()
-      .then((res) => {
-        props.setReviewState(res.data);
-        return setReviews(res.data);
-      })
-      .catch((err) => console.log("err ", err));
   };
 
   const handleRatingChange = (rating) => {
@@ -233,12 +227,26 @@ const Review = (props) => {
           onClick={closeReviewForm}
         ></button>
       </div>
-      <div className="review-posts">
-        <FriendsFeed />
-        {/* All Reviews */}
-        {reviews.map((post, index) => {
-          return <ReviewPost key={index} post={post} />;
-        })}
+      <div className="review-section">
+        {friendsUsernames.length > 0 ? (
+          <>
+            <h2>Friends Feed</h2>
+            <div className="review-posts">
+            <FriendsFeed
+              reviews={reviews}
+              friends={friendsUsernames}
+              user={user}
+            />
+          </div>
+          </>
+        ) : (
+          <>
+            <h2>All Users Feed</h2>
+            <div className="review-posts">
+              <AllUsersFeed reviews={reviews} />
+            </div>
+          </>
+        )}
       </div>
       <div className="review-button" style={styles.revBtn}>
         <button
