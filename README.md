@@ -25,7 +25,7 @@ A small web based app allowing a user to review and create quickinfo about locat
 
 # Build Status
 
-Still in pre-production
+Complete as of 3rd August 2020
 
 # Technology
 
@@ -50,6 +50,8 @@ Jason Vernot <br/>
 Tevin Ward <br/>
 
 # Notes
+
+There are still some additonal features we'd like to see added to this project.
 
 # Code Repository
 
