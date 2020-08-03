@@ -7,12 +7,12 @@ import StaticRating from "../Review/StaticRating";
 import API from "../../utils/API";
 
 
-function NewMap({ reviewData }) {
+function NewMap({ reviewsData, friends, user }) {
   const userLocation = useContext(UserLocationContext);
 
-  console.log("COORDS IN NEWMAP: ", userLocation);
+  //console.log("COORDS IN NEWMAP: ", userLocation);
 
-  console.log('props new map: ', reviewData);
+  //console.log('props new map reviews: ', reviewsData);
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -22,14 +22,14 @@ function NewMap({ reviewData }) {
     zoom: 12,
   });
 
-  const [eventState, setEventState] = useState({
-    reviews: [],
-  });
-
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const [profileImg, setProfileImg] = useState('');
   const [postOwner, setPostOwner] = useState('');
+
+  const [eventState, setEventState] = useState({
+    reviews: [],
+  });
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -42,16 +42,38 @@ function NewMap({ reviewData }) {
   }, []);
 
   useEffect(() => {
-    setEventState({
-      reviews: reviewData,
-    });
-  }, [reviewData]);
 
-  useEffect(() => {
-    if (selectedEvent !== null) {
-      getReviewOwnerDetails(selectedEvent.reviewOwner)
+    let friendReviews = [];
+
+    console.log('friends amount: ', friends);
+
+    if (friends.length > 0) {
+        for (let i = 0; i < reviewsData.length; i++) {
+            const reviewOwner = reviewsData[i].reviewOwner;
+            for (let j = 0; j < friends.length; j++) {
+                const friend = friends[j].userName;
+                if (reviewOwner === friend || reviewOwner === user.userName) {
+                    friendReviews.push(reviewsData[i])
+                    break;
+                }
+            }
+        }
+        setEventState({
+          reviews: friendReviews,
+        });
+    } else {
+      setEventState({
+        reviews: reviewsData,
+      });
     }
-  }, [selectedEvent]);
+
+}, [reviewsData]);
+
+useEffect(() => {
+  if (selectedEvent !== null) {
+    getReviewOwnerDetails(selectedEvent.reviewOwner)
+  }
+}, [selectedEvent]);
 
   const getReviewOwnerDetails = reviewOwner => {
     API.getUserInfo(reviewOwner)
