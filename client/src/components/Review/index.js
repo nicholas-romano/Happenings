@@ -92,16 +92,14 @@ const Review = (props) => {
     event.preventDefault();
 
     //fetching locations that match user input from the places API, setting to location in state
-    placesAPI
-      .getPlace(locationState.place, locationState.myCoords)
-      .then((res) => {
-        //console.log(res.data.items);
-        setLocationState({
-          ...locationState,
-          location: res.data.items,
-          showButtons: true,
-        });
+    placesAPI.getPlace(locationState.place, userLocation.coords).then((res) => {
+      //console.log(res.data.items);
+      setLocationState({
+        ...locationState,
+        location: res.data.items,
+        showButtons: true,
       });
+    });
   };
 
   const handleLocClick = (event) => {

@@ -14,7 +14,7 @@ function NewMap({ reviewData }) {
     height: 550,
     latitude: 0,
     longitude: 0,
-    zoom: 11,
+    zoom: 12,
   });
 
   const [eventState, setEventState] = useState({
@@ -46,9 +46,10 @@ function NewMap({ reviewData }) {
   ) : (
     <div className="container">
       <ReactMapGL
+        className="map"
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/jvernot/ckd80ii7w09rn1imr6fomm1zd"
+        mapStyle="mapbox://styles/jvernot/ckddwhsez2x561hpbwyf2snmg"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
         {eventState.reviews.map((post) => (
