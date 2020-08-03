@@ -8,6 +8,9 @@ import "react-bulma-components/dist/react-bulma-components.min.css";
 // EXS <a href> added to the following lines of code: 12, 17, 31, 34, 36, 38, 40
 // RK added ='bulma stuff' after blank href tags to remove errors
 const Header = () => {
+
+  const [isActive, setisActive] = React.useState(false)
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -15,19 +18,22 @@ const Header = () => {
           <img src={Icon} alt="LogoIcon" />
         </Link>
         <a
-          href="feed"
-          className="navbar-burger burger"
+          onClick={() => {
+            setisActive(!isActive)
+          }}
+          className={`navbar-burger burger ${isActive ? 'is-active' : ''}`}
           role="button"
           aria-label="menu"
           aria-expanded="false"
-          data-target="navbar-menu"
+          // data-target="navbar-menu"
+          
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
-      <div className="navbar-menu">
+      <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
         <div className="navbar-end">
           <Link to="feed" className="navbar-item">
             Home
