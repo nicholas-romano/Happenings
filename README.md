@@ -1,4 +1,4 @@
-# Whats Happening
+# Happenings
 
 [![Deployed](https://img.shields.io/website?down_color=lightgrey&down_message=Offline%20for%20Maintenance&style=for-the-badge&up_color=green&up_message=Online&url=https%3A%2F%2Fwhat-happenings.herokuapp.com%2F)](https://what-happenings.herokuapp.com/)
 [![Contributors](https://img.shields.io/github/contributors/saunderseddie/happenings?color=yellow&style=plastic)](https://github.com/SaundersEddie/Happenings)
