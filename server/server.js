@@ -5,6 +5,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 require("dotenv").config();
 
+console.log('process.env inside server.js: ', process.env);
+
 const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");

@@ -5,6 +5,7 @@ import UserLocationContext from "../../utils/UserLocationContext";
 import PulseLoader from "react-spinners/PulseLoader";
 import StaticRating from "../Review/StaticRating";
 import API from "../../utils/API";
+require("dotenv").config();
 
 
 function NewMap({ reviewsData, friends, user }) {
@@ -21,6 +22,8 @@ function NewMap({ reviewsData, friends, user }) {
     longitude: 0,
     zoom: 12,
   });
+
+  console.log('process.env inside newMap.js: ', process.env.REACT_APP_MAPBOX_TOKEN);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -99,7 +102,7 @@ useEffect(() => {
         className="map"
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/jvernot/ckddwhsez2x561hpbwyf2snmg"
+        mapStyle="mapbox://styles/nromano/ckdho73fw012x1io4k3z39a07"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
         {eventState.reviews.map((post) => (

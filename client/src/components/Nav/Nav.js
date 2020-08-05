@@ -35,7 +35,7 @@ const Nav = (props) => {
     <nav className="navbar navbar-expand-lg" style={styles.head}>
       <Col size="md-6 sm-6" >
         <Link to="/feed" className="navbar-brand" style={styles.word}>
-          Happening App
+          Happenings App
         </Link>
       </Col>
       <Col size="md-6 sm-6">

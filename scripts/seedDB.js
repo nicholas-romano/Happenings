@@ -43,7 +43,7 @@ const placesSeed = [
 const reviewsSeed = [
   {
     reviewOwner: "TestUser",
-    // reviewCreated: "Today",
+    reviewCreated: Date.now().toLocaleString(),
     reviewTitle: "TestTitle",
     reviewBody: "TestRewviewBody",
     reviewRating: 5,
