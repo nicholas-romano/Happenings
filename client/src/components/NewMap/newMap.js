@@ -5,8 +5,8 @@ import UserLocationContext from "../../utils/UserLocationContext";
 import PulseLoader from "react-spinners/PulseLoader";
 import StaticRating from "../Review/StaticRating";
 import API from "../../utils/API";
-require("dotenv").config();
-
+import mapboxgl from 'mapbox-gl';
+mapboxgl.accessToken = 'pk.eyJ1IjoibnJvbWFubyIsImEiOiJja2RobGVlaHYxMjR0Mnl0MW00ZGd5Yms0In0.RM5n9xU9WaTBG0eygl6TEg';
 
 function NewMap({ reviewsData, friends, user }) {
   const userLocation = useContext(UserLocationContext);
@@ -14,6 +14,8 @@ function NewMap({ reviewsData, friends, user }) {
   //console.log("COORDS IN NEWMAP: ", userLocation);
 
   //console.log('props new map reviews: ', reviewsData);
+
+  //console.log('Marker: ', Marker);
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -23,7 +25,7 @@ function NewMap({ reviewsData, friends, user }) {
     zoom: 12,
   });
 
-  console.log('process.env inside newMap.js: ', process.env.REACT_APP_MAPBOX_TOKEN);
+  //console.log('map box gl inside newMap.js: ', mapboxgl);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -48,7 +50,7 @@ function NewMap({ reviewsData, friends, user }) {
 
     let friendReviews = [];
 
-    console.log('friends amount: ', friends);
+    //console.log('friends amount: ', friends);
 
     if (friends.length > 0) {
         for (let i = 0; i < reviewsData.length; i++) {
@@ -101,7 +103,7 @@ useEffect(() => {
       <ReactMapGL
         className="map"
         {...viewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapboxApiAccessToken={mapboxgl.accessToken}
         mapStyle="mapbox://styles/nromano/ckdho73fw012x1io4k3z39a07"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
@@ -118,7 +120,7 @@ useEffect(() => {
                 setSelectedEvent(post);
               }}
             >
-              <img src="/mapMarkerWhite.png" alt="Location Icon" />
+              <img src="/pin.png" alt="Location Icon" />
             </button>
           </Marker>
         ))}

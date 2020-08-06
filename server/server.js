@@ -2,10 +2,10 @@
 if (process.env.NODE_ENV !== "production") {
   console.log("loading dev environments");
   require("dotenv").config();
+  console.log('process.env API_KEY inside server.js: ', process.env.REACT_APP_MAPBOX_TOKEN);
+
 }
 require("dotenv").config();
-
-console.log('process.env inside server.js: ', process.env);
 
 const express = require("express");
 const morgan = require("morgan");

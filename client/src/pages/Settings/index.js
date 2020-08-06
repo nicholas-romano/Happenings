@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import SettingsInput from '../components/Form/Settings/SettingsInput';
-import PasswordInput from '../components/Form/Settings/PasswordInput';
-import ProfileImage from '../components/Form/Settings/ProfileImg';
-import Interest from '../components/Form/Settings/Interest';
-import Friends from '../components/Form/Settings/Friends';
-import { FormBtn } from '../components/Form/FormBtn';
-import API from '../utils/API';
-import AUTH from '../utils/AUTH';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import SettingsInput from './SettingsInput';
+import PasswordInput from './PasswordInput';
+import ProfileImage from './ProfileImg';
+import Interest from './Interest';
+import Friends from './Friends';
+import { FormBtn } from '../../components/Form/FormBtn';
+import API from '../../utils/API';
+import AUTH from '../../utils/AUTH';
 
 const Settings = () => {
 
@@ -56,7 +56,7 @@ const Settings = () => {
         API.getUserInfo(userName)
             .then(res => {
             console.log('getUserInfo: ', res);
-            const { firstName, lastName, profileImg, userEmail, userInterest } = res.data[0];
+            const { firstName, lastName, userName, profileImg, userEmail, userInterest } = res.data[0];
             const friends = res.data[0].friends;
             setUserData({ 
                 "Username:": userName,
@@ -69,7 +69,7 @@ const Settings = () => {
             } else {
                 setInterestList([]);
             }
-            if (profileImg !== undefined) {
+            if (profileImg !== '') {
                 setUserProfileImg(profileImg);
             } else {
                 setUserProfileImg('');
@@ -148,12 +148,16 @@ const Settings = () => {
 
             console.log('updatedUser: ', updatedUser);
 
-            API.updateUser(updatedUser).then(res => {
-                console.log('res: ', res);
-                showSaveConfirmation();
-            }).catch(err => {
-                console.log('err: ', err)
-            });
+                API.updateReviewsUserName(name).then(res => {
+                    console.log('Updated reviews: ', res);
+                    API.updateUser(updatedUser).then(res => {
+                        console.log('Updated user: ', res);
+                        showSaveConfirmation();
+                    });
+                }).catch(err => {
+                    console.log('err: ', err)
+                });
+            
         } else {
             //Password changed:
             //Update User account in the database:
@@ -192,89 +196,90 @@ const Settings = () => {
 
     return (
         <>
-        <div className={showModal ? 'is-active modal' : 'modal'}>
-            <div className="modal-background"></div>
-                <div className="modal-card">
-                    <header className="modal-card-head">
-                        <p className="modal-card-title">Save Successful</p>
-                        <button className="delete" aria-label="close" onClick={closeSaveConfirmation}></button>
-                    </header>
-                    <section className="modal-card-body">
-                        <p>Your account changes have been saved successfully.</p>
-                    </section>
-                    <footer className="modal-card-foot">
-                        <button className="button is-success" onClick={closeSaveConfirmation}>OK</button>
-                    </footer>
-                </div>
-            <button className="modal-close is-large" aria-label="close" onClick={closeSaveConfirmation}></button>
-        </div>
-        <Header />
-        <section className="section settings">
-            <div className="container">
-                <h1 className="title">Settings</h1>
-                <h2 className="subtitle">
-                    Account Info:
-                </h2>
-                {
-                    userDataEntries.map((data, index) => {
-                        return (
-                            <SettingsInput 
-                                key={index}
-                                label={data[0]}
-                                value={data[1]}
-                                enableFields={enableFields}
-                                userData={userData}
-                                setUserData={setUserData}
-                                enableEdit={enableEdit}
-                                register={register}
-                                errors={errors}
-                            />
-                        )
-                    })
-                }
-                <PasswordInput
-                    password={password}
-                    setNewPassword={setNewPassword}
-                    enableFields={enableFields}
-                    enableEdit={enableEdit}
-                    register={register}
-                    errors={errors}
-                />
-                <ProfileImage 
-                    profileImg={profileImg}
-                    imageRef={imageRef}
-                    profileImg={profileImg}
-                    setUserProfileImg={setUserProfileImg}
-                    enableFields={enableFields}
-                    enableEdit={enableEdit}
-                    selectImgLink={selectImgLink}
-                />
-                <Interest
-                    newInterest={newInterest}
-                    interestList={interestList}
-                    deleteInterest={deleteInterest}
-                    addToInterests={addToInterests}
-                />
-                <Friends 
-                    friendsList={friendsList}
-                    deleteFriend={deleteFriend}
-                />
-                <div className="columns">
-                    <div className="column is-one-fifth">
+            <div className={showModal ? 'is-active modal' : 'modal'}>
+                <div className="modal-background"></div>
+                    <div className="modal-card">
+                        <header className="modal-card-head">
+                            <p className="modal-card-title">Save Successful</p>
+                            <button className="delete" aria-label="close" onClick={closeSaveConfirmation}></button>
+                        </header>
+                        <section className="modal-card-body">
+                            <p>Your account changes have been saved successfully.</p>
+                        </section>
+                        <footer className="modal-card-foot">
+                            <button className="button is-success" onClick={closeSaveConfirmation}>OK</button>
+                        </footer>
                     </div>
-                    <div className="columns is-four-fifths">
-                        <div className="column">
-                            <div>
-                                <button onClick={() => cancelChanges()} className="button is-light">Cancel</button>
-                                <FormBtn onClick={handleSubmit(handleFormSubmit)}>Save</FormBtn>
+                <button className="modal-close is-large" aria-label="close" onClick={closeSaveConfirmation}></button>
+            </div>
+            <Header /> 
+            <div className="container-fluid">
+                <section className="section settings">
+                    <div className="container">
+                        <h1 className="title">Settings</h1>
+                        <h2 className="subtitle">
+                            Account Info:
+                        </h2>
+                        {
+                            userDataEntries.map((data, index) => {
+                                return (
+                                    <SettingsInput 
+                                        key={index}
+                                        label={data[0]}
+                                        value={data[1]}
+                                        enableFields={enableFields}
+                                        userData={userData}
+                                        setUserData={setUserData}
+                                        enableEdit={enableEdit}
+                                        register={register}
+                                        errors={errors}
+                                    />
+                                )
+                            })
+                        }
+                        <PasswordInput
+                            password={password}
+                            setNewPassword={setNewPassword}
+                            enableFields={enableFields}
+                            enableEdit={enableEdit}
+                            register={register}
+                            errors={errors}
+                        />
+                        <ProfileImage 
+                            profileImg={profileImg}
+                            imageRef={imageRef}
+                            profileImg={profileImg}
+                            setUserProfileImg={setUserProfileImg}
+                            enableFields={enableFields}
+                            enableEdit={enableEdit}
+                            selectImgLink={selectImgLink}
+                        />
+                        <Interest
+                            newInterest={newInterest}
+                            interestList={interestList}
+                            deleteInterest={deleteInterest}
+                            addToInterests={addToInterests}
+                        />
+                        <Friends 
+                            friendsList={friendsList}
+                            deleteFriend={deleteFriend}
+                        />
+                        <div className="columns">
+                            <div className="column is-one-fifth">
+                            </div>
+                            <div className="columns is-four-fifths">
+                                <div className="column">
+                                    <div>
+                                        <button onClick={() => cancelChanges()} className="button is-light">Cancel</button>
+                                        <FormBtn onClick={handleSubmit(handleFormSubmit)}>Save</FormBtn>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
-
-        <Footer />
+            <Footer />
         </>
     );
 }

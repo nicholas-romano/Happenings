@@ -130,7 +130,8 @@ const Friends = () => {
 
     return (
         <>
-            <Header />
+        <Header />
+        <div className="container-fluid">
                     <div className="columns">
                         <div className="column">
                             <UsersList users={users} thisUser={thisUser} filterByUser={filterByUser} addFriend={addFriend} />
@@ -139,7 +140,8 @@ const Friends = () => {
                             <FriendsList friends={friendsUsernames} filterByFriend={filterByFriend} removeFriend={removeFriend} />
                         </div>
                     </div>
-            <Footer />
+        </div>  
+        <Footer />  
         </>
     )
 };

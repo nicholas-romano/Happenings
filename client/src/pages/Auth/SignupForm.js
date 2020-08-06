@@ -21,9 +21,9 @@ function SignupForm() {
 
   const [redirectTo, setRedirectTo] = useState(null);
 
-  useEffect(() => {
-    console.log('formObject: ', formObject);
-  }, [formObject]);
+  // useEffect(() => {
+  //   console.log('formObject: ', formObject);
+  // }, [formObject]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -54,78 +54,79 @@ function SignupForm() {
 
   return (
     <>
-    <Hero />
-    <Container>
-      <Row>
-        <Col size="md-3"></Col>
-        <Col size="md-6">
-          <Card title="Create your Happenings Account">
-            <form  style={{ marginTop: 10, textAlign: 'left' }}>
-              <Input
-                  name="firstName"
-                  title="First Name"
-                  type="input"
-                  setFormObject={setFormObject}
-                  formObject={formObject}
-                  value={formObject.firstName}
-                  placeholder="First Name"
-              />
-              <Input
-                  name="lastName"
-                  title="Last Name"
-                  type="input"
-                  setFormObject={setFormObject}
-                  formObject={formObject}
-                  value={formObject.lastName}
-                  placeholder="Last Name"
-              />
-               <Input
-                name="email"
-                title="Email"
-                type="email"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.email}
-                placeholder="Email"
-              />
-              <Input
-                name="userName"
-                title="Username"
-                type="input"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.userName}
-                placeholder="Username"
-              />
-              <Input
-                name="password"
-                title="Password"
-                type="password"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.password}
-                placeholder="Password"
-              />
-              <Input
-                name="confirmPassword"
-                title="Confirm Password"
-                type="password"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.confirmPassword}
-                placeholder="Confirm Password"
-              />
-              <Link to="/">Login</Link>
-              <FormBtn onClick={handleSubmit}>Register</FormBtn>
-            </form>
-          </Card>
-        </Col>
-        <Col size="md-3"></Col>
-      </Row>
-    </Container>
+      <Hero />
+      <div className="container-fluid">
+        <Container>
+          <Row>
+            <Col size="md-3"></Col>
+            <Col size="md-6">
+              <Card title="Create your Happenings Account">
+                <form  style={{ marginTop: 10, textAlign: 'left' }}>
+                  <Input
+                      name="firstName"
+                      title="First Name"
+                      type="input"
+                      setFormObject={setFormObject}
+                      formObject={formObject}
+                      value={formObject.firstName}
+                      placeholder="First Name"
+                  />
+                  <Input
+                      name="lastName"
+                      title="Last Name"
+                      type="input"
+                      setFormObject={setFormObject}
+                      formObject={formObject}
+                      value={formObject.lastName}
+                      placeholder="Last Name"
+                  />
+                  <Input
+                    name="email"
+                    title="Email"
+                    type="email"
+                    setFormObject={setFormObject}
+                    formObject={formObject}
+                    value={formObject.email}
+                    placeholder="Email"
+                  />
+                  <Input
+                    name="userName"
+                    title="Username"
+                    type="input"
+                    setFormObject={setFormObject}
+                    formObject={formObject}
+                    value={formObject.userName}
+                    placeholder="Username"
+                  />
+                  <Input
+                    name="password"
+                    title="Password"
+                    type="password"
+                    setFormObject={setFormObject}
+                    formObject={formObject}
+                    value={formObject.password}
+                    placeholder="Password"
+                  />
+                  <Input
+                    name="confirmPassword"
+                    title="Confirm Password"
+                    type="password"
+                    setFormObject={setFormObject}
+                    formObject={formObject}
+                    value={formObject.confirmPassword}
+                    placeholder="Confirm Password"
+                  />
+                  <Link to="/">Login</Link>
+                  <FormBtn onClick={handleSubmit}>Register</FormBtn>
+                </form>
+              </Card>
+            </Col>
+            <Col size="md-3"></Col>
+          </Row>
+        </Container>
+      </div>
     <Footer />
   </>
-  );
+  )
 }
-
 export default SignupForm;

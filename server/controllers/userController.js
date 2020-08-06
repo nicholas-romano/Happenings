@@ -49,7 +49,7 @@ module.exports = {
         if (password !== undefined) {
           //Password Change:
           const newPassword = bcrypt.hashSync(password, 10);
-          db.User.update(
+          db.User.updateOne(
             //update user data:
             {
               userName: req.user.userName
@@ -71,7 +71,7 @@ module.exports = {
           );
         } else {
           //Password Unchanged:
-          db.User.update(
+          db.User.updateOne(
             {
               userName: req.user.userName
             },
@@ -90,7 +90,22 @@ module.exports = {
           );
         }
       } else {
-        //username was changed, check if it already exists:
+        
+        //Username was changed, change all Reviews userNames:
+        const user = req.user.userName;
+        console.log('user before change: ', user);
+        console.log('Update to Username: ', userName);
+        db.Reviews.updateMany(
+          {
+            reviewOwner: user
+          },  
+          {
+            $set: {
+              reviewOwner: userName
+            }
+          }
+        );
+
         db.User.findOne({ userName: userName }, (err, userMatch) => {
 
           //If a match was found, someone else has the same username, return an error:
@@ -99,12 +114,13 @@ module.exports = {
               error: `Sorry, already a user with the username: ${userName}`
             });
           } else {
+
             //If a match was not found, change the user's username:
             //check to see if the user's password was changed:
             if (password !== undefined) {
               //Password Change:
               const newPassword = bcrypt.hashSync(password, 10);
-              db.User.update(
+              db.User.updateOne(
                 //update user data:
                 {
                   userName: req.user.userName
@@ -124,9 +140,10 @@ module.exports = {
                   }
                 }
               );
+              
             } else {
               //Password Unchanged:
-              db.User.update(
+              db.User.updateOne(
                 {
                   userName: req.user.userName
                 },
@@ -143,9 +160,11 @@ module.exports = {
                   }
                 }
               );
+              
             }
           }
         });
+
       }
 
     } else {

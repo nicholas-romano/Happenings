@@ -23,6 +23,9 @@ export default {
   removeFriend: function(friendUserName) {
     return axios.delete("/api/user/removeFriend/" + friendUserName)
   },
+  updateReviewsUserName: function(userName) {
+    return axios.put("/api/reviews/updateUsername/" + userName);
+  },
   // Deletes the book with the given id
   // deleteBook: function(id) {
   //   return axios.delete("/api/books/" + id);

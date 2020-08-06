@@ -11,178 +11,12 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
+    useCreateIndex: true
   }
 );
 
-const placesSeed = [
-  {
-    placesName: "myTestPlaceName4",
-    placesAddress: "2456 Main St",
-    placesCreatedBy: "Eddie",
-    placesQuickInfoTitle: "Ok Food",
-    placesQuickInfoEmoji: "Emoji goes here",
-    placesQuickInfoTags: ["Fast Food", "Greasy Spoon"],
-    placesQuickInfoPicture: "",
-  },
-  {
-    placesName: "myTestPlaceName5",
-    placesAddress: "7890 Main St",
-    placesCreatedBy: "Eddie2",
-    placesQuickInfoTitle: "Good Craft Beer",
-    placesQuickInfoEmoji: "Emoji goes here2",
-    placesQuickInfoTags: ["Craft Beer"],
-    placesQuickInfoPicture: "",
-  },
-];
-
-const reviewsSeed = [
-  {
-    reviewOwner: "TestUser",
-    reviewCreated: "Today",
-    reviewTitle: "TestTitle",
-    reviewBody: "TestRewviewBody",
-    reviewRating: 5,
-    reviewLocation: "Testing Location",
-    reviewLat: 35.711264,
-    reviewLong: -78.614171,
-    reviewGeoLocation: [35.711264, -78.614171],
-    reviewComments: [],
-  },
-];
-
-const locationEventsSeed = [
-  {
-    eventLocation: "ourTestlocation",
-    eventStart: TODAY.getDate(),
-    eventEnd: TODAY.getDate(),
-  },
-];
-
-const userSeed = [
-  {
-    firstName: "Eddie",
-    lastName: "Saunders",
-    profileImg: "",
-    userName: "Admin",
-    password: "",
-    userEmail: "saunders.eddie@outlook.com",
-    friends: ["Richard", "Jason", "Nick", "Tevin"],
-    userInterest: ["Beer", "Scotch", "Food"],
-  },
-];
-
-const emojiTagSeed = [
-  {
-    emojiType: [
-      "😀",
-      "😃",
-      "😄",
-      "😁",
-      "😆",
-      "😅",
-      "😂",
-      "🤣",
-      "☺️",
-      "😊",
-      "😇",
-      "🙂",
-      "🙃",
-      "😉",
-      "😌",
-      "😍",
-      "🥰",
-      "😘",
-      "😗",
-      "😙",
-      "😚",
-      "😋",
-      "😛",
-      "😝",
-      "😜",
-      "🤪",
-      "🤨",
-      "🧐",
-      "🤓",
-      "😎",
-      "🤩",
-      "🥳",
-      "😏",
-      "😒",
-      "😞",
-      "😔",
-      "😟",
-      "😕",
-      "🙁",
-      "☹️",
-      "😣",
-      "😖",
-      "😫",
-      "😩",
-      "🥺",
-      "😢",
-      "😭",
-      "😤",
-      "😠",
-      "😡",
-      "🤬",
-      "🤯",
-      "😳",
-      "🥵",
-      "🥶",
-      "😱",
-      "😨",
-      "😰",
-      "😥",
-      "😓",
-      "🤗",
-      "🤔",
-      "🤭",
-      "🤫",
-      "🤥",
-      "😶",
-      "😐",
-      "😑",
-      "😬",
-      "🙄",
-      "😯",
-      "😦",
-      "😧",
-      "😮",
-      "😲",
-      "🥱",
-      "😴",
-      "🤤",
-      "😪",
-      "😵",
-      "🤐",
-      "🥴",
-      "🤢",
-      "🤮",
-      "🤧",
-      "😷",
-      "🤒",
-      "🤕",
-      "🤑",
-    ],
-    tagType: ["Dickbag", "Good", "Bad", "Great", "Beer", "Food", "Party"],
-  },
-];
-
 // EXS When we execture the seedsDB, this removes all entries and then insert the records above
 // Optimize this code later
-
-db.Places.deleteMany({})
-  .then(console.log("Adding Places"))
-  .then(() => db.Places.collection.insertMany(placesSeed))
-  .then((data) => {
-    console.log(data.result.n + " places records inserted!");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
 
 db.Reviews.deleteMany({})
   .then(console.log("Adding My Reviews"))
@@ -196,33 +30,9 @@ db.Reviews.deleteMany({})
     process.exit(1);
   });
 
-db.LocationEvents.deleteMany({})
-  .then(console.log("Adding Location Events"))
-  .then(() => db.LocationEvents.collection.insertMany(locationEventsSeed))
-  .then((data) => {
-    console.log(data.result.n + " location events records inserted!");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
 db.User.deleteMany({})
   .then(console.log("Adding A User"))
   .then(() => db.User.collection.insertMany(userSeed))
-  .then((data) => {
-    console.log(data.result.n + " user records inserted!");
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.EmojiTag.deleteMany({})
-  .then(console.log("Adding A User"))
-  .then(() => db.EmojiTag.collection.insertMany(emojiTagSeed))
   .then((data) => {
     console.log(data.result.n + " user records inserted!");
     process.exit(0);

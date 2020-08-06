@@ -81,29 +81,30 @@ module.exports = {
         res.json(err);
       });
 
-    // db.Reviews.updateOne(
-    //   {
-    //     _id: ObjectId(id)
-    //   },
-    //   {
-    //     $push: {
-    //       reviewComments: [
-    //         {
-    //           user,
-    //           message,
-    //           time
-    //         },
-    //       ],
-    //     },
-    //   }
-    // )
-    //   .then((comment) => {
-    //     res.json(comment);
-    //   })
-    //   .catch((err) => {
-    //     res.json(err);
-    //   });
   },
+  updateUserName: (req, res) => {
+    const user = req.user.userName;
+    console.log('user before change: ', user);
+    const userName = req.params.userName;
+    console.log('Update Username to: ', userName);
+    db.Reviews.updateMany(
+      {
+        reviewOwner: user
+      },  
+      {
+        $set: {
+          reviewOwner: userName
+        }
+      },
+      (error, data) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send(data);
+        }
+      }
+    );
+  }
   //   update: function (req, res) {
   //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)
   //       .then(dbModel => {

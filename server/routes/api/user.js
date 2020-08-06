@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
-
 //Matches with "/api/user"
 router.route("/")
   .put(userController.updateUser);
@@ -18,7 +17,5 @@ router.route("/addFriend/:userName")
   
 router.route("/removeFriend/:userName")
   .delete(userController.removeFriend);
-//   .put(reviewsController.update)
-//   .delete(reviewsController.remove);
 
 module.exports = router;

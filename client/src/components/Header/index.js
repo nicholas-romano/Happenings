@@ -12,7 +12,7 @@ const Header = () => {
   const [isActive, setisActive] = React.useState(false)
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav className="navbar menu" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/feed">
           <img src={Icon} alt="LogoIcon" />

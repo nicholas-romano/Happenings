@@ -16,17 +16,9 @@ function LoginForm({ login, loginErr }) {
     password: "",
   });
 
-  // const handleInputChange = (event) => {
-  //   console.log('event: ', event);
-    // setUserObject({
-    //   ...userObject,
-    //   [event.target.name]: event.target.value,
-    // });
-  // };
-
-  useEffect(() => {
-    console.log('formObject: ', formObject);
-  }, [formObject])
+  // useEffect(() => {
+  //   console.log('formObject: ', formObject);
+  // }, [formObject])
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -45,11 +37,12 @@ function LoginForm({ login, loginErr }) {
   }
 
     return (
+      <>
       <Container>
         <Row>
           <Col size="md-3"></Col>
           <Col size="md-6">
-            <Card title="Login to the Happenings App!">
+            <Card title="Login">
               <form style={{ marginTop: 10, textAlign: 'left' }}>
                 {
                   checkForError()
@@ -80,6 +73,7 @@ function LoginForm({ login, loginErr }) {
           <Col size="md-3"></Col>
         </Row>
       </Container>
+      </>
     );
   }
 

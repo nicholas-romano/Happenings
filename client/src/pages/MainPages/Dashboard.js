@@ -4,7 +4,6 @@ import Header from "../../components/Header";
 import Review from "../../components/Review";
 import LocationSearch from "../../components/LocationSearch/locSearch";
 import NewMap from "../../components/NewMap/newMap";
-import QuickReview from "../../components/QuickReview/QuickReview";
 
 const styles = {
   twothirds: {
@@ -31,31 +30,23 @@ function Dashboard(props) {
 
   return (
     <>
-      <div>
-        <Header />
-      </div>
-      <div className="colums">
-        <div className="column">
-          <LocationSearch />
+    <Header />
+    <div className="container-fluid">
+        <div className="colums">
+          <div className="column">
+            <LocationSearch />
+          </div>
         </div>
-      </div>
-
-      <div className="columns is-dekstop">
-        <div className="column is-two-thirds" style={styles.twothirds} friends={friends}>
-          <NewMap reviewsData={reviewsData}  user={user} setUser={setUser} setReviewsData={setReviewsData} friends={friends} />
+        <div className="columns is-desktop">
+          <div className="column is-two-thirds" style={styles.twothirds} friends={friends}>
+            <NewMap reviewsData={reviewsData}  user={user} setUser={setUser} setReviewsData={setReviewsData} friends={friends} />
+          </div>
+          <div className="column is-one-third" style={styles.onethird}>
+            <Review reviewsData={reviewsData} setReviewsData={setReviewsData} user={user} setUser={setUser} friends={friends} setFriends={setFriends}  />
+          </div>
         </div>
-        <div className="column is-one-third" style={styles.onethird}>
-          <Review reviewsData={reviewsData} setReviewsData={setReviewsData} user={user} setUser={setUser} friends={friends} setFriends={setFriends}  />
-          <QuickReview />
-        </div>
-      </div>
-      <div className="columns is-desktop" style={styles.full}>
-        <div className="column ">{/* <Review /> */}</div>
-      </div>
-
-      <div>
-        <Footer />
-      </div>
+    </div>
+    <Footer />
     </>
   );
 }

@@ -8,8 +8,8 @@ import Feed from "./pages/Feed";
 import Review from "./components/Review";
 import Comments from "./components/Review/Comments";
 import Landing from "./pages/MainPages/Landing";
-import Settings from "./pages/Settings";
-import Contact from "./pages/Contact/Contact";
+import Settings from "./pages/Settings/";
+import Contact from "./pages/Contact/";
 import Friends from "./pages/Friends";
 import UserLocationContext from "./utils/UserLocationContext";
 
