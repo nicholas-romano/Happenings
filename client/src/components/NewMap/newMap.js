@@ -12,9 +12,7 @@ function NewMap({ reviewsData, friends, user }) {
   const userLocation = useContext(UserLocationContext);
 
   //console.log("COORDS IN NEWMAP: ", userLocation);
-
   //console.log('props new map reviews: ', reviewsData);
-
   //console.log('Marker: ', Marker);
 
   const [viewport, setViewport] = useState({

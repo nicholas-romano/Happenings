@@ -90,28 +90,14 @@ module.exports = {
           );
         }
       } else {
-        
-        //Username was changed, change all Reviews userNames:
-        const user = req.user.userName;
-        console.log('user before change: ', user);
-        console.log('Update to Username: ', userName);
-        db.Reviews.updateMany(
-          {
-            reviewOwner: user
-          },  
-          {
-            $set: {
-              reviewOwner: userName
-            }
-          }
-        );
 
         db.User.findOne({ userName: userName }, (err, userMatch) => {
 
           //If a match was found, someone else has the same username, return an error:
           if (userMatch) {
+            console.log('Error: that username already exists.')
             return res.json({
-              error: `Sorry, already a user with the username: ${userName}`
+              error: 'That username already exists. Please choose another.'
             });
           } else {
 

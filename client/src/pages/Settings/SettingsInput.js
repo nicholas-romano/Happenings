@@ -10,11 +10,15 @@ const SettingsInput = props => {
         userData,
         setUserData,
         register,
-        errors
+        errors,
+        userExistsErr
     } = props;
 
     let pattern;
     let errMessage;
+
+    console.log('label: ', label);
+    console.log('userExistsErr: ', userExistsErr);
 
     switch(label) {
         case "Username:":
@@ -56,6 +60,7 @@ const SettingsInput = props => {
                             {errors[label] && errors[label].type === "pattern" && 
                                 (<p className="error">{label} {errMessage}</p>)
                             }
+                            {(label === 'Username:' && userExistsErr === true ) ? (<p className="error">That username already exists, please choose another.</p>) : <></>}
                         </div>
                         <div className="column is-one-fifth">
                             <button onClick={() => enableEdit([label])} className="button is-link">

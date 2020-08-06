@@ -17,6 +17,7 @@ const Settings = () => {
     const newInterest = useRef();
     const [showModal, setModal] = useState(false);
     const { register, handleSubmit, errors } = useForm();
+    const [ userExistsErr, setUserExistsErr] = useState(false);
     const [userData, setUserData] = useState({
         "Username:": '',
         "First Name:": '',
@@ -146,16 +147,22 @@ const Settings = () => {
                 friends: newFriends
             };
 
-            console.log('updatedUser: ', updatedUser);
-
                 API.updateReviewsUserName(name).then(res => {
-                    console.log('Updated reviews: ', res);
+                    console.log('Result reviews: ', res);
                     API.updateUser(updatedUser).then(res => {
-                        console.log('Updated user: ', res);
-                        showSaveConfirmation();
+                        console.log('Result User: ', res);
+                        if (res.data.error) {
+                            console.log('User already exists');
+                            setUserExistsErr(true);
+                        } else {
+                            console.log('Username changed successfully');
+                            showSaveConfirmation();
+                        }
+                    }).catch(err => {
+                        console.log('err: ', err);
                     });
                 }).catch(err => {
-                    console.log('err: ', err)
+                    console.log('err: ', err);
                 });
             
         } else {
@@ -171,8 +178,6 @@ const Settings = () => {
                 userInterest: interestList,
                 friends: newFriends
             };
-
-            console.log('updatedUser: ', updatedUser);
 
             API.updateUser(updatedUser).then(res => {
                 console.log('res: ', res);
@@ -233,6 +238,7 @@ const Settings = () => {
                                         enableEdit={enableEdit}
                                         register={register}
                                         errors={errors}
+                                        userExistsErr={userExistsErr}
                                     />
                                 )
                             })

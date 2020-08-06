@@ -87,24 +87,40 @@ module.exports = {
     console.log('user before change: ', user);
     const userName = req.params.userName;
     console.log('Update Username to: ', userName);
-    db.Reviews.updateMany(
-      {
-        reviewOwner: user
-      },  
-      {
-        $set: {
-          reviewOwner: userName
-        }
-      },
-      (error, data) => {
-        if (error) {
-          res.send(error);
-        } else {
-          res.send(data);
-        }
+
+    db.User.findOne({ userName: userName }, (err, userMatch) => {
+
+      //If a match was found, someone else has the same username, return an error:
+      if (userMatch) {
+        console.log('Error: that username already exists.')
+        return res.json({
+          error: 'That username already exists. Please choose another.'
+        });
+      } else {
+        //Username does not already exist:
+        db.Reviews.updateMany(
+          {
+            reviewOwner: user
+          },  
+          {
+            $set: {
+              reviewOwner: userName
+            }
+          },
+          (error, data) => {
+            if (error) {
+              res.send(error);
+            } else {
+              res.send(data);
+            }
+          }
+        );
+          
       }
-    );
+
+    });
   }
+    
   //   update: function (req, res) {
   //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)
   //       .then(dbModel => {
@@ -124,4 +140,4 @@ module.exports = {
   //         .catch(err => res.status(422).json(err))
   //     })
   //   }
-};
+}
