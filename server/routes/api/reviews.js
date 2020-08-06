@@ -13,7 +13,14 @@ router.route("/")
   router.route("/:id")
   .put(reviewsController.addComment);
 
-//   .put(reviewsController.update)
-//   .delete(reviewsController.remove);
+router.route("/updateUsername/:userName")
+  .put(reviewsController.updateUserName);
+
+  router.route("/updateComments/:userName")
+  .put(reviewsController.updateComments);
+  //updateReviewsComments
+
+// .put(reviewsController.update)
+// .delete(reviewsController.remove);
 
 module.exports = router;
