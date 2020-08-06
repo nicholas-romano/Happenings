@@ -26,6 +26,9 @@ export default {
   updateReviewsUserName: function(userName) {
     return axios.put("/api/reviews/updateUsername/" + userName);
   },
+  updateReviewsComments: function(userName) {
+    return axios.put("/api/reviews/updateComments/" + userName);
+  },
   // Deletes the book with the given id
   // deleteBook: function(id) {
   //   return axios.delete("/api/books/" + id);

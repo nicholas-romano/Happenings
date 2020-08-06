@@ -17,9 +17,6 @@ const SettingsInput = props => {
     let pattern;
     let errMessage;
 
-    console.log('label: ', label);
-    console.log('userExistsErr: ', userExistsErr);
-
     switch(label) {
         case "Username:":
             pattern = /^[-\w]+$/;

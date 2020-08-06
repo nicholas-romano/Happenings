@@ -147,23 +147,35 @@ const Settings = () => {
                 friends: newFriends
             };
 
-                API.updateReviewsUserName(name).then(res => {
-                    console.log('Result reviews: ', res);
-                    API.updateUser(updatedUser).then(res => {
-                        console.log('Result User: ', res);
-                        if (res.data.error) {
-                            console.log('User already exists');
-                            setUserExistsErr(true);
-                        } else {
-                            console.log('Username changed successfully');
-                            showSaveConfirmation();
-                        }
+                API.updateReviewsComments(name).then(res => {
+                    console.log('Result comments: ', res);
+                    if (res.data.error) {
+                        console.log('User already exists');
+                        setUserExistsErr(true);
+                    } else {
+                        console.log('Username changed successfully');
+                        showSaveConfirmation();
+                    }
+                    API.updateReviewsUserName(name).then(res => {
+                        console.log('Result reviews: ', res);
+                        API.updateUser(updatedUser).then(res => {
+                            console.log('Result User: ', res);
+                            if (res.data.error) {
+                                console.log('User already exists');
+                                setUserExistsErr(true);
+                            } else {
+                                console.log('Username changed successfully');
+                                showSaveConfirmation();
+                            }
+                        }).catch(err => {
+                            console.log('err: ', err);
+                        });
                     }).catch(err => {
                         console.log('err: ', err);
                     });
                 }).catch(err => {
                     console.log('err: ', err);
-                });
+                }); 
             
         } else {
             //Password changed:
