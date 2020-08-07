@@ -13,8 +13,7 @@ if (process.env.MONGODB_URI) {
     useCreateIndex: true
   });
   //happening_user:h4663n1n8
-  MONGO_URL =
-    "mongodb://happening_user:h4663n1n8@ds121955.mlab.com:21955/heroku_72d6m5nb";
+  MONGO_URL = process.env.MONGODB_URI
 } else {
   mongoose.connect(MONGO_LOCAL_URL, {
     useNewUrlParser: true,
