@@ -9,7 +9,7 @@
 [![Repo Languages](https://img.shields.io/github/languages/count/SaundersEddie/Happenings?color=red&style=plastic)](https://github.com/SaundersEddie/Happenings)
 [![Main Repo Language](https://img.shields.io/github/languages/top/SaundersEddie/Happenings?color=blueviolet&style=plastic)](https://github.com/SaundersEddie/Happenings)
 
-A small web based app allowing a user to review and create quickinfo about locations they have visited.
+A small web based app allowing a user to review and create quick info about locations they have visited.
 
 # Table of Contents
 
