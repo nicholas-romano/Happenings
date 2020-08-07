@@ -49,7 +49,7 @@ module.exports = {
         if (password !== undefined) {
           //Password Change:
           const newPassword = bcrypt.hashSync(password, 10);
-          db.User.update(
+          db.User.updateOne(
             //update user data:
             {
               userName: req.user.userName
@@ -71,7 +71,7 @@ module.exports = {
           );
         } else {
           //Password Unchanged:
-          db.User.update(
+          db.User.updateOne(
             {
               userName: req.user.userName
             },
@@ -90,21 +90,23 @@ module.exports = {
           );
         }
       } else {
-        //username was changed, check if it already exists:
+
         db.User.findOne({ userName: userName }, (err, userMatch) => {
 
           //If a match was found, someone else has the same username, return an error:
           if (userMatch) {
+            console.log('Error: that username already exists.')
             return res.json({
-              error: `Sorry, already a user with the username: ${userName}`
+              error: 'That username already exists. Please choose another.'
             });
           } else {
+
             //If a match was not found, change the user's username:
             //check to see if the user's password was changed:
             if (password !== undefined) {
               //Password Change:
               const newPassword = bcrypt.hashSync(password, 10);
-              db.User.update(
+              db.User.updateOne(
                 //update user data:
                 {
                   userName: req.user.userName
@@ -124,9 +126,10 @@ module.exports = {
                   }
                 }
               );
+              
             } else {
               //Password Unchanged:
-              db.User.update(
+              db.User.updateOne(
                 {
                   userName: req.user.userName
                 },
@@ -143,9 +146,11 @@ module.exports = {
                   }
                 }
               );
+              
             }
           }
         });
+
       }
 
     } else {

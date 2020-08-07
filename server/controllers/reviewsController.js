@@ -81,29 +81,144 @@ module.exports = {
         res.json(err);
       });
 
-    // db.Reviews.updateOne(
-    //   {
-    //     _id: ObjectId(id)
-    //   },
-    //   {
-    //     $push: {
-    //       reviewComments: [
-    //         {
-    //           user,
-    //           message,
-    //           time
-    //         },
-    //       ],
-    //     },
-    //   }
-    // )
-    //   .then((comment) => {
-    //     res.json(comment);
-    //   })
-    //   .catch((err) => {
-    //     res.json(err);
-    //   });
   },
+  updateUserName: (req, res) => {
+    const user = req.user.userName;
+    console.log('Reviews user before change: ', user);
+    const userName = req.params.userName;
+    console.log('Reviews update Username to: ', userName);
+
+    if (userName === req.user.userName) {
+      //username unchanged:
+      db.Reviews.updateMany(
+        {
+          reviewOwner: user
+        },  
+        {
+          $set: {
+            reviewOwner: userName
+          }
+        },
+        (error, data) => {
+          if (error) {
+            res.send(error);
+          } else {
+            res.send(data);
+          }
+        }
+      );
+    } else {
+      //username changed:
+      db.User.findOne({ userName: userName }, (err, userMatch) => {
+
+        //If a match was found, someone else has the same username, return an error:
+        if (userMatch) {
+          console.log('Error: that username already exists.')
+          return res.json({
+            error: 'That username already exists. Please choose another.'
+          });
+        } else {
+  
+          //Username does not already exist change username:
+          db.Reviews.updateMany(
+            {
+              reviewOwner: user
+            },  
+            {
+              $set: {
+                reviewOwner: userName
+              }
+            },
+            (error, data) => {
+              if (error) {
+                res.send(error);
+              } else {
+                res.send(data);
+              }
+            }
+          );
+            
+        }
+  
+      });
+    }
+
+  },
+  updateComments: (req, res) => {
+    const user = req.user.userName;
+    console.log('Comments user before change: ', user);
+    const userName = req.params.userName;
+    console.log('Comments update Username to: ', userName);
+
+    if (userName === req.user.userName) {
+      //username unchanged:
+      db.Reviews.updateMany(
+        {
+          "reviewComments.user": user
+        },  
+        {
+          $set: {
+            "reviewComments.$.user": userName
+          }
+        },
+        (error, data) => {
+          if (error) {
+            res.send(error);
+          } else {
+            res.send(data);
+          }
+        },
+        (error, data) => {
+          if (error) {
+            res.send(error);
+          } else {
+            res.send(data);
+          }
+        }
+      );
+    } else {
+      //username was changed:
+      db.User.findOne({ userName: userName }, (err, userMatch) => {
+
+        //If a match was found, someone else has the same username, return an error:
+        if (userMatch) {
+          console.log('Error: that username already exists.')
+          return res.json({
+            error: 'That username already exists. Please choose another.'
+          });
+        } else {
+  
+          db.Reviews.updateMany(
+            {
+              "reviewComments.user": user
+            },  
+            {
+              $set: {
+                "reviewComments.$.user": userName
+              }
+            },
+            (error, data) => {
+              if (error) {
+                res.send(error);
+              } else {
+                res.send(data);
+              }
+            },
+            (error, data) => {
+              if (error) {
+                res.send(error);
+              } else {
+                res.send(data);
+              }
+            }
+          );
+  
+        }
+      });
+    }
+
+  }
+    
   //   update: function (req, res) {
   //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)
   //       .then(dbModel => {
@@ -123,4 +238,4 @@ module.exports = {
   //         .catch(err => res.status(422).json(err))
   //     })
   //   }
-};
+}
