@@ -13,14 +13,15 @@ if (process.env.MONGODB_URI) {
     useCreateIndex: true
   });
   //happening_user:h4663n1n8
-  MONGO_URL = process.env.MONGODB_URI
+  MONGO_URL = "mongodb://nromano:SweetCream12@iad2-c11-1.mongo.objectrocket.com:53117,iad2-c11-2.mongo.objectrocket.com:53117,iad2-c11-0.mongo.objectrocket.com:53117/'HappeningsApp?replicaSet=23271473858d4522a109382613eeae0c"
+    
 } else {
   mongoose.connect(MONGO_LOCAL_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   }); // local mongo url
-  MONGO_URL = MONGO_LOCAL_URL;
+  MONGO_URL = MONGO_LOCAL_URL
 }
 
 // should mongoose.connection be put in the call back of mongoose.connect???

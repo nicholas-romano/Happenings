@@ -5,8 +5,8 @@ import UserLocationContext from "../../utils/UserLocationContext";
 import PulseLoader from "react-spinners/PulseLoader";
 import StaticRating from "../Review/StaticRating";
 import API from "../../utils/API";
-//import mapboxgl from 'mapbox-gl';
-//mapboxgl.accessToken = 'pk.eyJ1IjoibnJvbWFubyIsImEiOiJja2RobGVlaHYxMjR0Mnl0MW00ZGd5Yms0In0.RM5n9xU9WaTBG0eygl6TEg';
+import mapboxgl from 'mapbox-gl';
+mapboxgl.accessToken = 'pk.eyJ1IjoibnJvbWFubyIsImEiOiJja2RobGVlaHYxMjR0Mnl0MW00ZGd5Yms0In0.RM5n9xU9WaTBG0eygl6TEg';
 
 function NewMap({ reviewsData, friends, user }) {
   const userLocation = useContext(UserLocationContext);
@@ -101,8 +101,7 @@ useEffect(() => {
       <ReactMapGL
         className="map"
         {...viewport}
-        // mapboxApiAccessToken={mapboxgl.accessToken}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapboxApiAccessToken={mapboxgl.accessToken}
         mapStyle="mapbox://styles/nromano/ckdho73fw012x1io4k3z39a07"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
