@@ -6,15 +6,14 @@ mongoose.Promise = global.Promise;
 let MONGO_URL;
 const MONGO_LOCAL_URL = "mongodb://localhost/happenings-app";
 
-if (process.env.ORMONGO_RS_URL) {
-  mongoose.connect(process.env.ORMONGO_RS_URL, {
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   });
-  //ORMONGO_URL : mongodb://iad2-c11-1.mongo.objectrocket.com:53117
-  //ORMONGO_RS_URL : mongodb://iad2-c11-1.mongo.objectrocket.com:53117,iad2-c11-2.mongo.objectrocket.com:53117,iad2-c11-0.mongo.objectrocket.com:53117/?replicaSet=23271473858d4522a109382613eeae0c
-  MONGO_URL = "mongodb://nromano:SweetCream12@iad2-c11-1.mongo.objectrocket.com:53117,iad2-c11-2.mongo.objectrocket.com:53117,iad2-c11-0.mongo.objectrocket.com:53117/'HappeningsApp?replicaSet=23271473858d4522a109382613eeae0c"
+  
+  MONGO_URL = "mongodb://nromano:coolness7@ds263248.mlab.com:63248/heroku_vqtfk517"
     
 } else {
   mongoose.connect(MONGO_LOCAL_URL, {
