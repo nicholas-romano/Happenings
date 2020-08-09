@@ -12,7 +12,6 @@ module.exports = {
   },
   getUsers: (req, res) => {
     if (req.user) {
-      console.log('getUsers controller function!!!')
       db.User.find({})
       .then((users) => {
           return res.json(users);

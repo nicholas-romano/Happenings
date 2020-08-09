@@ -13,23 +13,24 @@ const styles = {
 }
 
 const Nav = (props) => {
-  // let greeting;
 
-  // if (props.user === null) {
-  //   greeting = <p>Hello guest</p>;
-  // } else if (props.user.firstName) {
-  //   greeting = (
-  //     <Fragment>
-  //       Welcome back, <strong>{props.user.firstName}</strong>
-  //     </Fragment>
-  //   );
-  // } else if (props.user.username) {
-  //   greeting = (
-  //     <Fragment>
-  //       Welcome back, <strong>{props.user.username} </strong>
-  //     </Fragment>
-  //   );
-  // }
+   let greeting;
+
+  if (props.user === null) {
+    greeting = <p>Hello guest</p>;
+  } else if (props.user.firstName) {
+    greeting = (
+      <Fragment>
+        Welcome back, <strong>{props.user.firstName}</strong>
+      </Fragment>
+    );
+  } else if (props.user.userName) {
+    greeting = (
+      <Fragment>
+        Welcome back, <strong>{props.user.userName} </strong>
+      </Fragment>
+    );
+  }
 
   return (
     <nav className="navbar navbar-expand-lg" style={styles.head}>
@@ -40,7 +41,7 @@ const Nav = (props) => {
       </Col>
       <Col size="md-6 sm-6">
         <div className="float-right">
-          {/* {greeting} -{" "} */}
+          <span className="greeting">{greeting} - {" "}</span>
           <Link to="/" className="logout" onClick={props.logout}>
             Logout
           </Link>

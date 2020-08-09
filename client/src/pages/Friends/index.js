@@ -5,9 +5,12 @@ import UsersList from "./UsersList";
 import FriendsList from "./FriendsList";
 import "./friends.css";
 import API from "../../utils/API";
-import AUTH from "../../utils/AUTH";
 
-const Friends = () => {
+const Friends = props => {
+
+    const {
+        userProps
+    } = props;
 
      const [friendsUsernames, setFriendsUsernames] = useState([]);
      const [users, setUsers] = useState([]);
@@ -16,9 +19,10 @@ const Friends = () => {
      const [friendSearchQuery, setFriendSearchQuery] = useState('');
 
     useEffect(() => {
-        getCurrentUser();
+        setThisUser(userProps.userName)
+        setFriendsUsernames(userProps.friends);
         getAllUsersInfo();
-    }, []);
+    }, [userProps]);
 
     useEffect(() => {
 
@@ -36,30 +40,9 @@ const Friends = () => {
 
     }, [users, friendsUsernames]);
 
-    const getCurrentUser = () => {
-        AUTH.getUser()
-        .then(res => {
-            const userName = res.data.user.userName;
-            setThisUser(userName);
-            return getUserFriends(userName);
-        })
-        .catch(err => {
-            console.log('err: ', err);
-        })
-    }
-
-    const getUserFriends = userName => {
-        API.getUserInfo(userName).then(res => {
-            if (res.data[0].friends.length > 0) {
-                setFriendsUsernames(res.data[0].friends);
-                return;
-            }
-        })
-    }
-
     const getAllUsersInfo = () => {
         API.getUsers().then(res => {
-            console.log('get all users response: ', res);
+            //console.log('get all users response: ', res);
             setUsers(res.data);
         })
         .catch(err => console.log('err: ', err))
@@ -69,7 +52,7 @@ const Friends = () => {
         console.log('add friend to db ');
         API.addFriend(userName)
         .then(res => {
-            console.log('Friend added: ', res);
+            //console.log('Friend added: ', res);
             window.location.reload();
         })
         .catch(err => console.log('err: ', err));
@@ -79,7 +62,7 @@ const Friends = () => {
         console.log('removed friend from db ');
         API.removeFriend(userName)
         .then(res => {
-            console.log('Friend removed: ', res);
+            //console.log('Friend removed: ', res);
             window.location.reload();
         })
         .catch(err => console.log('err: ', err));
@@ -130,18 +113,18 @@ const Friends = () => {
 
     return (
         <>
-        <Header />
-        <div className="container-fluid">
-                    <div className="columns">
-                        <div className="column">
-                            <UsersList users={users} thisUser={thisUser} filterByUser={filterByUser} addFriend={addFriend} />
+            <Header />
+            <div className="container-fluid">
+                        <div className="columns">
+                            <div className="column">
+                                <UsersList users={users} thisUser={thisUser} filterByUser={filterByUser} addFriend={addFriend} />
+                            </div>
+                            <div className="column">
+                                <FriendsList friends={friendsUsernames} filterByFriend={filterByFriend} removeFriend={removeFriend} />
+                            </div>
                         </div>
-                        <div className="column">
-                            <FriendsList friends={friendsUsernames} filterByFriend={filterByFriend} removeFriend={removeFriend} />
-                        </div>
-                    </div>
-        </div>  
-        <Footer />  
+            </div>  
+            <Footer />
         </>
     )
 };

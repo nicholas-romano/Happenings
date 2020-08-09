@@ -6,9 +6,7 @@ export const TextArea = props => {
     title,
     name,
     placeholder,
-    value,
-    setFormObject,
-    formObject
+    inputRef
   } = props;
 
   return (
@@ -18,9 +16,9 @@ export const TextArea = props => {
         <textarea 
           className="textarea" 
           name={name} 
-          defaultValue={value}
-          onChange={e => setFormObject({...formObject, [name]: e.target.value})}
+          defaultValue=""
           placeholder={placeholder}
+          ref={inputRef}
         >
         </textarea>
       </div>        

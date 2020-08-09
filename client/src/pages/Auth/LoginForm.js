@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
@@ -11,20 +11,14 @@ function LoginForm({ login, loginErr }) {
 
   console.log('loginErr: ', loginErr);
 
-  const [formObject, setFormObject] = useState({
-    userName: "",
-    password: "",
-  });
-
-  // useEffect(() => {
-  //   console.log('formObject: ', formObject);
-  // }, [formObject])
+  const userNameRef = useRef();
+  const passwordRef = useRef();
 
   const handleSubmit = event => {
     event.preventDefault();
     login({
-      userName: formObject.userName,
-      password: formObject.password
+      userName: userNameRef.current.value,
+      password: passwordRef.current.value
     });
   }
 
@@ -32,7 +26,7 @@ function LoginForm({ login, loginErr }) {
     if (loginErr !== '') {
       return <p className="error">{loginErr}</p>
     } else {
-      return;
+      return <></>;
     }
   }
 
@@ -51,18 +45,14 @@ function LoginForm({ login, loginErr }) {
                   name="userName"
                   type="input"
                   title="Username"
-                  setFormObject={setFormObject}
-                  formObject={formObject}
-                  value={formObject.userName}
                   placeholder="Username"
+                  inputRef={userNameRef}
                 />
                 <Input
                   title="Password"
                   type="password"
                   name="password"
-                  value={formObject.password}
-                  setFormObject={setFormObject}
-                  formObject={formObject}
+                  inputRef={passwordRef}
                   placeholder="Password"
                 />
                 <Link to="/signup">Create Account</Link>

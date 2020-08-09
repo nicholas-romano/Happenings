@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useRef, useContext } from "react";
 import Input from "../../components/Form/Input";
 import { Rating, TextArea, FormBtn } from "../Form";
 import FriendsFeed from "./FriendsFeed";
@@ -7,8 +7,8 @@ import "../../App.css";
 import LocationSearch from "../LocationSearch/locSearch";
 import placesAPI from "../../utils/placesAPI";
 import UserLocationContext from "../../utils/UserLocationContext";
+import UserInfoContext from "../../utils/UserInfoContext";
 import API from "../../utils/API";
-import AUTH from "../../utils/AUTH";
 
 const styles = {
   revBtn: {
@@ -18,27 +18,25 @@ const styles = {
 
 const Review = (props) => {
 
+  const userProps = useContext(UserInfoContext);
+  //console.log('userProps in Reviews: ', userProps);  
+
   const {
     reviewsData,
-    setReviewsData,
-    friends,
-    setFriends,
-    user,
-    setUser
+    loadReviews
   } = props;
 
   const userLocation = useContext(UserLocationContext);
-
   //console.log("props review: ", props);
 
   const [showModal, setModal] = useState(false);
-  const [formObject, setFormObject] = useState({
-    title: "",
-    message: "",
-    rating: 0,
-  });
+
   const [reviewRating, setRatings] = useState(0);
   const formEl = useRef(null);
+
+  const titleRef = useRef();
+  const messageRef = useRef();
+  const placeRef = useRef();
 
   const [locationState, setLocationState] = useState({
     location: "",
@@ -54,40 +52,12 @@ const Review = (props) => {
     },
   });
 
-  useEffect(() => {
-    AUTH.getUser()
-      .then((res) => {
-        const { userName, firstName, lastName } = res.data.user;
-        setUser({ userName, firstName, lastName });
-        return getUserFriends(userName);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const getUserFriends = (userName) => {
-    API.getUserInfo(userName).then((res) => {
-      if (res.data[0].friends.length > 0) {
-        setFriends(res.data[0].friends);
-      }
-      return loadReviews();
-    });
-  };
-
-  const loadReviews = () => {
-    API.getReviews()
-      .then((res) => {
-        console.log('friends length: ', friends.length)
-        setReviewsData(res.data);
-      })
-      .catch((err) => console.log("err ", err));
-  };
-
   //handling the location search
   const handlePlaceSubmit = (event) => {
     event.preventDefault();
 
     //fetching locations that match user input from the places API, setting to location in state
-    placesAPI.getPlace(locationState.place, userLocation.coords).then((res) => {
+    placesAPI.getPlace(placeRef.current.value, userLocation.coords).then((res) => {
       //console.log(res.data.items);
       setLocationState({
         ...locationState,
@@ -119,9 +89,8 @@ const Review = (props) => {
     });
   };
 
-  const handleRatingChange = (rating) => {
+  const handleRatingChange = rating => {
     setRatings(rating);
-    setFormObject({ ...formObject, rating: rating });
   };
 
   const time = new Date();
@@ -129,14 +98,16 @@ const Review = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (formObject.title && locationState.place) {
+    const title = titleRef.current.value;
+
+    if (title !== '' && locationState.place) {
       //console.log("formObject: ", formObject);
       API.saveReview({
-        reviewOwner: user.userName,
+        reviewOwner: userProps.userName,
         reviewCreated: time.toLocaleString(),
-        reviewTitle: formObject.title,
-        reviewBody: formObject.message,
-        reviewRating: formObject.rating,
+        reviewTitle: titleRef.current.value,
+        reviewBody: messageRef.current.value,
+        reviewRating: reviewRating,
         reviewLocation: locationState.place,
         reviewLat: locationState.locationCoords.lat,
         reviewLong: locationState.locationCoords.long,
@@ -144,12 +115,13 @@ const Review = (props) => {
           locationState.locationCoords.lat,
           locationState.locationCoords.long,
         ],
-        reviewComments: [],
+        reviewComments: []
       })
         .then((res) => {
           formEl.current.reset();
+          titleRef.current.value = '';
+          messageRef.current.value = '';
           setRatings(0);
-          setFormObject({ rating: 0 });
           closeReviewForm();
           loadReviews();
         })
@@ -180,17 +152,13 @@ const Review = (props) => {
                 name="title"
                 title="Title"
                 type="input"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.title}
+                inputRef={titleRef}
                 placeholder="Title (required)"
               />
               <TextArea
                 name="message"
                 title="Message"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.message}
+                inputRef={messageRef}
                 placeholder="Message"
               />
               <Rating
@@ -199,14 +167,13 @@ const Review = (props) => {
                 handleRatingChange={handleRatingChange}
               />
               <LocationSearch
-                value={locationState.place}
                 locationState={locationState}
-                setLocationState={setLocationState}
+                inputRef={placeRef}
                 handlePlaceSubmit={handlePlaceSubmit}
                 handleLocClick={handleLocClick}
               />
               <FormBtn
-                disabled={!(formObject.title && locationState.place)}
+                disabled={!(titleRef && locationState.place)}
                 onClick={handleSubmit}
               >
                 Submit Review
@@ -221,14 +188,13 @@ const Review = (props) => {
         ></button>
       </div>
       <div className="review-section">
-        {friends.length > 0 ? (
+        {userProps.friends.length > 0 ? (
           <>
             <h2>Friends Feed</h2>
             <div className="review-posts">
             <FriendsFeed
-              user={user}
-              friends={friends}
               reviewsData={reviewsData}
+              userProps={userProps}
             />
           </div>
           </>

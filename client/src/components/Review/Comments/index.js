@@ -1,22 +1,18 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { useLocation } from "react-router-dom";
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import StaticRating from "../StaticRating";
 import Comment from "./Comment";
 import { TextArea, FormBtn } from '../../../components/Form';
+import UserInfoContext from "../../../utils/UserInfoContext";
+
 import API from "../../../utils/API";
-import AUTH from "../../../utils/AUTH";
 
 const Comments = props => {
 
-    const [user, setUser] = useState({
-        userName: "",
-        firstName: "",
-        lastName: ""
-    });
-
-    const [userProfileImg, setUserProfileImg] = useState('');
+    const userProps = useContext(UserInfoContext);
+    //console.log('userProps in comments: ', userProps);
 
     const location = useLocation();
     const [reviewId, setReviewId] = useState('');
@@ -28,9 +24,8 @@ const Comments = props => {
 
     const [showModal, setModal] = useState(false);
 
-    const [formObject, setFormObject] = useState({
-        message: ''
-    });
+    const messageRef = useRef();
+
     const formEl = useRef(null);
 
     const {
@@ -39,22 +34,8 @@ const Comments = props => {
         reviewTitle,
         reviewBody,
         reviewRating,
-        reviewLocation,
-        reviewLat,
-        reviewLong,
-        reviewGeoLocation,
-        reviewComments
+        reviewLocation
     } = review;
-
-    useEffect(() => {
-        AUTH.getUser()
-          .then((res) => {
-            const { userName, firstName, lastName } = res.data.user;
-            setUser({ userName, firstName, lastName });
-            return getUserPhoto(userName);
-          })
-          .catch((err) => console.log(err));
-    }, []);
         
     useEffect(() => {
         const review = new URLSearchParams(location.search).get('id');
@@ -64,14 +45,6 @@ const Comments = props => {
             getReview();
         }
     }, [reviewId]);
-
-    const getUserPhoto = userName => {
-        API.getUserInfo(userName)
-        .then(res => {
-            const profilePhoto = res.data[0].profileImg;
-            setUserProfileImg(profilePhoto);
-        });
-    }
 
     const getReview = () => {
         API.getReviewById(reviewId)
@@ -100,15 +73,19 @@ const Comments = props => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (messageRef.current.value === '') {
+            return;
+        }
         console.log('submit');
-        console.log('Message: ', formObject.message);
-        console.log('user info: ', user);
+        console.log('Message: ', messageRef.current.value);
+        console.log('user info: ', userProps);
 
         const time = new Date();
 
         const newComment =  {
-                user: user.userName,
-                message: formObject.message,
+                user: userProps.userName,
+                message: messageRef.current.value,
                 time: time.toLocaleString()
         }
 
@@ -180,12 +157,12 @@ const Comments = props => {
                             <div className="media">
                                 <div className="media-left">
                                     <figure className="image is-48x48">
-                                        <img src={(userProfileImg !== "") ? userProfileImg : "https://bulma.io/images/placeholders/96x96.png"} alt={user.firstName} />
+                                        <img src={(userProps.profileImg !== "") ? userProps.profileImg : "https://bulma.io/images/placeholders/96x96.png"} alt={userProps.firstName} />
                                     </figure>
                                 </div>
                                 <div className="media-content">
-                                    <p className="title is-4">{user.firstName} {user.lastName}</p>
-                                    <p className="subtitle is-6">@{user.userName}</p>
+                                    <p className="title is-4">{userProps.firstName} {userProps.lastName}</p>
+                                    <p className="subtitle is-6">@{userProps.userName}</p>
                                 </div>
                             </div>
                             <div className="content">
@@ -194,13 +171,10 @@ const Comments = props => {
                                         <TextArea
                                             name="message"
                                             title="Message"
-                                            setFormObject={setFormObject}
-                                            formObject={formObject}
-                                            value={formObject.message}
                                             placeholder="Message"
+                                            inputRef={messageRef}
                                         />
                                         <FormBtn
-                                            disabled={!(formObject.message)}
                                             onClick={handleSubmit}
                                         >
                                             Post Comment

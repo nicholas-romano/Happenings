@@ -9,6 +9,14 @@ html, body {
   background-color: #b7d1da;
 }
 
+.greeting {
+  color: white;
+}
+
+.greeting strong {
+  color: white;
+}
+
 .container-fluid {
   padding: 15px 15px 30px 15px;
   flex: 1 0 auto;

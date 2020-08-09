@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import Hero from "../../components/Hero";
 import Footer from '../../components/Footer';
@@ -19,6 +19,13 @@ function SignupForm() {
     confirmPassword: ""
   });
 
+const firstNameRef = useRef();
+const lastNameRef = useRef();
+const emailRef = useRef();
+const userNameRef = useRef();
+const passwordRef = useRef();
+const confirmPasswordRef = useRef();
+
   const [redirectTo, setRedirectTo] = useState(null);
 
   // useEffect(() => {
@@ -30,11 +37,11 @@ function SignupForm() {
     // TODO - validate!
     console.log(formObject);
     AUTH.signup({
-        firstName: formObject.firstName,
-        lastName: formObject.lastName,
-        userName: formObject.userName,
-        password: formObject.password,
-        userEmail: formObject.email,
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        userName: userNameRef.current.value,
+        password: passwordRef.current.value,
+        userEmail: emailRef.current.value,
         friends: [],
         userInterest: [],
         profileImg: ''
@@ -66,55 +73,43 @@ function SignupForm() {
                       name="firstName"
                       title="First Name"
                       type="input"
-                      setFormObject={setFormObject}
-                      formObject={formObject}
-                      value={formObject.firstName}
                       placeholder="First Name"
+                      inputRef={firstNameRef}           
                   />
                   <Input
                       name="lastName"
                       title="Last Name"
                       type="input"
-                      setFormObject={setFormObject}
-                      formObject={formObject}
-                      value={formObject.lastName}
                       placeholder="Last Name"
+                      inputRef={lastNameRef}
                   />
                   <Input
                     name="email"
                     title="Email"
                     type="email"
-                    setFormObject={setFormObject}
-                    formObject={formObject}
-                    value={formObject.email}
                     placeholder="Email"
+                    inputRef={emailRef}
                   />
                   <Input
                     name="userName"
                     title="Username"
                     type="input"
-                    setFormObject={setFormObject}
-                    formObject={formObject}
-                    value={formObject.userName}
                     placeholder="Username"
+                    inputRef={userNameRef}
                   />
                   <Input
                     name="password"
                     title="Password"
                     type="password"
-                    setFormObject={setFormObject}
-                    formObject={formObject}
-                    value={formObject.password}
+                    inputRef={passwordRef}
                     placeholder="Password"
                   />
                   <Input
                     name="confirmPassword"
                     title="Confirm Password"
                     type="password"
-                    setFormObject={setFormObject}
-                    formObject={formObject}
-                    value={formObject.confirmPassword}
                     placeholder="Confirm Password"
+                    inputRef={confirmPasswordRef}
                   />
                   <Link to="/">Login</Link>
                   <FormBtn onClick={handleSubmit}>Register</FormBtn>
