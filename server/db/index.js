@@ -12,7 +12,6 @@ if (process.env.MONGODB_URI) {
     useUnifiedTopology: true,
     useCreateIndex: true
   });
-  
   MONGO_URL = "mongodb://nromano:coolness7@ds263248.mlab.com:63248/heroku_vqtfk517"
     
 } else {
