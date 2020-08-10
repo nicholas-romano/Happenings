@@ -1,6 +1,6 @@
 {
-  "name": "Images App",
-  "short_name": "Images App",
+  "name": "Happenings App",
+  "short_name": "Happenings",
   "icons": [
     {
       "src": "assets/images/icons/icon-72x54.png",
