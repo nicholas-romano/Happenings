@@ -16,7 +16,7 @@ const passport = require("./passport");
 const app = express();
 
 //favicon:
-app.use(favicon(__dirname + '../client/public/favicon.ico'))
+app.use(favicon(__dirname + '/public/favicon.ico'))
 
 const PORT = process.env.PORT || 3001;
 
