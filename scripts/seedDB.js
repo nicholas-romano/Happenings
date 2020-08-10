@@ -54,100 +54,13 @@ const reviewsSeed = [
   },
 ];
 
-const friendsSeed = [
-  {
-    friendsOwner: "Eddie",
-    friendsList: "None",
-  },
-];
-
-const userInfoSeed = [
-  {
-    userName: "Eddie",
-    userPicture: "None",
-    userEmail: "Eddie@noemail.com",
-    userInterest: "Nothing",
-  },
-];
-
-const quickInfoSeed = [
-  {
-    placeEmoji: "Test",
-    placeTags: "123",
-    placeImage: "Placeholder if needed",
-  },
-];
-
-const locationEventsSeed = [
-  {
-    eventLocation: "ourTestlocation",
-    eventStart: TODAY.getDate(),
-    eventEnd: TODAY.getDate(),
-  },
-];
-
 // EXS When we execture the seedsDB, this removes all entries and then insert the records above
 // Optimize this code later
 // console.log(db.Friends, db.UserInfo)
 
-db.Places.deleteMany({})
-  .then(console.log("Adding Places"))
-  .then(() => db.Places.collection.insertMany(placesSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
 db.Reviews.deleteMany({})
   .then(console.log("Adding My Reviews", reviewsSeed))
   .then(() => db.Reviews.collection.insertMany(reviewsSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.Friends.deleteMany({})
-  .then(console.log("Adding Friends"))
-  .then(() => db.Friends.collection.insertMany(friendsSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.UserInfo.deleteMany({})
-  .then(console.log("Adding UserInfo"))
-  .then(() => db.UserInfo.collection.insertMany(userInfoSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.QuickInfo.deleteMany({})
-  .then(console.log("Adding My QuickInfo"))
-  .then(() => db.QuickInfo.collection.insertMany(quickInfoSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.LocationEvents.deleteMany({})
-  .then(console.log("Adding QuickInfo"))
-  .then(() => db.LocationEvents.collection.insertMany(locationEventsSeed))
   .then((data) => {
     process.exit(0);
   })
