@@ -4,7 +4,6 @@
 
 const mongoose = require("mongoose");
 const db = require("../models");
-const TODAY = new Date();
 
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/happenings-app",
@@ -15,14 +14,11 @@ mongoose.connect(
   }
 );
 
-// EXS When we execture the seedsDB, this removes all entries and then insert the records above
-// Optimize this code later
 
+//remove all records in the database:
 db.Reviews.deleteMany({})
-  .then(console.log("Adding My Reviews"))
-  .then(() => db.Reviews.collection.insertMany(reviewsSeed))
   .then((data) => {
-    console.log(data.result.n + " reviews records inserted!");
+    console.log(data.result.n + " reviews records removed!");
     process.exit(0);
   })
   .catch((err) => {
@@ -31,10 +27,8 @@ db.Reviews.deleteMany({})
   });
 
 db.User.deleteMany({})
-  .then(console.log("Adding A User"))
-  .then(() => db.User.collection.insertMany(userSeed))
   .then((data) => {
-    console.log(data.result.n + " user records inserted!");
+    console.log(data.result.n + " user records removed!");
     process.exit(0);
   })
   .catch((err) => {
