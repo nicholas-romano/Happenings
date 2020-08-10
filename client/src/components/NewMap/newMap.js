@@ -12,7 +12,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibnJvbWFubyIsImEiOiJja2RobGVlaHYxMjR0Mnl0MW00Z
 function NewMap({ reviewsData }) {
 
   const userProps = useContext(UserInfoContext);
-  // console.log('userProps in newMap: ', userProps); 
+  //console.log('userProps in newMap: ', userProps); 
 
   const userLocation = useContext(UserLocationContext);
 
@@ -121,7 +121,7 @@ useEffect(() => {
                 setSelectedEvent(post);
               }}
             >
-              <img src="/pin.png" alt="Location Icon" />
+              <img src={process.env.PUBLIC_URL + "/assets/images/pin.png"} alt="Location Icon" />
             </button>
           </Marker>
         ))}
