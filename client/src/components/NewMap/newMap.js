@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "./newMap.css";
+import Pin from "../../assets/pin.png";
 import UserLocationContext from "../../utils/UserLocationContext";
 import UserInfoContext from "../../utils/UserInfoContext";
 import PulseLoader from "react-spinners/PulseLoader";
@@ -121,7 +122,7 @@ useEffect(() => {
                 setSelectedEvent(post);
               }}
             >
-              <img src={process.env.PUBLIC_URL + "/assets/images/pin.png"} alt="Location Icon" />
+              <img src={Pin} alt="Location Icon" />
             </button>
           </Marker>
         ))}
