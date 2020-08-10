@@ -39,7 +39,7 @@ Complete as of 3rd August 2020
 
 Visit the following URL to open the application.
 
-https://what-happenings.herokuapp.com/
+[https://the-happenings-app.herokuapp.com/](https://the-happenings-app.herokuapp.com/)
 
 # Credits
 
