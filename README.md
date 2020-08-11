@@ -30,7 +30,6 @@ The Happenings App is a social media application that uses a live, interactive m
 
 ## Collaborators 
 * Richard Kessler:  [github.com/RichardKessler](https://github.com/RichardKessler)
-* Nicholas Romano:  [github.com/nicholas-romano](https://github.com/nicholas-romano)
 * Eddie Saunders:  [github.com/SaundersEddie](https://github.com/SaundersEddie)
 * Jason Vernot:  [github.com/jvernot](https://github.com/jvernot)
 * Tevin Ward:  [github.com/TevinWard7](https://github.com/TevinWard7)
