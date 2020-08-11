@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import UsersList from "./UsersList";
 import FriendsList from "./FriendsList";
 import "./friends.css";
 import API from "../../utils/API";
+import AUTH from "../../utils/AUTH";
 
-const Friends = props => {
 
-    const {
-        userProps
-    } = props;
+const Friends = () => {
 
      const [friendsUsernames, setFriendsUsernames] = useState([]);
      const [users, setUsers] = useState([]);
@@ -18,11 +16,10 @@ const Friends = props => {
      const [userSearchQuery, setUserSearchQuery] = useState('');
      const [friendSearchQuery, setFriendSearchQuery] = useState('');
 
-    useEffect(() => {
-        setThisUser(userProps.userName)
-        setFriendsUsernames(userProps.friends);
+     useEffect(() => {
+        getCurrentUser();
         getAllUsersInfo();
-    }, [userProps]);
+    }, []);
 
     useEffect(() => {
 
@@ -40,30 +37,47 @@ const Friends = props => {
 
     }, [users, friendsUsernames]);
 
+    const getCurrentUser = () => {
+        AUTH.getUser()
+        .then(res => {
+            const userName = res.data.user.userName;
+            setThisUser(userName);
+            return getUserFriends(userName);
+        })
+        .catch(err => {
+            console.log('err: ', err);
+        })
+    }
+
+    const getUserFriends = userName => {
+        API.getUserInfo(userName).then(res => {
+            if (res.data[0].friends.length > 0) {
+                setFriendsUsernames(res.data[0].friends);
+                return;
+            }
+        })
+    }
+
     const getAllUsersInfo = () => {
         API.getUsers().then(res => {
-            //console.log('get all users response: ', res);
+            console.log('get all users response: ', res);
             setUsers(res.data);
         })
         .catch(err => console.log('err: ', err))
     }
 
     const addFriend = userName => {
-        console.log('add friend to db ');
         API.addFriend(userName)
         .then(res => {
-            //console.log('Friend added: ', res);
-            window.location.reload();
+             console.log('Friend added: ', userName);
         })
         .catch(err => console.log('err: ', err));
     }
 
     const removeFriend = userName => {
-        console.log('removed friend from db ');
         API.removeFriend(userName)
         .then(res => {
-            //console.log('Friend removed: ', res);
-            window.location.reload();
+             console.log('Friend removed: ', userName);
         })
         .catch(err => console.log('err: ', err));
     }

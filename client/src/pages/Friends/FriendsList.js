@@ -9,9 +9,9 @@ const FriendsList = props => {
         filterByFriend
     } = props;
 
-    //return <Friend  />
-
     const renderFriend = (friend, index) => {
+
+        console.log('friend: ', friend);
 
         let displayed;
 

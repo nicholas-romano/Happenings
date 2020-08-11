@@ -159,7 +159,7 @@ function App() {
                       <Route exact path="/comments" component={Comments} />
                       <Route exact path="/settings" render={(props) => <Settings {...props} userProps={userProps} />} />
                       <Route exact path="/contact" component={Contact} />
-                      <Route exact path="/friends" render={(props) => <Friends {...props} userProps={userProps} />} />
+                      <Route exact path="/friends" component={Friends} />
                       <Route component={NoMatch} />
                     </Switch>
                   </div>
