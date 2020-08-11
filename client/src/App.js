@@ -58,11 +58,10 @@ function App() {
   });
 
   const history = useHistory();
-  console.log("history:", history);
-  console.log("loggedIn: ", loggedIn);
+  //console.log("history:", history);
+  //console.log("loggedIn: ", loggedIn);
   useEffect(() => {
     AUTH.getUser().then((response) => {
-      console.log('called getUser()');
       if (response.data.user) {
         setLoggedIn(true);
         //setUser(response.data.user);
@@ -122,7 +121,7 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log("err: ", err);
+        //console.log("err: ", err);
         setLoginErr("Invalid username and password combination.");
       });
   };
@@ -140,9 +139,8 @@ function App() {
     });
   }, []);
 
-  console.log("USER LOCATION: ", userLocation);
-
-  console.log("loggedIn!!!:", loggedIn);
+  //console.log("USER LOCATION: ", userLocation);
+  //console.log("loggedIn!!!:", loggedIn);
   return (
     <UserLocationContext.Provider value={userLocation}>
       <UserInfoContext.Provider value={userProps}>

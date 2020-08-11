@@ -32,7 +32,7 @@ function Landing(props) {
 
   const { login, loginErr } = props;
 
-  console.log("props landing: ", props);
+  //console.log("props landing: ", props);
 
   return (
     <>

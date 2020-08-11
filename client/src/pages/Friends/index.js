@@ -60,7 +60,7 @@ const Friends = () => {
 
     const getAllUsersInfo = () => {
         API.getUsers().then(res => {
-            console.log('get all users response: ', res);
+            //console.log('get all users response: ', res);
             setUsers(res.data);
         })
         .catch(err => console.log('err: ', err))

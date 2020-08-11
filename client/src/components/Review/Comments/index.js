@@ -77,9 +77,9 @@ const Comments = props => {
         if (messageRef.current.value === '') {
             return;
         }
-        console.log('submit');
-        console.log('Message: ', messageRef.current.value);
-        console.log('user info: ', userProps);
+        //console.log('submit');
+        //console.log('Message: ', messageRef.current.value);
+        //console.log('user info: ', userProps);
 
         const time = new Date();
 
@@ -91,7 +91,7 @@ const Comments = props => {
 
         API.addComment(reviewId, newComment)
         .then(res => {
-            console.log('comment res: ', res);
+            //console.log('comment res: ', res);
             hideForm();
             return getReview();
         });

@@ -59,7 +59,9 @@ const reviewsSeed = [
 // console.log(db.Friends, db.UserInfo)
 
 db.Reviews.deleteMany({})
-  .then(console.log("Adding My Reviews", reviewsSeed))
+  .then(() => {
+    //console.log("Adding My Reviews", reviewsSeed
+  })
   .then(() => db.Reviews.collection.insertMany(reviewsSeed))
   .then((data) => {
     process.exit(0);

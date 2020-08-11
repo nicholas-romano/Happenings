@@ -11,8 +11,6 @@ const FriendsList = props => {
 
     const renderFriend = (friend, index) => {
 
-        console.log('friend: ', friend);
-
         let displayed;
 
         if (friend.display === undefined) {

@@ -40,17 +40,13 @@
     "morgan": "^1.10.0",
     "node-sass": "^4.14.1",
     "npm": "^6.14.6",
-    "owl-carousel": "^1.0.0",
-    "owl.carousel": "^2.3.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react-bulma-components": "^3.4.0",
     "react-hook-form": "^6.0.8",
     "react-map-gl": "^5.2.7",
     "react-scripts": "^3.4.1",
-    "react-slick": "^0.27.1",
     "react-spinners": "^0.9.0",
-    "slick-carousel": "^1.8.1",
     "start": "^5.1.0"
   }
 }

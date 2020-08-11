@@ -120,23 +120,23 @@ const Settings = props => {
             };
 
                 API.updateReviewsComments(name).then(res => {
-                    console.log('Result comments: ', res);
+                    //console.log('Result comments: ', res);
                     if (res.data.error) {
-                        console.log('User already exists');
+                        //console.log('User already exists');
                         setUserExistsErr(true);
                     } else {
-                        console.log('Username changed successfully');
+                        //console.log('Username changed successfully');
                         showSaveConfirmation();
                     }
                     API.updateReviewsUserName(name).then(res => {
-                        console.log('Result reviews: ', res);
+                        //console.log('Result reviews: ', res);
                         API.updateUser(updatedUser).then(res => {
-                            console.log('Result User: ', res);
+                            //console.log('Result User: ', res);
                             if (res.data.error) {
-                                console.log('User already exists');
+                                //console.log('User already exists');
                                 setUserExistsErr(true);
                             } else {
-                                console.log('Username changed successfully');
+                                //console.log('Username changed successfully');
                                 showSaveConfirmation();
                             }
                         }).catch(err => {

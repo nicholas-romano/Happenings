@@ -18,7 +18,7 @@ mongoose.connect(
 //remove all records in the database:
 db.Reviews.deleteMany({})
   .then((data) => {
-    console.log(data.result.n + " reviews records removed!");
+    console.log(data.result.n + " reviews records removed");
     process.exit(0);
   })
   .catch((err) => {
@@ -28,7 +28,7 @@ db.Reviews.deleteMany({})
 
 db.User.deleteMany({})
   .then((data) => {
-    console.log(data.result.n + " user records removed!");
+    console.log(data.result.n + " users records removed");
     process.exit(0);
   })
   .catch((err) => {

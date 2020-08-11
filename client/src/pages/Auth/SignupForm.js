@@ -46,11 +46,11 @@ const confirmPasswordRef = useRef();
         userInterest: [],
         profileImg: ''
       }).then((response) => {
-        console.log(response);
+        //console.log(response);
       if (!response.data.errmsg) {
         setRedirectTo("/");
       } else {
-        console.log("duplicate");
+        //console.log("duplicate");
       }
       });
   };
