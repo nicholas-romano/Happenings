@@ -5,8 +5,7 @@ const FriendsFeed = props => {
 
     const {
         reviewsData,
-        friends,
-        user
+        userProps
     } = props;
 
     //console.log('friends feed props: ', props);
@@ -22,9 +21,9 @@ const FriendsFeed = props => {
         if (reviewsData.length > 0) {
             for (let i = 0; i < reviewsData.length; i++) {
                 const reviewOwner = reviewsData[i].reviewOwner;
-                for (let j = 0; j < friends.length; j++) {
-                    const friend = friends[j].userName;
-                    if (reviewOwner === friend || reviewOwner === user.userName) {
+                for (let j = 0; j < userProps.friends.length; j++) {
+                    const friend = userProps.friends[j].userName;
+                    if (reviewOwner === friend || reviewOwner === userProps.userName) {
                         friendReviews.push(reviewsData[i])
                         break;
                     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const User = props => {
 
@@ -13,10 +13,13 @@ const User = props => {
         addFriend
     } = props;
 
+    const [buttonState, setButtonState] = useState({
+        label: 'Add Friend',
+        disabled: false
+    })
+
     const handleButtonClick = event => {
-        console.log('event ', event);
-        event.target.disabled = true;
-        event.target.innerHTML = "Added";
+        setButtonState({label: 'Added', disabled: true});
         addFriend(userName);
     }
 
@@ -30,7 +33,7 @@ const User = props => {
             {firstName} {lastName} ({userName})
             </label>
             <div className="action-button">
-                <button onClick={handleButtonClick} className="button is-link add-friend">Add Friend</button>
+    <button onClick={handleButtonClick} disabled={buttonState.disabled} className="button is-link add-friend">{buttonState.label}</button>
             </div>
         </a>
     )

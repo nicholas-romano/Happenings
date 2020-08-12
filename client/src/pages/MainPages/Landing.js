@@ -4,15 +4,13 @@ import LoginForm from "../Auth/LoginForm";
 
 import Hero from "../../components/Hero";
 import Footer from "../../components/Footer";
-import MediaContent from "../../components/MediaContent";
 
 import "react-bulma-components/dist/react-bulma-components.min.css";
-import NewMap from "../../components/NewMap/newMap";
 
 const styles = {
-  twothirds: {
+  isfull: {
     paddingBottom: 10,
-    backgroundColor: "rgba(183, 209, 218, 1)",
+    backgroundColor: "rgba(183, 209, 218, 1)"
   },
   onethird: {
     backgroundColor: "rgba(163, 124, 64, 1)",
@@ -34,31 +32,30 @@ function Landing(props) {
 
   const { login, loginErr } = props;
 
-  console.log("props landing: ", props);
+  //console.log("props landing: ", props);
 
   return (
-    <div style={styles.back}>
-      <Hero />
-
-      <div className="columns is-gapless is-desktop">
-        <div className="column is-two-thirds" style={styles.twothirds}>
-          <LoginForm login={login} loginErr={loginErr} />
+    <>
+      <div className="container-fluid">
+        <main>
+        <div style={styles.back}>
+          <Hero />
+          <div className="columns is-gapless is-desktop">
+            <div className="column is-full" style={styles.isfull}>
+              <LoginForm login={login} loginErr={loginErr} />
+            </div>
+          </div>
+          <div className="columns">
+            <div
+              className="column is-full is-centered"
+              style={styles.breaking}
+            ></div>
+          </div>
         </div>
-        <div className="column is-one-third" style={styles.onethird}>
-          <img src="/MapScreenshot2.png"></img>
-        </div>
+        </main>
       </div>
-      <div className="columns">
-        <div
-          className="column is-full is-centered"
-          style={styles.breaking}
-        ></div>
-      </div>
-
-      <MediaContent />
-
-      <Footer />
-    </div>
+    <Footer />
+    </>
   );
 }
 

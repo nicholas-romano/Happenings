@@ -12,7 +12,6 @@ module.exports = {
   },
   getUsers: (req, res) => {
     if (req.user) {
-      console.log('getUsers controller function!!!')
       db.User.find({})
       .then((users) => {
           return res.json(users);
@@ -95,7 +94,7 @@ module.exports = {
 
           //If a match was found, someone else has the same username, return an error:
           if (userMatch) {
-            console.log('Error: that username already exists.')
+            //console.log('Error: that username already exists.')
             return res.json({
               error: 'That username already exists. Please choose another.'
             });
@@ -162,7 +161,7 @@ module.exports = {
     const user = req.user.userName;
     const userName = req.params.userName;
 
-    console.log('addFriend controller');
+    //console.log('addFriend controller');
     
     if (req.user) {
 

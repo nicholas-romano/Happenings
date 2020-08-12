@@ -10,10 +10,13 @@ const Friend = props => {
     } = props.friend;
 
     const {
-        actionButton,
-        actionType,
         removeFriend
     } = props;
+
+    const [buttonState, setButtonState] = useState({
+        label: 'Remove Friend',
+        disabled: false
+    })
 
     useEffect(() => {
         getFriendInfo(userName);
@@ -35,9 +38,7 @@ const Friend = props => {
     }
 
     const handleButtonClick = event => {
-        console.log('event ', event);
-        event.target.disabled = true;
-        event.target.innerHTML = "Removed";
+        setButtonState({label: 'Removed', disabled: true});
         removeFriend(userName);
     }
 
@@ -51,7 +52,7 @@ const Friend = props => {
             {friendInfo.firstName} {friendInfo.lastName} ({friendInfo.userName})
             </label>
             <div className="action-button">
-                <button onClick={handleButtonClick} className="button is-link remove-friend">Remove Friend</button>
+                <button onClick={handleButtonClick} disabled={buttonState.disabled} className="button is-link remove-friend">{buttonState.label}</button>
             </div>
         </a>
     )

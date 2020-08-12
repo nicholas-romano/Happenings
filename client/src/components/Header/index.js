@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import UserInfoContext from '../../utils/UserInfoContext';
 
 import Icon from "../../assets/HapLogoIcon.png";
 import "react-bulma-components/dist/react-bulma-components.min.css";
@@ -9,10 +10,13 @@ import "react-bulma-components/dist/react-bulma-components.min.css";
 // RK added ='bulma stuff' after blank href tags to remove errors
 const Header = () => {
 
+  const userProps = useContext(UserInfoContext);
+  //console.log('userProps: ', userProps);
+
   const [isActive, setisActive] = React.useState(false)
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav className="navbar menu" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/feed">
           <img src={Icon} alt="LogoIcon" />

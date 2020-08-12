@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 require("dotenv").config();
 
 const express = require("express");
+
 const morgan = require("morgan");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -13,6 +14,7 @@ const dbConnection = require("./db"); // loads our connection to the mongo datab
 const routes = require("./routes");
 const passport = require("./passport");
 const app = express();
+
 const PORT = process.env.PORT || 3001;
 
 // Middlewares

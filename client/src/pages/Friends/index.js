@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import UsersList from "./UsersList";
@@ -6,6 +6,7 @@ import FriendsList from "./FriendsList";
 import "./friends.css";
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
+
 
 const Friends = () => {
 
@@ -15,7 +16,7 @@ const Friends = () => {
      const [userSearchQuery, setUserSearchQuery] = useState('');
      const [friendSearchQuery, setFriendSearchQuery] = useState('');
 
-    useEffect(() => {
+     useEffect(() => {
         getCurrentUser();
         getAllUsersInfo();
     }, []);
@@ -59,28 +60,24 @@ const Friends = () => {
 
     const getAllUsersInfo = () => {
         API.getUsers().then(res => {
-            console.log('get all users response: ', res);
+            //console.log('get all users response: ', res);
             setUsers(res.data);
         })
         .catch(err => console.log('err: ', err))
     }
 
     const addFriend = userName => {
-        console.log('add friend to db ');
         API.addFriend(userName)
         .then(res => {
-            console.log('Friend added: ', res);
-            window.location.reload();
+             console.log('Friend added: ', userName);
         })
         .catch(err => console.log('err: ', err));
     }
 
     const removeFriend = userName => {
-        console.log('removed friend from db ');
         API.removeFriend(userName)
         .then(res => {
-            console.log('Friend removed: ', res);
-            window.location.reload();
+             console.log('Friend removed: ', userName);
         })
         .catch(err => console.log('err: ', err));
     }
@@ -131,14 +128,16 @@ const Friends = () => {
     return (
         <>
             <Header />
-                    <div className="columns">
-                        <div className="column">
-                            <UsersList users={users} thisUser={thisUser} filterByUser={filterByUser} addFriend={addFriend} />
+            <div className="container-fluid">
+                        <div className="columns">
+                            <div className="column">
+                                <UsersList users={users} thisUser={thisUser} filterByUser={filterByUser} addFriend={addFriend} />
+                            </div>
+                            <div className="column">
+                                <FriendsList friends={friendsUsernames} filterByFriend={filterByFriend} removeFriend={removeFriend} />
+                            </div>
                         </div>
-                        <div className="column">
-                            <FriendsList friends={friendsUsernames} filterByFriend={filterByFriend} removeFriend={removeFriend} />
-                        </div>
-                    </div>
+            </div>  
             <Footer />
         </>
     )

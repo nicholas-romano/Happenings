@@ -1,10 +1,5 @@
-// EXS 17th July 2020
-// Test seed files to ensure it exectures as required.
-// Schema will be created here, this is just to test our data
-
 const mongoose = require("mongoose");
 const db = require("../models");
-const TODAY = new Date();
 
 console.log("Executing database seed");
 
@@ -17,82 +12,64 @@ mongoose.connect(
   }
 );
 
-//console.log("We are Inside seedDB.js");
-//console.log('Places: ', db.Places)
-//console.log('Reviews: ', db.Reviews)
-
-const placesSeed = [
+const usersSeed = [
   {
-    placeName: "myTestPlaceName4",
-    placeAddress: "2456 Main St",
-    // placeEvent: 'None',
-    // placeEventStart: Date.now,
-    // placeEventFinish: Date.now,
-    placeCreatedBy: "Eddie",
+    firstName: "John",
+    lastName: "Doe",
+    userName: "jdoe",
+    userEmail: "jdoe@gmail.com",
+    profileImg: "",
+    password: "password",
+    friends: [
+      {
+        userName: "mjones"
+      }
+    ],
+    userInterest: []
   },
   {
-    placeName: "myTestPlaceName5",
-    placeAddress: "2456 Main St",
-    // placeEvent: 'None',
-    // placeEventStart: Date.now,
-    // placeEventFinish: Date.now,
-    placeCreatedBy: "Eddie",
+    firstName: "Mary",
+    lastName: "Jones",
+    userName: "mjones",
+    userEmail: "mjones@gmail.com",
+    profileImg: "",
+    password: "password",
+    friends: [
+      {
+        userName: "jdoe"
+      }
+    ],
+    userInterest: []
   },
 ];
 
 const reviewsSeed = [
   {
-    reviewOwner: "TestUser",
-    // reviewCreated: "Today",
-    reviewTitle: "TestTitle",
-    reviewBody: "TestRewviewBody",
-    reviewRating: 5,
-    reviewLocation: "Testing Location",
-    reviewTestField: "Test",
-    reviewLat: 53.2734,
-    reviewLong: -7.77832031,
-  },
-];
-
-const friendsSeed = [
-  {
-    friendsOwner: "Eddie",
-    friendsList: "None",
-  },
-];
-
-const userInfoSeed = [
-  {
-    userName: "Eddie",
-    userPicture: "None",
-    userEmail: "Eddie@noemail.com",
-    userInterest: "Nothing",
-  },
-];
-
-const quickInfoSeed = [
-  {
-    placeEmoji: "Test",
-    placeTags: "123",
-    placeImage: "Placeholder if needed",
-  },
-];
-
-const locationEventsSeed = [
-  {
-    eventLocation: "ourTestlocation",
-    eventStart: TODAY.getDate(),
-    eventEnd: TODAY.getDate(),
+    reviewOwner: "John Doe",
+    reviewCreated: Date.now().toLocaleString(),
+    reviewTitle: "Review Title",
+    reviewBody: "Review Message",
+    reviewRating: 3,
+    reviewLocation: "Review Location",
+    reviewLat: 35.96794,
+    reviewLong: -78.54322,
+    reviewGeoLocation: [35.96794, -78.54322],
+    reviewComments: [
+      {
+        user: "mjones",
+        message: "Review comment",
+        time: Date.now().toLocaleString()
+      }
+    ]
   },
 ];
 
 // EXS When we execture the seedsDB, this removes all entries and then insert the records above
-// Optimize this code later
-// console.log(db.Friends, db.UserInfo)
-
-db.Places.deleteMany({})
-  .then(console.log("Adding Places"))
-  .then(() => db.Places.collection.insertMany(placesSeed))
+db.User.deleteMany({})
+  .then(() => {
+    console.log("Adding Users: ", usersSeed)
+  })
+  .then(() => db.User.collection.insertMany(usersSeed))
   .then((data) => {
     process.exit(0);
   })
@@ -102,52 +79,10 @@ db.Places.deleteMany({})
   });
 
 db.Reviews.deleteMany({})
-  .then(console.log("Adding My Reviews", reviewsSeed))
+  .then(() => {
+    console.log("Adding Reviews: ", reviewsSeed)
+  })
   .then(() => db.Reviews.collection.insertMany(reviewsSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.Friends.deleteMany({})
-  .then(console.log("Adding Friends"))
-  .then(() => db.Friends.collection.insertMany(friendsSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.UserInfo.deleteMany({})
-  .then(console.log("Adding UserInfo"))
-  .then(() => db.UserInfo.collection.insertMany(userInfoSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.QuickInfo.deleteMany({})
-  .then(console.log("Adding My QuickInfo"))
-  .then(() => db.QuickInfo.collection.insertMany(quickInfoSeed))
-  .then((data) => {
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.LocationEvents.deleteMany({})
-  .then(console.log("Adding QuickInfo"))
-  .then(() => db.LocationEvents.collection.insertMany(locationEventsSeed))
   .then((data) => {
     process.exit(0);
   })

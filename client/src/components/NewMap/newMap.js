@@ -1,18 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "./newMap.css";
+import Pin from "../../assets/mapMarkerWhite.png";
 import UserLocationContext from "../../utils/UserLocationContext";
+import UserInfoContext from "../../utils/UserInfoContext";
 import PulseLoader from "react-spinners/PulseLoader";
 import StaticRating from "../Review/StaticRating";
 import API from "../../utils/API";
 
+function NewMap({ reviewsData }) {
 
-function NewMap({ reviewsData, friends, user }) {
+  const userProps = useContext(UserInfoContext);
+  //console.log('userProps in newMap: ', userProps); 
+
   const userLocation = useContext(UserLocationContext);
 
   //console.log("COORDS IN NEWMAP: ", userLocation);
-
   //console.log('props new map reviews: ', reviewsData);
+  //console.log('Marker: ', Marker);
 
   const [viewport, setViewport] = useState({
     width: "100%",
@@ -22,14 +27,16 @@ function NewMap({ reviewsData, friends, user }) {
     zoom: 12,
   });
 
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  //console.log('map box gl inside newMap.js: ', mapboxgl);
 
-  const [profileImg, setProfileImg] = useState('');
-  const [postOwner, setPostOwner] = useState('');
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const [eventState, setEventState] = useState({
     reviews: [],
   });
+
+  const [profileImg, setProfileImg] = useState('');
+  const [postOwner, setPostOwner] = useState('');
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -45,25 +52,23 @@ function NewMap({ reviewsData, friends, user }) {
 
     let friendReviews = [];
 
-    console.log('friends amount: ', friends);
-
-    if (friends.length > 0) {
+    if (userProps.friends.length > 0) {
         for (let i = 0; i < reviewsData.length; i++) {
             const reviewOwner = reviewsData[i].reviewOwner;
-            for (let j = 0; j < friends.length; j++) {
-                const friend = friends[j].userName;
-                if (reviewOwner === friend || reviewOwner === user.userName) {
+            for (let j = 0; j < userProps.friends.length; j++) {
+                const friend = userProps.friends[j].userName;
+                if (reviewOwner === friend || reviewOwner === userProps.userName) {
                     friendReviews.push(reviewsData[i])
                     break;
                 }
             }
         }
         setEventState({
-          reviews: friendReviews,
+          reviews: friendReviews
         });
     } else {
       setEventState({
-        reviews: reviewsData,
+        reviews: reviewsData
       });
     }
 
@@ -115,7 +120,7 @@ useEffect(() => {
                 setSelectedEvent(post);
               }}
             >
-              <img src="/mapMarkerWhite.png" alt="Location Icon" />
+              <img src={Pin} alt="Location Icon" />
             </button>
           </Marker>
         ))}
