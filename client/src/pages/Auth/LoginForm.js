@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Grid";
 import { Card } from "../../components/Card";
@@ -9,30 +9,16 @@ console.log('Inside our loginForm.js')
 
 function LoginForm({ login, loginErr }) {
 
-  console.log('loginErr: ', loginErr);
+  //console.log('loginErr: ', loginErr);
 
-  const [formObject, setFormObject] = useState({
-    userName: "",
-    password: "",
-  });
-
-  // const handleInputChange = (event) => {
-  //   console.log('event: ', event);
-    // setUserObject({
-    //   ...userObject,
-    //   [event.target.name]: event.target.value,
-    // });
-  // };
-
-  useEffect(() => {
-    console.log('formObject: ', formObject);
-  }, [formObject])
+  const userNameRef = useRef();
+  const passwordRef = useRef();
 
   const handleSubmit = event => {
     event.preventDefault();
     login({
-      userName: formObject.userName,
-      password: formObject.password
+      userName: userNameRef.current.value,
+      password: passwordRef.current.value
     });
   }
 
@@ -40,16 +26,17 @@ function LoginForm({ login, loginErr }) {
     if (loginErr !== '') {
       return <p className="error">{loginErr}</p>
     } else {
-      return;
+      return <></>;
     }
   }
 
     return (
+      <>
       <Container>
         <Row>
           <Col size="md-3"></Col>
           <Col size="md-6">
-            <Card title="Login to the Happenings App!">
+            <Card title="Login">
               <form style={{ marginTop: 10, textAlign: 'left' }}>
                 {
                   checkForError()
@@ -58,18 +45,14 @@ function LoginForm({ login, loginErr }) {
                   name="userName"
                   type="input"
                   title="Username"
-                  setFormObject={setFormObject}
-                  formObject={formObject}
-                  value={formObject.userName}
                   placeholder="Username"
+                  inputRef={userNameRef}
                 />
                 <Input
                   title="Password"
                   type="password"
                   name="password"
-                  value={formObject.password}
-                  setFormObject={setFormObject}
-                  formObject={formObject}
+                  inputRef={passwordRef}
                   placeholder="Password"
                 />
                 <Link to="/signup">Create Account</Link>
@@ -80,6 +63,7 @@ function LoginForm({ login, loginErr }) {
           <Col size="md-3"></Col>
         </Row>
       </Container>
+      </>
     );
   }
 

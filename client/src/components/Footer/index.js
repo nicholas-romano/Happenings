@@ -11,7 +11,7 @@ const Footer = () => {
     <footer className="footer p-3" style={styles.foot}>
       <div className="content has-text-centered">
         <p>
-          <strong>Happenings</strong> by Eddie, Jason, Nick, Richard, and Tevin.
+          <strong>Happenings App</strong> by: Nicholas Romano, Eddie Saunders, Jason Vernot, Richard Kessler, and Tevin Ward.
         </p>
       </div>
     </footer>

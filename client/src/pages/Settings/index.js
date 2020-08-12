@@ -2,28 +2,48 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import SettingsInput from '../../components/Form/Settings/SettingsInput';
-import PasswordInput from '../../components/Form/Settings/PasswordInput';
-import ProfileImage from '../../components/Form/Settings/ProfileImg';
-import Interest from '../../components/Form/Settings/Interest';
-import Friends from '../../components/Form/Settings/Friends';
+import SettingsInput from './SettingsInput';
+import PasswordInput from './PasswordInput';
+import ProfileImage from './ProfileImg';
+import Interest from './Interest';
+import Friends from './Friends';
 import { FormBtn } from '../../components/Form/FormBtn';
 import API from '../../utils/API';
-import AUTH from '../../utils/AUTH';
 
-const Settings = () => {
+const Settings = props => {
+
+    const {
+        userProps
+    } = props;
+
+    // console.log('userProps in Settings: ', userProps);
 
     const imageRef = useRef();
     const newInterest = useRef();
     const [showModal, setModal] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const [ userExistsErr, setUserExistsErr] = useState(false);
+
     const [userData, setUserData] = useState({
         "Username:": '',
         "First Name:": '',
         "Last Name:": '',
         "Email:": ''
     });
+    
+    useEffect(() => {
+        setUserData({
+            ...userData,
+            "Username:": userProps.userName,
+            "First Name:": userProps.firstName,
+            "Last Name:": userProps.lastName,
+            "Email:": userProps.userEmail
+        });
+        setUserProfileImg(userProps.profileImg);
+        setInterestList(userProps.userInterest);
+        setFriendsList(userProps.friends);
+    }, [userProps]);
+
     const [password, setNewPassword] = useState('');
     const [profileImg, setUserProfileImg] = useState('');
     const [interestList, setInterestList] = useState([]);
@@ -36,54 +56,6 @@ const Settings = () => {
         profileImg: false,
         password: false
     });
-
-    useEffect(() => {
-        getUserName();
-    }, []);
-
-    const getUserName = () => {
-        AUTH.getUser()
-            .then(res => {
-                console.log('getUser: ', res);
-                const { userName } = res.data.user;
-                return getUserInfo(userName);
-            })
-            .catch(err => console.log(err));
-
-    }
-
-    const getUserInfo = userName => {
-
-        API.getUserInfo(userName)
-            .then(res => {
-            console.log('getUserInfo: ', res);
-            const { firstName, lastName, userName, profileImg, userEmail, userInterest } = res.data[0];
-            const friends = res.data[0].friends;
-            setUserData({ 
-                "Username:": userName,
-                "First Name:": firstName,
-                "Last Name:": lastName,
-                "Email:": userEmail
-            });
-            if (userInterest !== undefined) {
-                setInterestList(userInterest);
-            } else {
-                setInterestList([]);
-            }
-            if (profileImg !== '') {
-                setUserProfileImg(profileImg);
-            } else {
-                setUserProfileImg('');
-            }
-            if (friends !== undefined) {
-                setFriendsList(friends);
-            } else {
-                setFriendsList([]);
-            }
-        })
-        .catch(err => console.log(err));
-
-    }
 
     const enableEdit = field => {
         if (!enableFields[field]) {
@@ -148,23 +120,23 @@ const Settings = () => {
             };
 
                 API.updateReviewsComments(name).then(res => {
-                    console.log('Result comments: ', res);
+                    //console.log('Result comments: ', res);
                     if (res.data.error) {
-                        console.log('User already exists');
+                        //console.log('User already exists');
                         setUserExistsErr(true);
                     } else {
-                        console.log('Username changed successfully');
+                        //console.log('Username changed successfully');
                         showSaveConfirmation();
                     }
                     API.updateReviewsUserName(name).then(res => {
-                        console.log('Result reviews: ', res);
+                        //console.log('Result reviews: ', res);
                         API.updateUser(updatedUser).then(res => {
-                            console.log('Result User: ', res);
+                            //console.log('Result User: ', res);
                             if (res.data.error) {
-                                console.log('User already exists');
+                                //console.log('User already exists');
                                 setUserExistsErr(true);
                             } else {
-                                console.log('Username changed successfully');
+                                //console.log('Username changed successfully');
                                 showSaveConfirmation();
                             }
                         }).catch(err => {
@@ -266,7 +238,6 @@ const Settings = () => {
                         <ProfileImage 
                             profileImg={profileImg}
                             imageRef={imageRef}
-                            profileImg={profileImg}
                             setUserProfileImg={setUserProfileImg}
                             enableFields={enableFields}
                             enableEdit={enableEdit}

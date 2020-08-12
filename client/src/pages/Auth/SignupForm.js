@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import Hero from "../../components/Hero";
 import Footer from '../../components/Footer';
@@ -19,31 +19,38 @@ function SignupForm() {
     confirmPassword: ""
   });
 
+const firstNameRef = useRef();
+const lastNameRef = useRef();
+const emailRef = useRef();
+const userNameRef = useRef();
+const passwordRef = useRef();
+const confirmPasswordRef = useRef();
+
   const [redirectTo, setRedirectTo] = useState(null);
 
-  useEffect(() => {
-    console.log('formObject: ', formObject);
-  }, [formObject]);
+  // useEffect(() => {
+  //   console.log('formObject: ', formObject);
+  // }, [formObject]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO - validate!
     console.log(formObject);
     AUTH.signup({
-        firstName: formObject.firstName,
-        lastName: formObject.lastName,
-        userName: formObject.userName,
-        password: formObject.password,
-        userEmail: formObject.email,
+        firstName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
+        userName: userNameRef.current.value,
+        password: passwordRef.current.value,
+        userEmail: emailRef.current.value,
         friends: [],
         userInterest: [],
         profileImg: ''
       }).then((response) => {
-        console.log(response);
+        //console.log(response);
       if (!response.data.errmsg) {
         setRedirectTo("/");
       } else {
-        console.log("duplicate");
+        //console.log("duplicate");
       }
       });
   };
@@ -54,78 +61,67 @@ function SignupForm() {
 
   return (
     <>
-    <Hero />
-    <Container>
-      <Row>
-        <Col size="md-3"></Col>
-        <Col size="md-6">
-          <Card title="Create your Happenings Account">
-            <form  style={{ marginTop: 10, textAlign: 'left' }}>
-              <Input
-                  name="firstName"
-                  title="First Name"
-                  type="input"
-                  setFormObject={setFormObject}
-                  formObject={formObject}
-                  value={formObject.firstName}
-                  placeholder="First Name"
-              />
-              <Input
-                  name="lastName"
-                  title="Last Name"
-                  type="input"
-                  setFormObject={setFormObject}
-                  formObject={formObject}
-                  value={formObject.lastName}
-                  placeholder="Last Name"
-              />
-               <Input
-                name="email"
-                title="Email"
-                type="email"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.email}
-                placeholder="Email"
-              />
-              <Input
-                name="userName"
-                title="Username"
-                type="input"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.userName}
-                placeholder="Username"
-              />
-              <Input
-                name="password"
-                title="Password"
-                type="password"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.password}
-                placeholder="Password"
-              />
-              <Input
-                name="confirmPassword"
-                title="Confirm Password"
-                type="password"
-                setFormObject={setFormObject}
-                formObject={formObject}
-                value={formObject.confirmPassword}
-                placeholder="Confirm Password"
-              />
-              <Link to="/">Login</Link>
-              <FormBtn onClick={handleSubmit}>Register</FormBtn>
-            </form>
-          </Card>
-        </Col>
-        <Col size="md-3"></Col>
-      </Row>
-    </Container>
+      <Hero />
+      <div className="container-fluid">
+        <Container>
+          <Row>
+            <Col size="md-3"></Col>
+            <Col size="md-6">
+              <Card title="Create your Happenings Account">
+                <form  style={{ marginTop: 10, textAlign: 'left' }}>
+                  <Input
+                      name="firstName"
+                      title="First Name"
+                      type="input"
+                      placeholder="First Name"
+                      inputRef={firstNameRef}           
+                  />
+                  <Input
+                      name="lastName"
+                      title="Last Name"
+                      type="input"
+                      placeholder="Last Name"
+                      inputRef={lastNameRef}
+                  />
+                  <Input
+                    name="email"
+                    title="Email"
+                    type="email"
+                    placeholder="Email"
+                    inputRef={emailRef}
+                  />
+                  <Input
+                    name="userName"
+                    title="Username"
+                    type="input"
+                    placeholder="Username"
+                    inputRef={userNameRef}
+                  />
+                  <Input
+                    name="password"
+                    title="Password"
+                    type="password"
+                    inputRef={passwordRef}
+                    placeholder="Password"
+                  />
+                  <Input
+                    name="confirmPassword"
+                    title="Confirm Password"
+                    type="password"
+                    placeholder="Confirm Password"
+                    inputRef={confirmPasswordRef}
+                  />
+                  <Link to="/">Login</Link>
+                  <FormBtn onClick={handleSubmit}>Register</FormBtn>
+                </form>
+              </Card>
+            </Col>
+            <Col size="md-3"></Col>
+          </Row>
+        </Container>
+      </div>
     <Footer />
   </>
-  );
+  )
 }
-
 export default SignupForm;

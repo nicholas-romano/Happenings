@@ -6,10 +6,10 @@ const hereURL =
 export default {
   getPlace: function (place, coords) {
     let placeStr = place.replace(/\s+/g, "-");
-    console.log(placeStr);
+    //console.log(placeStr);
     let locationCoords = `${coords.lat},${coords.long};r=10000`;
     const queryURL = `${hereURL}${locationCoords}&q=${placeStr}`;
-    console.log("queryURL:", queryURL);
+    //console.log("queryURL:", queryURL);
     return axios.get(queryURL);
   },
 };

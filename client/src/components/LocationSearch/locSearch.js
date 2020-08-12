@@ -1,7 +1,17 @@
 import React from "react";
-
 function LocationSearch(props) {
-  if (!props.locationState) return null;
+
+  const {
+    locationState,
+    handlePlaceSubmit,
+    handleLocClick,
+    inputRef
+  } = props;
+
+  if (!locationState) {
+    return null;
+  }
+
   return (
     <div>
       <div className="field">
@@ -12,8 +22,8 @@ function LocationSearch(props) {
             className="input" 
             placeholder="Search here (required)"
             name="place"
-            defaultValue={props.value}
-            onChange={e => props.setLocationState({...props.locationState, place: e.target.value})}
+            defaultValue=""
+            ref={inputRef}
           />
         </div>
         <p className="help">
@@ -25,7 +35,7 @@ function LocationSearch(props) {
         <p className="control">
           <button
             className="button is-success"
-            onClick={props.handlePlaceSubmit}
+            onClick={handlePlaceSubmit}
           >
             Find Locations
           </button>
@@ -34,8 +44,8 @@ function LocationSearch(props) {
 
       {/* conditional rendering the buttons to display the places matching the users search */}
       <div>
-        {props.locationState.location.length > 0 ? (
-          props.locationState.location.map((key, i) => {
+        {locationState.location.length > 0 ? (
+          locationState.location.map((key, i) => {
             //console.log("Key Inside Map: ", key);
             //console.log(props.locationState.showButtons);
             return (
@@ -48,7 +58,7 @@ function LocationSearch(props) {
                 data-latitude={key.position.lat}
                 data-longitude={key.position.lng}
                 className="button"
-                onClick={props.handleLocClick}
+                onClick={handleLocClick}
               >
                 {`${key.title} - ${key.address.houseNumber} ${key.address.street}, ${key.address.city}`}
               </button>

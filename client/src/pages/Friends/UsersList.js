@@ -36,11 +36,11 @@ const UsersList = props => {
     return (
         <nav className="panel">
                     <p className="panel-heading">
-                        Search Users
+                        Users List
                     </p>
                     <div className="panel-block">
                         <p className="control has-icons-left">
-                        <input className="input" type="text" onChange={filterByUser} placeholder="Search" />
+                        <input className="input" type="text" onChange={filterByUser} placeholder="Search Users (by last name)" />
                         <span className="icon is-left">
                             <i className="fas fa-search" aria-hidden="true"></i>
                         </span>

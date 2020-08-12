@@ -1,6 +1,6 @@
 import axios from "axios";
 
-console.log("Inside AUTH.js");
+//console.log("Inside AUTH.js");
 
 export default {
   // Gets user info

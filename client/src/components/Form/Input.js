@@ -8,9 +8,7 @@ const Input = props => {
     type,
     name,
     placeholder,
-    value,
-    setFormObject,
-    formObject
+    inputRef
   } = props;
 
   return (
@@ -21,8 +19,8 @@ const Input = props => {
             type={type}
             className="input" 
             name={name}
-            defaultValue={value}
-            onChange={e => setFormObject({...formObject, [name]: e.target.value})}
+            defaultValue=""
+            ref={inputRef}
             placeholder={placeholder}
           />
       </div>
