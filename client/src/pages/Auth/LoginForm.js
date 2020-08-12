@@ -9,7 +9,7 @@ console.log('Inside our loginForm.js')
 
 function LoginForm({ login, loginErr }) {
 
-  console.log('loginErr: ', loginErr);
+  //console.log('loginErr: ', loginErr);
 
   const userNameRef = useRef();
   const passwordRef = useRef();
