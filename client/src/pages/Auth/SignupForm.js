@@ -10,15 +10,6 @@ import AUTH from "../../utils/AUTH";
 
 function SignupForm() {
 
-  const [formObject, setFormObject] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    userName: "",
-    password: "",
-    confirmPassword: ""
-  });
-
 const firstNameRef = useRef();
 const lastNameRef = useRef();
 const emailRef = useRef();
@@ -28,14 +19,9 @@ const confirmPasswordRef = useRef();
 
   const [redirectTo, setRedirectTo] = useState(null);
 
-  // useEffect(() => {
-  //   console.log('formObject: ', formObject);
-  // }, [formObject]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO - validate!
-    console.log(formObject);
     AUTH.signup({
         firstName: firstNameRef.current.value,
         lastName: lastNameRef.current.value,

@@ -5,7 +5,7 @@ import { Card } from "../../components/Card";
 import Input from "../../components/Form/Input";
 import { FormBtn } from "../../components/Form";
 
-console.log('Inside our loginForm.js')
+//console.log('Inside our loginForm.js')
 
 function LoginForm({ login, loginErr }) {
 

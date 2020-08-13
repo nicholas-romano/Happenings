@@ -14,6 +14,8 @@ const dbConnection = require("./db"); // loads our connection to the mongo datab
 const routes = require("./routes");
 const passport = require("./passport");
 const app = express();
+const favicon = require('express-favicon');
+app.use(favicon(__dirname + '/public/favicon.png'));
 
 const PORT = process.env.PORT || 3001;
 
