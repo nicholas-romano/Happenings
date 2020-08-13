@@ -13,7 +13,6 @@ const MongoStore = require("connect-mongo")(session);
 const dbConnection = require("./db"); // loads our connection to the mongo database
 const routes = require("./routes");
 const passport = require("./passport");
-const favicon = require('serve-favicon');
 const app = express();
 
 const PORT = process.env.PORT || 3001;
@@ -47,7 +46,6 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/"));
   });
-  app.use(favicon(path.join(__dirname, "../client/build/static/favicon.ico"))); 
 }
 
 // Add routes, both API and view
