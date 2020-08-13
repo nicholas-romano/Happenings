@@ -19,7 +19,6 @@ if (process.env.MONGODB_URI) {
     useUnifiedTopology: true,
     useCreateIndex: true
   }); // local mongo url
-  MONGO_URL = MONGO_LOCAL_URL
 }
 
 // should mongoose.connection be put in the call back of mongoose.connect???
