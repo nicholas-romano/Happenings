@@ -14,10 +14,12 @@ const dbConnection = require("./db"); // loads our connection to the mongo datab
 const routes = require("./routes");
 const passport = require("./passport");
 const app = express();
-const favicon = require('express-favicon');
-app.use(favicon(__dirname + '/public/favicon.png'));
 
 const PORT = process.env.PORT || 3001;
+
+const favicon = require('express-favicon');
+
+app.use(favicon(path.join(__dirname, "public", "favicon.ico"))); 
 
 // Middlewares
 app.use(morgan("dev"));
@@ -39,11 +41,12 @@ app.use(passport.session()); // will call the deserializeUser
 // If its production environment!
 if (process.env.NODE_ENV === "production") {
   const path = require("path");
+  
   // console.log('YOU ARE IN THE PRODUCTION ENV');
   app.use(
     "/static",
     express.static(path.join(__dirname, "../client/build/static"))
-  );
+  ); 
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/"));
   });
