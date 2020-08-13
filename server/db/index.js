@@ -3,7 +3,6 @@
  */
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-let MONGO_URL;
 const MONGO_LOCAL_URL = "mongodb://localhost/happenings-app";
 
 if (process.env.MONGODB_URI) {
@@ -12,9 +11,6 @@ if (process.env.MONGODB_URI) {
     useUnifiedTopology: true,
     useCreateIndex: true
   });
-  //happening_user:h4663n1n8
-  MONGO_URL =
-    "mongodb://happening_user:h4663n1n8@ds121955.mlab.com:21955/heroku_72d6m5nb";
 } else {
   mongoose.connect(MONGO_LOCAL_URL, {
     useNewUrlParser: true,
@@ -32,7 +28,7 @@ db.on("error", (err) => {
 
 db.once("open", () => {
   console.log(
-    `You have successfully connected to your mongo database: ${MONGO_URL}`
+    `You have successfully connected to your mongo database`
   );
 });
 
