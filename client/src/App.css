@@ -9,6 +9,17 @@ html, body {
   background-color: #b7d1da;
 }
 
+.card .card-header {
+  background-color: rgb(36, 123, 160);
+  font-weight: bold;
+}
+
+.card .card-header h5 {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .greeting {
   color: white;
 }

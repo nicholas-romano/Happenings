@@ -119,7 +119,7 @@ const Settings = props => {
                 friends: newFriends
             };
             API.updateFriendsLists(name).then(res => {
-                console.log('update user friends list: ', res);                                    
+                //console.log('update user friends list: ', res);                                    
                 API.updateReviewsComments(name).then(res => {
                     //console.log('Result comments: ', res);
                     if (res.data.error) {
