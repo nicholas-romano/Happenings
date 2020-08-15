@@ -40,7 +40,7 @@ const Header = () => {
       <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
         <div className="navbar-end">
           <Link to="feed" className="navbar-item">
-            Home
+            Dashboard
           </Link>
           <Link to="/friends" className="navbar-item">
             Friends

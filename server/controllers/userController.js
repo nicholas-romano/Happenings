@@ -41,52 +41,16 @@ module.exports = {
   updateUser: (req, res) => {
     const { userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends} = req.body;
     if (req.user) {
-
       if (userName === req.user.userName) {
         //username was not changed:
         //check to see if the user's password was changed:
         if (password !== undefined) {
           //Password Change:
           const newPassword = bcrypt.hashSync(password, 10);
-          db.User.updateOne(
-            //update user data:
-            {
-              userName: req.user.userName
-            },
-            {
-              $set: {
-                userName, firstName, lastName, userEmail, 
-                password: newPassword, 
-                profileImg, userInterest, friends
-              }
-            },
-            (error, data) => {
-              if (error) {
-                res.send(error);
-              } else {
-                res.send(data);
-              }
-            }
-          );
+          updateUserInfo(req, res, userName, firstName, lastName, userEmail, newPassword, profileImg, userInterest, friends);
         } else {
           //Password Unchanged:
-          db.User.updateOne(
-            {
-              userName: req.user.userName
-            },
-            {
-              $set: {
-                userName, firstName, lastName, userEmail, profileImg, userInterest, friends
-              }
-            },
-            (error, data) => {
-              if (error) {
-                res.send(error);
-              } else {
-                res.send(data);
-              }
-            }
-          );
+          updateUserInfo(req, res, userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends);
         }
       } else {
 
@@ -99,59 +63,19 @@ module.exports = {
               error: 'That username already exists. Please choose another.'
             });
           } else {
-
             //If a match was not found, change the user's username:
             //check to see if the user's password was changed:
             if (password !== undefined) {
               //Password Change:
               const newPassword = bcrypt.hashSync(password, 10);
-              db.User.updateOne(
-                //update user data:
-                {
-                  userName: req.user.userName
-                },
-                {
-                  $set: {
-                    userName, firstName, lastName, userEmail, 
-                    password: newPassword, 
-                    profileImg, userInterest, friends
-                  }
-                },
-                (error, data) => {
-                  if (error) {
-                    res.send(error);
-                  } else {
-                    res.send(data);
-                  }
-                }
-              );
-              
+              updateUserInfo(req, res, userName, firstName, lastName, userEmail, newPassword, profileImg, userInterest, friends);
             } else {
               //Password Unchanged:
-              db.User.updateOne(
-                {
-                  userName: req.user.userName
-                },
-                {
-                  $set: {
-                    userName, firstName, lastName, userEmail, profileImg, userInterest, friends
-                  }
-                },
-                (error, data) => {
-                  if (error) {
-                    res.send(error);
-                  } else {
-                    res.send(data);
-                  }
-                }
-              );
-              
+              updateUserInfo(req, res, userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends);
             }
           }
         });
-
       }
-
     } else {
       return res.json({ user: null });
     }
@@ -160,7 +84,6 @@ module.exports = {
   addFriend: (req, res) => {
     const user = req.user.userName;
     const userName = req.params.userName;
-
     //console.log('addFriend controller');
     
     if (req.user) {
@@ -185,9 +108,7 @@ module.exports = {
             .catch((err) => {
               res.json(err);
             });
-
-    }
-    
+    }    
   },
   removeFriend: (req, res) => {
     if (req.user) {
@@ -255,4 +176,52 @@ module.exports = {
   }
 };
 
-console.log('Inside our userController');
+const updateUserInfo = (req, res, userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends) => {
+
+  if (password === undefined) {
+
+    db.User.updateOne(
+      //update user data with password unchanged:
+      {
+        userName: req.user.userName
+      },
+      {
+        $set: {
+          userName, firstName, lastName, userEmail, 
+          profileImg, userInterest, friends
+        }
+      },
+      (error, data) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send(data);
+        }
+      }
+    );
+
+  } else {
+
+    db.User.updateOne(
+      //update user data with password change:
+      {
+        userName: req.user.userName
+      },
+      {
+        $set: {
+          userName, firstName, lastName, userEmail, 
+          password, profileImg, userInterest, friends
+        }
+      },
+      (error, data) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send(data);
+        }
+      }
+    );
+
+  }
+  
+}
