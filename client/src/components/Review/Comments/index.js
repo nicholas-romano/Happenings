@@ -82,11 +82,14 @@ const Comments = props => {
         //console.log('user info: ', userProps);
 
         const time = new Date();
+        const timeStamp = + new Date();
+        console.log('current timestamp: ', timeStamp);
 
         const newComment =  {
-                user: userProps.userName,
-                message: messageRef.current.value,
-                time: time.toLocaleString()
+            user: userProps.userName,
+            message: messageRef.current.value,
+            time: time.toLocaleString(),
+            timeStamp: timeStamp
         }
 
         API.addComment(reviewId, newComment)

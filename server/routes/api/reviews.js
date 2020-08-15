@@ -16,11 +16,7 @@ router.route("/")
 router.route("/updateUsername/:userName")
   .put(reviewsController.updateUserName);
 
-  router.route("/updateComments/:userName")
+router.route("/updateComments/:userName")
   .put(reviewsController.updateComments);
-  //updateReviewsComments
-
-// .put(reviewsController.update)
-// .delete(reviewsController.remove);
 
 module.exports = router;

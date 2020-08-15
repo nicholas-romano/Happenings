@@ -118,7 +118,8 @@ const Settings = props => {
                 userInterest: interestsList,
                 friends: newFriends
             };
-
+            API.updateFriendsLists(name).then(res => {
+                console.log('update user friends list: ', res);                                    
                 API.updateReviewsComments(name).then(res => {
                     //console.log('Result comments: ', res);
                     if (res.data.error) {
@@ -148,7 +149,9 @@ const Settings = props => {
                 }).catch(err => {
                     console.log('err: ', err);
                 }); 
-            
+            }).catch(err => {
+                console.log('err: ', err);
+            });
         } else {
             //Password changed:
             //Update User account in the database:

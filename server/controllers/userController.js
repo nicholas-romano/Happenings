@@ -46,7 +46,7 @@ module.exports = {
         //check to see if the user's password was changed:
         if (password !== undefined) {
           //Password Change:
-          const newPassword = bcrypt.hashSync(password, 10);
+          const newPassword = encryptPassword(password);
           updateUserInfo(req, res, userName, firstName, lastName, userEmail, newPassword, profileImg, userInterest, friends);
         } else {
           //Password Unchanged:
@@ -67,7 +67,7 @@ module.exports = {
             //check to see if the user's password was changed:
             if (password !== undefined) {
               //Password Change:
-              const newPassword = bcrypt.hashSync(password, 10);
+              const newPassword = encryptPassword(password);
               updateUserInfo(req, res, userName, firstName, lastName, userEmail, newPassword, profileImg, userInterest, friends);
             } else {
               //Password Unchanged:
@@ -80,6 +80,38 @@ module.exports = {
       return res.json({ user: null });
     }
     
+  },
+  updateFriends: (req, res) => {
+    const user = req.user.userName;
+    const userName = req.params.userName;
+    //console.log('previous username: ', user);
+    //console.log('new username: ', userName);
+
+    if (req.user) {
+
+      db.User.updateMany(
+        {
+          "friends.userName": user
+        },  
+        {
+          $set: {
+            "friends.$.userName": userName
+          }
+        },
+        (error, data) => {
+          if (error) {
+            res.send(error);
+          } else {
+            res.send(data);
+          }
+        }
+      );
+
+    } else {
+      return res.json({ user: null });
+    }
+    
+
   },
   addFriend: (req, res) => {
     const user = req.user.userName;
@@ -175,6 +207,10 @@ module.exports = {
     res.json({ user: cleanUser });
   }
 };
+
+const encryptPassword = password => {
+  return bcrypt.hashSync(password, 10);
+}
 
 const updateUserInfo = (req, res, userName, firstName, lastName, userEmail, password, profileImg, userInterest, friends) => {
 

@@ -93,18 +93,19 @@ const Review = (props) => {
     setRatings(rating);
   };
 
-  const time = new Date();
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const title = titleRef.current.value;
+    const time = new Date();
+    const timeStamp = + new Date();
+    console.log('current timestamp: ', timeStamp);
 
     if (title !== '' && locationState.place) {
-      //console.log("formObject: ", formObject);
       API.saveReview({
         reviewOwner: userProps.userName,
         reviewCreated: time.toLocaleString(),
+        reviewTimeStamp: timeStamp,
         reviewTitle: titleRef.current.value,
         reviewBody: messageRef.current.value,
         reviewRating: reviewRating,

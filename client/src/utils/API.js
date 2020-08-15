@@ -29,15 +29,13 @@ export default {
   updateReviewsComments: function(userName) {
     return axios.put("/api/reviews/updateComments/" + userName);
   },
+  updateFriendsLists: function(userName) {
+    return axios.put("/api/user/updateFriends/" + userName);
+  },
   saveReview: function(reviewData) {
     return axios.post("/api/reviews", reviewData);
   },
   addComment: function(id, commentData) {
     return axios.put("/api/reviews/" + id, commentData)
   }
-  // Deletes the book with the given id
-  // deleteBook: function(id) {
-  //   return axios.delete("/api/books/" + id);
-  // },
-  // Saves a review to the database:
 };
