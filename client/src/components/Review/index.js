@@ -99,7 +99,7 @@ const Review = (props) => {
     const title = titleRef.current.value;
     const time = new Date();
     const timeStamp = + new Date();
-    console.log('current timestamp: ', timeStamp);
+    //console.log('current timestamp: ', timeStamp);
 
     if (title !== '' && locationState.place) {
       API.saveReview({

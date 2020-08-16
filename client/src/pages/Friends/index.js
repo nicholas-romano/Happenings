@@ -7,7 +7,6 @@ import "./friends.css";
 import API from "../../utils/API";
 import AUTH from "../../utils/AUTH";
 
-
 const Friends = () => {
 
      const [friendsUsernames, setFriendsUsernames] = useState([]);

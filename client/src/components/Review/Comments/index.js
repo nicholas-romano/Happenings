@@ -83,7 +83,7 @@ const Comments = props => {
 
         const time = new Date();
         const timeStamp = + new Date();
-        console.log('current timestamp: ', timeStamp);
+        //console.log('current timestamp: ', timeStamp);
 
         const newComment =  {
             user: userProps.userName,
