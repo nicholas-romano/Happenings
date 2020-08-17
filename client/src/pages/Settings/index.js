@@ -90,10 +90,6 @@ const Settings = props => {
         setFriendsList(newList);
     }
 
-    const cancelChanges = () => {
-        window.location.reload();
-    }
-
     const handleFormSubmit = () => {
         const name =  userData["Username:"];
         const first = userData["First Name:"]
@@ -262,7 +258,7 @@ const Settings = props => {
                             <div className="columns is-four-fifths">
                                 <div className="column">
                                     <div>
-                                        <button onClick={() => cancelChanges()} className="button is-light">Cancel</button>
+                                        
                                         <FormBtn onClick={handleSubmit(handleFormSubmit)}>Save</FormBtn>
                                     </div>
                                 </div>
