@@ -153,8 +153,11 @@ const Comments = props => {
         id="review-modal"
       >
       <div className="modal-background"></div>
-        <div className="modal-content">
-                <h2>Leave a Comment</h2>
+        <div className="modal-card">
+                    <header className="modal-card-head">
+                        <p className="modal-card-title">Post a Comment</p>
+                        <button className="delete" aria-label="close" onClick={hideForm}></button>
+                    </header>
                     <div className="card">
                         <div className="card-content">
                             <div className="media">
