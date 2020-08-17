@@ -10,7 +10,7 @@ import API from "../../utils/API";
 import mapboxgl from 'mapbox-gl';
 mapboxgl.accessToken = 'pk.eyJ1IjoibnJvbWFubyIsImEiOiJja2RobGVlaHYxMjR0Mnl0MW00ZGd5Yms0In0.RM5n9xU9WaTBG0eygl6TEg';
 
-function NewMap({ reviewsData }) {
+function NewMap({ reviewsData, loadReviews }) {
 
   const userProps = useContext(UserInfoContext);
   //console.log('userProps in newMap: ', userProps); 
@@ -48,6 +48,7 @@ function NewMap({ reviewsData }) {
         longitude: position.coords.longitude,
       });
     });
+    loadReviews();
   }, []);
 
   useEffect(() => {

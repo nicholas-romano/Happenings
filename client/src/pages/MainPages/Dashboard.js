@@ -23,10 +23,6 @@ function Dashboard(props) {
   
   const [reviewsData, setReviewsData] = useState([]);
 
-  useEffect(() => {
-    loadReviews();
-  }, []);
-
   const loadReviews = () => {
     API.getReviews()
       .then((res) => {
@@ -46,7 +42,7 @@ function Dashboard(props) {
         </div>
         <div className="columns is-desktop">
           <div className="column is-two-thirds" style={styles.twothirds}>
-            <NewMap reviewsData={reviewsData} />
+            <NewMap reviewsData={reviewsData} loadReviews={loadReviews} />
           </div>
           <div className="column is-one-third" style={styles.onethird}>
             <Review reviewsData={reviewsData} loadReviews={loadReviews} />

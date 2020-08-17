@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import Input from "../../components/Form/Input";
 import { Rating, TextArea, FormBtn } from "../Form";
 import FriendsFeed from "./FriendsFeed";
@@ -51,6 +51,11 @@ const Review = (props) => {
       long: 0,
     },
   });
+
+  useEffect(() => {
+    console.log('Loading reviews in reviews component...');
+    loadReviews();
+  }, []);
 
   //handling the location search
   const handlePlaceSubmit = (event) => {
