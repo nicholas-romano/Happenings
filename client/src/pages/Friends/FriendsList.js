@@ -8,28 +8,6 @@ const FriendsList = props => {
         removeFriend
     } = props;
 
-    const renderFriend = (friend, index) => {
-
-        let displayed;
-
-        if (friend.display === undefined) {
-            displayed = true;
-        } else {
-            displayed = friend.display;
-        }
-
-        if (displayed === true) {
-            return (
-                <Friend 
-                    friend={friend} 
-                    key={index} 
-                    removeFriend={removeFriend}
-                />
-            );
-        }
-
-    }
-
     return (<>
                 <nav className="panel">
                     <p className="panel-heading">
@@ -41,7 +19,7 @@ const FriendsList = props => {
                             You have not added any friends yet.
                         </a> :
                         friends.map((friend, index) => {
-                            return renderFriend(friend, index);
+                            return <Friend friend={friend} key={index} removeFriend={removeFriend} />
                         })
                     }
                 </nav>

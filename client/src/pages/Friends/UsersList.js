@@ -10,28 +10,6 @@ const UsersList = props => {
         addFriend
     } = props;
 
-    const renderUser = (user, index) => {
-
-        let displayed;
-
-        if (user.display === undefined) {
-            displayed = true;
-        } else {
-            displayed = user.display;
-        }
-
-        if (displayed === true) {
-            return (
-                <User 
-                    user={user} 
-                    key={index} 
-                    addFriend={addFriend} 
-                />
-            );
-        }
-
-    }
-
     return (
         <nav className="panel">
                     <p className="panel-heading">
@@ -41,7 +19,7 @@ const UsersList = props => {
                         users.map((user, index = 1) => {
                             
                             if (user.userName !== thisUser) {
-                                return renderUser(user, index);
+                                return <User user={user} key={index} addFriend={addFriend} />
                             }
                             
                         })
