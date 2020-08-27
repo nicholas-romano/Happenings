@@ -7,8 +7,7 @@ const UsersList = props => {
     const {
         users,
         thisUser,
-        addFriend,
-        filterByUser
+        addFriend
     } = props;
 
     const renderUser = (user, index) => {
@@ -38,14 +37,6 @@ const UsersList = props => {
                     <p className="panel-heading">
                         Users List
                     </p>
-                    <div className="panel-block">
-                        <p className="control has-icons-left">
-                        <input className="input" type="text" onChange={filterByUser} placeholder="Search Users (by last name)" />
-                        <span className="icon is-left">
-                            <i className="fas fa-search" aria-hidden="true"></i>
-                        </span>
-                        </p>
-                    </div>
                     {
                         users.map((user, index = 1) => {
                             

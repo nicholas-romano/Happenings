@@ -5,8 +5,7 @@ const FriendsList = props => {
 
     const {
         friends,
-        removeFriend,
-        filterByFriend
+        removeFriend
     } = props;
 
     const renderFriend = (friend, index) => {
@@ -36,14 +35,6 @@ const FriendsList = props => {
                     <p className="panel-heading">
                         Friends List
                     </p>
-                    <div className="panel-block">
-                        <p className="control has-icons-left">
-                        <input className="input" type="text" onChange={filterByFriend} placeholder="Search Friends (by username)" />
-                        <span className="icon is-left">
-                            <i className="fas fa-search" aria-hidden="true"></i>
-                        </span>
-                        </p>
-                    </div>
                     {
                         friends.length === 0 ?
                         <a className="panel-block">

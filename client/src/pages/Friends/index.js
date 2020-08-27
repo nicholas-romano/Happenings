@@ -12,8 +12,6 @@ const Friends = () => {
      const [friendsUsernames, setFriendsUsernames] = useState([]);
      const [users, setUsers] = useState([]);
      const [thisUser, setThisUser] = useState('');
-     const [userSearchQuery, setUserSearchQuery] = useState('');
-     const [friendSearchQuery, setFriendSearchQuery] = useState('');
 
      useEffect(() => {
         getCurrentUser();
@@ -81,59 +79,16 @@ const Friends = () => {
         .catch(err => console.log('err: ', err));
     }
 
-    //Filter by search input:
-    const filterByUser = event => {
-
-        const query = event.target.value;
-
-        setUserSearchQuery(query);
-           
-            //add display: true/false to display the record if it matches the search string:
-            const newUsersTable = users.map(user => {
-                let name = user.lastName.toLowerCase();
-
-                if (name.indexOf(userSearchQuery.toLowerCase()) !== -1) {
-                    return {...user, display: true}
-                } else {
-                    return {...user, display: false}
-                }
-            });
-
-            setUsers(newUsersTable);
-
-    }
-
-    const filterByFriend = event => {
-
-        const query = event.target.value;
-
-        setFriendSearchQuery(query);
-           
-            //add display: true/false to display the record if it matches the search string:
-            const newFriendsTable = friendsUsernames.map(friend => {
-                let name = friend.userName.toLowerCase();
-
-                if (name.indexOf(friendSearchQuery.toLowerCase()) !== -1) {
-                    return {...friend, display: true}
-                } else {
-                    return {...friend, display: false}
-                }
-            });
-
-            setFriendsUsernames(newFriendsTable);
-
-    }
-
     return (
         <>
             <Header />
             <div className="container-fluid">
                         <div className="columns">
                             <div className="column">
-                                <UsersList users={users} thisUser={thisUser} filterByUser={filterByUser} addFriend={addFriend} />
+                                <UsersList users={users} thisUser={thisUser} addFriend={addFriend} />
                             </div>
                             <div className="column">
-                                <FriendsList friends={friendsUsernames} filterByFriend={filterByFriend} removeFriend={removeFriend} />
+                                <FriendsList friends={friendsUsernames} removeFriend={removeFriend} />
                             </div>
                         </div>
             </div>  
