@@ -18,4 +18,7 @@ router.route("/addFriend/:userName")
 router.route("/removeFriend/:userName")
   .delete(userController.removeFriend);
 
+router.route("/updateFriends/:userName")
+  .put(userController.updateFriends);
+
 module.exports = router;
