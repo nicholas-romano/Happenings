@@ -5,7 +5,7 @@ const db = require("../models");
 module.exports = {
   findAll: (req, res) => {
     if (req.user) {
-      db.Reviews.find({}).sort({ _id: -1 })
+      db.Reviews.find({}).sort({ reviewTimeStamp: -1 })
         .then((reviews) => {
           res.json(reviews);
         })
@@ -27,29 +27,13 @@ module.exports = {
   create: (req, res) => {
     //console.log("review submitted: ", req.body);
     const {
-      reviewOwner,
-      reviewCreated,
-      reviewTitle,
-      reviewBody,
-      reviewRating,
-      reviewLocation,
-      reviewLat,
-      reviewLong,
-      reviewGeoLocation,
-      reviewComments
+      reviewOwner, reviewCreated, reviewTimeStamp, reviewTitle, reviewBody, reviewRating,
+      reviewLocation, reviewLat, reviewLong, reviewGeoLocation, reviewComments
     } = req.body;
     if (req.user) {
       db.Reviews.create({
-        reviewOwner,
-        reviewCreated,
-        reviewTitle,
-        reviewBody,
-        reviewRating,
-        reviewLocation,
-        reviewLat,
-        reviewLong,
-        reviewGeoLocation,
-        reviewComments
+        reviewOwner, reviewCreated, reviewTimeStamp, reviewTitle, reviewBody, reviewRating,
+        reviewLocation, reviewLat, reviewLong, reviewGeoLocation, reviewComments
       })
         .then((dbReview) => {
           res.json(dbReview);
@@ -59,7 +43,7 @@ module.exports = {
   },
   addComment: (req, res) => {
     const { id } = req.params;
-    const { user, message, time } = req.body;
+    const { user, message, time, timeStamp } = req.body;
 
     db.Reviews.updateOne(
       {
@@ -68,8 +52,8 @@ module.exports = {
       {
         $push: {
           reviewComments: {
-            $each: [{ user, message, time}],
-            $sort: { time: -1 }
+            $each: [{ user, message, time, timeStamp}],
+            $sort: { timeStamp: -1 }
           }
         }
       }
@@ -84,33 +68,16 @@ module.exports = {
   },
   updateUserName: (req, res) => {
     const user = req.user.userName;
-    console.log('Reviews user before change: ', user);
+    //console.log('Reviews user before change: ', user);
     const userName = req.params.userName;
-    console.log('Reviews update Username to: ', userName);
+    //console.log('Reviews update Username to: ', userName);
 
     if (userName === req.user.userName) {
       //username unchanged:
-      db.Reviews.updateMany(
-        {
-          reviewOwner: user
-        },  
-        {
-          $set: {
-            reviewOwner: userName
-          }
-        },
-        (error, data) => {
-          if (error) {
-            res.send(error);
-          } else {
-            res.send(data);
-          }
-        }
-      );
+      updateUserNameInfo(user, res, userName);
     } else {
       //username changed:
       db.User.findOne({ userName: userName }, (err, userMatch) => {
-
         //If a match was found, someone else has the same username, return an error:
         if (userMatch) {
           console.log('Error: that username already exists.')
@@ -118,64 +85,22 @@ module.exports = {
             error: 'That username already exists. Please choose another.'
           });
         } else {
-  
           //Username does not already exist change username:
-          db.Reviews.updateMany(
-            {
-              reviewOwner: user
-            },  
-            {
-              $set: {
-                reviewOwner: userName
-              }
-            },
-            (error, data) => {
-              if (error) {
-                res.send(error);
-              } else {
-                res.send(data);
-              }
-            }
-          );
-            
+          updateUserNameInfo(user, res, userName);  
         }
-  
       });
     }
 
   },
   updateComments: (req, res) => {
     const user = req.user.userName;
-    console.log('Comments user before change: ', user);
+    //console.log('Comments user before change: ', user);
     const userName = req.params.userName;
-    console.log('Comments update Username to: ', userName);
+    //console.log('Comments update Username to: ', userName);
 
     if (userName === req.user.userName) {
       //username unchanged:
-      db.Reviews.updateMany(
-        {
-          "reviewComments.user": user
-        },  
-        {
-          $set: {
-            "reviewComments.$.user": userName
-          }
-        },
-        (error, data) => {
-          if (error) {
-            res.send(error);
-          } else {
-            res.send(data);
-          }
-        },
-        (error, data) => {
-          if (error) {
-            res.send(error);
-          } else {
-            res.send(data);
-          }
-        }
-      );
+      updateCommentsInfo(user, res, userName);
     } else {
       //username was changed:
       db.User.findOne({ userName: userName }, (err, userMatch) => {
@@ -187,55 +112,62 @@ module.exports = {
             error: 'That username already exists. Please choose another.'
           });
         } else {
-  
-          db.Reviews.updateMany(
-            {
-              "reviewComments.user": user
-            },  
-            {
-              $set: {
-                "reviewComments.$.user": userName
-              }
-            },
-            (error, data) => {
-              if (error) {
-                res.send(error);
-              } else {
-                res.send(data);
-              }
-            },
-            (error, data) => {
-              if (error) {
-                res.send(error);
-              } else {
-                res.send(data);
-              }
-            }
-          );
-  
+          updateCommentsInfo(user, res, userName);
         }
       });
     }
 
   }
     
-  //   update: function (req, res) {
-  //     db.Reviews.findOneAndUpdate({ _id: req.params.id }, req.body)
-  //       .then(dbModel => {
-  //         console.log(dbModel)
-  //         res.json(dbModel)
-  //       })
-  //       .catch(err => res.status(422).json(err))
-  //   },
-  //   remove: function (req, res) {
-  //     db.Reviews.findOneAndUpdate(
-  //       { _id: req.user._id },
-  //       { $pull: { books: new ObjectId(req.params.id) } },
-  //       { new: true }
-  //     ).then(() => {
-  //       db.Book.findOneAndDelete({ _id: req.params.id })
-  //         .then(dbReview => res.json(dbReview))
-  //         .catch(err => res.status(422).json(err))
-  //     })
-  //   }
+}
+
+const updateCommentsInfo = (user, res, userName) => {
+  
+  db.Reviews.updateMany(
+    {
+      "reviewComments.user": user
+    },  
+    {
+      $set: {
+        "reviewComments.$.user": userName
+      }
+    },
+    (error, data) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send(data);
+      }
+    },
+    (error, data) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send(data);
+      }
+    }
+  );
+
+}
+
+const updateUserNameInfo = (user, res, userName) => {
+
+  db.Reviews.updateMany(
+    {
+      reviewOwner: user
+    },  
+    {
+      $set: {
+        reviewOwner: userName
+      }
+    },
+    (error, data) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send(data);
+      }
+    }
+  );
+
 }
