@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import Input from "../../components/Form/Input";
 import { Rating, TextArea, FormBtn } from "../Form";
 import FriendsFeed from "./FriendsFeed";
@@ -52,6 +52,11 @@ const Review = (props) => {
     },
   });
 
+  useEffect(() => {
+    console.log('Loading reviews in reviews component...');
+    loadReviews();
+  }, []);
+
   //handling the location search
   const handlePlaceSubmit = (event) => {
     event.preventDefault();
@@ -93,18 +98,19 @@ const Review = (props) => {
     setRatings(rating);
   };
 
-  const time = new Date();
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const title = titleRef.current.value;
+    const time = new Date();
+    const timeStamp = + new Date();
+    //console.log('current timestamp: ', timeStamp);
 
     if (title !== '' && locationState.place) {
-      //console.log("formObject: ", formObject);
       API.saveReview({
         reviewOwner: userProps.userName,
         reviewCreated: time.toLocaleString(),
+        reviewTimeStamp: timeStamp,
         reviewTitle: titleRef.current.value,
         reviewBody: messageRef.current.value,
         reviewRating: reviewRating,
