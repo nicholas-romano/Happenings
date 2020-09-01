@@ -90,10 +90,6 @@ const Settings = props => {
         setFriendsList(newList);
     }
 
-    const cancelChanges = () => {
-        window.location.reload();
-    }
-
     const handleFormSubmit = () => {
         const name =  userData["Username:"];
         const first = userData["First Name:"]
@@ -118,7 +114,8 @@ const Settings = props => {
                 userInterest: interestsList,
                 friends: newFriends
             };
-
+            API.updateFriendsLists(name).then(res => {
+                //console.log('update user friends list: ', res);                                    
                 API.updateReviewsComments(name).then(res => {
                     //console.log('Result comments: ', res);
                     if (res.data.error) {
@@ -148,7 +145,9 @@ const Settings = props => {
                 }).catch(err => {
                     console.log('err: ', err);
                 }); 
-            
+            }).catch(err => {
+                console.log('err: ', err);
+            });
         } else {
             //Password changed:
             //Update User account in the database:
@@ -259,7 +258,7 @@ const Settings = props => {
                             <div className="columns is-four-fifths">
                                 <div className="column">
                                     <div>
-                                        <button onClick={() => cancelChanges()} className="button is-light">Cancel</button>
+                                        
                                         <FormBtn onClick={handleSubmit(handleFormSubmit)}>Save</FormBtn>
                                     </div>
                                 </div>
