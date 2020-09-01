@@ -11,6 +11,10 @@ const reviewsSchema = new Schema({
     type: String,
     required: true
   },
+  reviewTimeStamp: {
+    type: Number,
+    required: true
+  },
   reviewTitle: {
     type: String,
     required: true
