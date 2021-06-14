@@ -8,7 +8,9 @@ import Input from "../../components/Form/Input";
 import { FormBtn } from "../../components/Form";
 import AUTH from "../../utils/AUTH";
 
-function SignupForm() {
+function SignupForm(props) {
+
+  //console.log(props)
 
 const firstNameRef = useRef();
 const lastNameRef = useRef();
@@ -22,7 +24,46 @@ const confirmPasswordRef = useRef();
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO - validate!
-    AUTH.signup({
+
+    const validFirstName = props.isAlpha(firstNameRef.current.value);
+    const validLastName = props.isAlpha(lastNameRef.current.value);
+    const validEmail = props.validateEmailAddress(emailRef.current.value);
+    const validUserName = props.isAlphaNumeric(userNameRef.current.value);
+    const matchingPasswords = props.confirmPassword(passwordRef.current.value, confirmPasswordRef.current.value);
+
+    if (validFirstName) {
+      props.setValidFname(true);
+    } else {
+     props.setValidFname(false);
+    }
+
+    if (validLastName) {
+      props.setValidLname(true);
+    } else {
+     props.setValidLname(false);
+    }
+
+    if (validEmail) {
+      props.setValidEmail(true);
+    } else {
+     props.setValidEmail(false);
+    }
+
+    if (validUserName) {
+      props.setValidUserName(true);
+    } else {
+     props.setValidUserName(false);
+    }
+
+    if (matchingPasswords) {
+      props.setMatch(true);
+    } else {
+      props.setMatch(false);
+    }
+
+    if (validFirstName && validLastName && validEmail && validUserName && matchingPasswords) {
+      //All fields are valid, send the form data:
+       AUTH.signup({
         firstName: firstNameRef.current.value,
         lastName: lastNameRef.current.value,
         userName: userNameRef.current.value,
@@ -39,6 +80,8 @@ const confirmPasswordRef = useRef();
         //console.log("duplicate");
       }
       });
+    }
+
   };
 
   if (redirectTo) {
@@ -62,6 +105,11 @@ const confirmPasswordRef = useRef();
                       placeholder="First Name"
                       inputRef={firstNameRef}           
                   />
+                  <p className="error">
+                  {
+                    (props.validFirstName === false) ? 'First Name field must be only letters' : '' 
+                  }
+                  </p>
                   <Input
                       name="lastName"
                       title="Last Name"
@@ -69,6 +117,11 @@ const confirmPasswordRef = useRef();
                       placeholder="Last Name"
                       inputRef={lastNameRef}
                   />
+                  <p className="error">
+                  {
+                    (props.validLastName === false) ? 'Last Name field must be only letters' : '' 
+                  }
+                  </p>
                   <Input
                     name="email"
                     title="Email"
@@ -76,6 +129,11 @@ const confirmPasswordRef = useRef();
                     placeholder="Email"
                     inputRef={emailRef}
                   />
+                  <p className="error">
+                  {
+                    (props.validEmail === false) ? 'Email Address format is invalid' : '' 
+                  }
+                  </p>
                   <Input
                     name="userName"
                     title="Username"
@@ -83,6 +141,11 @@ const confirmPasswordRef = useRef();
                     placeholder="Username"
                     inputRef={userNameRef}
                   />
+                  <p className="error">
+                  {
+                    (props.validUserName === false) ? 'Username field must be letters and numbers' : '' 
+                  }
+                  </p>
                   <Input
                     name="password"
                     title="Password"
@@ -97,6 +160,11 @@ const confirmPasswordRef = useRef();
                     placeholder="Confirm Password"
                     inputRef={confirmPasswordRef}
                   />
+                  <p className="error">
+                  {
+                    (props.passwordsMatch === false) ? 'Passwords do not match' : '' 
+                  }
+                  </p>
                   <Link to="/">Login</Link>
                   <FormBtn onClick={handleSubmit}>Register</FormBtn>
                 </form>

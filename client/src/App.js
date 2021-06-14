@@ -48,6 +48,11 @@ function App() {
   //   console.log('userProps: ', userProps);
   // }, [userProps]);
 
+  const [passwordsMatch, setMatch] = useState();
+  const [validFirstName, setValidFname] = useState();
+  const [validLastName, setValidLname] = useState();
+  const [validEmail, setValidEmail] = useState();
+  const [validUserName, setValidUserName] = useState();
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginErr, setLoginErr] = useState("");
   const [userLocation, setUserLocation] = useState({
@@ -126,6 +131,41 @@ function App() {
       });
   };
 
+  const confirmPassword = (password1, password2) => {
+    if (password1 === password2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const isAlpha = input => {
+    const isValid = input.match(/^[a-z]+$/i) !== null;
+    if (isValid) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const isAlphaNumeric = input => {
+    const isValid = input.match(/^[a-z0-9]+$/i) !== null;
+    if (isValid) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const validateEmailAddress = input => {
+    const isValid = input.match(/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i) !== null;
+    if (isValid) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //getting user coordinated to render map and use throughout other components
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -172,7 +212,28 @@ function App() {
                       <Landing login={login} loginErr={loginErr} />
                     )}
                   />
-                  <Route exact path="/signup" component={SignupForm} />
+                  <Route
+                    exact
+                    path="/signup"
+                    component={() => (
+                      <SignupForm 
+                      isAlpha={isAlpha}
+                      confirmPassword={confirmPassword} 
+                      setMatch={setMatch}                      
+                      passwordsMatch={passwordsMatch}
+                      setValidFname={setValidFname}
+                      validFirstName={validFirstName}
+                      validLastName={validLastName}
+                      setValidLname={setValidLname}
+                      isAlphaNumeric={isAlphaNumeric}
+                      setValidEmail={setValidEmail}
+                      validateEmailAddress={validateEmailAddress}
+                      validEmail={validEmail}
+                      validUserName={validUserName}
+                      setValidUserName={setValidUserName}
+                      />
+                    )}
+                  />
                 </div>
               )}
             </div>
